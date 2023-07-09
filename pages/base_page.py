@@ -1,15 +1,11 @@
-import time
-import os
-
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
-
-from .site_data.locators import BasePageLocators
 
 
 class BasePage:
-    def __init__(self, browser, url, timeout=10):
+    def __init__(self, browser, env, url, timeout=10):
+        self.env = env
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
@@ -17,6 +13,18 @@ class BasePage:
 
     def open(self):
         self.browser.get(self.url)
+
+    def find_elem(self, method, css_selector, error_text=''):
+        found_elem = self.browser.find_elements(method, css_selector)
+        if len(found_elem) == 0:
+            if error_text:
+                print_text = error_text
+            else:
+                print_text = f'[No Such Element by {method}: "{css_selector}"]'
+            print(print_text, end=' ')
+            assert False, print_text
+        else:
+            return found_elem[0]
 
     def is_element_present(self, method, css_selector):
         try:
@@ -40,3 +48,13 @@ class BasePage:
         except TimeoutException:
             return False
         return True
+
+    def is_clickable(self, method, css_selector, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout). \
+                until(EC.element_to_be_clickable((method, css_selector)))
+        except TimeoutException:
+            error_text = f'Element is not clickable: "{css_selector}"'
+            print(error_text, end=' ')
+            raise TimeoutException(error_text)
+        return self.find_elem(method, css_selector)

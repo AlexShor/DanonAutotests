@@ -17,11 +17,24 @@ def pytest_addoption(parser):
                      default="en",
                      help="Choose browser language")
 
+    parser.addoption('--base_url',
+                     action='store',
+                     default="DEV",
+                     help="Choose base url")
+
+
+@pytest.fixture()
+def env(request):
+    base_url = request.config.getoption("base_url")
+    print(f'[env={base_url}]', end=' ')
+    return base_url
+
 
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     user_language = request.config.getoption("language")
+
     print(f'[browser={browser_name}] [language={user_language}]', end=' ')
 
     if browser_name == "chrome":
