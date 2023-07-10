@@ -1,7 +1,7 @@
 from .base_page import BasePage
 from .site_data.locators import ScenarioListPageLocators as SLLocator
 from .site_data.locators import BasePageLocators as BPLocator
-from ..pages.site_data.urls import Links
+from .site_data.urls import Links
 
 
 class ScenarioListPage(BasePage):
