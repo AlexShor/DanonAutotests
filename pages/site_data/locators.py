@@ -15,7 +15,7 @@ class BasePageLocators:
 
     @staticmethod
     def select_item(item):
-        return By.XPATH, f'//div[@class="rc-select-item-option-content" and text()="{item}"]/..'
+        return By.XPATH, f'(//div[@class="rc-select-item-option-content" and text()="{item}"])[last()]/..'
 
 
 class LoginPageLocators:
@@ -26,9 +26,20 @@ class LoginPageLocators:
     PASSWORD_EYE = (By.XPATH, '//div[contains(@class, "_noMultiline_")]/..//div[contains(@class, "_icon_")]')
 
 
-class ScenarioListPageLocators:
+class ScenarioListPageLocators(BasePageLocators):
     BLOCK_FILTERS = (By.XPATH, '//div[contains(@class, "_filters_")]')
     BLOCK_SEARCH = (By.XPATH, '//div[contains(@class, "_search_")]')
+    SCENARIO_BLOCK = (By.XPATH, '//div[contains(@class, "_scenarioBlock_")]')
+    SCENARIO_TITLE = (By.XPATH, SCENARIO_BLOCK[1] + '//p[contains(@class, "_title_") and text()="{}"]')
+    MAIN_INFO = (By.XPATH, SCENARIO_BLOCK[1] + '//div[contains(@class, "_mainInfo_")]')
+    ACTION_BUTTONS = (By.XPATH, SCENARIO_BLOCK[1] + '//div[contains(@class, "_actionButtons_")]')
+    PROGRESS_INFO = (By.XPATH, SCENARIO_BLOCK[1] + '//div[contains(@class, "_progressInfo_")]')
+    MAIN_INFO_TOOLTIPS = (By.XPATH, MAIN_INFO[1] + '//div[contains(@class, "_tooltip_") and contains(@class, "_top_")]')
+    ACTION_BUTTON_EDIT = (By.XPATH, ACTION_BUTTONS[1] + '//div[contains(@class, "_wrap_")][1]')
+    ACTION_BUTTON_COPY = (By.XPATH, ACTION_BUTTONS[1] + '//div[contains(@class, "_wrap_")][2]')
+    ACTION_BUTTON_DELETE = (By.XPATH, ACTION_BUTTONS[1] + '//div[contains(@class, "_wrap_")][3]')
+    PROGRESS_INFO_BUTTON = (By.XPATH, PROGRESS_INFO[1] + '//button[contains(@class, "_status_")]')
+    PROGRESS_INFO_UPDATED = (By.XPATH, PROGRESS_INFO[1] + '//p[contains(@class, "_updated_")]')
 
 
 class CreateScenarioPageLocators(BasePageLocators):
@@ -51,3 +62,13 @@ class BaseScenarioPageLocators(BasePageLocators):
     TAB_INPUT = (By.XPATH, TABS[1] + '//span[text()="Input"]/../..')
     TAB_PFR = (By.XPATH, TABS[1] + '//span[text()="Params for run"]/../..')
     TAB_OUTPUT = (By.XPATH, TABS[1] + '//span[text()="Output"]/../..')
+
+
+class InputTabLocators(BaseScenarioPageLocators):
+    CARD = (By.XPATH, '//div[contains(@class, "_card_")]')
+    CARD_TITLE = (By.XPATH, CARD[1] + '//div[contains(@class, "_cardTitle_") and text()="{}"]')
+    CARD_CONTENT = (By.XPATH, '//div[contains(@class, "_cardContent_")]')
+    SELECT = (By.XPATH, CARD_TITLE[1] + BasePageLocators.SELECTOR[1])
+    SELECT_TYPE_DATA = (By.XPATH, CARD_TITLE[1] + '/../..' + CARD_CONTENT[1] + '/div[1]' + BasePageLocators.SELECTOR[1])
+    UPLOAD_FILE_BUTTON = (By.XPATH, CARD_TITLE[1] + '/../..' + CARD_CONTENT[1] + '//input[@type="file"]')
+

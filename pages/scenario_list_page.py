@@ -14,3 +14,6 @@ class ScenarioListPage(BasePage):
 
     def user_cen_open_create_scenario_page(self):
         self.find_elem(*BPLocator.JB_LEFT).click()
+
+    def user_cen_open_scenario_page(self):
+        self.find_elem(*SLLocator.SCENARIO_TITLE, 'Scenario_20230713_1').click()

@@ -30,7 +30,7 @@ def env(request):
     return base_url
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="class")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     user_language = request.config.getoption("language")

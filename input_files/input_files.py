@@ -1,8 +1,9 @@
+import time
 import os
 from collections import Counter
 
 from py_google_sheets.gsheets import GoogleSheets
-from input_data import CheckInputUrls, FillData, DataTypes
+from input_data import FillData, DataTypes, Spreadsheets
 import pandas as pd
 
 
@@ -41,66 +42,156 @@ def nan_type(validity_of_type, nan_value, value, del_value):
             return value
 
 
-def create_data(data_type, nan, negative, validity, del_value_nan=False, negativity=False):
+def create_data(data_type, nan, negative, validity, del_value_nan=False, negativity=False, inverse_integrity=False):
+    if data_type == '': return 'NO_DATA_TYPE'
     value = FillData.get_value(data_type, validity)
     if not validity:
         negativity = False
     value = nan_type(validity, nan, value, del_value_nan)
-    if data_type == DataTypes.DECIMAL or DataTypes.INT:
-        if value != '':
+    if value != '':
+        if data_type == DataTypes.DECIMAL:
             value = negative_type(validity, negative, value, negativity)
+            if inverse_integrity:
+                value = value[:value.index('.')]
+        elif data_type == DataTypes.INT:
+            value = negative_type(validity, negative, value, negativity)
+            if inverse_integrity:
+                value += '.45'
+
     return value
 
 
 class InputFiles:
     @staticmethod
-    def create(check_input_url, params=None):
+    def create(check_input_url,
+               params=None,
+               folder='files',
+               miss_worksheets=None,
+               invert_miss_worksheets=False):
+
         if params is None:
-            params = [(False, False, False),
-                      (True, True, False, True),
+            # validity, del_value_nan=False, negativity=False, inverse_integrity=False, [Fill 1//2 row]
+            params = [(False, False, False, False),
+                      (True, True, False, False, True),
+                      (True, False, False, False, True),
+                      (True, False, True, False),
                       (True, False, False, True),
-                      (True, False, True)]
+                      (True, False, False, False)]
 
-        table = GoogleSheets.pars(check_input_url)
-        file_names = Counter([row[0] for row in table][1:])
+        tables, worksheets_names = GoogleSheets.pars(check_input_url, miss_worksheets, invert_miss_worksheets)
+        start_creating_files = time.time()
+        print('====Start creating files')
 
-        folder_name = 'files'
-        if not os.path.exists(folder_name):
-            os.mkdir(folder_name)
+        for table in range(len(tables)):
+            file_names = Counter([row[0].strip() for row in tables[table]][1:])
 
-        for file_name in file_names.keys():
-            count_col = file_names.get(file_name)
-            column_names = [row[1] for row in table if row[0] == file_name]
-            data = [[] for _ in range(len(params))]
-            for i in range(len(params)):
-                count = 0
-                for column_name in column_names:
-                    for row in table:
-                        if row[0] == file_name and row[1] == column_name:
-                            if len(params[i]) > 3 and params[i][3]:
-                                count += 1
-                                if count <= (count_col // 2):
-                                    data[i].append(create_data(row[2], row[3], row[4],
-                                                               params[i][0],
-                                                               params[i][1],
-                                                               params[i][2]))
-                                    break
+            folder_name = f'files/{folder}/{worksheets_names[table]}'
+            if not os.path.exists(folder_name):
+                os.makedirs(folder_name)
+
+            for file_name in file_names.keys():
+                count_col = file_names.get(file_name)
+
+                start_creating = time.time()
+                print(f'========Creating file: "{worksheets_names[table]}/{file_name}.csv".', end=' ')
+
+                column_names = [row[1].strip() for row in tables[table] if row[0].strip() == file_name]
+                data = [[] for _ in range(len(params))]
+                for i in range(len(params)):
+                    count = 0
+                    for column_name in column_names:
+                        for row in tables[table]:
+                            if row[0].strip() == file_name and row[1].strip() == column_name:
+                                if len(params[i]) > 4 and params[i][4]:
+                                    count += 1
+                                    if count <= (count_col // 2):
+                                        data[i].append(create_data(row[2].strip().upper(),
+                                                                   row[3].strip().upper(),
+                                                                   row[4].strip().upper(),
+                                                                   params[i][0],
+                                                                   params[i][1],
+                                                                   params[i][2],
+                                                                   params[i][3]))
+                                        break
+                                    else:
+                                        data[i].append(create_data(row[2].strip().upper(),
+                                                                   row[3].strip().upper(),
+                                                                   row[4].strip().upper(),
+                                                                   params[i][0],
+                                                                   not params[i][1],
+                                                                   params[i][2],
+                                                                   params[i][3]))
+                                        break
                                 else:
-                                    data[i].append(create_data(row[2], row[3], row[4],
-                                                               params[i][0],
-                                                               not params[i][1],
-                                                               params[i][2]))
+                                    data[i].append(create_data(row[2].upper(),
+                                                               row[3].upper(),
+                                                               row[4].upper(),
+                                                               *params[i]))
                                     break
-                            else:
-                                data[i].append(create_data(row[2], row[3], row[4], *params[i]))
-                                break
 
-            file_path = rf'{folder_name}\{file_name}.csv'
+                file_path = rf'{folder_name}/{file_name}.csv'
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+
+                df = pd.DataFrame(data, columns=column_names)
+                df.to_csv(file_path, index=False, encoding="utf_8_sig")
+
+                end_creating = time.time() - start_creating
+                print(f' ==Done: ', round(end_creating, 3))
+
+        end_creating_files = time.time() - start_creating_files
+        print('====End creating files. Time:', round(end_creating_files, 3), end='\n\n')
+
+    @staticmethod
+    def get_input_file_from_spreadsheet(check_input_url,
+                                        folder='files',
+                                        miss_worksheets=None,
+                                        invert_miss_worksheets=False):
+
+        spreadsheet, worksheets_names = GoogleSheets.pars(check_input_url, miss_worksheets, invert_miss_worksheets)
+        start_creating_files = time.time()
+        print('====Start creating files')
+
+        folder_name = 'files/' + folder
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
+
+        for i in range(len(spreadsheet)):
+            file_name = worksheets_names[i]
+
+            start_creating_file = time.time()
+            print(f'========Creating file: "{file_name}.csv".', end=' ')
+
+            column_names = spreadsheet[i][0]
+            data = spreadsheet[i][1:]
+
+            file_path = rf'{folder_name}/{file_name}.csv'
             if os.path.exists(file_path):
                 os.remove(file_path)
 
             df = pd.DataFrame(data, columns=column_names)
-            df.to_csv(file_path, index=False)
+            df.to_csv(file_path, index=False, encoding="utf_8_sig")
+
+            end_creating_file = time.time() - start_creating_file
+            print(f' ==Done: ', round(end_creating_file, 3))
+
+        end_creating_files = time.time() - start_creating_files
+        print('====End creating files. Time:', round(end_creating_files, 3), end='\n\n')
 
 
-InputFiles.create(CheckInputUrls.PROMO)
+list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef',
+                'constraint_ratio_first_option', 'constraint_ratio_second_option']
+# InputFiles.create('https://docs.google.com/spreadsheets/d/1VYYQiF7ftxTdFj40cw1aPS_nTAvSBFWq/')
+InputFiles.create('https://docs.google.com/spreadsheets/d/1YERmUHZL-cEIbWDW3NUGAnU6I8LhZcn-/')
+# InputFiles.get_input_file_from_spreadsheet(CheckInputUrls.TEST, 'milk_balance')
+# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Promo.INPUT_PROMO, 'promo/input_files', list_to_miss)
+
+# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_SOURCING, 'tetris/input_sourcing')
+# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MD, 'tetris/input_md')
+# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_INDUSTRY, 'tetris/input_industry')
+# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MILK_BALANCE, 'tetris/input_milk_balance')
+
+# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('milk_balance'), folder='tetris/check_input')
+# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('industry'), folder='tetris/check_input/industry')
+# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('md'), folder='tetris/check_input/md')
+# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('sourcing'), folder='tetris/check_input/sourcing')
