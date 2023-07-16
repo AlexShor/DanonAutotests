@@ -3,7 +3,7 @@ import os
 from collections import Counter
 
 from py_google_sheets.gsheets import GoogleSheets
-from input_data import FillData, DataTypes, Spreadsheets
+from input_data import FillData, DataTypes
 import pandas as pd
 
 
@@ -179,19 +179,8 @@ class InputFiles:
         print('====End creating files. Time:', round(end_creating_files, 3), end='\n\n')
 
 
-list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef',
-                'constraint_ratio_first_option', 'constraint_ratio_second_option']
-# InputFiles.create('https://docs.google.com/spreadsheets/d/1VYYQiF7ftxTdFj40cw1aPS_nTAvSBFWq/')
-InputFiles.create('https://docs.google.com/spreadsheets/d/1YERmUHZL-cEIbWDW3NUGAnU6I8LhZcn-/')
-# InputFiles.get_input_file_from_spreadsheet(CheckInputUrls.TEST, 'milk_balance')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Promo.INPUT_PROMO, 'promo/input_files', list_to_miss)
+# list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
 
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_SOURCING, 'tetris/input_sourcing')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MD, 'tetris/input_md')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_INDUSTRY, 'tetris/input_industry')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MILK_BALANCE, 'tetris/input_milk_balance')
 
-# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('milk_balance'), folder='tetris/check_input')
-# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('industry'), folder='tetris/check_input/industry')
-# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('md'), folder='tetris/check_input/md')
-# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT.get('sourcing'), folder='tetris/check_input/sourcing')
+# InputFiles.create(Spreadsheets.Promo.CHECK_INPUT, folder='promo/check_input')
+

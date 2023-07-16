@@ -1,9 +1,8 @@
 import os
+import time
 
 import googleapiclient.errors
 import pygsheets
-from input_data import FillData, DataTypes, Spreadsheets
-import time
 import gdown
 import pandas
 
@@ -79,7 +78,8 @@ class GoogleSheets:
         start_pars = time.time()
 
         try:
-            client = pygsheets.authorize(client_secret=find_client_secret(os.getcwd(), 'client_secret.json'))
+            client = pygsheets.authorize(client_secret=find_client_secret(os.getcwd(), 'client_secret.json'),
+                                         service_file=find_client_secret(os.getcwd(), 'pygsheets_key.json'))
             spreadsheet = client.open_by_url(spreadsheet_link)
             worksheets_list = spreadsheet.worksheets()
             worksheets_names = [
@@ -117,25 +117,3 @@ class GoogleSheets:
             end_pars = time.time() - start_pars
             print('====End parsing. Time: ', round(end_pars, 3), end='\n\n')
             return to_matrix(tables), worksheets_names
-
-
-# link = 'https://docs.google.com/spreadsheets/d/1VYYQiF7ftxTdFj40cw1aPS_nTAvSBFWq/'
-# data = GoogleSheets.pars(link)
-# print(data)
-
-# l = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
-# l = ['distr_mapping', 'combine_products', 'combine_chains']
-
-
-
-# print(GoogleSheets.download_file_from_google_drive(link, l, True))
-
-# data = GoogleSheets.pars('https://docs.google.com/spreadsheets/d/1fn4PxFE6bbyOTe0aPRUpYhEVC9uTDslF7', l, True)
-# data = GoogleSheets.pars(Spreadsheets.Promo.INPUT_PROMO, l, True)
-# GoogleSheets.pars(Spreadsheets.Tetris.INPUT_INDUSTRY)
-# GoogleSheets.pars_input_files_from_spreadsheet(CheckInputUrls.TETRIS.get('sourcing'))
-
-
-# for i in data:
-#     for j in i:
-#         print(*j)

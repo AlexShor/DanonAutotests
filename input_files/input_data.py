@@ -3,24 +3,19 @@ google_sheets_url = 'https://docs.google.com/spreadsheets/d/'
 
 class Spreadsheets:
     class Promo:
-        CHECK_INPUT = f'{google_sheets_url}1Nlmr4xCBhdXUBRx-l8bUjVlL2SkOTZcA9Uo_UVgbcS8' + '/'
-        INPUT_PROMO = f'{google_sheets_url}18adE7GVnQPOD_ZL7SnhR6kkup8fshWzrYzbDrcYi2K8' + '/'
+        CHECK_INPUT = f'{google_sheets_url}1uYnl-r1F9AIMgAE4PNJSBXVmgvhcnu8PNcjWArUMYSI' + '/'
+        INPUT_PROMO = f'{google_sheets_url}1fn4PxFE6bbyOTe0aPRUpYhEVC9uTDslF' + '/'
 
     class RTM:
-        CHECK_INPUT = f'{google_sheets_url}1eH7CeUgACj3WYSA_xovhiqNsJl9VWVH8DWS-lKTiAHM' + '/'
-        INPUT_RTM = f'{google_sheets_url}1zvN0SjpV3OSUu4x1PD-bDwX2jWc4rd0DXc6wkjIQPCw' + '/'
+        CHECK_INPUT = f'{google_sheets_url}1VYYQiF7ftxTdFj40cw1aPS_nTAvSBFWq' + '/'
+        INPUT_RTM = f'{google_sheets_url}1gKS4J3tPOn1y-s9t5W5Mnf-SChoGTbJJ' + '/'
 
     class Tetris:
-        check_input_sp_sheet = '1rF_hqm--YdjBioPpThBmaPpf8efkrge3LLkvu1Mo194' + '/'
-
-        CHECK_INPUT = {'milk_balance': f'{google_sheets_url}{check_input_sp_sheet}/edit#gid=1179607784',
-                       'industry': f'{google_sheets_url}{check_input_sp_sheet}/edit#gid=1755984529',
-                       'md': f'{google_sheets_url}{check_input_sp_sheet}/edit#gid=276097005',
-                       'sourcing': f'{google_sheets_url}{check_input_sp_sheet}/edit#gid=101905169'}
-        INPUT_MILK_BALANCE = f'{google_sheets_url}1S3vHAcGubdZfONUaLOE9cba34_TupuIi1Lt-JVe0LWY' + '/'
-        INPUT_MD = f'{google_sheets_url}1okMXXYudAmdC237OOHcqL5J42TBd2ljUnCci4axm-Y4' + '/'
-        INPUT_INDUSTRY = f'{google_sheets_url}1VVMkc81PHvUV_eaG9iI0VPWepJQS6IYHib72TT2_DvU' + '/'
-        INPUT_SOURCING = f'{google_sheets_url}1IoRK54hkNA9y42eN4F9sd69miP5mIigkDv513G-gGX0' + '/'
+        CHECK_INPUT = f'{google_sheets_url}1YERmUHZL-cEIbWDW3NUGAnU6I8LhZcn-' + '/'
+        INPUT_MILK_BALANCE = f'{google_sheets_url}1KleiyYpvy_LxdklVIjBY18NGo2ygB36n' + '/'
+        INPUT_MD = f'{google_sheets_url}1YL6eHd61hlxaDdIypljwGtp8BAIDstbQ' + '/'
+        INPUT_INDUSTRY = f'{google_sheets_url}1GOyAx82lEWSb5MsdSIgj48CKlX8zxSJ-' + '/'
+        INPUT_SOURCING = f'{google_sheets_url}1vz9V5l4bta_UDHa7NpersgI6I5ve3Y_h' + '/'
 
 
 class DataTypes:
