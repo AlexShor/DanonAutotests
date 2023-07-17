@@ -39,6 +39,10 @@ class FillData(DataTypes):
         return types.get(validity).get(data_type)
 
 
+class DataTypesErrorExceptions:
+    DATA = [['gps', 'SKU_SAP_CODE']]
+
+
 class InputNameMatch:
     PROMO = {'GPS': 'gps',
              'Distribution Mapping': 'distr_mapping',
