@@ -51,3 +51,13 @@ class PublicRequests:
                                  files=files)
 
         return response
+
+    @staticmethod
+    def tetris_delete_input_file(tetris_scenario_id, current_type, token, env='DEV'):
+
+        base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
+        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{current_type}/inputs'
+
+        response = requests.delete(url, headers={'Authorization': f'Bearer {token}'}, verify=False,)
+
+        return response

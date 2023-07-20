@@ -47,26 +47,19 @@ class DataTypesErrorExceptions:
 
 
 class ErrorLogTexts:
-    class Promo:
-        OBLIGATION = 'Errors regarding obligatory fields:'
-        TYPE = 'Type errors:'
-        NEGATIVE = 'Errors with non-negative values:'
-        ROW = 'row'
-        COLUMN = 'column'
-
-    class Rtm:
-        OBLIGATION = 'Errors regarding obligatory fields:'
-        TYPE = 'Type errors:'
-        NEGATIVE = 'Errors with non-negative values:'
-        ROW = 'row'
-        COLUMN = 'column'
-
-    class Tetris:
+    class Rus:
         OBLIGATION = 'Ошибки касающийся обязательных полей:'
         TYPE = 'Ошибки по типам полей:'
         NEGATIVE = 'Ошибки по неотрицательным значениям:'
         ROW = 'строка'
         COLUMN = 'колонка'
+
+    class Eng:
+        OBLIGATION = 'Errors regarding obligatory fields:'
+        TYPE = 'Type errors:'
+        NEGATIVE = 'Errors with non-negative values:'
+        ROW = 'row'
+        COLUMN = 'column'
 
 
 class InputNameMatch:
