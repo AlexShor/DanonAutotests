@@ -26,9 +26,10 @@ class PublicRequests:
             return response.json()
 
     @staticmethod
-    def tetris_input_log(tetris_scenario_id, current_type, token, params_input_type, env='DEV'):
+    def tetris_input_log(tetris_scenario_id, url_input_type, token, params_input_type, env='DEV'):
         base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
-        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{current_type}/inputs/log'
+        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{url_input_type}/inputs/log'
+
         response = requests.get(url,
                                 headers={'Authorization': f'Bearer {token}'},
                                 params={'input_type': params_input_type},
@@ -38,11 +39,11 @@ class PublicRequests:
         return response
 
     @staticmethod
-    def tetris_upload_input_file(tetris_scenario_id, current_type, token, params_input_type, file_path, env='DEV'):
-        files = {'file': open(file_path, 'rb')}
-
+    def tetris_upload_input_file(tetris_scenario_id, url_input_type, token, params_input_type, file_path, env='DEV'):
         base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
-        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{current_type}/inputs'
+        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{url_input_type}/inputs'
+
+        files = {'file': open(file_path, 'rb')}
 
         response = requests.post(url,
                                  headers={'Authorization': f'Bearer {token}'},
@@ -53,11 +54,14 @@ class PublicRequests:
         return response
 
     @staticmethod
-    def tetris_delete_input_file(tetris_scenario_id, current_type, token, env='DEV'):
+    def tetris_delete_input_file(tetris_scenario_id, url_input_type, token, params_input_type, env='DEV'):
 
         base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
-        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{current_type}/inputs'
+        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}/{url_input_type}/inputs'
 
-        response = requests.delete(url, headers={'Authorization': f'Bearer {token}'}, verify=False,)
+        response = requests.delete(url,
+                                   headers={'Authorization': f'Bearer {token}'},
+                                   params={'input_type': params_input_type},
+                                   verify=False, )
 
         return response

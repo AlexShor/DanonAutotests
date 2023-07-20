@@ -62,66 +62,342 @@ class ErrorLogTexts:
         COLUMN = 'column'
 
 
-class InputNameMatch:
-    PROMO = {'GPS': 'gps',
-             'Distribution Mapping': 'distr_mapping',
-             'Combine Products': 'combine_products',
-             'Combine Chains': 'combine_chains',
-             'Up/Down Size': 'up_down_size',
-             'Product Masterdata': 'prod_md',
-             'Customer Masterdata': 'cust_md',
-             'Promo Library': 'lib'}
+# class InputNameMatch:
+#     PROMO = {'GPS': 'gps',
+#              'Distribution Mapping': 'distr_mapping',
+#              'Combine Products': 'combine_products',
+#              'Combine Chains': 'combine_chains',
+#              'Up/Down Size': 'up_down_size',
+#              'Product Masterdata': 'prod_md',
+#              'Customer Masterdata': 'cust_md',
+#              'Promo Library': 'lib'}
 
 
 class InputTypeNameMatch:
-    class Tetris:
-        input_type_md = ['md', 'master-data']
-        input_type_sourcing = ['sourcing', 'sourcing-logistics']
-        input_type_industry = ['industry', 'industry']
-        input_type_optimilk = ['milkbalance', 'optimilk']
+    class Promo:
+        TYPES = {
+            'gps': {
+                'url_path': 'promo-gps',
+                'file_name': 'gps',
+                'front_name': 'GPS'
+            },
+            'distr_mapping': {
+                'url_path': 'promo-distr-mappings',
+                'file_name': 'distr_mapping',
+                'front_name': 'Distribution Mapping'
+            },
+            'combine_products': {
+                'url_path': 'promo-combine-products',
+                'file_name': 'combine_products',
+                'front_name': 'Combine Products'
+            },
+            'combine_chains': {
+                'url_path': 'promo-combine-chains',
+                'file_name': 'combine_chains',
+                'front_name': 'Combine Chains'
+            },
+            'up_down_size': {
+                'url_path': 'promo-up-down-sizes',
+                'file_name': 'up_down_size',
+                'front_name': 'Up/Down Size'
+            },
+            'prod_md': {
+                'url_path': 'promo-product-mds',
+                'file_name': 'prod_md',
+                'front_name': 'Product Masterdata'
+            },
+            'cust_md': {
+                'url_path': 'promo-customer-mds',
+                'file_name': 'cust_md',
+                'front_name': 'Customer Masterdata'
+            },
+            'lib': {
+                'url_path': 'promo-libs',
+                'file_name': 'lib',
+                'front_name': 'Promo Library'
+            }
+        }
 
-        TYPES = [
-            [*input_type_md, 'alt_names_locations', 'AlternativeLocations'],
-            [*input_type_md, 'alt_names_materials', 'AlternativeMaterials'],
-            [*input_type_md, 'alt_names_products', 'AlternativeProducts'],
-            [*input_type_md, 'alt_names_vendors', 'AlternativeVendors'],
-            [*input_type_md, 'calendars', 'Calendars'],
-            [*input_type_md, 'locations', 'Locations'],
-            [*input_type_md, 'material_groups', 'MaterialGroups'],
-            [*input_type_md, 'materials', 'Materials'],
-            [*input_type_md, 'products', 'Products'],
-            [*input_type_md, 'vendors', 'VendorsBuyers'],
-            [*input_type_sourcing, 'demand', 'OP(Demand)'],
-            [*input_type_sourcing, 'premade_volumes', 'Premade'],
-            [*input_type_sourcing, 'product_terms', 'Product Terms'],
-            [*input_type_sourcing, 'rejections', 'Rejects'],
-            [*input_type_sourcing, 't1_adjustments', 'T1 Adjustments'],
-            [*input_type_sourcing, 't1_legs', 'T1 Legs'],
-            [*input_type_sourcing, 't1_scheme', 'Транспортная схема'],
-            [*input_type_sourcing, 'trade_terms', 'Trade Terms'],
-            [*input_type_sourcing, 'sourcing_scheme', 'BP19DCPlant(сорсинг матрица)'],
-            [*input_type_sourcing, 'sourcing_settings', 'Settings'],
-            [*input_type_industry, 'bom', 'BOM'],
-            [*input_type_industry, 'bom_replacements', 'BOMSubstitutions'],
-            [*input_type_industry, 'line_capacity', 'LineCapacity'],
-            [*input_type_industry, 'material_contents', 'MaterialContents'],
-            [*input_type_industry, 'min_batches', 'MinBatches'],
-            [*input_type_industry, 'mr_adjustments', 'MRAdjustments'],
-            [*input_type_industry, 'line_bindings', 'PlantLineSKU'],
-            [*input_type_optimilk, 'separation', 'BomSeparation'],
-            [*input_type_optimilk, 'regular_supplies', 'Commitments_M'],
-            [*input_type_optimilk, 'derivation_material', 'DerivationMaterial'],
-            [*input_type_optimilk, 'co_packers', 'DisposalsCopacker'],
-            [*input_type_optimilk, 'stop_buyers', 'DisposalsSpot'],
-            [*input_type_optimilk, 'inbound_capacity', 'InboundCapacities'],
-            [*input_type_optimilk, 'mb_adjustments', 'MBAdjustments'],
-            [*input_type_optimilk, 'new_farms', 'NewFarms_M'],
-            [*input_type_optimilk, 'outbound_capacity', 'OutboundCapacities'],
-            [*input_type_optimilk, 'reco_material', 'RecoMaterial'],
-            [*input_type_optimilk, 'shortage', 'Shortage'],
-            [*input_type_optimilk, 'spot_supplies', 'Spot_M'],
-            [*input_type_optimilk, 'material_stocks', 'Stock'],
-            [*input_type_optimilk, 'ts_farm_to_buyer', 'TSFarmToBuyer'],
-            [*input_type_optimilk, 'ts_farm_to_plant', 'TSFarmToPlant'],
-            [*input_type_optimilk, 'ts_plant_to_buyer', 'TSPlantToBuyer'],
-            [*input_type_optimilk, 'ts_plant_to_plant', 'TSPlantToPlant']]
+    class Tetris:
+        url_path_md = 'master-data'
+        url_path_sourcing = 'sourcing-logistics'
+        url_path_industry = 'industry'
+        url_path_optimilk = 'optimilk'
+
+        TYPES_MD = {
+            'alt_names_locations': {
+                'url_path': url_path_md,
+                'file_name': 'AlternativeLocations',
+                'front_name': '',
+                'parameter': 'alt_names_locations'
+            },
+            'alt_names_materials': {
+                'url_path': url_path_md,
+                'file_name': 'AlternativeMaterials',
+                'front_name': '',
+                'parameter': 'alt_names_materials'
+            },
+            'alt_names_products': {
+                'url_path': url_path_md,
+                'file_name': 'AlternativeProducts',
+                'front_name': '',
+                'parameter': 'alt_names_products'
+            },
+            'alt_names_vendors': {
+                'url_path': url_path_md,
+                'file_name': 'AlternativeVendors',
+                'front_name': '',
+                'parameter': 'alt_names_vendors'
+            },
+            'calendars': {
+                'url_path': url_path_md,
+                'file_name': 'Calendars',
+                'front_name': '',
+                'parameter': 'calendars'
+            },
+            'locations': {
+                'url_path': url_path_md,
+                'file_name': 'Locations',
+                'front_name': '',
+                'parameter': 'locations'
+            },
+            'material_groups': {
+                'url_path': url_path_md,
+                'file_name': 'MaterialGroups',
+                'front_name': '',
+                'parameter': 'material_groups'
+            },
+            'materials': {
+                'url_path': url_path_md,
+                'file_name': 'Materials',
+                'front_name': '',
+                'parameter': 'materials'
+            },
+            'products': {
+                'url_path': url_path_md,
+                'file_name': 'Products',
+                'front_name': '',
+                'parameter': 'products'
+            },
+            'vendors': {
+                'url_path': url_path_md,
+                'file_name': 'VendorsBuyers',
+                'front_name': '',
+                'parameter': 'vendors'
+            }
+        }
+
+        TYPES_SOURCING = {
+            'demand': {
+                'url_path': url_path_sourcing,
+                'file_name': 'OP(Demand)',
+                'front_name': '',
+                'parameter': 'demand'
+            },
+            'premade_volumes': {
+                'url_path': url_path_sourcing,
+                'file_name': 'Premade',
+                'front_name': '',
+                'parameter': 'premade_volumes'
+            },
+            'product_terms': {
+                'url_path': url_path_sourcing,
+                'file_name': 'Product Terms',
+                'front_name': '',
+                'parameter': 'product_terms'
+            },
+            'rejections': {
+                'url_path': url_path_sourcing,
+                'file_name': 'Rejects',
+                'front_name': '',
+                'parameter': 'rejections'
+            },
+            't1_adjustments': {
+                'url_path': url_path_sourcing,
+                'file_name': 'T1 Adjustments',
+                'front_name': '',
+                'parameter': 't1_adjustments'
+            },
+            't1_legs': {
+                'url_path': url_path_sourcing,
+                'file_name': 'T1 Legs',
+                'front_name': '',
+                'parameter': 't1_legs'
+            },
+            't1_scheme': {
+                'url_path': url_path_sourcing,
+                'file_name': 'Транспортная схема',
+                'front_name': '',
+                'parameter': 't1_scheme'
+            },
+            'trade_terms': {
+                'url_path': url_path_sourcing,
+                'file_name': 'Trade Terms',
+                'front_name': '',
+                'parameter': 'trade_terms'
+            },
+            'sourcing_scheme': {
+                'url_path': url_path_sourcing,
+                'file_name': 'BP19DCPlant(сорсинг матрица)',
+                'front_name': '',
+                'parameter': 'sourcing_scheme'
+            },
+            'sourcing_settings': {
+                'url_path': url_path_sourcing,
+                'file_name': 'Settings',
+                'front_name': '',
+                'parameter': 'sourcing_settings'
+            }
+        }
+
+        TYPES_INDUSTRY = {
+            'bom': {
+                'url_path': url_path_industry,
+                'file_name': 'BOM',
+                'front_name': '',
+                'parameter': 'bom'
+            },
+            'bom_replacements': {
+                'url_path': url_path_industry,
+                'file_name': 'BOMSubstitutions',
+                'front_name': '',
+                'parameter': 'bom_replacements'
+            },
+            'line_capacity': {
+                'url_path': url_path_industry,
+                'file_name': 'LineCapacity',
+                'front_name': '',
+                'parameter': 'line_capacity'
+            },
+            'material_contents': {
+                'url_path': url_path_industry,
+                'file_name': 'MaterialContents',
+                'front_name': '',
+                'parameter': 'material_contents'
+            },
+            'min_batches': {
+                'url_path': url_path_industry,
+                'file_name': 'MinBatches',
+                'front_name': '',
+                'parameter': 'min_batches'
+            },
+            'mr_adjustments': {
+                'url_path': url_path_industry,
+                'file_name': 'MRAdjustments',
+                'front_name': '',
+                'parameter': 'mr_adjustments'
+            },
+            'line_bindings': {
+                'url_path': url_path_industry,
+                'file_name': 'PlantLineSKU',
+                'front_name': '',
+                'parameter': 'line_bindings'
+            }
+        }
+
+        TYPES_OPTIMILK = {
+            'separation': {
+                'url_path': url_path_optimilk,
+                'file_name': 'BomSeparation',
+                'front_name': '',
+                'parameter': 'separation'
+            },
+            'regular_supplies': {
+                'url_path': url_path_optimilk,
+                'file_name': 'Commitments_M',
+                'front_name': '',
+                'parameter': 'regular_supplies'
+            },
+            'derivation_material': {
+                'url_path': url_path_optimilk,
+                'file_name': 'DerivationMaterial',
+                'front_name': '',
+                'parameter': 'derivation_material'
+            },
+            'co_packers': {
+                'url_path': url_path_optimilk,
+                'file_name': 'DisposalsCopacker',
+                'front_name': '',
+                'parameter': 'co_packers'
+            },
+            'stop_buyers': {
+                'url_path': url_path_optimilk,
+                'file_name': 'DisposalsSpot',
+                'front_name': '',
+                'parameter': 'stop_buyers'
+            },
+            'inbound_capacity': {
+                'url_path': url_path_optimilk,
+                'file_name': 'InboundCapacities',
+                'front_name': '',
+                'parameter': 'inbound_capacity'
+            },
+            'mb_adjustments': {
+                'url_path': url_path_optimilk,
+                'file_name': 'MBAdjustments',
+                'front_name': '',
+                'parameter': 'mb_adjustments'
+            },
+            'new_farms': {
+                'url_path': url_path_optimilk,
+                'file_name': 'NewFarms_M',
+                'front_name': '',
+                'parameter': 'new_farms'
+            },
+            'outbound_capacity': {
+                'url_path': url_path_optimilk,
+                'file_name': 'OutboundCapacities',
+                'front_name': '',
+                'parameter': 'outbound_capacity'
+            },
+            'reco_material': {
+                'url_path': url_path_optimilk,
+                'file_name': 'RecoMaterial',
+                'front_name': '',
+                'parameter': 'reco_material'
+            },
+            'shortage': {
+                'url_path': url_path_optimilk,
+                'file_name': 'Shortage',
+                'front_name': '',
+                'parameter': 'shortage'
+            },
+            'spot_supplies': {
+                'url_path': url_path_optimilk,
+                'file_name': 'Spot_M',
+                'front_name': '',
+                'parameter': 'spot_supplies'
+            },
+            'material_stocks': {
+                'url_path': url_path_optimilk,
+                'file_name': 'Stock',
+                'front_name': '',
+                'parameter': 'material_stocks'
+            },
+            'ts_farm_to_buyer': {
+                'url_path': url_path_optimilk,
+                'file_name': 'TSFarmToBuyer',
+                'front_name': '',
+                'parameter': 'ts_farm_to_buyer'
+            },
+            'ts_farm_to_plant': {
+                'url_path': url_path_optimilk,
+                'file_name': 'TSFarmToPlant',
+                'front_name': '',
+                'parameter': 'ts_farm_to_plant'
+            },
+            'ts_plant_to_buyer': {
+                'url_path': url_path_optimilk,
+                'file_name': 'TSPlantToBuyer',
+                'front_name': '',
+                'parameter': 'ts_plant_to_buyer'
+            },
+            'ts_plant_to_plant': {
+                'url_path': url_path_optimilk,
+                'file_name': 'TSPlantToPlant',
+                'front_name': '',
+                'parameter': 'ts_plant_to_plant'
+            }
+        }
+
+

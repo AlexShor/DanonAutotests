@@ -295,20 +295,13 @@ class InputFiles:
 
     class ViaAPI:
         @staticmethod
-        def comparison_validation_errors(error_log_txt, input_type_name_match, scenario_id, path):
-            types = input_type_name_match
-            t_folder = 0
-            t_url_path = 1
-            t_param_input = 2
-            t_file_name = 3
+        def comparison_validation_errors(scenario_id, path, input_types, token, error_log_txt, errors_row_len=5):
+            for input_name, input_type in input_types.items():
+                url_input_type = input_type.get('url_path')
+                params_input_type = input_type.get('parameter')
+                file_name = input_type.get('file_name')
 
-            token = PubReq.authorization(*Creds.auth().values(), get='access')
-
-            for i in range(len(types)):
-                input_type = types[i][t_url_path]
-                input_name = types[i][t_param_input]
-
-                response = PubReq.tetris_input_log(scenario_id, input_type, token, input_name)
+                response = PubReq.tetris_input_log(scenario_id, url_input_type, token, params_input_type)
 
                 if response.text != '':
                     request_data = extract_list_from_error_log(response.text,
@@ -316,8 +309,8 @@ class InputFiles:
                                                                error_log_txt.TYPE,
                                                                error_log_txt.NEGATIVE)
 
-                    folder_path = rf'files/{path}/{types[i][t_folder]}/'
-                    error_log_file_name = f'errors_{types[i][t_file_name]}.txt'
+                    folder_path = rf'files/{path}/'
+                    error_log_file_name = f'errors_{file_name}.txt'
 
                     error_log_file = io.open(folder_path + error_log_file_name, "r", encoding='utf-8')
                     log_file_data = error_log_file.read()
@@ -329,80 +322,105 @@ class InputFiles:
                                                                 error_log_txt.NEGATIVE)
 
                     for m in range(len(request_data)):
-                        request_data[m][t_url_path] = set(request_data[m][t_url_path])
+                        request_data[m][1] = set(request_data[m][1])
 
                     for m in range(len(log_file_data)):
-                        log_file_data[m][t_url_path] = set(log_file_data[m][t_url_path])
+                        log_file_data[m][1] = set(log_file_data[m][1])
 
                     result = []
                     for k in range(len(request_data)):
-                        set_difference = str(request_data[k][t_url_path].difference(log_file_data[k][t_url_path]))
+                        set_difference = str(request_data[k][1].difference(log_file_data[k][1]))
                         if set_difference != 'set()':
                             result.append(f'{request_data[k][0]} {set_difference}')
 
                     if result:
-                        print(f'==[{i}] {types[i][t_url_path]} {types[i][t_file_name]} {CCol.txt_red("FAIL")}')
+                        print(f'==Check: {url_input_type} - {input_name} {CCol.txt_red("FAIL")}')
                         for err in result:
                             print('====' + err)
                     else:
-                        print(f'==[{i}] {types[i][t_url_path]} {types[i][t_file_name]} {CCol.txt_grn("PASS")}')
+                        print(f'==Check: {url_input_type} - {input_name} {CCol.txt_grn("PASS")}')
                 else:
-                    print(f'==[{i}] {types[i][t_url_path]} {types[i][t_file_name]} {CCol.txt_yel("EMPTY RESPONSE")}')
+                    print(f'==Check: {url_input_type} - {input_name} {CCol.txt_yel("EMPTY RESPONSE")}')
 
         @staticmethod
-        def upload_inputs_files(scenario_id, path, input_type_name_match):
-            types = input_type_name_match
-            t_folder = 0
-            t_url_path = 1
-            t_param_input = 2
-            t_file_name = 3
+        def upload_inputs_files(scenario_id, path, input_types, token, errors_row_len=5):
+            for input_name, input_type in input_types.items():
+                url_input_type = input_type.get('url_path')
+                params_input_type = input_type.get('parameter')
+                file_name = input_type.get('file_name')
 
-            token = PubReq.authorization(*Creds.auth().values(), get='access')
-
-            for i in range(len(types)):
-                input_type = types[i][t_url_path]
-                input_name = types[i][t_param_input]
-                folder_path = rf'files/{path}/{types[i][t_folder]}/'
-                file_name = f'{types[i][t_file_name]}.csv'
+                folder_path = rf'files/{path}/'
+                file_name = f'{file_name}.csv'
                 file_path = folder_path + file_name
-                response = PubReq.tetris_upload_input_file(scenario_id, input_type, token, input_name, file_path)
+
+                response = PubReq.tetris_upload_input_file(scenario_id, url_input_type, token, params_input_type,
+                                                           file_path)
                 status_code = response.status_code
                 if 200 <= status_code <= 299:
-                    status = f'[{status_code}] PASS'
-                    print(f'==[{i}] {types[i][t_url_path]} {types[i][t_file_name]}.csv {CCol.txt_grn(status)}')
+                    status = CCol.txt_grn(f'[{status_code}] PASS')
                 elif 404 <= status_code <= 599:
-                    status = f'[{status_code}] FAIL'
-                    print(f'==[{i}] {types[i][t_url_path]} {types[i][t_file_name]}.csv {CCol.txt_red(status)}')
+                    status = CCol.txt_red(f'[{status_code}] FAIL')
                 else:
-                    status = f'[{status_code}] FAIL'
-                    print(f'==[{i}] {types[i][t_url_path]} {types[i][t_file_name]}.csv {CCol.txt_red(status)}')
+                    status = CCol.txt_red(f'[{status_code}] FAIL')
+                print(f'==Upload input: {url_input_type} - {input_name} {status}')
+                if chr(10) in response.text:
+                    print('====' + '\n    '.join(response.text.split(chr(10))[:errors_row_len]) + '\n    ...')
+                elif len(response.text) > 0:
+                    print(f'===={response.text}')
+
+        @staticmethod
+        def delete_inputs_files(scenario_id, input_types, token, errors_row_len=5):
+            for input_name, input_type in input_types.items():
+                url_input_type = input_type.get('url_path')
+                params_input_type = input_type.get('parameter')
+
+                response = PubReq.tetris_delete_input_file(scenario_id, url_input_type, token, params_input_type)
+                status_code = response.status_code
+
+                if 200 <= status_code <= 299:
+                    status = CCol.txt_grn(f'[{status_code}] PASS')
+                elif 404 <= status_code <= 599:
+                    status = CCol.txt_red(f'[{status_code}] FAIL')
+                else:
+                    status = CCol.txt_red(f'[{status_code}] FAIL')
+                print(f'==Delete input: {url_input_type} - {input_name} {status}')
+                if chr(10) in response.text:
+                    print('====' + '\n    '.join(response.text.split(chr(10))[:errors_row_len]) + '\n    ...')
+                elif len(response.text) > 0:
                     print(f'===={response.text}')
 
 
+access_token = PubReq.authorization(*Creds.auth().values(), get='access')
+name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
+                'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
+                'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
+                'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
+
+spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
+                'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
+                'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
+                'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
 # list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
 
+# for path, types in spreadsheets.items():
+#     InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
 
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MD,
-#                                            folder=f'tetris/input_files/{InputTypeNameMatch.Tetris.input_type_md[0]}')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_INDUSTRY,
-#                                            folder=f'tetris/input_files/{InputTypeNameMatch.Tetris.input_type_industry[0]}')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_SOURCING,
-#                                            folder=f'tetris/input_files/{InputTypeNameMatch.Tetris.input_type_sourcing[0]}')
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MILK_BALANCE,
-#                                            folder=f'tetris/input_files/{InputTypeNameMatch.Tetris.input_type_optimilk[0]}')
-
-# InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT,
-#                                 folder='tetris/check_input',
+# InputFiles.create_invalid_files(Spreadsheets.Promo.CHECK_INPUT,
+#                                 folder='promo/check_input',
 #                                 error_log_txt=ErrorLogTexts.Eng)
 
-# InputFiles.ViaAPI.comparison_validation_errors(error_log_txt=ErrorLogTexts.Eng,
-#                                                input_type_name_match=InputTypeNameMatch.Tetris.TYPES,
-#                                                scenario_id=213,
-#                                                path='tetris/check_input/error_logs')
+# for path, types in name_matches.items():
+#     InputFiles.ViaAPI.comparison_validation_errors(error_log_txt=ErrorLogTexts.Eng,
+#                                                    input_types=types,
+#                                                    scenario_id=213,
+#                                                    path=f'tetris/check_input/error_logs/{path}',
+#                                                    token=access_token)
 
-# types = [InputTypeNameMatch.Tetris.TYPES[0]]
-# types = [['md', 'master-data', 'alt_names_locations', 'AlternativeLocations']]
+# for path, types in name_matches.items():
+#     InputFiles.ViaAPI.upload_inputs_files(scenario_id=213,
+#                                           input_types=types,
+#                                           path=f'tetris/input_files/{path}',
+#                                           token=access_token)  # tetris/input_files tetris/check_input
 
-# InputFiles.ViaAPI.upload_inputs_files(input_type_name_match=InputTypeNameMatch.Tetris.TYPES,
-#                                       scenario_id=213,
-#                                       path='tetris/check_input')  # tetris/input_files tetris/check_input
+# for types in name_matches.values():
+#     InputFiles.ViaAPI.delete_inputs_files(scenario_id=213, input_types=types, token=access_token)
