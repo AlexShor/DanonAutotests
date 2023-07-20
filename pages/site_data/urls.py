@@ -2,6 +2,7 @@ class BaseUrls:
     BASE_URLS = {'DEV': 'https://app.danon.digital-spectr.ru',
                  'STAGE': 'https://app.danon-stage.jumeforecast.com',
                  'PROD': 'https://danone.jumeplatform.com'}
+    BASE_URLS_BACK = {'DEV': 'https://back.danon.digital-spectr.ru'}
 
 
 class Paths:

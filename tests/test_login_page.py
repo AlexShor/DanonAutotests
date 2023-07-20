@@ -7,14 +7,16 @@ from ..pages.input_tab_on_scenario_page import InputTabOnScenarioPage
 from ..pages.login_page import LoginPage
 from ..pages.site_data.urls import Links
 from ..input_files.input_data import InputNameMatch
+from pages.site_data.credentials import Credentials as Creds
 
 
 class TestStart:
-    def test_user_authorization(self, env, browser, authoriz_creds):
+    def test_user_authorization(self, env, browser):
         link = Links(env).get('LOGIN_PAGE')
         login_page = LoginPage(browser, env, link)
         login_page.open()
-        login_page.authorize_user(*authoriz_creds.values())
+        Creds.auth()
+        login_page.authorize_user(*Creds.auth().values())
 
     def test_user_cen_open_create_scenario_page(self, env, browser):
         link = Links(env).get('SCENARIO_LIST_PAGE')

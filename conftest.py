@@ -1,9 +1,6 @@
-import os
-
 import pytest
 
 from selenium import webdriver
-from dotenv import load_dotenv
 
 
 def pytest_addoption(parser):
@@ -52,11 +49,3 @@ def browser(request):
 
     yield browser
     browser.quit()
-
-
-@pytest.fixture()
-def authoriz_creds():
-    load_dotenv()
-    email = os.getenv('EMAIL')
-    password = os.getenv('PASSWORD')
-    return {'email': email, 'password': password}

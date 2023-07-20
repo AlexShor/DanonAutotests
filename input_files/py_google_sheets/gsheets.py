@@ -1,6 +1,8 @@
 import os
 import time
 
+from console_design.colors import ConsoleColors as CCol
+
 import googleapiclient.errors
 import pygsheets
 import gdown
@@ -52,17 +54,17 @@ class GoogleSheets:
             if len(miss_worksheets) > 0:
                 if invert_miss_worksheets:
                     if worksheets_names[i] not in miss_worksheets:
-                        print(f'========Miss worksheet: "{worksheets_names[i]}"')
+                        print(f'========Worksheet: "{worksheets_names[i]}" {CCol.txt_yel("SKIPPED")}')
                         continue
                 else:
                     if worksheets_names[i] in miss_worksheets:
-                        print(f'========Miss worksheet: "{worksheets_names[i]}"')
+                        print(f'========Worksheet: "{worksheets_names[i]}" {CCol.txt_yel("SKIPPED")}')
                         continue
             print(f'========Reading worksheet: "{worksheets_names[i]}".', end=' ')
             start = time.time()
             tables.append(spreadsheet.get(worksheets_names[i]).to_dict('records'))
             end = time.time() - start
-            print(f'==Done: ', round(end, 3))
+            print(f'=={CCol.txt_grn("DONE")}: ', round(end, 3))
 
         os.remove(file_name)
         print('====Removed downloaded file.')
@@ -89,17 +91,17 @@ class GoogleSheets:
                 if len(miss_worksheets) > 0:
                     if invert_miss_worksheets:
                         if worksheets_names[i] not in miss_worksheets:
-                            print(f'========Miss worksheet: "{worksheets_names[i]}"')
+                            print(f'========Worksheet: "{worksheets_names[i]}" {CCol.txt_yel("SKIPPED")}')
                             continue
                     else:
                         if worksheets_names[i] in miss_worksheets:
-                            print(f'========Miss worksheet: "{worksheets_names[i]}"')
+                            print(f'========Worksheet: "{worksheets_names[i]}" {CCol.txt_yel("SKIPPED")}')
                             continue
                 print(f'========Parsing worksheet: "{worksheets_names[i]}".', end=' ')
                 start = time.time()
                 tables.append(worksheets_list[i].get_all_records(numericise_data=False))
                 end = time.time() - start
-                print(f'==Done: ', round(end, 3))
+                print(f'=={CCol.txt_grn("DONE")}: ', round(end, 3))
 
             worksheets_names = [elem for elem in worksheets_names if elem not in miss_worksheets]
 
@@ -107,12 +109,13 @@ class GoogleSheets:
             print('====End parsing. Time: ', round(end_pars, 3), end='\n\n')
             return to_matrix(tables), worksheets_names
         except googleapiclient.errors.HttpError:
-            print("====Can't pars google sheet, start downloading...")
+            txt = "Can't pars google sheet, start downloading..."
+            print(f'===={CCol.txt_yel(txt)}')
             tables, worksheets_names = GoogleSheets.download_file_from_google_drive(spreadsheet_link,
                                                                                     miss_worksheets,
                                                                                     invert_miss_worksheets)
 
-            worksheets_names = [elem for elem in worksheets_names if elem not in miss_worksheets]
+            worksheets_names = [elem.strip() for elem in worksheets_names if elem not in miss_worksheets]
 
             end_pars = time.time() - start_pars
             print('====End parsing. Time: ', round(end_pars, 3), end='\n\n')
