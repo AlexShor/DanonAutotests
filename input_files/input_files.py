@@ -200,8 +200,6 @@ class InputFiles:
                 os.makedirs(folder_name)
 
             for file_name in file_names.keys():
-                count_col = file_names.get(file_name)
-
                 start_creating = time.time()
                 print(f'========Creating files: "{worksheets_names[table]}/{file_name}.csv"', end='')
 
@@ -209,43 +207,29 @@ class InputFiles:
                 data = [[] for _ in range(len(params))]
                 for i in range(len(params)):
                     current_row = i
-                    count = 0
                     for column_name in column_names:
                         for row in tables[table]:
-                            if row[0].strip() == file_name and row[1].strip() == column_name:
+                            table_file_name = row[0].strip()
+                            table_column_name = row[1].strip()
+                            table_data_type = row[2].strip().upper()
+                            table_nan_value = row[3].strip().upper()
+                            table_negative = row[4].strip().upper()
+                            if table_file_name == file_name and table_column_name == column_name:
                                 if len(params[i]) > 5 and params[i][5]:
-                                    count += 1
-                                    if count <= (count_col // 2):
-                                        data[i].append(create_data(file_name, column_name, current_row,
-                                                                   error_log_txt,
-                                                                   row[2].strip().upper(),
-                                                                   row[3].strip().upper(),
-                                                                   row[4].strip().upper(),
-                                                                   params[i][0],
-                                                                   params[i][1],
-                                                                   params[i][2],
-                                                                   params[i][3],
-                                                                   params[i][4]))
-                                        break
-                                    else:
-                                        params[i][1] = not params[i][1]
-                                        data[i].append(create_data(file_name, column_name, current_row,
-                                                                   error_log_txt,
-                                                                   row[2].strip().upper(),
-                                                                   row[3].strip().upper(),
-                                                                   row[4].strip().upper(),
-                                                                   params[i][0],
-                                                                   params[i][1],
-                                                                   params[i][2],
-                                                                   params[i][3],
-                                                                   params[i][4]))
-                                        break
+                                    params[i][1] = not params[i][1]
+                                    data[i].append(create_data(file_name, column_name, current_row,
+                                                               error_log_txt,
+                                                               table_data_type,
+                                                               table_nan_value,
+                                                               table_negative,
+                                                               *params[i][:-1]))
+                                    break
                                 else:
                                     data[i].append(create_data(file_name, column_name, current_row,
                                                                error_log_txt,
-                                                               row[2].upper(),
-                                                               row[3].upper(),
-                                                               row[4].upper(),
+                                                               table_data_type,
+                                                               table_nan_value,
+                                                               table_negative,
                                                                *params[i]))
                                     break
 
@@ -407,9 +391,9 @@ class InputFiles:
 # InputFiles.get_input_file_from_spreadsheet(Spreadsheets.Tetris.INPUT_MILK_BALANCE,
 #                                            folder=f'tetris/input_files/{InputTypeNameMatch.Tetris.input_type_optimilk[0]}')
 
-InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT,
-                  folder='tetris/check_input2',
-                  error_log_txt=ErrorLogTexts.Tetris)
+# InputFiles.create(Spreadsheets.Tetris.CHECK_INPUT,
+#                   folder='tetris/check_input',
+#                   error_log_txt=ErrorLogTexts.Tetris)
 
 # InputFiles.api_comparison_validation_errors(error_log_txt=ErrorLogTexts.Tetris,
 #                                             input_type_name_match=InputTypeNameMatch.Tetris.TYPES,
