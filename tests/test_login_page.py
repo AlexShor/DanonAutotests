@@ -6,7 +6,7 @@ from ..pages.create_scenario_page import CreateScenarioPage
 from ..pages.input_tab_on_scenario_page import InputTabOnScenarioPage
 from ..pages.login_page import LoginPage
 from ..pages.site_data.urls import Links
-from ..input_files.input_data import InputNameMatch
+from ..input_files.input_data import InputTypeNameMatch
 from pages.site_data.credentials import Credentials as Creds
 
 
@@ -35,7 +35,7 @@ class TestStart:
         scenario_page.should_be_scenario_page()
 
         input_tab = InputTabOnScenarioPage(browser)
-        for file_user_name, file_system_name in InputNameMatch.PROMO.items():
+        for file_user_name, file_system_name in InputTypeNameMatch.Promo.TYPES.values():
             #file_path = rf'../input_files/files/promo/input_files/{file_system_name}.csv'
             file_path = rf'C:\Users\LexSh\YandexDisk\Projects\Advanced\Danone\DaneneAutotests\input_files\files\promo\input_files\{file_system_name}.csv'
             input_tab.upload_the_file(file_user_name, file_path)

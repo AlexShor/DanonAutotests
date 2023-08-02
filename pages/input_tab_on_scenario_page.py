@@ -16,4 +16,3 @@ class InputTabOnScenarioPage(BaseScenarioPage):
         self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=input_name).click()
         self.is_clickable(*ITPLocator.select_item('local file')).click()
         self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON, element_for_format=input_name).send_keys(file_path)
-
