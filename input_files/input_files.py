@@ -311,15 +311,15 @@ class InputFiles:
                 count += 1
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
-                file_name = input_type.get('file_name')
+                file_name = input_type.get('system_file_name')
                 type_scenarios = input_type.get('type_scenarios')
 
-                response = ApiReq.tetris_input_log(tetris_scenario_id=scenario_id,
-                                                   url_input_type=url_input_type,
-                                                   type_scenarios=type_scenarios,
-                                                   token=token,
-                                                   params_input_type=params_input_type,
-                                                   env=env)
+                response = ApiReq.get_input_log(tetris_scenario_id=scenario_id,
+                                                url_input_type=url_input_type,
+                                                type_scenarios=type_scenarios,
+                                                token=token,
+                                                params_input_type=params_input_type,
+                                                env=env)
 
                 url_input_type = (f'{url_input_type} - ', '')[url_input_type is None]
                 if response.text != '' and response.status_code < 299:
@@ -403,20 +403,20 @@ class InputFiles:
             for input_name, input_type in input_types.items():
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
-                file_name = input_type.get('file_name')
+                file_name = input_type.get('system_file_name')
                 type_scenarios = input_type.get('type_scenarios')
 
                 folder_path = rf'files/{path}/'
                 file_name = f'{file_name}.{files_format}'
                 file_path = folder_path + file_name
 
-                response = ApiReq.tetris_upload_input_file(tetris_scenario_id=scenario_id,
-                                                           url_input_type=url_input_type,
-                                                           type_scenarios=type_scenarios,
-                                                           token=token,
-                                                           params_input_type=params_input_type,
-                                                           file_path=file_path,
-                                                           env=env)
+                response = ApiReq.upload_input_file(tetris_scenario_id=scenario_id,
+                                                    url_input_type=url_input_type,
+                                                    type_scenarios=type_scenarios,
+                                                    token=token,
+                                                    params_input_type=params_input_type,
+                                                    file_path=file_path,
+                                                    env=env)
                 status_code = response.status_code
                 if 200 <= status_code <= 299:
                     status = CCol.txt_grn(f'[{status_code}] PASS')
@@ -443,11 +443,11 @@ class InputFiles:
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
 
-                response = ApiReq.tetris_delete_input_file(tetris_scenario_id=scenario_id,
-                                                           url_input_type=url_input_type,
-                                                           token=token,
-                                                           params_input_type=params_input_type,
-                                                           env=env)
+                response = ApiReq.delete_input_file(tetris_scenario_id=scenario_id,
+                                                    url_input_type=url_input_type,
+                                                    token=token,
+                                                    params_input_type=params_input_type,
+                                                    env=env)
                 status_code = response.status_code
 
                 if 200 <= status_code <= 299:
@@ -525,17 +525,18 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 
 # required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
 
-required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
-required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
+# required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
+# required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
 
 # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
 # required_inputs = InputTypeNameMatch.Promo.TYPES
 
-InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
-                                      input_types=required_inputs,
-                                      path=f'cfr/input_files',  # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
-                                      token=access_token,
-                                      env=environment)  # valid_input_files input_files check_input check_input_old
+# InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
+#                                       input_types=required_inputs,
+#                                       path=f'cfr/input_files',
+#                                       # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
+#                                       token=access_token,
+#                                       env=environment)  # valid_input_files input_files check_input check_input_old
 
 # for types in name_matches.values():
 #     InputFiles.ViaAPI.delete_inputs_files(scenario_id=scenario_id,

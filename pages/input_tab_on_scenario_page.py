@@ -12,7 +12,7 @@ class InputTabOnScenarioPage(BaseScenarioPage):
         self.find_elem(*BSPLocator.TAB_PFR)
         self.find_elem(*BSPLocator.TAB_OUTPUT)
 
-    def upload_the_file(self, input_name, file_path):
-        self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=input_name).click()
+    def upload_the_file(self, input_file_front_name, file_path):
+        self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=input_file_front_name).click()
         self.is_clickable(*ITPLocator.select_item('local file')).click()
-        self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON, element_for_format=input_name).send_keys(file_path)
+        self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON, element_for_format=input_file_front_name).send_keys(file_path)

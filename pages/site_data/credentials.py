@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 class Credentials:
     @staticmethod
-    def auth():
+    def auth(env='DEV'):
         load_dotenv()
-        email = os.getenv('EMAIL')
-        password = os.getenv('PASSWORD')
+        email = os.getenv(f'{env}_EMAIL')
+        password = os.getenv(f'{env}_PASSWORD')
         return {'email': email, 'password': password}
