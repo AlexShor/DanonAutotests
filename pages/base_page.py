@@ -26,15 +26,15 @@ class BasePage:
         else:
             return found_elem[0]
 
-    def is_clickable(self, method, css_selector, element_for_format='', timeout=4):
+    def is_clickable(self, method, css_selector, element_for_format=(), timeout=4):
         try:
             WebDriverWait(self.browser, timeout). \
-                until(EC.element_to_be_clickable((method, css_selector.format(element_for_format))))
+                until(EC.element_to_be_clickable((method, css_selector.format(*element_for_format))))
         except TimeoutException:
-            error_text = f'Element is not clickable: "{css_selector.format(element_for_format)}"'
+            error_text = f'Element is not clickable: "{css_selector.format(*element_for_format)}"'
             print(error_text, end=' ')
             raise TimeoutException(error_text)
-        return self.find_elem(method, css_selector, element_for_format=element_for_format)
+        return self.find_elem(method, css_selector, element_for_format=(element_for_format,))
 
     def is_element_present(self, method, css_selector):
         try:
@@ -43,18 +43,18 @@ class BasePage:
             return False
         return True
 
-    def is_not_element_present(self, method, css_selector, timeout=4):
+    def is_not_element_present(self, method, css_selector, element_for_format=(), error_text='', timeout=4):
         try:
             WebDriverWait(self.browser, timeout).\
-                until(EC.presence_of_element_located((method, css_selector)))
+                until(EC.presence_of_element_located((method, css_selector.format(*element_for_format))))
         except TimeoutException:
             return True
         return False
 
-    def is_disappeared(self, method, css_selector, element_for_format='', error_text='', timeout=4):
+    def is_disappeared(self, method, css_selector, element_for_format=(), error_text='', timeout=4):
         try:
-            WebDriverWait(self.browser, timeout, 1). \
-                until_not(EC.presence_of_element_located((method, css_selector.format(element_for_format))))
+            WebDriverWait(self.browser, timeout=timeout). \
+                until_not(EC.visibility_of_element_located((method, css_selector.format(*element_for_format))))
         except TimeoutException:
             return False
         return True

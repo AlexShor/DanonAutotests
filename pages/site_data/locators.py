@@ -58,24 +58,37 @@ class BaseScenarioPageLocators(BasePageLocators):
     SCENARIO_SUBTITLE = (By.XPATH, '//div[contains(@class, "ScenarioSubtitle_")]')
     SCENARIO_SUBTITLE_ELEMENTS = (By.XPATH, SCENARIO_SUBTITLE[1] + '/SPAN')
     SELECT_EDIT_ACCESS = (By.XPATH, SCENARIO_HEADER[1] + BasePageLocators.SELECTOR[1])
+    SELECT_GROUP_UPLOAD_FROM_SCENARIO = (
+        By.XPATH,
+        '//div[@class="rc-select-selector"]//span[text()="group upload from scenario"]')
+
     TABS = (By.XPATH, '//div[contains(@class, "_tabs_")]/div[contains(@class, "_tabs_")]')
     TAB_INPUT = (By.XPATH, TABS[1] + '//span[text()="Input"]/../..')
     TAB_PFR = (By.XPATH, TABS[1] + '//span[text()="Params for run"]/../..')
     TAB_OUTPUT = (By.XPATH, TABS[1] + '//span[text()="Output"]/../..')
+    DARK_TAB_INPUT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="Input"]')
 
 
 class InputTabLocators(BaseScenarioPageLocators):
+    TAB_TITLE = (By.XPATH, '//div[contains(@class, "_tabTitle_") and text()="Input"]')
+
     CARD = (By.XPATH, '//div[contains(@class, "_card_")]')
     CARD_TITLE = (By.XPATH, CARD[1] + '//div[contains(@class, "_cardTitle_") and text()="{}"]')
     CARD_CONTENT = (By.XPATH, '//div[contains(@class, "_cardContent_")]')
-    SELECT = (By.XPATH, CARD_TITLE[1] + BasePageLocators.SELECTOR[1])
     CARD_CONTENT_BY_TITLE = (By.XPATH, CARD_TITLE[1] + '/../..' + CARD_CONTENT[1])
+
+    SELECT = (By.XPATH, CARD_TITLE[1] + BasePageLocators.SELECTOR[1])
     SELECT_TYPE_DATA = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '/div[1]' + BasePageLocators.SELECTOR[1])
+
     UPLOAD_FILE_BUTTON = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '//input[@type="file"]')
     INFO_TAG_UPLOADED_DATA = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '//div[contains(@class, "_tag_")]')
     PREVIEW_BUTTON = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '//button[contains(@class, "_cardAction_")]')
     CARD_INFO_TEXT = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '//p[contains(@class, "_cardInfo_")]')
+
     PRELOADER = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '//div[contains(@class, "_loader_")]')
     PRELOADER_TEXT = (By.XPATH, PRELOADER[1] + '//div[text()="{}"]')
     PRELOADER_SPINNER_LARGE = (By.XPATH, CARD_CONTENT_BY_TITLE[1] + '//div[contains(@class, "_spinnerLarge_")]')
 
+    POPOVER_MESSAGE_LIST = (By.XPATH, BasePageLocators.POPOVER[1] + '//div[contains(@class, "_messageList_")]')
+    MESSAGE_IN_POPOVER_MESSAGE_LIST = (By.XPATH, POPOVER_MESSAGE_LIST[1] +
+                                       '//span[contains(@class, "_messageText_") and text()="{}"]')

@@ -12,8 +12,8 @@ class ScenarioListPage(BasePage):
         assert Links(self.env).get('SCENARIO_LIST_PAGE') == self.browser.current_url, \
             'Current url is not SCENARIO_LIST_PAGE'
 
-    def user_cen_open_create_scenario_page(self):
+    def user_can_open_create_scenario_page(self):
         self.find_elem(*BPLocator.JB_LEFT).click()
 
-    def user_cen_open_scenario_page(self):
-        self.find_elem(*SLLocator.SCENARIO_TITLE, 'Scenario_20230713_1').click()
+    def user_can_open_scenario_page_by_click_on_title(self, scenario_title):
+        self.find_elem(*SLLocator.SCENARIO_TITLE, element_for_format=(scenario_title, )).click()

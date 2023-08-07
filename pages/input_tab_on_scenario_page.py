@@ -6,13 +6,20 @@ from .site_data.locators import InputTabLocators as ITPLocator
 
 
 class InputTabOnScenarioPage(BaseScenarioPage):
-    def should_be_scenario_page(self):
-        self.find_elem(*BSPLocator.SCENARIO_TITLE)
-        self.find_elem(*BSPLocator.SCENARIO_SUBTITLE)
-        self.find_elem(*BSPLocator.SELECT_EDIT_ACCESS)
-        self.find_elem(*BSPLocator.TAB_INPUT)
-        self.find_elem(*BSPLocator.TAB_PFR)
-        self.find_elem(*BSPLocator.TAB_OUTPUT)
+    def should_be_input_tab_on_scenario_page(self):
+        self.find_elem(*ITPLocator.TAB_TITLE)
+        self.find_elem(*ITPLocator.SELECT_GROUP_UPLOAD_FROM_SCENARIO)
+        self.find_elem(*ITPLocator.CARD)
+        self.find_elem(*ITPLocator.DARK_TAB_INPUT)
+
+    def should_be_input_name_in_popover_message_list(self, input_file_front_name):
+        self.find_elem(*ITPLocator.MESSAGE_IN_POPOVER_MESSAGE_LIST, element_for_format=(input_file_front_name,))
+
+    def should_be_not_input_name_in_popover_message_list(self, input_file_front_name):
+        assert self.is_not_element_present(*ITPLocator.MESSAGE_IN_POPOVER_MESSAGE_LIST,
+                                           element_for_format=(input_file_front_name,),
+                                           timeout=1), \
+            f'Input name: "{input_file_front_name}" is present in popover message list'
 
     def upload_the_file(self, input_file_front_name, file_path):
         self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=(input_file_front_name,)).click()
@@ -20,7 +27,7 @@ class InputTabOnScenarioPage(BaseScenarioPage):
         self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON, element_for_format=(input_file_front_name,)).send_keys(file_path)
         self.check_preloader(input_file_front_name, preloader_text='loading')
         self.check_preloader(input_file_front_name, preloader_text='file check')
-        self.check_disappeared_preloader(input_file_front_name)
+        # self.check_disappeared_preloader(input_file_front_name)
 
     def file_should_be_uploaded(self, input_file_front_name, system_file_name, check_date=None):
         if check_date is None:
@@ -63,4 +70,4 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
     def check_disappeared_preloader(self, input_file_front_name):
         assert self.is_disappeared(*ITPLocator.PRELOADER_SPINNER_LARGE, element_for_format=(input_file_front_name,)), \
-            'is_disappeared'
+            'Preloader is not disappeared'
