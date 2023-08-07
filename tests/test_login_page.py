@@ -1,4 +1,5 @@
 import time
+import os
 
 import pytest
 
@@ -46,9 +47,12 @@ class TestStart:
 
         input_tab = InputTabOnScenarioPage(browser)
 
-        path = rf'C:/Users/LexSh/YandexDisk/Projects/Advanced/Danone/DaneneAutotests/input_files/files/promo/input_files/'
+        path = '\\input_files\\files\\promo\\input_files\\'
+        path = '\\'.join(os.path.dirname(os.path.abspath(__file__)).split('\\')[:-1]) + path
 
         file_path = path + f'{system_file_name}.csv'
         input_tab.upload_the_file(front_name, file_path)
 
-        #time.sleep(2)
+        input_tab.file_should_be_uploaded(front_name, system_file_name=f'{system_file_name}.csv')
+
+    time.sleep(2)

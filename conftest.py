@@ -22,17 +22,16 @@ def pytest_addoption(parser):
 
 @pytest.fixture()
 def env(request):
-    base_url = request.config.getoption("base_url")
-    print(f'[env={base_url}]', end=' ')
-    return base_url
+    return request.config.getoption("base_url")
 
 
 @pytest.fixture(scope="class")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     user_language = request.config.getoption("language")
+    env = request.config.getoption("base_url")
 
-    print(f'[browser={browser_name}] [language={user_language}]', end=' ')
+    print(f'[browser={browser_name}] [language={user_language}] [env={env}]', end=' ')
 
     if browser_name == "chrome":
         options = webdriver.ChromeOptions()

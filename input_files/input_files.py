@@ -465,7 +465,7 @@ class InputFiles:
 
 
 environment = 'DEV'
-scenario_id = 54
+scenario_id = 277
 # list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
 access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=environment)
 if access_token == 502:
@@ -525,18 +525,18 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 
 # required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
 
-# required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
-# required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
+required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
+required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
 
 # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
 # required_inputs = InputTypeNameMatch.Promo.TYPES
 
-# InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
-#                                       input_types=required_inputs,
-#                                       path=f'cfr/input_files',
-#                                       # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
-#                                       token=access_token,
-#                                       env=environment)  # valid_input_files input_files check_input check_input_old
+InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
+                                      input_types=required_inputs,
+                                      path=f'cfr/check_input/cfr_check_data',
+                                      # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
+                                      token=access_token,
+                                      env=environment)  # valid_input_files input_files check_input check_input_old
 
 # for types in name_matches.values():
 #     InputFiles.ViaAPI.delete_inputs_files(scenario_id=scenario_id,
