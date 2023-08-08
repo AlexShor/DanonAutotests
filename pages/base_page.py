@@ -8,6 +8,7 @@ class BasePage:
         self.env = env
         self.browser = browser
         self.url = url
+        self.implicitly_wait_timeout = timeout
         self.browser.implicitly_wait(timeout)
         self.browser.maximize_window()
 
@@ -28,8 +29,10 @@ class BasePage:
 
     def is_clickable(self, method, css_selector, element_for_format=(), timeout=4):
         try:
+            self.browser.implicitly_wait(0)
             WebDriverWait(self.browser, timeout). \
                 until(EC.element_to_be_clickable((method, css_selector.format(*element_for_format))))
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
         except TimeoutException:
             error_text = f'Element is not clickable: "{css_selector.format(*element_for_format)}"'
             print(error_text, end=' ')
@@ -45,16 +48,20 @@ class BasePage:
 
     def is_not_element_present(self, method, css_selector, element_for_format=(), error_text='', timeout=4):
         try:
+            self.browser.implicitly_wait(0)
             WebDriverWait(self.browser, timeout).\
                 until(EC.presence_of_element_located((method, css_selector.format(*element_for_format))))
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
         except TimeoutException:
             return True
         return False
 
     def is_disappeared(self, method, css_selector, element_for_format=(), error_text='', timeout=4):
         try:
+            self.browser.implicitly_wait(0)
             WebDriverWait(self.browser, timeout=timeout). \
                 until_not(EC.visibility_of_element_located((method, css_selector.format(*element_for_format))))
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
         except TimeoutException:
             return False
         return True

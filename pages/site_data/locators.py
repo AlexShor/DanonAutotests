@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class BasePageLocators:
+    HTML_TAG = (By.XPATH, '//html')
     JENIUS_BUTTON = (By.XPATH, '//button[contains(@class, "_circleCont_")]')
     JB_BUTTON = (By.XPATH, '//div[contains(@class, "_button_")]' + JENIUS_BUTTON[1])
     JB_SMALL = (By.XPATH, '//div[contains(@class, "_small_")]' + JENIUS_BUTTON[1])

@@ -60,4 +60,7 @@ class TestStart:
 
     def test_user_can_open_pfr_tab_from_input_tab(self, env, browser):
         input_tab = InputTabOnScenarioPage(browser)
+        input_tab.should_be_open_pfr_tab_by_click_on_jenius_button_left()
+        
 
+        time.sleep(2)
