@@ -101,10 +101,21 @@ def create_error_log(data_type, current_row, column_name, validity, del_value_na
             errors_with_non_negative_values.append(error_text)
 
 
-# def increase_data_values(i, data_values, options_increasing_data_values):
-#     for key, value in options_increasing_data_values.items():
-#         if i % value['step'] == 0:
-#             data_values[key] =
+def increase_data_values(i, data_values, options_increasing_data_values):
+    for key, value in options_increasing_data_values.items():
+        if i % value['step'] == 0:
+            if type(data_values[key]) == int:
+                if value['value'] == random:
+                    data_values[key] = value['value'].randint(*value['rand_values'])
+                else:
+                    data_values[key] += value['value']
+            elif type(data_values[key]) == str:
+                string, num = data_values[key].split('_')
+                if value.get('value') is None:
+                    data_values[key] = f"{string}_{data_values[value['copy_value']]}"
+                else:
+                    data_values[key] = f"{string}_{int(num) + value['value']}"
+    return data_values
 
 
 def negative_type(validity_of_type, negative_value, value, negativity):
@@ -186,6 +197,7 @@ class InputFiles:
                      error_log_txt=ErrorLogTexts.Eng,
                      params=None,
                      folder='files',
+                     file_name_prefix='',
                      miss_worksheets=None,
                      invert_miss_worksheets=False,
                      only_files=None,
@@ -219,12 +231,20 @@ class InputFiles:
 
             for file_name in file_names.keys():
                 start_creating = time.time()
-                print(f'========Creating files: "{worksheets_names[table]}/{file_name}.csv"', end='')
+                print(f'========Creating file: "{worksheets_names[table]}/{file_name}{file_name_prefix}.csv"', end='')
 
                 column_names = [row[1].strip() for row in tables[table] if row[0].strip() == file_name]
                 data = [[] for _ in range(len(params))]
                 for i in range(len(params)):
                     current_row = i
+                    if data_values is not None and increasing_data_values:
+                        data_values = increase_data_values(i, data_values, options_increasing_data_values)
+                        # if i % 100 == 0:
+                        #     progress = round(100 / len(params) * i)
+                        #     if progress < 100:
+                        #         print(progress, '%', sep='', end='\r')
+                        #     if i == len(params) - 1:
+                        #         print(progress, '%', sep='', end='\n')
                     for column_name in column_names:
                         for row in tables[table]:
                             table_file_name = row[0].strip()
@@ -254,8 +274,6 @@ class InputFiles:
                                                                data_values,
                                                                *params[i]))
                                     break
-                    # if data_values is not None and increasing_data_values:
-                    #     data_values = increase_data_values(i, data_values, options_increasing_data_values)
 
                 if create_error_logs:
                     save_error_log(errors_regarding_obligatory_fields,
@@ -270,7 +288,7 @@ class InputFiles:
                 type_errors.clear()
                 errors_with_non_negative_values.clear()
 
-                file_path = rf'{folder_name}/{file_name}.csv'
+                file_path = rf'{folder_name}/{file_name}{file_name_prefix}.csv'
                 if os.path.exists(file_path):
                     os.remove(file_path)
 
@@ -518,30 +536,74 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 
 # InputFiles.get_input_file_from_spreadsheet(Spreadsheets.CFR.INPUT_CFR, folder=f'cfr/input_files/')
 
-# param = [[True, False, False, False, False] for i in range(100)]
-# files = ['dlc']
-# data_v = {
-#     'CHAIN': 'R0R004',
-#     'WH': '5000',
-#     'SKU': '54983',
-#     'MAX(MIN_DLC)': '9',
-#     'Delivery Time, days': '1'
-# }
-# # options_increasing = {
-# #     'CHAIN': {'value': 1, 'step': 100},
-# #     'WH': {'value': 1, 'step': 100},
-# #     'SKU': {'value': 1, 'step': 10},
-# #     'MAX(MIN_DLC)': {'value': 1, 'step': 1},
-# #     'Delivery Time, days': {'value': 1, 'step': 1}
-# # }
+
+
+# n = 1000000
+# for i in range(n):
+#     prog = 100 / n * i
+#     print(prog, sep='', end='\r')
+#     #time.sleep(10)
+
+
+# for k, v in {
+#     '_t': 1000,
+#     #'_500k': 500000,
+#     #'_1kk': 1000000,
+#     #'_2kk': 2000000,
+#     #'_5kk': 5000000,
+#     #'_7kk': 7000000,
+#     #'_10kk': 10000000,
+# }.items():
+#     param = [[True, False, False, False, False] for i in range(v)]
+#     files = ['quarantine']
+#     # data_v = {
+#     #     'CHAIN': 'CHAIN_1',
+#     #     'WH': 5000,
+#     #     'SKU': 54983,
+#     #     'MAX(MIN_DLC)': 1,
+#     #     'Delivery Time, days': 1
+#     # }
+#     # options_increasing = {
+#     #     'CHAIN': {'value': 1, 'step': 10},
+#     #     'WH': {'value': 1, 'step': 5},
+#     #     'SKU': {'value': 1, 'step': 3},
+#     #     'MAX(MIN_DLC)': {'value': random, 'rand_values': (1, 9), 'step': 1},
+#     #     'Delivery Time, days': {'value': random, 'rand_values': (1, 20), 'step': 1}
+#     # }
+#     data_v = {
+#         'Plant': 1000,
+#         'SKU': 10000,
+#         'SKU Name': 'SKU Name_1',
+#         'Жесткий Карантин(дней)': 1,
+#         'Мягкий карантин(дней)': 1,
+#         'Частота розлива в неделю': 1,
+#         'Срок годности': 1,
+#         'Признак долгосрока': 1,
+#         'Ready to ship': 1
+#     }
+#     options_increasing = {
+#         'Plant': {'value': 1, 'step': 100},
+#         'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
+#         'SKU Name': {'copy_value': 'SKU', 'step': 1},
+#         'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
+#         'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
+#         'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
+#         'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+#         'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
+#         'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
 #
-# InputFiles.create_files(Spreadsheets.CFR.CHECK_INPUT,
-#                                 params=param,
-#                                 folder='cfr/test',
-#                                 error_log_txt=ErrorLogTexts.Eng,
-#                                 only_files=files,
-#                                 create_error_logs=False,
-#                                 data_values=data_v)
+#     }
+#
+#     InputFiles.create_files(Spreadsheets.CFR.CHECK_INPUT,
+#                             params=param,
+#                             folder='cfr/test',
+#                             file_name_prefix=k,
+#                             error_log_txt=ErrorLogTexts.Eng,
+#                             only_files=files,
+#                             create_error_logs=False,
+#                             data_values=data_v,
+#                             increasing_data_values=True,
+#                             options_increasing_data_values=options_increasing)
 
 # InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT_OLD,
 #                                 folder='tetris/check_input_old',

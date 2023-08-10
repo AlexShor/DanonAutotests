@@ -2,6 +2,8 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from .site_data.locators import BasePageLocators as BPLocator
+
 
 class BasePage:
     def __init__(self, browser, env='', url='', timeout=10):
@@ -37,11 +39,11 @@ class BasePage:
             error_text = f'Element is not clickable: "{css_selector.format(*element_for_format)}"'
             print(error_text, end=' ')
             raise TimeoutException(error_text)
-        return self.find_elem(method, css_selector, element_for_format=(element_for_format,))
+        return self.find_elem(method, css_selector, element_for_format=element_for_format)
 
-    def is_element_present(self, method, css_selector):
+    def is_element_present(self, method, css_selector, element_for_format=()):
         try:
-            self.browser.find_element(method, css_selector)
+            self.browser.find_element(method, css_selector.format(*element_for_format))
         except NoSuchElementException:
             return False
         return True
@@ -65,3 +67,29 @@ class BasePage:
         except TimeoutException:
             return False
         return True
+
+    def is_url_contains(self, url, timeout=4):
+        try:
+            self.browser.implicitly_wait(0)
+            WebDriverWait(self.browser, timeout).\
+                until(EC.url_contains(url))
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+        except TimeoutException:
+            return False
+        return True
+
+    def should_be_sidebar(self):
+        self.find_elem(*BPLocator.SIDEBAR)
+        self.find_elem(*BPLocator.PROJECT_SELECTOR)
+        self.find_elem(*BPLocator.ALL_SCENARIOS_BUTTON)
+        self.find_elem(*BPLocator.OPEN_MENU_BUTTON)
+
+    def choose_project(self, project_name):
+        self.find_elem(*BPLocator.PROJECT_SELECTOR).click()
+        self.is_clickable(*BPLocator.ITEM_IN_SELECTOR, element_for_format=(project_name,)).click()
+
+        project_selector_text = self.find_elem(*BPLocator.PROJECT_SELECTOR).text
+        assert project_name == project_selector_text, \
+            f'Project name: "{project_name}" not in project selector, project selector have: "{project_selector_text}"'
+
+

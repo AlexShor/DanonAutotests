@@ -14,7 +14,14 @@ class Paths:
 class Pages:
     LOGIN = 'login'
     PROMO_SCENARIO_LIST = 'promo-optimizer'
+    RTM_SCENARIO_LIST = 'rtm-optimizer'
+    TETRIS_SCENARIO_LIST = 'tetris-optimizer'
+    CFR_SCENARIO_LIST = 'cfr-optimizer'
+
     PROMO_CREATE_SCENARIO = 'create-promo-scenario'
+    RTM_CREATE_SCENARIO = 'create-rtm-scenario'
+    TETRIS_CREATE_SCENARIO = 'create-tetris-scenario'
+    CFR_CREATE_SCENARIO = 'create-cfr-scenario'
 
 
 class Links(BaseUrls, Paths):

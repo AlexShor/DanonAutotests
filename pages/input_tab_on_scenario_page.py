@@ -5,6 +5,10 @@ from selenium.webdriver.common.keys import Keys
 from .base_scenario_page import BaseScenarioPage
 from .site_data.locators import BaseScenarioPageLocators as BSPLocator
 from .site_data.locators import InputTabLocators as ITPLocator
+from .site_data.element_texts import InputTabScenarioPage as IptTxt
+
+
+language = 'en'
 
 
 def benchmark(func):
@@ -37,10 +41,11 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
     def upload_the_file(self, input_file_front_name, file_path):
         self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=(input_file_front_name,)).click()
-        self.is_clickable(*ITPLocator.select_item('local file')).click()
+        self.is_clickable(*ITPLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(IptTxt.ITEM_IN_SELECTOR_FILE[language],)).click()
         self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON, element_for_format=(input_file_front_name,)).send_keys(file_path)
-        self.check_preloader(input_file_front_name, preloader_text='loading')
-        self.check_preloader(input_file_front_name, preloader_text='file check')
+        self.check_preloader(input_file_front_name, preloader_text=IptTxt.PRELOADER_LOADING[language])
+        self.check_preloader(input_file_front_name, preloader_text=IptTxt.PRELOADER_CHECK[language])
         self.check_disappeared_preloader(input_file_front_name)
 
     def file_should_be_uploaded(self, input_file_front_name, system_file_name, check_date=None):
@@ -67,13 +72,16 @@ class InputTabOnScenarioPage(BaseScenarioPage):
             f'Text: "{text_in_info_tag}" not in info tag. Info tag have "{tag_text}"'
 
     #@benchmark
-    def check_preview_button(self, input_file_front_name, button_text='preview'):
-        preview_button_text = self.find_elem(*ITPLocator.PREVIEW_BUTTON, element_for_format=(input_file_front_name,)).text
+    def check_preview_button(self, input_file_front_name):
+        button_text = IptTxt.PREVIEW_BUTTON[language]
+        preview_button_text = self.find_elem(*ITPLocator.PREVIEW_BUTTON,
+                                             element_for_format=(input_file_front_name,)).text
         assert preview_button_text == button_text, \
             f'Preview button have a text "{preview_button_text}", but should be "{button_text}"'
 
     #@benchmark
-    def check_card_info_text(self, input_file_front_name, card_info_text='Uploaded on '):
+    def check_card_info_text(self, input_file_front_name,
+                             card_info_text=IptTxt.CARD_INFO_UPLOADED[language]):
         current_card_info_text = self.find_elem(*ITPLocator.CARD_INFO_TEXT,
                                                 element_for_format=(input_file_front_name,)).text
         assert card_info_text in current_card_info_text, \

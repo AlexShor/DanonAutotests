@@ -7,14 +7,15 @@ from ..pages.base_scenario_page import BaseScenarioPage
 from ..pages.scenario_list_page import ScenarioListPage
 from ..pages.create_scenario_page import CreateScenarioPage
 from ..pages.input_tab_on_scenario_page import InputTabOnScenarioPage
+from ..pages.pfr_tab_on_scenario_page import PFRTabOnScenarioPage
 from ..pages.login_page import LoginPage
-from ..pages.site_data.urls import Links
+from ..pages.site_data.urls import Links, Pages
 from ..input_files.input_data import InputTypeNameMatch
 from ..pages.site_data.credentials import Credentials as Creds
 from ..conftest import dict_parametrize
 
 
-class TestStart:
+class TestFullSmokePath:
     def test_user_authorization(self, env, browser):
         link = Links(env).get('LOGIN_PAGE')
         login_page = LoginPage(browser, env, link)
@@ -22,20 +23,31 @@ class TestStart:
         Creds.auth()
         login_page.authorize_user(*Creds.auth().values())
 
-    def test_user_can_open_create_scenario_page(self, env, browser):
-        link = Links(env).get('SCENARIO_LIST_PAGE')
-        scenario_list_page = ScenarioListPage(browser, env, link)
+    def test_user_can_change_project(self, env, browser):
+        scenario_list_page = ScenarioListPage(browser, env)
         scenario_list_page.should_be_scenario_list_page()
-        scenario_list_page.user_can_open_create_scenario_page()
+
+        scenario_list_page.should_be_sidebar()
+        # QA_RTM_Optimizer_1 QA_Promo_optimizer_1 QA_Tetris_Optimizer_2 QA_CFR_Optimizer_2
+        scenario_list_page.choose_project('QA_CFR_Optimizer_2')
+
+        # Pages.RTM_SCENARIO_LIST PROMO_SCENARIO_LIST TETRIS_SCENARIO_LIST CFR_SCENARIO_LIST
+        scenario_list_page.should_be_scenario_list_page(project_url_path=Pages.CFR_SCENARIO_LIST)
+
+    def test_user_can_open_create_scenario_page(self, env, browser):
+        scenario_list_page = ScenarioListPage(browser, env)
+        scenario_list_page.should_be_scenario_list_page()
+        scenario_list_page.should_be_open_create_scenario_page_by_click_on_jenius_button_bottom()
 
     def test_user_can_create_scenario_and_open_scenario_page(self, env, browser):
-        link = Links(env).get('PROMO_CREATE_SCENARIO')
-        create_scenario_page = CreateScenarioPage(browser, env, link)
+        create_scenario_page = CreateScenarioPage(browser, env)
         create_scenario_page.should_be_create_scenario_page()
-        create_scenario_page.create_scenario(name='test',
-                                             description='',
-                                             group='regular scenario',
-                                             period='2023 Q4')
+        # params = {'Name': 'test', 'Group': 'regular scenario', 'Period': '2023 Q4'}
+        # params = {'Name': 'test', 'Group': 'Regular', 'Type': 'RTM Optimizer', 'Description': 'test'}
+        # params = {'Name': 'test', 'Group': 'Regular', 'Date Bucket': 'RF (Month)', 'Description': 'test', 'Date format': '%yM%m'}
+        params = {'Name': 'test', 'Group': 'Regular', 'Type': 'Optimizer', 'Description': 'test', 'Randomizer regime': 'Demand randomizer'}
+        create_scenario_page.create_scenario(params=params)
+
         scenario_page = BaseScenarioPage(browser)
         scenario_page.should_be_scenario_page()
 
@@ -62,5 +74,7 @@ class TestStart:
         input_tab = InputTabOnScenarioPage(browser)
         input_tab.should_be_open_pfr_tab_by_click_on_jenius_button_left()
         
+        pfr_tab = PFRTabOnScenarioPage(browser)
+        pfr_tab.should_be_pfr_tab_on_scenario_page()
 
         time.sleep(2)

@@ -10,3 +10,6 @@ class BaseScenarioPage(BasePage):
         self.find_elem(*BSPLocator.TAB_INPUT)
         self.find_elem(*BSPLocator.TAB_PFR)
         self.find_elem(*BSPLocator.TAB_OUTPUT)
+
+    def get_scenario_id_from_url(self):
+        return self.browser.current_url.split('/')[-1]

@@ -1,4 +1,13 @@
 from selenium.webdriver.common.by import By
+from .element_texts import (BasePage as BPTxt,
+                            BaseScenarioPage as BSTxt,
+                            InputTabScenarioPage as IptTxt,
+                            PFRTabScenarioPage as PFRTxt,
+                            OutputTabScenarioPage as OtpTxt,
+                            CreateScenarioPage as CrtTxt)
+
+
+language = 'en'
 
 
 class BasePageLocators:
@@ -13,10 +22,13 @@ class BasePageLocators:
     HEADER = (By.XPATH, '//h1[contains(@class, "_header_")]')
     BLOCK = (By.XPATH, '//div[contains(@class, "_wrap_") and contains(@class, "_block_")]')
     SELECTOR = (By.XPATH, '//div[@class="rc-select-selector"]')
+    ITEM_IN_SELECTOR = (By.XPATH, '(//div[@class="rc-select-item-option-content" and text()="{}"])[last()]/..')
+    SELECT_DROPDOWN = (By.XPATH, '//div[contains(@class, "rc-select-dropdown-cont")]//div[text()="{}]')
 
-    @staticmethod
-    def select_item(item):
-        return By.XPATH, f'(//div[@class="rc-select-item-option-content" and text()="{item}"])[last()]/..'
+    SIDEBAR = (By.XPATH, '//aside[contains(@class, "_sidebar_")]')
+    PROJECT_SELECTOR = (By.XPATH, SIDEBAR[1] + SELECTOR[1])
+    ALL_SCENARIOS_BUTTON = (By.XPATH, SIDEBAR[1] + f'//span[text()="{BPTxt.ALL_SCENARIOS_BUTTON[language]}"]/..')
+    OPEN_MENU_BUTTON = (By.XPATH, SIDEBAR[1] + '//div[contains(@class, "_openMenu_")]')
 
 
 class LoginPageLocators:
@@ -46,32 +58,45 @@ class ScenarioListPageLocators(BasePageLocators):
 class CreateScenarioPageLocators(BasePageLocators):
     ITEM_WRAPPER = (By.XPATH, '//div[contains(@class, "_itemWrapper_")]')
     ITEM_NAME = (By.XPATH, '//span[contains(@class, "_itemName_")]')
-    INPUT_NAME = (By.XPATH, '//span[text()="Name"]/..//input')
-    INPUT_DESCRIPTION = (By.XPATH, '//span[text()="Description"]/..//input')
-    INPUT_GRANULARITY = (By.XPATH, '//span[text()="Granularity"]/..//span[contains(@class, "_input_")]')
-    SELECT_GROUP = (By.XPATH, '//span[text()="Group"]/..//input')
-    SELECT_PERIOD = (By.XPATH, '//span[text()="Period"]/..//input')
+    INPUT_NAME = (By.XPATH, f'//span[text()="{CrtTxt.INPUT_NAME[language]}"]/..//input')
+    INPUT_DESCRIPTION = (By.XPATH, f'//span[text()="{CrtTxt.INPUT_DESCRIPTION[language]}"]/..//input')
+    INPUT_GRANULARITY = (By.XPATH,
+                         f'//span[text()="{CrtTxt.INPUT_GRANULARITY[language]}"]'
+                         f'/..//span[contains(@class, "_input_")]')
+    SELECT_GROUP = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_GROUP[language]}"]/..//input')
+    SELECT_PERIOD = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_PERIOD[language]}"]/..//input')
+    SELECT_TYPE = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_TYPE[language]}"]/..//input')
+    SELECT_DATE_BUCKET = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_DATE_BUCKET[language]}"]/..//input')
+    SELECT_DATE_FORMAT = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_DATE_FORMAT[language]}"]/..//input')
+    SELECT_RANDOMIZER_TYPE = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_RANDOMIZER_TYPE[language]}"]/..//input')
 
 
 class BaseScenarioPageLocators(BasePageLocators):
-    SCENARIO_HEADER = (By.XPATH, '//div[contains(@class, "ScenarioHeader")]')
-    SCENARIO_TITLE = (By.XPATH, '//div[contains(@class, "ScenarioTitle_")]')
-    SCENARIO_SUBTITLE = (By.XPATH, '//div[contains(@class, "ScenarioSubtitle_")]')
+    SCENARIO_HEADER = (By.XPATH, '//div[contains(@class, "_scenarioHeader_")]')
+    SCENARIO_TITLE = (By.XPATH, '//div[contains(@class, "_scenarioTitle_")]')
+    SCENARIO_SUBTITLE = (By.XPATH, '//div[contains(@class, "_scenarioSubtitle_")]')
     SCENARIO_SUBTITLE_ELEMENTS = (By.XPATH, SCENARIO_SUBTITLE[1] + '/SPAN')
     SELECT_EDIT_ACCESS = (By.XPATH, SCENARIO_HEADER[1] + BasePageLocators.SELECTOR[1])
     SELECT_GROUP_UPLOAD_FROM_SCENARIO = (
         By.XPATH,
-        '//div[@class="rc-select-selector"]//span[text()="group upload from scenario"]')
+        f'//div[@class="rc-select-selector"]//span[text()='
+        f'"{BSTxt.SELECT_GROUP_UPLOAD_FROM_SCENARIO[language]}"]')
 
     TABS = (By.XPATH, '//div[contains(@class, "_tabs_")]/div[contains(@class, "_tabs_")]')
-    TAB_INPUT = (By.XPATH, TABS[1] + '//span[text()="Input"]/../..')
-    TAB_PFR = (By.XPATH, TABS[1] + '//span[text()="Params for run"]/../..')
-    TAB_OUTPUT = (By.XPATH, TABS[1] + '//span[text()="Output"]/../..')
-    DARK_TAB_INPUT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="Input"]')
+    TAB_INPUT = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.INPUT_TAB[language]}"]/../..')
+    TAB_PFR = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.PFR_TAB[language]}"]/../..')
+    TAB_OUTPUT = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.OUTPUT_TAB[language]}"]/../..')
+    DARK_TAB_INPUT = (By.XPATH, TABS[1] +
+                      f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.INPUT_TAB[language]}"]')
+    DARK_TAB_PFR = (By.XPATH, TABS[1] +
+                    f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.PFR_TAB[language]}"]')
+    DARK_TAB_OUTPUT = (By.XPATH, TABS[1] +
+                       f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.OUTPUT_TAB[language]}"]')
 
 
 class InputTabLocators(BaseScenarioPageLocators):
-    TAB_TITLE = (By.XPATH, '//div[contains(@class, "_tabTitle_") and text()="Input"]')
+    TAB_TITLE = (By.XPATH,
+                 f'//div[contains(@class, "_tabTitle_") and text()="{IptTxt.INPUT_TAB_TITLE[language]}"]')
 
     CARD = (By.XPATH, '//div[contains(@class, "_card_")]')
     CARD_TITLE = (By.XPATH, CARD[1] + '//div[contains(@class, "_cardTitle_") and text()="{}"]')
@@ -93,3 +118,12 @@ class InputTabLocators(BaseScenarioPageLocators):
     POPOVER_MESSAGE_LIST = (By.XPATH, BasePageLocators.POPOVER[1] + '//div[contains(@class, "_messageList_")]')
     MESSAGE_IN_POPOVER_MESSAGE_LIST = (By.XPATH, POPOVER_MESSAGE_LIST[1] +
                                        '//span[contains(@class, "_messageText_") and text()="{}"]')
+
+
+class PFRTabLocators(BaseScenarioPageLocators):
+    TAB_TITLE = (By.XPATH, f'//h2[contains(@class, "_title_") and text()="{PFRTxt.PFR_TAB_TITLE[language]}"]')
+    APPLY_BUTTON = (By.XPATH, '//button[contains(@class, "_applyButton_")]')
+
+    BLOCKS_WRAPPER = (By.XPATH, '//form//div[contains(@class, "_blocksWrapper_")]')
+    BLOCKS_WITH_TITLE = (By.XPATH, BLOCKS_WRAPPER[1] + '//p[contains(@class, "_blocksTitle_") and text()="{}"]/..')
+
