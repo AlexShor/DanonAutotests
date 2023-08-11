@@ -12,6 +12,9 @@ language = 'en'
 
 class BasePageLocators:
     HTML_TAG = (By.XPATH, '//html')
+    BODY_TAG = (By.XPATH, '//body')
+    SCROLL_BLOCK = (By.XPATH, '//div[contains(@class, "_scroll_")]')
+
     JENIUS_BUTTON = (By.XPATH, '//button[contains(@class, "_circleCont_")]')
     JB_BUTTON = (By.XPATH, '//div[contains(@class, "_button_")]' + JENIUS_BUTTON[1])
     JB_SMALL = (By.XPATH, '//div[contains(@class, "_small_")]' + JENIUS_BUTTON[1])
@@ -72,9 +75,9 @@ class CreateScenarioPageLocators(BasePageLocators):
 
 
 class BaseScenarioPageLocators(BasePageLocators):
-    SCENARIO_HEADER = (By.XPATH, '//div[contains(@class, "_scenarioHeader_")]')
-    SCENARIO_TITLE = (By.XPATH, '//div[contains(@class, "_scenarioTitle_")]')
-    SCENARIO_SUBTITLE = (By.XPATH, '//div[contains(@class, "_scenarioSubtitle_")]')
+    SCENARIO_HEADER = (By.XPATH, '//div[contains(@class, "cenarioHeader_")]')
+    SCENARIO_TITLE = (By.XPATH, '//div[contains(@class, "cenarioTitle_")]')
+    SCENARIO_SUBTITLE = (By.XPATH, '//div[contains(@class, "cenarioSubtitle_")]')
     SCENARIO_SUBTITLE_ELEMENTS = (By.XPATH, SCENARIO_SUBTITLE[1] + '/SPAN')
     SELECT_EDIT_ACCESS = (By.XPATH, SCENARIO_HEADER[1] + BasePageLocators.SELECTOR[1])
     SELECT_GROUP_UPLOAD_FROM_SCENARIO = (

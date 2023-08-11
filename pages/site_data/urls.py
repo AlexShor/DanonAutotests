@@ -1,3 +1,6 @@
+from .default_params import ProjectType as Ptype
+
+
 class BaseUrls:
     BASE_URLS = {'DEV': 'https://app.danon.digital-spectr.ru',
                  'STAGE': 'https://app.danon-stage.jumeforecast.com',
@@ -13,15 +16,15 @@ class Paths:
 
 class Pages:
     LOGIN = 'login'
-    PROMO_SCENARIO_LIST = 'promo-optimizer'
-    RTM_SCENARIO_LIST = 'rtm-optimizer'
-    TETRIS_SCENARIO_LIST = 'tetris-optimizer'
-    CFR_SCENARIO_LIST = 'cfr-optimizer'
+    SCENARIO_LIST = {Ptype.PROMO: 'promo-optimizer',
+                     Ptype.RTM: 'rtm-optimizer',
+                     Ptype.TETRIS: 'tetris-optimizer',
+                     Ptype.CFR: 'cfr-optimizer'}
 
-    PROMO_CREATE_SCENARIO = 'create-promo-scenario'
-    RTM_CREATE_SCENARIO = 'create-rtm-scenario'
-    TETRIS_CREATE_SCENARIO = 'create-tetris-scenario'
-    CFR_CREATE_SCENARIO = 'create-cfr-scenario'
+    CREATE_SCENARIO = {Ptype.PROMO: 'create-promo-scenario',
+                       Ptype.RTM: 'create-rtm-scenario',
+                       Ptype.TETRIS: 'create-tetris-scenario',
+                       Ptype.CFR: 'create-cfr-scenario'}
 
 
 class Links(BaseUrls, Paths):
@@ -31,8 +34,8 @@ class Links(BaseUrls, Paths):
     def get(self, link, scenario_id=''):
         base_url = BaseUrls.BASE_URLS.get(self.environment)
         links = {'LOGIN_PAGE': f'{base_url}/{Pages.LOGIN}',
-                 'SCENARIO_LIST_PAGE': f'{base_url}/{Pages.PROMO_SCENARIO_LIST}',
-                 'CREATE_SCENARIO_PAGE': f'{base_url}/{Pages.PROMO_CREATE_SCENARIO}',
+                 'SCENARIO_LIST_PAGE': f'{base_url}/{Pages.SCENARIO_LIST["promo"]}',
+                 'CREATE_SCENARIO_PAGE': f'{base_url}/{Pages.CREATE_SCENARIO["promo"]}',
                  'SCENARIO_PAGE': f'{base_url}/{Paths.SCENARIO_PAGE}/{scenario_id}'}
         return links.get(link)
 

@@ -7,10 +7,9 @@ from collections import Counter
 from py_google_sheets.gsheets import GoogleSheets
 from input_data import FillData, DataTypes, Spreadsheets, DataTypesErrorExceptions, InputTypeNameMatch
 from input_data import ErrorLogTexts
-from pages.site_data.urls import BaseUrls
 from pages.api.base_api_requests import BaseApiRequests as ApiReq
 from pages.site_data.credentials import Credentials as Creds
-from console_design.colors import ConsoleColors as CCol
+from castom_moduls.console_design.colors import ConsoleColors as CCol
 
 import pandas as pd
 import ast
@@ -234,17 +233,24 @@ class InputFiles:
                 print(f'========Creating file: "{worksheets_names[table]}/{file_name}{file_name_prefix}.csv"', end='')
 
                 column_names = [row[1].strip() for row in tables[table] if row[0].strip() == file_name]
-                data = [[] for _ in range(len(params))]
-                for i in range(len(params)):
+
+                params_length = len(params)
+                data = [[] for _ in range(params_length)]
+
+                for i in range(params_length):
+                    # if i % 100 == 0 or i == params_length - 1:
+                    #     progress = round(100 / params_length * i, 2)
+                    #     if progress <= 100:
+                    #         #print(progress)
+                    #         print('\r')
+                    #         print(progress, '%', sep='')
+                    #     if i == params_length - 1:
+                    #         print(progress, '%', sep='', end='\n')
+
                     current_row = i
                     if data_values is not None and increasing_data_values:
                         data_values = increase_data_values(i, data_values, options_increasing_data_values)
-                        # if i % 100 == 0:
-                        #     progress = round(100 / len(params) * i)
-                        #     if progress < 100:
-                        #         print(progress, '%', sep='', end='\r')
-                        #     if i == len(params) - 1:
-                        #         print(progress, '%', sep='', end='\n')
+
                     for column_name in column_names:
                         for row in tables[table]:
                             table_file_name = row[0].strip()
@@ -511,7 +517,7 @@ class InputFiles:
 
 
 environment = 'DEV'
-scen_id = 292
+scen_id = 338
 # list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
 access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=environment)
 if access_token == 502:
@@ -537,41 +543,13 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 # InputFiles.get_input_file_from_spreadsheet(Spreadsheets.CFR.INPUT_CFR, folder=f'cfr/input_files/')
 
 
-
-# n = 1000000
-# for i in range(n):
-#     prog = 100 / n * i
-#     print(prog, sep='', end='\r')
-#     #time.sleep(10)
-
-
 # for k, v in {
-#     '_t': 1000,
-#     #'_500k': 500000,
-#     #'_1kk': 1000000,
-#     #'_2kk': 2000000,
-#     #'_5kk': 5000000,
-#     #'_7kk': 7000000,
-#     #'_10kk': 10000000,
+#     '_t1': 1,
 # }.items():
 #     param = [[True, False, False, False, False] for i in range(v)]
 #     files = ['quarantine']
-#     # data_v = {
-#     #     'CHAIN': 'CHAIN_1',
-#     #     'WH': 5000,
-#     #     'SKU': 54983,
-#     #     'MAX(MIN_DLC)': 1,
-#     #     'Delivery Time, days': 1
-#     # }
-#     # options_increasing = {
-#     #     'CHAIN': {'value': 1, 'step': 10},
-#     #     'WH': {'value': 1, 'step': 5},
-#     #     'SKU': {'value': 1, 'step': 3},
-#     #     'MAX(MIN_DLC)': {'value': random, 'rand_values': (1, 9), 'step': 1},
-#     #     'Delivery Time, days': {'value': random, 'rand_values': (1, 20), 'step': 1}
-#     # }
 #     data_v = {
-#         'Plant': 1000,
+#         'Plant': 1,
 #         'SKU': 10000,
 #         'SKU Name': 'SKU Name_1',
 #         'Жесткий Карантин(дней)': 1,
@@ -642,7 +620,7 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
 # required_inputs = InputTypeNameMatch.Promo.TYPES
 
-# InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
+# InputFiles.ViaAPI.upload_inputs_files(scenario_id=scen_id,
 #                                       input_types=required_inputs,
 #                                       path=f'cfr/input_files',
 #                                       # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv

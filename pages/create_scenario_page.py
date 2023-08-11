@@ -5,7 +5,9 @@ from .site_data.locators import BasePageLocators as BPLocator
 from .site_data.locators import CreateScenarioPageLocators as CSLocator
 from .site_data.locators import BaseScenarioPageLocators as BSPLocator
 from .site_data.element_texts import CreateScenarioPage as CrtTxt
-from ..pages.site_data.urls import Links, Pages
+from .site_data.urls import Links, Pages
+from .site_data.default_params import (CreateScenarioDefaultParams as DefPrm,
+                                       ProjectType as Ptype)
 
 
 language = 'en'
@@ -20,18 +22,18 @@ class CreateScenarioPage(BasePage):
         self.find_elem(*CSLocator.INPUT_DESCRIPTION)
         self.find_elem(*CSLocator.SELECT_GROUP)
 
-        if Pages.PROMO_CREATE_SCENARIO in current_url:
+        if Pages.SCENARIO_LIST[Ptype.PROMO] in current_url:
             self.find_elem(*CSLocator.INPUT_GRANULARITY)
             self.find_elem(*CSLocator.SELECT_PERIOD)
 
-        if Pages.RTM_CREATE_SCENARIO in current_url:
+        if Pages.SCENARIO_LIST[Ptype.RTM] in current_url:
             self.find_elem(*CSLocator.SELECT_TYPE)
 
-        if Pages.TETRIS_CREATE_SCENARIO in current_url:
+        if Pages.SCENARIO_LIST[Ptype.TETRIS] in current_url:
             self.find_elem(*CSLocator.SELECT_DATE_BUCKET)
             self.find_elem(*CSLocator.SELECT_DATE_FORMAT)
 
-        if Pages.CFR_CREATE_SCENARIO in current_url:
+        if Pages.SCENARIO_LIST[Ptype.CFR] in current_url:
             self.find_elem(*CSLocator.SELECT_TYPE)
             self.find_elem(*CSLocator.SELECT_RANDOMIZER_TYPE)
 
@@ -40,6 +42,8 @@ class CreateScenarioPage(BasePage):
             f'Current page header is not "{header}"'
 
     def create_scenario(self, params=None):
+        if params is None:
+            params = {}
         current_url = self.browser.current_url
 
         name = CrtTxt.INPUT_NAME[language]
@@ -59,34 +63,62 @@ class CreateScenarioPage(BasePage):
         if params.get(description) is not None:
             self.find_elem(*CSLocator.INPUT_DESCRIPTION).send_keys(params[description])
 
-        self.find_elem(*CSLocator.SELECT_GROUP).click()
-        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(group),)).click()
+        if Pages.CREATE_SCENARIO[Ptype.PROMO] in current_url:
+            self.choose_promo_params(params, period, group)
 
-        if Pages.PROMO_CREATE_SCENARIO in current_url:
-            self.find_elem(*CSLocator.SELECT_PERIOD).click()
-            self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(period),)).click()
+        if Pages.CREATE_SCENARIO[Ptype.RTM] in current_url:
+            self.choose_rtm_params(params, _type, group)
 
-        if Pages.RTM_CREATE_SCENARIO in current_url:
-            self.find_elem(*CSLocator.SELECT_TYPE).click()
-            self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(_type),)).click()
+        if Pages.CREATE_SCENARIO[Ptype.TETRIS] in current_url:
+            self.choose_tetris_params(params, date_bucket, date_format, group)
 
-        if Pages.TETRIS_CREATE_SCENARIO in current_url:
-            self.find_elem(*CSLocator.SELECT_DATE_BUCKET).click()
-            self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(date_bucket),)).click()
-
-            self.find_elem(*CSLocator.SELECT_DATE_FORMAT).click()
-            self.find_elem(*CSLocator.SELECT_DATE_FORMAT).click()
-            self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(date_format),)).click()
-
-        if Pages.CFR_CREATE_SCENARIO in current_url:
-            self.find_elem(*CSLocator.SELECT_TYPE).click()
-            self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(_type),)).click()
-
-            self.find_elem(*CSLocator.SELECT_RANDOMIZER_TYPE).click()
-            self.is_clickable(*CSLocator.ITEM_IN_SELECTOR, element_for_format=(params.get(randomizer_type),)).click()
+        if Pages.CREATE_SCENARIO[Ptype.CFR] in current_url:
+            self.choose_cfr_params(params, _type, randomizer_type, group)
 
         self.find_elem(*BPLocator.JENIUS_BUTTON).click()
-
         self.find_elem(*BSPLocator.SCENARIO_TITLE)
 
+    def choose_promo_params(self, params, period, group):
+        self.find_elem(*CSLocator.SELECT_PERIOD).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(period, DefPrm.PROMO_PARAMS[period]),)).click()
 
+        self.find_elem(*CSLocator.SELECT_GROUP).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(group, DefPrm.PROMO_PARAMS[group]),)).click()
+
+    def choose_rtm_params(self, params, _type, group):
+        self.find_elem(*CSLocator.SELECT_TYPE).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(_type, DefPrm.RTM_PARAMS[_type]),)).click()
+
+        self.find_elem(*CSLocator.SELECT_GROUP).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=( params.get(group, DefPrm.RTM_PARAMS[group]),)).click()
+
+    def choose_tetris_params(self, params, date_bucket, date_format, group):
+        self.find_elem(*CSLocator.SELECT_DATE_BUCKET).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(date_bucket, DefPrm.TETRIS_PARAMS[date_bucket]),)).click()
+
+        self.find_elem(*CSLocator.SELECT_DATE_FORMAT).click()
+        self.find_elem(*CSLocator.SELECT_DATE_FORMAT).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(date_format, DefPrm.TETRIS_PARAMS[date_format]),)).click()
+
+        self.find_elem(*CSLocator.SELECT_GROUP).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(group, DefPrm.TETRIS_PARAMS[group]),)).click()
+
+    def choose_cfr_params(self, params, _type, randomizer_type, group):
+        self.find_elem(*CSLocator.SELECT_TYPE).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(_type, DefPrm.CFR_PARAMS[_type]),)).click()
+
+        self.find_elem(*CSLocator.SELECT_RANDOMIZER_TYPE).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(randomizer_type, DefPrm.CFR_PARAMS[randomizer_type]),)).click()
+
+        self.find_elem(*CSLocator.SELECT_GROUP).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(group, DefPrm.CFR_PARAMS[group]),)).click()

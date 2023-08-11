@@ -1,7 +1,7 @@
 import os
 import time
 
-from console_design.colors import ConsoleColors as CCol
+from castom_moduls.console_design.colors import ConsoleColors as CCol
 
 import googleapiclient.errors
 import pygsheets
