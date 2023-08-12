@@ -32,17 +32,17 @@ class BaseApiRequests:
     def get_input_log(tetris_scenario_id,
                       token,
                       params_input_type,
-                      type_scenarios,
+                      scenario_type,
                       url_input_type=None,
                       env='DEV'):
 
         url_input_type = (f'/{url_input_type}', '')[url_input_type is None]
         params = ({'input_type': params_input_type}, None)[params_input_type is None]
-        inputs_in_url = ('/inputs', '')['promo' in type_scenarios]
+        inputs_in_url = ('/inputs', '')['promo' in scenario_type]
         headers = {'Authorization': f'Bearer {token}'}
 
         base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
-        url = f'{base_url}/{type_scenarios}/{tetris_scenario_id}{url_input_type}{inputs_in_url}/log'
+        url = f'{base_url}/{scenario_type}/{tetris_scenario_id}{url_input_type}{inputs_in_url}/log'
 
         response = requests.get(url=url,
                                 headers=headers,
@@ -57,17 +57,17 @@ class BaseApiRequests:
                           token,
                           params_input_type,
                           file_path,
-                          type_scenarios,
+                          scenario_type,
                           url_input_type=None,
                           env='DEV'):
 
         url_input_type = (f'/{url_input_type}', '')[url_input_type is None]
         params = ({'input_type': params_input_type}, None)[params_input_type is None]
-        inputs_in_url = ('/inputs', '')['promo' in type_scenarios]
+        inputs_in_url = ('/inputs', '')['promo' in scenario_type]
         headers = {'Authorization': f'Bearer {token}'}
 
         base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
-        url = f'{base_url}/{type_scenarios}/{tetris_scenario_id}{url_input_type}{inputs_in_url}'
+        url = f'{base_url}/{scenario_type}/{tetris_scenario_id}{url_input_type}{inputs_in_url}'
 
         files = {'file': open(file_path, 'rb')}
 
@@ -83,17 +83,17 @@ class BaseApiRequests:
     def delete_input_file(tetris_scenario_id,
                           url_input_type,
                           token,
-                          type_scenarios,
+                          scenario_type,
                           params_input_type=None,
                           env='DEV'):
 
         url_input_type = (f'/{url_input_type}', '')[url_input_type is None]
         params = ({'input_type': params_input_type}, None)[params_input_type is None]
-        inputs_in_url = ('/inputs', '')['promo' in type_scenarios]
+        inputs_in_url = ('/inputs', '')['promo' in scenario_type]
         headers = {'Authorization': f'Bearer {token}'}
 
         base_url = f'{BaseUrls.BASE_URLS_BACK.get(env)}/api'
-        url = f'{base_url}/tetris-scenarios/{tetris_scenario_id}{url_input_type}{inputs_in_url}'
+        url = f'{base_url}/{scenario_type}/{tetris_scenario_id}{url_input_type}{inputs_in_url}'
 
         response = requests.delete(url=url,
                                    headers=headers,

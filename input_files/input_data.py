@@ -1,3 +1,6 @@
+from ..pages.site_data.default_params import ProjectType as Ptype
+from ..pages.site_data.urls import Paths
+
 google_sheets_url = 'https://docs.google.com/spreadsheets/d/'
 
 
@@ -67,55 +70,62 @@ class ErrorLogTexts:
         COLUMN = 'column'
 
 
+class ScenarioTypes:
+    TYPE = {Ptype.PROMO: 'promo-scenarios',
+            Ptype.RTM: 'rtm-scenarios',
+            Ptype.TETRIS: 'tetris-scenarios',
+            Ptype.CFR: 'cfr-scenarios'}
+
+
 class InputTypeNameMatch:
     class Promo:
-        type_scenarios = 'promo-scenarios'
+        scenario_type = ScenarioTypes.TYPE[Ptype.PROMO]
 
         TYPES = {
             'gps': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-gps',
                 'system_file_name': 'gps',
                 'front_name': 'GPS'
             },
             'distr_mapping': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-distr-mappings',
                 'system_file_name': 'distr_mapping',
                 'front_name': 'Distribution Mapping'
             },
             'combine_products': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-combine-products',
                 'system_file_name': 'combine_products',
                 'front_name': 'Combine Products'
             },
             'combine_chains': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-combine-chains',
                 'system_file_name': 'combine_chains',
                 'front_name': 'Combine Chains'
             },
             'up_down_size': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-up-down-sizes',
                 'system_file_name': 'up_down_size',
                 'front_name': 'Up/Down Size'
             },
             'prod_md': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-product-mds',
                 'system_file_name': 'prod_md',
                 'front_name': 'Product Masterdata'
             },
             'cust_md': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-customer-mds',
                 'system_file_name': 'cust_md',
                 'front_name': 'Customer Masterdata'
             },
             'lib': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'url_path': 'promo-libs',
                 'system_file_name': 'lib',
                 'front_name': 'Promo Library'
@@ -123,231 +133,254 @@ class InputTypeNameMatch:
         }
 
     class RTM:
-        type_scenarios = 'rtm-scenarios'
+        scenario_type = ScenarioTypes.TYPE[Ptype.RTM]
 
         TYPES = {
             'fin_log_model': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'fin_log_model',
                 'front_name': 'Fin Log Model',
-                'parameter': 'fin_log_model'
+                'parameter': 'fin_log_model',
+                'url_path': None,
             },
             'fin_scorecard': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'fin_scorecard',
                 'front_name': 'Fin Scorecard',
-                'parameter': 'fin_scorecard'
+                'parameter': 'fin_scorecard',
+                'url_path': None,
             },
             'md_ship_to': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'md_ship_to',
                 'front_name': 'MD shipTo',
-                'parameter': 'md_ship_to'
+                'parameter': 'md_ship_to',
+                'url_path': None,
             },
             'plants_info': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'plants_info',
                 'front_name': 'Plants info',
-                'parameter': 'plants_info'
+                'parameter': 'plants_info',
+                'url_path': None,
             },
             'wh_mapping': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'wh_mapping',
                 'front_name': 'WH mapping',
-                'parameter': 'wh_mapping'
+                'parameter': 'wh_mapping',
+                'url_path': None,
             },
             'drivers_break_old_version': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'drivers_break_old_version',
                 'front_name': 'Drivers break (old)',
-                'parameter': 'drivers_break_old_version'
+                'parameter': 'drivers_break_old_version',
+                'url_path': None,
             },
             'drivers_break_mobile': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'drivers_break_mobile',
                 'front_name': 'Drivers break (mobile)',
-                'parameter': 'drivers_break_mobile'
+                'parameter': 'drivers_break_mobile',
+                'url_path': None,
             },
             'distance_data': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'distance_data',
                 'front_name': 'Distance',
-                'parameter': 'distance_data'
+                'parameter': 'distance_data',
+                'url_path': None,
             },
             'wh_cost_split_cost': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'wh_cost_split_cost',
                 'front_name': 'Cost Split Cost WH',
-                'parameter': 'wh_cost_split_cost'
+                'parameter': 'wh_cost_split_cost',
+                'url_path': None,
             },
             't2_cost_split_rule': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 't2_cost_split_rule',
                 'front_name': 'Cost Split Rule T2',
-                'parameter': 't2_cost_split_rule'
+                'parameter': 't2_cost_split_rule',
+                'url_path': None,
             },
             'conso_eod': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'conso_eod',
                 'front_name': 'Conso EOD',
-                'parameter': 'conso_eod'
+                'parameter': 'conso_eod',
+                'url_path': None,
             },
             'transport_capacity': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'transport_capacity',
                 'front_name': 'Transport capacity',
-                'parameter': 'transport_capacity'
+                'parameter': 'transport_capacity',
+                'url_path': None,
             },
             'transport_availability': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'transport_availability',
                 'front_name': 'Transport availability',
-                'parameter': 'transport_availability'
+                'parameter': 'transport_availability',
+                'url_path': None,
             },
             'mapping_plant': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'mapping_plant',
                 'front_name': 'Plant-Location mapping',
-                'parameter': 'mapping_plant'
+                'parameter': 'mapping_plant',
+                'url_path': None,
             },
             'plant_line_sku': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'plant_line_sku',
                 'front_name': 'Plant-Line-SKU',
-                'parameter': 'plant_line_sku'
+                'parameter': 'plant_line_sku',
+                'url_path': None,
             },
             'dlc': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'dlc',
                 'front_name': 'DLC',
-                'parameter': 'dlc'
+                'parameter': 'dlc',
+                'url_path': None,
             },
             'quarantine_soft_hard': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'quarantine_soft_hard',
                 'front_name': 'Quarantine',
-                'parameter': 'quarantine_soft_hard'
+                'parameter': 'quarantine_soft_hard',
+                'url_path': None,
             },
             'min_delivery_freq': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'min_delivery_freq',
                 'front_name': 'Min delivery frequency',
-                'parameter': 'min_delivery_freq'
+                'parameter': 'min_delivery_freq',
+                'url_path': None,
             },
             'min_delivery_freq_except': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'min_delivery_freq_except',
                 'front_name': 'Min delivery frequency (exceptions)',
-                'parameter': 'min_delivery_freq_except'
+                'parameter': 'min_delivery_freq_except',
+                'url_path': None,
             },
             'md_shipto_cust_group': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'md_shipto_cust_group',
                 'front_name': 'MD ShipTo Customer Group',
-                'parameter': 'md_shipto_cust_group'
+                'parameter': 'md_shipto_cust_group',
+                'url_path': None,
             },
             'wh_schedule': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'wh_schedule',
                 'front_name': 'WH Schedule',
-                'parameter': 'wh_schedule'
+                'parameter': 'wh_schedule',
+                'url_path': None,
             },
             'cost_pasting_copaking': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'cost_pasting_copaking',
                 'front_name': 'Pasting, copaking',
-                'parameter': 'cost_pasting_copaking'
+                'parameter': 'cost_pasting_copaking',
+                'url_path': None,
             },
             'client_requirements': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'client_requirements',
                 'front_name': 'Client Requirements',
-                'parameter': 'client_requirements'
+                'parameter': 'client_requirements',
+                'url_path': None,
             },
 
         }
 
     class Tetris:
-        url_path_md = 'master-data'
-        url_path_sourcing = 'sourcing-logistics'
-        url_path_industry = 'industry'
-        url_path_optimilk = 'optimilk'
-        type_scenarios = 'tetris-scenarios'
+        URL_PATH_MD = Paths.URL_PATH_MD
+        URL_PATH_SOURCING = Paths.URL_PATH_SOURCING
+        URL_PATH_INDUSTRY = Paths.URL_PATH_INDUSTRY
+        URL_PATH_OPTIMILK = Paths.URL_PATH_OPTIMILK
+        scenario_type = ScenarioTypes.TYPE[Ptype.TETRIS]
 
         TYPES_MD = {
             'alt_names_locations': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'AlternativeLocations',
                 'front_name': 'Alternative Names Locations',
                 'parameter': 'alt_names_locations'
             },
             'alt_names_materials': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'AlternativeMaterials',
                 'front_name': 'Alternative Names Materials',
                 'parameter': 'alt_names_materials'
             },
             'alt_names_products': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'AlternativeProducts',
                 'front_name': 'Alternative Names Products',
                 'parameter': 'alt_names_products'
             },
             'alt_names_vendors': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'AlternativeVendors',
                 'front_name': 'Alternative Names Vendors',
                 'parameter': 'alt_names_vendors'
             },
             'calendars': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'Calendars',
                 'front_name': 'Calendars',
                 'parameter': 'calendars'
             },
             'locations': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'Locations',
                 'front_name': 'Locations',
                 'parameter': 'locations'
             },
             'material_groups': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'MaterialGroups',
                 'front_name': 'Material Groups',
                 'parameter': 'material_groups'
             },
             'materials': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'Materials',
                 'front_name': 'Materials',
                 'parameter': 'materials'
             },
             'products': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'Products',
                 'front_name': 'Products',
                 'parameter': 'products'
             },
             'vendors': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'VendorsBuyers',
                 'front_name': 'Vendors',
                 'parameter': 'vendors'
             },
             'uom': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_md,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_MD,
                 'system_file_name': 'UOM',
                 'front_name': 'UOM',
                 'parameter': 'uom'
@@ -356,71 +389,71 @@ class InputTypeNameMatch:
 
         TYPES_SOURCING = {
             'demand': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'OP(Demand)',
                 'front_name': 'Demand',
                 'parameter': 'demand'
             },
             'premade_volumes': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'Premade',
                 'front_name': 'Premade Volumes',
                 'parameter': 'premade_volumes'
             },
             'product_terms': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'Product Terms',
                 'front_name': 'Product Terms',
                 'parameter': 'product_terms'
             },
             'rejections': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'Rejects',
                 'front_name': 'Rejections',
                 'parameter': 'rejections'
             },
             't1_adjustments': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'T1 Adjustments',
                 'front_name': 'T1 Adjustments',
                 'parameter': 't1_adjustments'
             },
             't1_legs': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'T1 Legs',
                 'front_name': 'T1 Legs',
                 'parameter': 't1_legs'
             },
             't1_scheme': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'Транспортная схема',
                 'front_name': 'T1 Scheme',
                 'parameter': 't1_scheme'
             },
             'trade_terms': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'Trade Terms',
                 'front_name': 'Trade Terms',
                 'parameter': 'trade_terms'
             },
             'sourcing_scheme': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'BP19DCPlant(сорсинг матрица)',
                 'front_name': 'Sourcing Scheme',
                 'parameter': 'sourcing_scheme'
             },
             'sourcing_settings': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_sourcing,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_SOURCING,
                 'system_file_name': 'Settings',
                 'front_name': 'Sourcing Settings',
                 'parameter': 'sourcing_settings'
@@ -429,50 +462,50 @@ class InputTypeNameMatch:
 
         TYPES_INDUSTRY = {
             'bom': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'BOM',
                 'front_name': 'BOM',
                 'parameter': 'bom'
             },
             'bom_replacements': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'BOMSubstitutions',
                 'front_name': 'BOM Replacements',
                 'parameter': 'bom_replacements'
             },
             'line_capacity': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'LineCapacity',
                 'front_name': 'Line Capacity',
                 'parameter': 'line_capacity'
             },
             'material_contents': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'MaterialContents',
                 'front_name': 'Material Contents',
                 'parameter': 'material_contents'
             },
             'min_batches': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'MinBatches',
                 'front_name': 'Min-batches',
                 'parameter': 'min_batches'
             },
             'mr_adjustments': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'MRAdjustments',
                 'front_name': 'MR Adjustments',
                 'parameter': 'mr_adjustments'
             },
             'line_bindings': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_industry,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_INDUSTRY,
                 'system_file_name': 'PlantLineSKU',
                 'front_name': 'Line Bindings',
                 'parameter': 'line_bindings'
@@ -481,236 +514,254 @@ class InputTypeNameMatch:
 
         TYPES_OPTIMILK = {
             'separation': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'BomSeparation',
                 'front_name': 'Separation',
                 'parameter': 'separation'
             },
             'regular_supplies': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'Commitments_M',
                 'front_name': 'Regular Supplies',
                 'parameter': 'regular_supplies'
             },
             'derivation_material': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'DerivationMaterial',
                 'front_name': 'Material Stocks',
                 'parameter': 'derivation_material'
             },
             'co_packers': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'DisposalsCopacker',
                 'front_name': 'Co-Packers',
                 'parameter': 'co_packers'
             },
             'stop_buyers': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'DisposalsSpot',
                 'front_name': 'Stop Buyers',
                 'parameter': 'stop_buyers'
             },
             'inbound_capacity': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'InboundCapacities',
                 'front_name': 'Inbound Capacity',
                 'parameter': 'inbound_capacity'
             },
             'mb_adjustments': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'MBAdjustments',
                 'front_name': 'MB Adjustments',
                 'parameter': 'mb_adjustments'
             },
             'new_farms': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'NewFarms_M',
                 'front_name': 'New Farms',
                 'parameter': 'new_farms'
             },
             'outbound_capacity': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'OutboundCapacities',
                 'front_name': 'Outbound Capacity',
                 'parameter': 'outbound_capacity'
             },
             'reco_material': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'RecoMaterial',
                 'front_name': 'Recomb/Recon',
                 'parameter': 'reco_material'
             },
             'shortage': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'Shortage',
                 'front_name': 'Shortage',
                 'parameter': 'shortage'
             },
             'spot_supplies': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'Spot_M',
                 'front_name': 'Spot Supplies',
                 'parameter': 'spot_supplies'
             },
             'material_stocks': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'Stock',
                 'front_name': 'Material Stocks',
                 'parameter': 'material_stocks'
             },
             'ts_farm_to_buyer': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'TSFarmToBuyer',
                 'front_name': 'Transport Scheme farm-to-buyer',
                 'parameter': 'ts_farm_to_buyer'
             },
             'ts_farm_to_plant': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'TSFarmToPlant',
                 'front_name': 'Transport Scheme farm-to-plant',
                 'parameter': 'ts_farm_to_plant'
             },
             'ts_plant_to_buyer': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'TSPlantToBuyer',
                 'front_name': 'Transport Scheme plant-to-buyer',
                 'parameter': 'ts_plant_to_buyer'
             },
             'ts_plant_to_plant': {
-                'type_scenarios': type_scenarios,
-                'url_path': url_path_optimilk,
+                'scenario_type': scenario_type,
+                'url_path': URL_PATH_OPTIMILK,
                 'system_file_name': 'TSPlantToPlant',
                 'front_name': 'Transport Scheme plant-to-plant',
                 'parameter': 'ts_plant_to_plant'
             }
         }
 
+        TYPES = {**TYPES_MD, **TYPES_SOURCING, **TYPES_INDUSTRY, **TYPES_OPTIMILK}
+
     class CFR:
-        type_scenarios = 'cfr-scenarios'
+        scenario_type = ScenarioTypes.TYPE[Ptype.CFR]
 
         OBLIGATORY_TYPES = {
             'safety_days': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'safety_days',
                 'front_name': 'Safety days',
-                'parameter': 'safety_days'
+                'parameter': 'safety_days',
+                'url_path': None,
             },
             'coef': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'coef',
                 'front_name': 'Coef',
-                'parameter': 'coef'
+                'parameter': 'coef',
+                'url_path': None,
             },
             'routes': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'routes',
                 'front_name': 'Routes',
-                'parameter': 'routes'
+                'parameter': 'routes',
+                'url_path': None,
             },
             'moq': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'moq',
                 'front_name': 'Moq',
-                'parameter': 'moq'
+                'parameter': 'moq',
+                'url_path': None,
             },
             'fc': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'fc',
                 'front_name': 'FC',
-                'parameter': 'fc'
+                'parameter': 'fc',
+                'url_path': None,
             },
             'fact': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'fact',
                 'front_name': 'Fact',
-                'parameter': 'fact'
+                'parameter': 'fact',
+                'url_path': None,
             },
             'quarantine': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'quarantine',
                 'front_name': 'Quarantine',
-                'parameter': 'quarantine'
+                'parameter': 'quarantine',
+                'url_path': None,
             },
             'step_table': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'step_table',
                 'front_name': 'Step table',
-                'parameter': 'step_table'
+                'parameter': 'step_table',
+                'url_path': None,
             },
             'dlc': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'dlc',
                 'front_name': 'DLC',
-                'parameter': 'dlc'
+                'parameter': 'dlc',
+                'url_path': None,
             },
             'shipment_freq': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'shipment_freq',
                 'front_name': 'Shipment freq',
-                'parameter': 'shipment_freq'
+                'parameter': 'shipment_freq',
+                'url_path': None,
             },
             'costs': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'costs',
                 'front_name': 'Costs',
-                'parameter': 'costs'
+                'parameter': 'costs',
+                'url_path': None,
             },
             'frozen_horizon': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'frozen_horizon',
                 'front_name': 'Frozen horizon',
-                'parameter': 'frozen_horizon'
+                'parameter': 'frozen_horizon',
+                'url_path': None,
             },
             'hubbing_days': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'hubbing_days',
                 'front_name': 'Hubbing days',
-                'parameter': 'hubbing_days'
+                'parameter': 'hubbing_days',
+                'url_path': None,
             },
             'md_locations': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'md_locations',
                 'front_name': 'Md locations',
-                'parameter': 'md_locations'
+                'parameter': 'md_locations',
+                'url_path': None,
             },
             'uom': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'uom',
                 'front_name': 'UOM',
-                'parameter': 'uom'
+                'parameter': 'uom',
+                'url_path': None,
             }
         }
 
         NOT_OBLIGATORY_TYPES = {
             'min_cfr_max_pped': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'min_cfr_max_pped',
                 'front_name': 'Min CFR/Max PPED',
-                'parameter': 'min_cfr_max_pped'
+                'parameter': 'min_cfr_max_pped',
+                'url_path': None,
             },
             'delta_fa_bias': {
-                'type_scenarios': type_scenarios,
+                'scenario_type': scenario_type,
                 'system_file_name': 'delta_fa_bias',
                 'front_name': 'Delta FA bias',
-                'parameter': 'delta_fa_bias'
+                'parameter': 'delta_fa_bias',
+                'url_path': None,
             }
         }
 
-
-
+        TYPES = {**OBLIGATORY_TYPES, **NOT_OBLIGATORY_TYPES}

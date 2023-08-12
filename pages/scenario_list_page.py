@@ -28,5 +28,5 @@ class ScenarioListPage(BasePage):
         self.scroll_in_element(*SLLocator.SCROLL_BLOCK, direction='DOWN')
         self.is_clickable(*BPLocator.JB_BOTTOM).click()
 
-    def user_can_open_scenario_page_by_click_on_title(self, scenario_title):
+    def user_can_open_scenario_page_by_click_on_scenario_title(self, scenario_title):
         self.find_elem(*SLLocator.SCENARIO_TITLE, element_for_format=(scenario_title, )).click()

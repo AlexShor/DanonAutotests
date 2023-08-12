@@ -21,6 +21,11 @@ class InputTabScenarioPage(BaseScenarioPage):
     CARD_INFO_UPLOADED = {'en': 'Uploaded on', 'ru': ''}
     CARD_INFO_COPIED = {'en': 'Copied', 'ru': ''}
 
+    TETRIS_INPUT_TAB_MD = {'en': 'masterdata', 'ru': ''}
+    TETRIS_INPUT_TAB_SOURCING = {'en': 'sourcing&Logistics', 'ru': ''}
+    TETRIS_INPUT_TAB_INDUSTRY = {'en': 'industry', 'ru': ''}
+    TETRIS_INPUT_TAB_OPTIMILK = {'en': 'optimilk', 'ru': ''}
+
 
 class PFRTabScenarioPage(BaseScenarioPage):
     PFR_TAB_TITLE = {'en': 'Params for run', 'ru': ''}

@@ -122,6 +122,32 @@ class InputTabLocators(BaseScenarioPageLocators):
     MESSAGE_IN_POPOVER_MESSAGE_LIST = (By.XPATH, POPOVER_MESSAGE_LIST[1] +
                                        '//span[contains(@class, "_messageText_") and text()="{}"]')
 
+    CONTAINER_INPUT = (By.XPATH, '//div[contains(@class, "_containerInput_")]')
+    INPUT_TABS = (By.XPATH, CONTAINER_INPUT[1] +
+                  '//div[contains(@class, "_inputTabs_")]/div[contains(@class, "_tabs_")]')
+
+    INPUT_TAB_MD = (By.XPATH,
+                    INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_MD[language]}"]/../..')
+    INPUT_TAB_SOURCING = (By.XPATH,
+                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_SOURCING[language]}"]/../..')
+    INPUT_TAB_INDUSTRY = (By.XPATH,
+                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_INDUSTRY[language]}"]/../..')
+    INPUT_TAB_OPTIMILK = (By.XPATH,
+                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_OPTIMILK[language]}"]/../..')
+
+    ACTIVE_INPUT_TAB_MD = (
+        By.XPATH, INPUT_TABS[1] +
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_MD[language]}"]')
+    ACTIVE_INPUT_TAB_SOURCING = (
+        By.XPATH, INPUT_TABS[1] +
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_SOURCING[language]}"]')
+    ACTIVE_INPUT_TAB_INDUSTRY = (
+        By.XPATH, INPUT_TABS[1] +
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_INDUSTRY[language]}"]')
+    ACTIVE_INPUT_TAB_OPTIMILK = (
+        By.XPATH, INPUT_TABS[1] +
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_OPTIMILK[language]}"]')
+
 
 class PFRTabLocators(BaseScenarioPageLocators):
     TAB_TITLE = (By.XPATH, f'//h2[contains(@class, "_title_") and text()="{PFRTxt.PFR_TAB_TITLE[language]}"]')

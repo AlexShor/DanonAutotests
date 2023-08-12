@@ -13,6 +13,11 @@ class BaseUrls:
 class Paths:
     SCENARIO_PAGE = 'promo-optimizer/promo-scenario'
 
+    URL_PATH_MD = 'master-data'
+    URL_PATH_SOURCING = 'sourcing-logistics'
+    URL_PATH_INDUSTRY = 'industry'
+    URL_PATH_OPTIMILK = 'optimilk'
+
 
 class Pages:
     LOGIN = 'login'

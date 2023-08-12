@@ -362,11 +362,11 @@ class InputFiles:
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
                 file_name = input_type.get('system_file_name')
-                type_scenarios = input_type.get('type_scenarios')
+                scenario_type = input_type.get('scenario_type')
 
                 response = ApiReq.get_input_log(tetris_scenario_id=scenario_id,
                                                 url_input_type=url_input_type,
-                                                type_scenarios=type_scenarios,
+                                                scenario_type=scenario_type,
                                                 token=token,
                                                 params_input_type=params_input_type,
                                                 env=env)
@@ -454,7 +454,7 @@ class InputFiles:
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
                 file_name = input_type.get('system_file_name')
-                type_scenarios = input_type.get('type_scenarios')
+                scenario_type = input_type.get('scenario_type')
 
                 folder_path = rf'files/{path}/'
                 file_name = f'{file_name}.{files_format}'
@@ -462,7 +462,7 @@ class InputFiles:
 
                 response = ApiReq.upload_input_file(tetris_scenario_id=scenario_id,
                                                     url_input_type=url_input_type,
-                                                    type_scenarios=type_scenarios,
+                                                    scenario_type=scenario_type,
                                                     token=token,
                                                     params_input_type=params_input_type,
                                                     file_path=file_path,
@@ -492,12 +492,12 @@ class InputFiles:
             for input_name, input_type in input_types.items():
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
-                type_scenarios = input_type.get('type_scenarios')
+                scenario_type = input_type.get('scenario_type')
 
                 response = ApiReq.delete_input_file(tetris_scenario_id=scenario_id,
                                                     url_input_type=url_input_type,
                                                     token=token,
-                                                    type_scenarios=type_scenarios,
+                                                    scenario_type=scenario_type,
                                                     params_input_type=params_input_type,
                                                     env=env)
                 status_code = response.status_code
@@ -540,7 +540,7 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 # for path, types in tetris_spreadsheets.items():
 #     InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
 
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.CFR.INPUT_CFR, folder=f'cfr/input_files/')
+# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.RTM.INPUT_RTM, folder=f'rtm/input_files/')
 
 
 # for k, v in {
@@ -632,3 +632,8 @@ tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
 #                                           input_types=types,
 #                                           token=access_token,
 #                                           env=environment)
+
+InputFiles.ViaAPI.delete_inputs_files(scenario_id=525,
+                                      input_types=InputTypeNameMatch.RTM.TYPES,
+                                      token=access_token,
+                                      env=environment)
