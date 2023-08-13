@@ -516,124 +516,125 @@ class InputFiles:
             print(f'==End delete input files', end='\n')
 
 
-environment = 'DEV'
-scen_id = 338
-# list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
-access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=environment)
-if access_token == 502:
-    print('access_token', access_token)
+if __name__ == '__main__':
+    environment = 'DEV'
+    scen_id = 338
+    # list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
+    access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=environment)
+    if access_token == 502:
+        print('access_token', access_token)
 
-tetris_name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
-                       'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
-                       'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
-                       'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
+    tetris_name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
+                           'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
+                           'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
+                           'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
 
-tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
-                       'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
-                       'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
-                       'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
+    tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
+                           'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
+                           'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
+                           'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
 
-# def start():
-#     pass
-
-
-# for path, types in tetris_spreadsheets.items():
-#     InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
-
-# InputFiles.get_input_file_from_spreadsheet(Spreadsheets.RTM.INPUT_RTM, folder=f'rtm/input_files/')
+    # def start():
+    #     pass
 
 
-# for k, v in {
-#     '_t1': 1,
-# }.items():
-#     param = [[True, False, False, False, False] for i in range(v)]
-#     files = ['quarantine']
-#     data_v = {
-#         'Plant': 1,
-#         'SKU': 10000,
-#         'SKU Name': 'SKU Name_1',
-#         'Жесткий Карантин(дней)': 1,
-#         'Мягкий карантин(дней)': 1,
-#         'Частота розлива в неделю': 1,
-#         'Срок годности': 1,
-#         'Признак долгосрока': 1,
-#         'Ready to ship': 1
-#     }
-#     options_increasing = {
-#         'Plant': {'value': 1, 'step': 100},
-#         'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
-#         'SKU Name': {'copy_value': 'SKU', 'step': 1},
-#         'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
-#         'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
-#         'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
-#         'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
-#         'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
-#         'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
-#
-#     }
-#
-#     InputFiles.create_files(Spreadsheets.CFR.CHECK_INPUT,
-#                             params=param,
-#                             folder='cfr/test',
-#                             file_name_prefix=k,
-#                             error_log_txt=ErrorLogTexts.Eng,
-#                             only_files=files,
-#                             create_error_logs=False,
-#                             data_values=data_v,
-#                             increasing_data_values=True,
-#                             options_increasing_data_values=options_increasing)
+    # for path, types in tetris_spreadsheets.items():
+    #     InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
 
-# InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT_OLD,
-#                                 folder='tetris/check_input_old',
-#                                 error_log_txt=ErrorLogTexts.Eng)
-#
-# count_all = 0
-# for path_items, types_items in tetris_name_matches.items():
-#     result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
-#                                                            input_types=types_items,
-#                                                            scenario_id=scenario_id,
-#                                                            path=f'tetris/check_input_old/error_logs/{path_items}',
-#                                                            token=access_token,
-#                                                            count=count_all,
-#                                                            env=environment)  # check_input check_input_old
-#     count_all = result_comp.get('count')
+    # InputFiles.get_input_file_from_spreadsheet(Spreadsheets.RTM.INPUT_RTM, folder=f'rtm/input_files/')
 
-# result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
-#                                                        input_types=InputTypeNameMatch.CFR.OBLIGATORY_TYPES,
-#                                                        scenario_id=scenario_id,
-#                                                        path=f'cfr/check_input/error_logs/cfr_check_data',
-#                                                        token=access_token,
-#                                                        env=environment)  # check_input check_input_old
 
-# for path, types in tetris_name_matches.items():
-#     InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
-#                                           input_types=types,
-#                                           path=f'tetris/valid_input_files/{path}',
-#                                           token=access_token,
-#                                           env=environment)  # valid_input_files input_files check_input check_input_old
+    # for k, v in {
+    #     '_t1': 1,
+    # }.items():
+    #     param = [[True, False, False, False, False] for i in range(v)]
+    #     files = ['quarantine']
+    #     data_v = {
+    #         'Plant': 1,
+    #         'SKU': 10000,
+    #         'SKU Name': 'SKU Name_1',
+    #         'Жесткий Карантин(дней)': 1,
+    #         'Мягкий карантин(дней)': 1,
+    #         'Частота розлива в неделю': 1,
+    #         'Срок годности': 1,
+    #         'Признак долгосрока': 1,
+    #         'Ready to ship': 1
+    #     }
+    #     options_increasing = {
+    #         'Plant': {'value': 1, 'step': 100},
+    #         'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
+    #         'SKU Name': {'copy_value': 'SKU', 'step': 1},
+    #         'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
+    #         'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
+    #         'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
+    #         'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+    #         'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
+    #         'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+    #
+    #     }
+    #
+    #     InputFiles.create_files(Spreadsheets.CFR.CHECK_INPUT,
+    #                             params=param,
+    #                             folder='cfr/test',
+    #                             file_name_prefix=k,
+    #                             error_log_txt=ErrorLogTexts.Eng,
+    #                             only_files=files,
+    #                             create_error_logs=False,
+    #                             data_values=data_v,
+    #                             increasing_data_values=True,
+    #                             options_increasing_data_values=options_increasing)
 
-# required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
+    # InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT_OLD,
+    #                                 folder='tetris/check_input_old',
+    #                                 error_log_txt=ErrorLogTexts.Eng)
+    #
+    # count_all = 0
+    # for path_items, types_items in tetris_name_matches.items():
+    #     result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
+    #                                                            input_types=types_items,
+    #                                                            scenario_id=scenario_id,
+    #                                                            path=f'tetris/check_input_old/error_logs/{path_items}',
+    #                                                            token=access_token,
+    #                                                            count=count_all,
+    #                                                            env=environment)  # check_input check_input_old
+    #     count_all = result_comp.get('count')
 
-# required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
-# required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
+    # result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
+    #                                                        input_types=InputTypeNameMatch.CFR.OBLIGATORY_TYPES,
+    #                                                        scenario_id=scenario_id,
+    #                                                        path=f'cfr/check_input/error_logs/cfr_check_data',
+    #                                                        token=access_token,
+    #                                                        env=environment)  # check_input check_input_old
 
-# required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
-# required_inputs = InputTypeNameMatch.Promo.TYPES
+    # for path, types in tetris_name_matches.items():
+    #     InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
+    #                                           input_types=types,
+    #                                           path=f'tetris/valid_input_files/{path}',
+    #                                           token=access_token,
+    #                                           env=environment)  # valid_input_files input_files check_input check_input_old
 
-# InputFiles.ViaAPI.upload_inputs_files(scenario_id=scen_id,
-#                                       input_types=required_inputs,
-#                                       path=f'cfr/input_files',
-#                                       # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
-#                                       token=access_token,
-#                                       env=environment)  # valid_input_files input_files check_input check_input_old
+    # required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
 
-# for types in name_matches.values():
-#     InputFiles.ViaAPI.delete_inputs_files(scenario_id=scenario_id,
-#                                           input_types=types,
-#                                           token=access_token,
-#                                           env=environment)
+    # required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
+    # required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
 
-InputFiles.ViaAPI.delete_inputs_files(scenario_id=525,
-                                      input_types=InputTypeNameMatch.RTM.TYPES,
-                                      token=access_token,
-                                      env=environment)
+    # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
+    # required_inputs = InputTypeNameMatch.Promo.TYPES
+
+    # InputFiles.ViaAPI.upload_inputs_files(scenario_id=scen_id,
+    #                                       input_types=required_inputs,
+    #                                       path=f'cfr/input_files',
+    #                                       # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
+    #                                       token=access_token,
+    #                                       env=environment)  # valid_input_files input_files check_input check_input_old
+
+    # for types in name_matches.values():
+    #     InputFiles.ViaAPI.delete_inputs_files(scenario_id=scenario_id,
+    #                                           input_types=types,
+    #                                           token=access_token,
+    #                                           env=environment)
+
+    InputFiles.ViaAPI.delete_inputs_files(scenario_id=525,
+                                          input_types=InputTypeNameMatch.RTM.TYPES,
+                                          token=access_token,
+                                          env=environment)

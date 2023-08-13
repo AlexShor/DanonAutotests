@@ -17,8 +17,27 @@ from ..pages.site_data.default_params import (ProjectType as Ptype,
                                               DefaultProjectNames as DPNames,
                                               DefaultInputFilePaths as DIPaths)
 
+project_type = Ptype.PROMO
+types = {Ptype.PROMO: InputTypeNameMatch.Promo.TYPES,
+         Ptype.RTM: InputTypeNameMatch.RTM.TYPES,
+         Ptype.TETRIS: InputTypeNameMatch.Tetris.TYPES,
+         Ptype.CFR: InputTypeNameMatch.CFR.TYPES}[project_type]
 
-project_type = Ptype.TETRIS
+skip = {Ptype.PROMO: ['gps', 'distr_mapping', 'combine_chains'],
+        Ptype.RTM: [],
+        Ptype.TETRIS: ['bom'],
+        Ptype.CFR: []}[project_type]
+
+
+# def pytest_generate_tests(metafunc):
+#
+#
+#     if "types_data" in metafunc.fixturenames:
+#         metafunc.parametrize("types_data", types.values(), ids=types.keys(), )
+
+# if "scenario_type" in metafunc.fixturenames:
+#     list_scenario_type = [value['scenario_type'] for value in types.values()]
+#     metafunc.parametrize("scenario_type", ['promo-scenarios', 'promo-scenarios'])
 
 
 class TestFullSmokePath:
@@ -36,10 +55,9 @@ class TestFullSmokePath:
         scenario_list_page.should_be_scenario_list_page()
 
         scenario_list_page.should_be_sidebar()
-        # QA_RTM_Optimizer_1 QA_Promo_optimizer_1 QA_Tetris_Optimizer_2 QA_CFR_Optimizer_2
+
         scenario_list_page.choose_project(DPNames.PROJECT_NAME[project_type])
 
-        # Pages.RTM_SCENARIO_LIST PROMO_SCENARIO_LIST TETRIS_SCENARIO_LIST CFR_SCENARIO_LIST
         scenario_list_page.should_be_scenario_list_page(project_url_path=Pages.SCENARIO_LIST[project_type])
 
     @pytest.mark.testmark
@@ -65,16 +83,19 @@ class TestFullSmokePath:
         scenario_page.should_be_scenario_page(project_type=project_type)
 
     @pytest.mark.testmark
-    @dict_parametrize({Ptype.PROMO: InputTypeNameMatch.Promo.TYPES,
-                       Ptype.RTM: InputTypeNameMatch.RTM.TYPES,
-                       Ptype.TETRIS: InputTypeNameMatch.Tetris.TYPES,
-                       Ptype.CFR: InputTypeNameMatch.CFR.TYPES}[project_type])
+    @dict_parametrize(data=types,
+                      skip=skip,
+                      arguments=('system_file_name', 'front_name', 'scenario_type', 'url_path'))
     def test_user_can_add_input_file(self, env, browser,
-                                     url_path,
-                                     scenario_type,
-                                     parameter,
                                      system_file_name,
-                                     front_name):
+                                     front_name,
+                                     scenario_type,
+                                     url_path):
+        # system_file_name = types_data['system_file_name']
+        # front_name = types_data['front_name']
+        # scenario_type = types_data['scenario_type']
+        # url_path = types_data['url_path']
+
         input_tab = InputTabOnScenarioPage(browser)
         input_tab.should_be_input_tab_on_scenario_page()
 
@@ -96,7 +117,7 @@ class TestFullSmokePath:
     def test_user_can_open_pfr_tab_from_input_tab(self, env, browser):
         input_tab = InputTabOnScenarioPage(browser)
         input_tab.should_be_open_pfr_tab_by_click_on_jenius_button_left()
-        
+
         pfr_tab = PFRTabOnScenarioPage(browser)
         pfr_tab.should_be_pfr_tab_on_scenario_page()
 

@@ -50,8 +50,13 @@ def browser(request):
     browser.quit()
 
 
-def dict_parametrize(data, **kwargs):
-    args = list(list(data.values())[0].keys())
-    formatted_data = [[item[a] for a in args] for item in data.values()]
+def dict_parametrize(data, arguments=(), skip=None, skip_reason='Skipped', **kwargs):
+    args = [key for key in list(data.values())[0].keys() if key in arguments]
     ids = list(data.keys())
+
+    formatted_data = []
+    for key, item in data.items():
+        formatted_data.append(
+            pytest.param(*[item[a] for a in args], marks=pytest.mark.skipif(key in skip, reason=skip_reason)))
+
     return pytest.mark.parametrize(args, formatted_data, ids=ids, **kwargs)
