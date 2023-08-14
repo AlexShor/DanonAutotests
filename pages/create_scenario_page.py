@@ -1,14 +1,13 @@
 import time
 
-from .base_page import BasePage
-from .site_data.locators import BasePageLocators as BPLocator
-from .site_data.locators import CreateScenarioPageLocators as CSLocator
-from .site_data.locators import BaseScenarioPageLocators as BSPLocator
-from .site_data.element_texts import CreateScenarioPage as CrtTxt
-from .site_data.urls import Links, Pages
-from .site_data.default_params import (CreateScenarioDefaultParams as DefPrm,
-                                       ProjectType as Ptype)
-
+from pages.base_page import BasePage
+from pages.site_data.locators import BasePageLocators as BPLocator
+from pages.site_data.locators import CreateScenarioPageLocators as CSLocator
+from pages.site_data.locators import BaseScenarioPageLocators as BSPLocator
+from pages.site_data.element_texts import CreateScenarioPage as CrtTxt
+from pages.site_data.urls import Links, Pages
+from pages.site_data.default_params import (CreateScenarioDefaultParams as DefPrm,
+                                            ProjectType as Ptype)
 
 language = 'en'
 
@@ -94,7 +93,7 @@ class CreateScenarioPage(BasePage):
 
         self.find_elem(*CSLocator.SELECT_GROUP).click()
         self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
-                          element_for_format=( params.get(group, DefPrm.RTM_PARAMS[group]),)).click()
+                          element_for_format=(params.get(group, DefPrm.RTM_PARAMS[group]),)).click()
 
     def choose_tetris_params(self, params, date_bucket, date_format, group):
         self.find_elem(*CSLocator.SELECT_DATE_BUCKET).click()

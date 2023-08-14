@@ -2,10 +2,10 @@ import time
 
 from selenium.webdriver.common.keys import Keys
 
-from .base_page import BasePage
-from .site_data.locators import ScenarioListPageLocators as SLLocator
-from .site_data.locators import BasePageLocators as BPLocator
-from .site_data.urls import Links
+from pages.base_page import BasePage
+from pages.site_data.locators import ScenarioListPageLocators as SLLocator
+from pages.site_data.locators import BasePageLocators as BPLocator
+from pages.site_data.urls import Links
 
 
 class ScenarioListPage(BasePage):

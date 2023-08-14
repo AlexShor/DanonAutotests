@@ -1,6 +1,6 @@
-from .base_page import BasePage
-from .site_data.locators import LoginPageLocators as LPLocator
-from .site_data.locators import BasePageLocators as BPLocator
+from pages.base_page import BasePage
+from pages.site_data.locators import LoginPageLocators as LPLocator
+from pages.site_data.locators import BasePageLocators as BPLocator
 
 
 class LoginPage(BasePage):

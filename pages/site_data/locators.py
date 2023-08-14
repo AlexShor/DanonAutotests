@@ -1,11 +1,11 @@
 from selenium.webdriver.common.by import By
-from .element_texts import (BasePage as BPTxt,
-                            BaseScenarioPage as BSTxt,
-                            InputTabScenarioPage as IptTxt,
-                            PFRTabScenarioPage as PFRTxt,
-                            OutputTabScenarioPage as OtpTxt,
-                            CreateScenarioPage as CrtTxt)
 
+from pages.site_data.element_texts import (BasePage as BPTxt,
+                                           BaseScenarioPage as BSTxt,
+                                           InputTabScenarioPage as IptTxt,
+                                           PFRTabScenarioPage as PFRTxt,
+                                           OutputTabScenarioPage as OtpTxt,
+                                           CreateScenarioPage as CrtTxt)
 
 language = 'en'
 
@@ -155,4 +155,3 @@ class PFRTabLocators(BaseScenarioPageLocators):
 
     BLOCKS_WRAPPER = (By.XPATH, '//form//div[contains(@class, "_blocksWrapper_")]')
     BLOCKS_WITH_TITLE = (By.XPATH, BLOCKS_WRAPPER[1] + '//p[contains(@class, "_blocksTitle_") and text()="{}"]/..')
-

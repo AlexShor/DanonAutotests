@@ -2,10 +2,10 @@ from datetime import datetime
 
 from selenium.webdriver.common.keys import Keys
 
-from .base_scenario_page import BaseScenarioPage
-from .site_data.locators import BaseScenarioPageLocators as BSPLocator
-from .site_data.locators import PFRTabLocators as PFRTPLocator
-from .site_data.element_texts import PFRTabScenarioPage as PFRTxt
+from pages.base_scenario_page import BaseScenarioPage
+from pages.site_data.locators import BaseScenarioPageLocators as BSPLocator
+from pages.site_data.locators import PFRTabLocators as PFRTPLocator
+from pages.site_data.element_texts import PFRTabScenarioPage as PFRTxt
 
 
 language = 'en'

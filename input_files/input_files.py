@@ -10,6 +10,7 @@ from input_data import ErrorLogTexts
 from pages.api.base_api_requests import BaseApiRequests as ApiReq
 from pages.site_data.credentials import Credentials as Creds
 from castom_moduls.console_design.colors import ConsoleColors as CCol
+from castom_moduls.console_design.indentation_levels import indentation_levels as Ilvl
 
 import pandas as pd
 import ast
@@ -17,6 +18,31 @@ import ast
 errors_regarding_obligatory_fields = []
 type_errors = []
 errors_with_non_negative_values = []
+
+
+def benchmark(func):
+    import time
+
+    def wrapper(*args, **kwargs):
+        start_creating_files = time.time()
+        print(f'{Ilvl(1)}Start: "{func.__name__}".')
+
+        res = func(*args, **kwargs)
+
+        end_creating_files = time.time() - start_creating_files
+        print(f'{Ilvl(1)}End: "{func.__name__}". Time:', round(end_creating_files, 3), end='\n\n')
+
+        return res
+    return wrapper
+
+
+def processing(i, params_length, text='Processing:'):
+    step = params_length / 20
+    if i % step == 0:
+        percent = str(100 * i / params_length)
+        print(f'\r{Ilvl(2)}{text} {percent}%', sep='', end='')
+    if i == params_length-1:
+        print(f'\r{Ilvl(2)}{text} 100.0%', sep='', end='\n')
 
 
 def extract_list_from_error_log(data, error_log_txt_obl, error_log_txt_type, error_log_txt_neg):
@@ -101,20 +127,21 @@ def create_error_log(data_type, current_row, column_name, validity, del_value_na
 
 
 def increase_data_values(i, data_values, options_increasing_data_values):
+    result = data_values.copy()
     for key, value in options_increasing_data_values.items():
         if i % value['step'] == 0:
-            if type(data_values[key]) == int:
+            if type(result[key]) == int:
                 if value['value'] == random:
-                    data_values[key] = value['value'].randint(*value['rand_values'])
+                    result[key] = value['value'].randint(*value['rand_values'])
                 else:
-                    data_values[key] += value['value']
-            elif type(data_values[key]) == str:
-                string, num = data_values[key].split('_')
+                    result[key] += value['value']
+            elif type(result[key]) == str:
+                string, num = result[key].split('_')
                 if value.get('value') is None:
-                    data_values[key] = f"{string}_{data_values[value['copy_value']]}"
+                    result[key] = f"{string}_{result[value['copy_value']]}"
                 else:
-                    data_values[key] = f"{string}_{int(num) + value['value']}"
-    return data_values
+                    result[key] = f"{string}_{int(num) + value['value']}"
+    return result
 
 
 def negative_type(validity_of_type, negative_value, value, negativity):
@@ -153,57 +180,55 @@ def nan_type(validity_of_type, nan_value, value, del_value):
 
 
 def create_data(file_name, column_name, current_row, error_log_txt,
-                data_type, nan_value, negative, create_error_logs, data_values,
+                data_type, nan_value, negative, create_error_logs,
                 validity,
                 del_value_nan=False,
                 negativity=False,
                 inverse_integrity=False,
                 bool_false=False):
-    if data_values is None:
-        if data_type == '':
-            return 'NO_DATA_TYPE'
-        value = FillData.get_value(data_type, validity)
-        if not validity:
-            negativity = False
-        value = nan_type(validity, nan_value, value, del_value_nan)
-        if value != '':
-            if data_type == DataTypes.BOOL and validity:
-                if bool_false:
-                    value = value.split(':')[0]
-                    value = value.split('|')[random.randrange(2)]
-                else:
-                    value = value.split(':')[1]
-                    value = value.split('|')[random.randrange(2)]
-            if data_type == DataTypes.DECIMAL:
-                value = negative_type(validity, negative, value, negativity)
-                if inverse_integrity:
-                    value = value[:value.index('.')]
-            elif data_type == DataTypes.INT:
-                value = negative_type(validity, negative, value, negativity)
-                if inverse_integrity:
-                    value += '.45'
-        if create_error_logs:
-            create_error_log(data_type, current_row, column_name, validity,
-                             del_value_nan, negativity, nan_value, inverse_integrity, file_name, error_log_txt)
-    else:
-        value = data_values.get(column_name)
+
+    if data_type == '':
+        return 'NO_DATA_TYPE'
+    value = FillData.get_value(data_type, validity)
+    if not validity:
+        negativity = False
+    value = nan_type(validity, nan_value, value, del_value_nan)
+    if value != '':
+        if data_type == DataTypes.BOOL and validity:
+            if bool_false:
+                value = value.split(':')[0]
+                value = value.split('|')[random.randrange(2)]
+            else:
+                value = value.split(':')[1]
+                value = value.split('|')[random.randrange(2)]
+        if data_type == DataTypes.DECIMAL:
+            value = negative_type(validity, negative, value, negativity)
+            if inverse_integrity:
+                value = value[:value.index('.')]
+        elif data_type == DataTypes.INT:
+            value = negative_type(validity, negative, value, negativity)
+            if inverse_integrity:
+                value += '.45'
+    if create_error_logs:
+        create_error_log(data_type, current_row, column_name, validity,
+                         del_value_nan, negativity, nan_value, inverse_integrity, file_name, error_log_txt)
+
     return value
 
 
 class InputFiles:
+
     @staticmethod
-    def create_files(check_input_url,
-                     error_log_txt=ErrorLogTexts.Eng,
-                     params=None,
-                     folder='files',
-                     file_name_prefix='',
-                     miss_worksheets=None,
-                     invert_miss_worksheets=False,
-                     only_files=None,
-                     create_error_logs=True,
-                     data_values=None,
-                     increasing_data_values=False,
-                     options_increasing_data_values=None):
+    @benchmark
+    def create_invalid_files(check_input_url,
+                             error_log_txt=ErrorLogTexts.Eng,
+                             params=None,
+                             folder='files',
+                             file_name_prefix='',
+                             miss_worksheets=None,
+                             invert_miss_worksheets=False,
+                             only_files=None,
+                             create_error_logs=True):
 
         if params is None:
             # validity, del_value_nan=False, negativity=False, inverse_integrity=False, bool_false, [Fill 1//2 row]
@@ -215,8 +240,9 @@ class InputFiles:
                       [True, False, False, False, False]]
 
         tables, worksheets_names = GoogleSheets.pars(check_input_url, miss_worksheets, invert_miss_worksheets)
-        start_creating_files = time.time()
-        print('====Start creating files')
+
+        # start_creating_files = time.time()
+        # print(f'{Ilvl(1)}Start {}')
 
         for table in range(len(tables)):
             file_names = Counter([row[0].strip() for row in tables[table]][1:])
@@ -230,7 +256,8 @@ class InputFiles:
 
             for file_name in file_names.keys():
                 start_creating = time.time()
-                print(f'========Creating file: "{worksheets_names[table]}/{file_name}{file_name_prefix}.csv"', end='')
+                print(f'{Ilvl(2)}Creating file: "{worksheets_names[table]}/{file_name}{file_name_prefix}.csv"',
+                      end='\n')
 
                 column_names = [row[1].strip() for row in tables[table] if row[0].strip() == file_name]
 
@@ -238,19 +265,7 @@ class InputFiles:
                 data = [[] for _ in range(params_length)]
 
                 for i in range(params_length):
-                    # if i % 100 == 0 or i == params_length - 1:
-                    #     progress = round(100 / params_length * i, 2)
-                    #     if progress <= 100:
-                    #         #print(progress)
-                    #         print('\r')
-                    #         print(progress, '%', sep='')
-                    #     if i == params_length - 1:
-                    #         print(progress, '%', sep='', end='\n')
-
                     current_row = i
-                    if data_values is not None and increasing_data_values:
-                        data_values = increase_data_values(i, data_values, options_increasing_data_values)
-
                     for column_name in column_names:
                         for row in tables[table]:
                             table_file_name = row[0].strip()
@@ -267,7 +282,6 @@ class InputFiles:
                                                                table_nan_value,
                                                                table_negative,
                                                                create_error_logs,
-                                                               data_values,
                                                                *params[i][:-1]))
                                     break
                                 else:
@@ -277,7 +291,6 @@ class InputFiles:
                                                                table_nan_value,
                                                                table_negative,
                                                                create_error_logs,
-                                                               data_values,
                                                                *params[i]))
                                     break
 
@@ -297,25 +310,59 @@ class InputFiles:
                 file_path = rf'{folder_name}/{file_name}{file_name_prefix}.csv'
                 if os.path.exists(file_path):
                     os.remove(file_path)
-
+                print(data)
                 df = pd.DataFrame(data, columns=column_names)
                 df.to_csv(file_path, index=False, encoding="utf_8_sig")
 
                 end_creating = time.time() - start_creating
-                print(f' =={CCol.txt_grn("DONE")}: ', round(end_creating, 3))
+                print(f' {Ilvl(1)}{CCol.txt_grn("DONE")}: ', round(end_creating, 3))
 
-        end_creating_files = time.time() - start_creating_files
-        print('====End creating files. Time:', round(end_creating_files, 3), end='\n\n')
+        # end_creating_files = time.time() - start_creating_files
+        # print('====End creating invalid files. Time:', round(end_creating_files, 3), end='\n\n')
 
     @staticmethod
+    @benchmark
+    def create_file(count_row, data_values, options_increasing_data_values,
+                    folder, file_name, file_name_prefix, write_step=100000):
+
+        folder_name = f'files/{folder}'
+        file_path = rf'{folder_name}/{file_name}{file_name_prefix}.csv'
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        df = pd.DataFrame([data_values])
+        df.to_csv(file_path, index=False, header=True, encoding="utf_8_sig")
+
+        rows = count_row
+        prec_i = 0
+        while rows != 0 and rows >= write_step:
+            data = []
+
+            for i in range(write_step):
+                data_values = increase_data_values(i, data_values, options_increasing_data_values)
+                data.append(data_values)
+
+                processing(i + prec_i, count_row)
+
+            df = pd.DataFrame(data)
+            df.to_csv(file_path, mode='a', index=False, header=False, encoding="utf_8_sig")
+
+            prec_i += write_step
+            rows -= write_step
+            if rows < write_step:
+                write_step = rows
+
+
+    @staticmethod
+    @benchmark
     def get_input_file_from_spreadsheet(check_input_url,
                                         folder='files',
                                         miss_worksheets=None,
                                         invert_miss_worksheets=False):
 
         spreadsheet, worksheets_names = GoogleSheets.pars(check_input_url, miss_worksheets, invert_miss_worksheets)
-        start_time = time.time()
-        print('==Start creating files')
+        # start_time = time.time()
+        # print('==Start creating files')
 
         folder_name = 'files/' + folder
         if not os.path.exists(folder_name):
@@ -325,7 +372,7 @@ class InputFiles:
             file_name = worksheets_names[i].strip()
 
             start_creating_file = time.time()
-            print(f'====Creating file: "{file_name}.csv".', end=' ')
+            print(f'{Ilvl(2)}Creating file: "{file_name}.csv".', end=' ')
 
             column_names = spreadsheet[i][0]
             data = spreadsheet[i][1:]
@@ -338,13 +385,14 @@ class InputFiles:
             df.to_csv(file_path, index=False, encoding="utf_8_sig")
 
             end_creating_file = time.time() - start_creating_file
-            print(f'=={CCol.txt_grn("DONE")}: ', round(end_creating_file, 3))
+            print(f' {Ilvl(1)}{CCol.txt_grn("DONE")}: ', round(end_creating_file, 3))
 
-        end_time = time.time() - start_time
-        print('====End creating files. Time:', round(end_time, 3), end='\n\n')
+        # end_time = time.time() - start_time
+        # print('====End creating files. Time:', round(end_time, 3), end='\n\n')
 
     class ViaAPI:
         @staticmethod
+        @benchmark
         def errors_logs_comparison(scenario_id,
                                    path,
                                    input_types,
@@ -353,7 +401,7 @@ class InputFiles:
                                    errors_row_len=5,
                                    count=0,
                                    env='DEV'):
-            print(f'==Start errors logs comparison')
+            # print(f'==Start errors logs comparison')
             comparison_pass = 0
             comparison_fail = 0
             comparison_skip = 0
@@ -405,26 +453,26 @@ class InputFiles:
                     if len(result) > 0:
                         comparison_fail += 1
                         status = CCol.txt_red("FAIL")
-                        print(f'====[{count}] Check: {url_input_type}{input_name} {status}')
+                        print(f'{Ilvl(2)}[{count}] Check: {url_input_type}{input_name} {status}')
                         for err in result:
-                            print('========' + err)
+                            print(Ilvl(3) + err)
                     else:
                         comparison_pass += 1
                         status = CCol.txt_grn("PASS")
-                        print(f'====[{count}] Check: {url_input_type}{input_name} {status}')
+                        print(f'{Ilvl(2)}[{count}] Check: {url_input_type}{input_name} {status}')
                 else:
                     comparison_skip += 1
                     if 200 <= response.status_code < 300:
                         status = CCol.txt_yel("EMPTY RESPONSE")
-                        print(f'====[{count}] Check: {url_input_type}{input_name} {status}')
+                        print(f'{Ilvl(2)}[{count}] Check: {url_input_type}{input_name} {status}')
                     else:
                         status = CCol.txt_red("FAIL")
-                        print(f'====[{count}] Check: {url_input_type}{input_name} {status}')
+                        print(f'{Ilvl(2)}[{count}] Check: {url_input_type}{input_name} {status}')
                         if chr(10) in response.text:
-                            print('========' + '\n        '.join(response.text.split(chr(10))[:errors_row_len]) +
-                                  '\n    ...')
+                            print(Ilvl(3) + f'\n{Ilvl(3, symbol=" ")}'.join(
+                                response.text.split(chr(10))[:errors_row_len]) + f'\n{Ilvl(2, symbol=" ")}...')
                         elif len(response.text) > 0:
-                            print(f'========{response.text}')
+                            print(f'{Ilvl(3)}{response.text}')
 
             comparison_result = {}
             if comparison_pass > 0:
@@ -436,11 +484,12 @@ class InputFiles:
             if count > 0:
                 comparison_result['count'] = count
 
-            print(f'==End errors logs comparison', end='\n\n')
+            # print(f'{Ilvl(1)}End errors logs comparison', end='\n\n')
 
             return comparison_result
 
         @staticmethod
+        @benchmark
         def upload_inputs_files(scenario_id,
                                 path,
                                 input_types,
@@ -449,7 +498,7 @@ class InputFiles:
                                 env='DEV',
                                 files_format='csv'):
 
-            print(f'==Start upload input files')
+            # print(f'==Start upload input files')
             for input_name, input_type in input_types.items():
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
@@ -475,20 +524,22 @@ class InputFiles:
                 else:
                     status = CCol.txt_red(f'[{status_code}] FAIL')
                 url_input_type = (f'{url_input_type} - ', '')[url_input_type is None]
-                print(f'====Upload input: {url_input_type}{input_name} {status}')
+                print(f'{Ilvl(2)}Upload input: {url_input_type}{input_name} {status}')
                 if chr(10) in response.text:
-                    print('========' + '\n        '.join(response.text.split(chr(10))[:errors_row_len]) + '\n    ...')
+                    print(Ilvl(3) + f'\n{Ilvl(3, symbol=" ")}'.join(
+                        response.text.split(chr(10))[:errors_row_len]) + f'\n{Ilvl(2, symbol=" ")}...')
                 elif len(response.text) > 0:
-                    print(f'========{response.text}')
-            print(f'==End upload input files', end='\n')
+                    print(f'{Ilvl(3)}{response.text}')
+            # print(f'==End upload input files', end='\n')
 
         @staticmethod
+        @benchmark
         def delete_inputs_files(scenario_id,
                                 input_types,
                                 token,
                                 errors_row_len=5,
                                 env='DEV'):
-            print(f'==Start delete input files')
+            # print(f'==Start delete input files')
             for input_name, input_type in input_types.items():
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
@@ -508,133 +559,149 @@ class InputFiles:
                     status = CCol.txt_red(f'[{status_code}] FAIL')
                 else:
                     status = CCol.txt_red(f'[{status_code}] FAIL')
-                print(f'====Delete input: {url_input_type} - {input_name} {status}')
+                print(f'{Ilvl(2)}Delete input: {url_input_type} - {input_name} {status}')
                 if chr(10) in response.text:
-                    print('========' + '\n        '.join(response.text.split(chr(10))[:errors_row_len]) + '\n    ...')
+                    print(Ilvl(3) + f'\n{Ilvl(3, symbol=" ")}'.join(
+                        response.text.split(chr(10))[:errors_row_len]) + f'\n{Ilvl(2, symbol=" ")}...')
                 elif len(response.text) > 0:
-                    print(f'========{response.text}')
-            print(f'==End delete input files', end='\n')
+                    print(f'{Ilvl(3)}{response.text}')
+            # print(f'==End delete input files', end='\n')
 
 
 if __name__ == '__main__':
-    environment = 'DEV'
-    scen_id = 338
-    # list_to_miss = ['objective', 'objective_customer', 'objective_product', 'constraint_coef', 'constraint_ratio_first_option', 'constraint_ratio_second_option']
-    access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=environment)
-    if access_token == 502:
-        print('access_token', access_token)
+    def start():
+        environment = 'DEV'
+        scen_id = 338
+        tetris_name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
+                               'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
+                               'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
+                               'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
 
-    tetris_name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
-                           'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
-                           'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
-                           'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
+        tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
+                               'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
+                               'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
+                               'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
 
-    tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
-                           'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
-                           'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
-                           'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
+        def auth():
+            access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=environment)
+            if access_token == 502:
+                print('access_token', access_token)
+            return access_token
 
-    # def start():
-    #     pass
+        def start_get_input_file_from_spreadsheet_tetris():
+            for path, types in tetris_spreadsheets.items():
+                InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
 
+        def start_get_input_file_from_spreadsheet_other():
+            InputFiles.get_input_file_from_spreadsheet(Spreadsheets.RTM.INPUT_RTM, folder=f'rtm/input_files/')
 
-    # for path, types in tetris_spreadsheets.items():
-    #     InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
+        def start_create_file():
+            for k, v in {'_test_1': 23000000}.items():
+                data_v = {
+                    'Plant': 1,
+                    'SKU': 10000,
+                    'SKU Name': 'SKU Name_1',
+                    'Жесткий Карантин(дней)': 1,
+                    'Мягкий карантин(дней)': 1,
+                    'Частота розлива в неделю': 1,
+                    'Срок годности': 1,
+                    'Признак долгосрока': 1,
+                    'Ready to ship': 1
+                }
+                options_increasing = {
+                    'Plant': {'value': 1, 'step': 10},
+                    'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
+                    'SKU Name': {'copy_value': 'SKU', 'step': 1},
+                    'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
+                    'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
+                    'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
+                    'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+                    'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
+                    'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+                }
 
-    # InputFiles.get_input_file_from_spreadsheet(Spreadsheets.RTM.INPUT_RTM, folder=f'rtm/input_files/')
+                InputFiles.create_file(count_row=v,
+                                       data_values=data_v,
+                                       options_increasing_data_values=options_increasing,
+                                       folder='cfr/test/cfr_check_data',
+                                       file_name='quarantine',
+                                       file_name_prefix=k)
 
+        def start_create_invalid_files():
+            InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT_OLD,
+                                            folder='tetris/check_input_old',
+                                            error_log_txt=ErrorLogTexts.Eng)
 
-    # for k, v in {
-    #     '_t1': 1,
-    # }.items():
-    #     param = [[True, False, False, False, False] for i in range(v)]
-    #     files = ['quarantine']
-    #     data_v = {
-    #         'Plant': 1,
-    #         'SKU': 10000,
-    #         'SKU Name': 'SKU Name_1',
-    #         'Жесткий Карантин(дней)': 1,
-    #         'Мягкий карантин(дней)': 1,
-    #         'Частота розлива в неделю': 1,
-    #         'Срок годности': 1,
-    #         'Признак долгосрока': 1,
-    #         'Ready to ship': 1
-    #     }
-    #     options_increasing = {
-    #         'Plant': {'value': 1, 'step': 100},
-    #         'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
-    #         'SKU Name': {'copy_value': 'SKU', 'step': 1},
-    #         'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
-    #         'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
-    #         'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
-    #         'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
-    #         'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
-    #         'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
-    #
-    #     }
-    #
-    #     InputFiles.create_files(Spreadsheets.CFR.CHECK_INPUT,
-    #                             params=param,
-    #                             folder='cfr/test',
-    #                             file_name_prefix=k,
-    #                             error_log_txt=ErrorLogTexts.Eng,
-    #                             only_files=files,
-    #                             create_error_logs=False,
-    #                             data_values=data_v,
-    #                             increasing_data_values=True,
-    #                             options_increasing_data_values=options_increasing)
+        def start_errors_logs_comparison_tetris():
+            count_all = 0
+            for path_items, types_items in tetris_name_matches.items():
+                result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
+                                                                       input_types=types_items,
+                                                                       scenario_id=scen_id,
+                                                                       path=f'tetris/check_input_old/error_logs/'
+                                                                            f'{path_items}',
+                                                                       token=auth(),
+                                                                       count=count_all,
+                                                                       env=environment)  # check_input check_input_old
+                count_all = result_comp.get('count')
 
-    # InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT_OLD,
-    #                                 folder='tetris/check_input_old',
-    #                                 error_log_txt=ErrorLogTexts.Eng)
-    #
-    # count_all = 0
-    # for path_items, types_items in tetris_name_matches.items():
-    #     result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
-    #                                                            input_types=types_items,
-    #                                                            scenario_id=scenario_id,
-    #                                                            path=f'tetris/check_input_old/error_logs/{path_items}',
-    #                                                            token=access_token,
-    #                                                            count=count_all,
-    #                                                            env=environment)  # check_input check_input_old
-    #     count_all = result_comp.get('count')
+        def start_errors_logs_comparison_other():
+            result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
+                                                                   input_types=InputTypeNameMatch.CFR.TYPES,
+                                                                   scenario_id=scen_id,
+                                                                   path=f'cfr/check_input/error_logs/cfr_check_data',
+                                                                   token=auth(),
+                                                                   env=environment)  # check_input check_input_old
 
-    # result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
-    #                                                        input_types=InputTypeNameMatch.CFR.OBLIGATORY_TYPES,
-    #                                                        scenario_id=scenario_id,
-    #                                                        path=f'cfr/check_input/error_logs/cfr_check_data',
-    #                                                        token=access_token,
-    #                                                        env=environment)  # check_input check_input_old
+        def start_upload_inputs_files_tetris():
+            for path, types in tetris_name_matches.items():
+                InputFiles.ViaAPI.upload_inputs_files(scenario_id=scen_id,
+                                                      input_types=types,
+                                                      path=f'tetris/valid_input_files/{path}',
+                                                      token=auth(),
+                                                      env=environment)
+                # valid_input_files input_files check_input check_input_old
 
-    # for path, types in tetris_name_matches.items():
-    #     InputFiles.ViaAPI.upload_inputs_files(scenario_id=scenario_id,
-    #                                           input_types=types,
-    #                                           path=f'tetris/valid_input_files/{path}',
-    #                                           token=access_token,
-    #                                           env=environment)  # valid_input_files input_files check_input check_input_old
+        def start_upload_inputs_files_other():
+            # required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
 
-    # required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
+            required_inputs = InputTypeNameMatch.CFR.TYPES
 
-    # required_inputs = InputTypeNameMatch.CFR.OBLIGATORY_TYPES.copy()
-    # required_inputs.update(InputTypeNameMatch.CFR.NOT_OBLIGATORY_TYPES)
+            # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
+            # required_inputs = InputTypeNameMatch.Promo.TYPES
 
-    # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
-    # required_inputs = InputTypeNameMatch.Promo.TYPES
+            InputFiles.ViaAPI.upload_inputs_files(scenario_id=scen_id,
+                                                  input_types=required_inputs,
+                                                  path=f'cfr/input_files',
+                                                  token=auth(),
+                                                  env=environment)
+            # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
+            # valid_input_files input_files check_input check_input_old
 
-    # InputFiles.ViaAPI.upload_inputs_files(scenario_id=scen_id,
-    #                                       input_types=required_inputs,
-    #                                       path=f'cfr/input_files',
-    #                                       # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
-    #                                       token=access_token,
-    #                                       env=environment)  # valid_input_files input_files check_input check_input_old
+        def start_delete_inputs_files_tetris():
+            for types in tetris_name_matches.values():
+                InputFiles.ViaAPI.delete_inputs_files(scenario_id=scen_id,
+                                                      input_types=types,
+                                                      token=auth(),
+                                                      env=environment)
 
-    # for types in name_matches.values():
-    #     InputFiles.ViaAPI.delete_inputs_files(scenario_id=scenario_id,
-    #                                           input_types=types,
-    #                                           token=access_token,
-    #                                           env=environment)
+        def start_delete_inputs_files_other():
+            InputFiles.ViaAPI.delete_inputs_files(scenario_id=scen_id,
+                                                  input_types=InputTypeNameMatch.RTM.TYPES,
+                                                  token=auth(),
+                                                  env=environment)
 
-    InputFiles.ViaAPI.delete_inputs_files(scenario_id=525,
-                                          input_types=InputTypeNameMatch.RTM.TYPES,
-                                          token=access_token,
-                                          env=environment)
+        # start_get_input_file_from_spreadsheet_tetris()
+        # start_get_input_file_from_spreadsheet_other()
+
+        # start_create_file()
+        # start_create_invalid_files()
+
+        # start_errors_logs_comparison_tetris()
+        # start_errors_logs_comparison_other()
+
+        # start_upload_inputs_files_tetris()
+        # start_upload_inputs_files_other()
+
+        # start_delete_inputs_files_tetris()
+        # start_delete_inputs_files_other()

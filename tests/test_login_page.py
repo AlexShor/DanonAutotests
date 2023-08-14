@@ -1,29 +1,27 @@
 import time
-import os
 
 import pytest
 
-from ..pages.base_scenario_page import BaseScenarioPage
-from ..pages.scenario_list_page import ScenarioListPage
-from ..pages.create_scenario_page import CreateScenarioPage
-from ..pages.input_tab_on_scenario_page import InputTabOnScenarioPage
-from ..pages.pfr_tab_on_scenario_page import PFRTabOnScenarioPage
-from ..pages.login_page import LoginPage
-from ..pages.site_data.urls import Links, Pages
-from ..input_files.input_data import InputTypeNameMatch
-from ..pages.site_data.credentials import Credentials as Creds
-from ..conftest import dict_parametrize
-from ..pages.site_data.default_params import (ProjectType as Ptype,
-                                              DefaultProjectNames as DPNames,
-                                              DefaultInputFilePaths as DIPaths)
+from conftest import dict_parametrize
+from input_files.input_data import InputTypeNameMatch
+from pages.base_scenario_page import BaseScenarioPage
+from pages.create_scenario_page import CreateScenarioPage
+from pages.input_tab_on_scenario_page import InputTabOnScenarioPage
+from pages.login_page import LoginPage
+from pages.pfr_tab_on_scenario_page import PFRTabOnScenarioPage
+from pages.scenario_list_page import ScenarioListPage
+from pages.site_data.credentials import Credentials as Creds
+from pages.site_data.default_params import (ProjectType as Ptype,
+                                            DefaultProjectNames as DPNames)
+from pages.site_data.urls import Links, Pages
 
-project_type = Ptype.PROMO
+project_type = Ptype.CFR
 types = {Ptype.PROMO: InputTypeNameMatch.Promo.TYPES,
          Ptype.RTM: InputTypeNameMatch.RTM.TYPES,
          Ptype.TETRIS: InputTypeNameMatch.Tetris.TYPES,
          Ptype.CFR: InputTypeNameMatch.CFR.TYPES}[project_type]
 
-skip = {Ptype.PROMO: ['gps', 'distr_mapping', 'combine_chains'],
+skip = {Ptype.PROMO: [],  # 'gps', 'distr_mapping', 'combine_chains'
         Ptype.RTM: [],
         Ptype.TETRIS: ['bom'],
         Ptype.CFR: []}[project_type]
@@ -41,7 +39,7 @@ skip = {Ptype.PROMO: ['gps', 'distr_mapping', 'combine_chains'],
 
 
 class TestFullSmokePath:
-    @pytest.mark.testmark
+    @pytest.mark.test_full_smoke
     def test_user_authorization(self, env, browser):
         link = Links(env).get('LOGIN_PAGE')
         login_page = LoginPage(browser, env, link)
@@ -49,7 +47,7 @@ class TestFullSmokePath:
         Creds.auth()
         login_page.authorize_user(*Creds.auth().values())
 
-    @pytest.mark.testmark
+    @pytest.mark.test_full_smoke
     def test_user_can_change_project(self, env, browser):
         scenario_list_page = ScenarioListPage(browser, env)
         scenario_list_page.should_be_scenario_list_page()
@@ -60,20 +58,23 @@ class TestFullSmokePath:
 
         scenario_list_page.should_be_scenario_list_page(project_url_path=Pages.SCENARIO_LIST[project_type])
 
-    @pytest.mark.testmark
+    @pytest.mark.open_scenario_from_scenario_list
+    @pytest.mark.test_full_smoke
     def test_user_can_open_scenario_page_from_scenario_list(self, env, browser):
         scenario_list_page = ScenarioListPage(browser, env)
         scenario_list_page.should_be_scenario_list_page()
         scenario_list_page.user_can_open_scenario_page_by_click_on_scenario_title('Scenario_test_1')
 
-    # @pytest.mark.testmark
+    @pytest.mark.create_scenario
+    @pytest.mark.test_full_smoke
     def test_user_can_open_create_scenario_page(self, env, browser):
         scenario_list_page = ScenarioListPage(browser, env)
         scenario_list_page.should_be_scenario_list_page()
         scenario_list_page.should_be_open_create_scenario_page_by_click_on_jenius_button_bottom()
         # scenario_list_page.should_be_open_create_scenario_page_by_click_on_jenius_button_left()
 
-    # @pytest.mark.testmark
+    @pytest.mark.create_scenario
+    @pytest.mark.test_full_smoke
     def test_user_can_create_scenario_and_open_scenario_page(self, env, browser):
         create_scenario_page = CreateScenarioPage(browser, env)
         create_scenario_page.should_be_create_scenario_page()
@@ -82,7 +83,7 @@ class TestFullSmokePath:
         scenario_page = BaseScenarioPage(browser)
         scenario_page.should_be_scenario_page(project_type=project_type)
 
-    @pytest.mark.testmark
+    @pytest.mark.test_full_smoke
     @dict_parametrize(data=types,
                       skip=skip,
                       arguments=('system_file_name', 'front_name', 'scenario_type', 'url_path'))
@@ -91,10 +92,6 @@ class TestFullSmokePath:
                                      front_name,
                                      scenario_type,
                                      url_path):
-        # system_file_name = types_data['system_file_name']
-        # front_name = types_data['front_name']
-        # scenario_type = types_data['scenario_type']
-        # url_path = types_data['url_path']
 
         input_tab = InputTabOnScenarioPage(browser)
         input_tab.should_be_input_tab_on_scenario_page()
@@ -108,12 +105,12 @@ class TestFullSmokePath:
                                   scenario_type=scenario_type,
                                   url_path=url_path)
 
-        input_tab.file_should_be_uploaded(front_name, system_file_name=f'{system_file_name}.csv')
+        input_tab.file_should_be_uploaded(front_name, system_file_name=file_name)
         input_tab.should_be_not_input_name_in_popover_message_list(front_name)
 
         time.sleep(2)
 
-    # @pytest.mark.testmark
+    @pytest.mark.test_full_smoke
     def test_user_can_open_pfr_tab_from_input_tab(self, env, browser):
         input_tab = InputTabOnScenarioPage(browser)
         input_tab.should_be_open_pfr_tab_by_click_on_jenius_button_left()

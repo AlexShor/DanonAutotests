@@ -1,4 +1,4 @@
-from .default_params import ProjectType as Ptype
+from pages.site_data.default_params import ProjectType as Ptype
 
 
 class BaseUrls:

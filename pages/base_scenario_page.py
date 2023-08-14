@@ -1,7 +1,7 @@
-from .base_page import BasePage
-from .site_data.locators import BaseScenarioPageLocators as BSPLocator
-from .site_data.default_params import (CreateScenarioDefaultParams as DefPrm,
-                                       ProjectType as Ptype)
+from pages.base_page import BasePage
+from pages.site_data.locators import BaseScenarioPageLocators as BSPLocator
+from pages.site_data.default_params import (CreateScenarioDefaultParams as DefPrm,
+                                            ProjectType as Ptype)
 
 
 class BaseScenarioPage(BasePage):

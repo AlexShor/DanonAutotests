@@ -1,9 +1,10 @@
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from ..castom_moduls import castom_expected_conditions as CEC
 
-from .site_data.locators import BasePageLocators as BPLocator
+from castom_moduls import castom_expected_conditions as CEC
+
+from pages.site_data.locators import BasePageLocators as BPLocator
 
 
 class BasePage:

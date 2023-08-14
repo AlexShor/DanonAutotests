@@ -1,5 +1,5 @@
-from ..pages.scenario_list_page import ScenarioListPage
-from ..pages.site_data.urls import Links
+from pages.scenario_list_page import ScenarioListPage
+from pages.site_data.urls import Links
 
 
 def test_user_authorization(env, browser, authoriz_creds):

@@ -2,15 +2,13 @@ from datetime import datetime
 
 from selenium.webdriver.common.keys import Keys
 
-from .base_scenario_page import BaseScenarioPage
-from .site_data.locators import BaseScenarioPageLocators as BSPLocator
-from .site_data.locators import InputTabLocators as ITPLocator
-from .site_data.element_texts import InputTabScenarioPage as IptTxt
-from .site_data.default_params import (ProjectType as Ptype,
-                                       DefaultProjectNames as DPNames,
-                                       DefaultInputFilePaths as DIPaths)
-from ..input_files.input_data import ScenarioTypes, InputTypeNameMatch
-from .site_data.urls import Paths
+from pages.base_scenario_page import BaseScenarioPage
+from pages.site_data.default_params import (ProjectType as Ptype,
+                                            DefaultInputFilePaths as DIPaths)
+from pages.site_data.element_texts import InputTabScenarioPage as IptTxt
+from pages.site_data.locators import InputTabLocators as ITPLocator
+from pages.site_data.urls import Paths
+from input_files.input_data import ScenarioTypes
 
 language = 'en'
 

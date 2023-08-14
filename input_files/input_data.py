@@ -1,7 +1,7 @@
 from operator import itemgetter
 
-from ..pages.site_data.default_params import ProjectType as Ptype
-from ..pages.site_data.urls import Paths
+from pages.site_data.default_params import ProjectType as Ptype
+from pages.site_data.urls import Paths
 
 google_sheets_url = 'https://docs.google.com/spreadsheets/d/'
 

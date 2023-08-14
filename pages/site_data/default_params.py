@@ -1,8 +1,5 @@
 import os
 
-#from ...input_files.input_data import InputTypeNameMatch as ITNM
-#from .urls import Paths
-
 
 class ProjectType:
     PROMO = 'promo'
