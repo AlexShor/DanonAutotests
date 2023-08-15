@@ -1,12 +1,11 @@
 from datetime import datetime
 
-from selenium.webdriver.common.keys import Keys
-
 from pages.base_scenario_page import BaseScenarioPage
 from pages.site_data.default_params import (ProjectType as Ptype,
                                             DefaultInputFilePaths as DIPaths)
 from pages.site_data.element_texts import InputTabScenarioPage as IptTxt
-from pages.site_data.locators import InputTabLocators as ITPLocator
+from pages.site_data.locators import (InputTabLocators as ITPLocator,
+                                      BasePageLocators as BPLocator)
 from pages.site_data.urls import Paths
 from input_files.input_data import ScenarioTypes
 
@@ -59,7 +58,8 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
         self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=(input_file_front_name,)).click()
         self.is_clickable(*ITPLocator.ITEM_IN_SELECTOR,
-                          element_for_format=(IptTxt.ITEM_IN_SELECTOR_FILE[language],)).click()
+                          element_for_format=(IptTxt.ITEM_IN_SELECTOR_FILE[language],),
+                          timeout=1).click()
         self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON,
                        element_for_format=(input_file_front_name,)).send_keys(file_path + file_name)
 
@@ -99,49 +99,55 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
         return input_type_file_path
 
-    def file_should_be_uploaded(self, input_file_front_name, system_file_name, check_date=None):
+    def file_should_be_uploaded(self, input_file_front_name, system_file_name, check_date=None, timeout=None):
         if check_date is None:
             check_date = datetime.now().strftime("%d.%m.%Y")
 
-        self.check_text_in_info_tag(input_file_front_name, system_file_name)
-        self.check_preview_button(input_file_front_name)
-        self.check_card_info_text(input_file_front_name)
-        self.check_card_info_date(input_file_front_name, check_date)
+        self.check_text_in_info_tag(input_file_front_name, system_file_name, timeout=timeout)
+        self.check_preview_button(input_file_front_name, timeout=timeout)
+        self.check_card_info_text(input_file_front_name, timeout=timeout)
+        self.check_card_info_date(input_file_front_name, check_date, timeout=timeout)
 
     def should_be_open_pfr_tab_by_click_on_jenius_button_left(self):
-        self.find_elem(*ITPLocator.HTML_TAG).send_keys(Keys.HOME)
+        self.scroll_in_element(*BPLocator.SCROLL_BLOCK, direction='UP')
         self.is_clickable(*ITPLocator.JB_LEFT).click()
 
     def should_be_open_pfr_tab_by_click_on_jenius_button_bottom(self):
-        self.find_elem(*ITPLocator.HTML_TAG).send_keys(Keys.END)
+        self.scroll_in_element(*BPLocator.SCROLL_BLOCK, direction='DOWN')
         self.is_clickable(*ITPLocator.JB_BOTTOM).click()
 
     # @benchmark
-    def check_text_in_info_tag(self, input_file_front_name, text_in_info_tag):
-        tag_text = self.find_elem(*ITPLocator.INFO_TAG_UPLOADED_DATA, element_for_format=(input_file_front_name,)).text
+    def check_text_in_info_tag(self, input_file_front_name, text_in_info_tag, timeout=None):
+        tag_text = self.find_elem(*ITPLocator.INFO_TAG_UPLOADED_DATA,
+                                  element_for_format=(input_file_front_name,),
+                                  timeout=timeout).text
         assert text_in_info_tag == tag_text, \
             f'Text: "{text_in_info_tag}" not in info tag. Info tag have "{tag_text}"'
 
     # @benchmark
-    def check_preview_button(self, input_file_front_name):
+    def check_preview_button(self, input_file_front_name, timeout=None):
         button_text = IptTxt.PREVIEW_BUTTON[language]
         preview_button_text = self.find_elem(*ITPLocator.PREVIEW_BUTTON,
-                                             element_for_format=(input_file_front_name,)).text
+                                             element_for_format=(input_file_front_name,),
+                                             timeout=timeout).text
         assert preview_button_text == button_text, \
             f'Preview button have a text "{preview_button_text}", but should be "{button_text}"'
 
     # @benchmark
     def check_card_info_text(self, input_file_front_name,
-                             card_info_text=IptTxt.CARD_INFO_UPLOADED[language]):
+                             card_info_text=IptTxt.CARD_INFO_UPLOADED[language],
+                             timeout=None):
         current_card_info_text = self.find_elem(*ITPLocator.CARD_INFO_TEXT,
-                                                element_for_format=(input_file_front_name,)).text
+                                                element_for_format=(input_file_front_name,),
+                                                timeout=timeout).text
         assert card_info_text in current_card_info_text, \
             f'Card info text: "{current_card_info_text}" don\'t have substring: "{card_info_text}"'
 
     # @benchmark
-    def check_card_info_date(self, input_file_front_name, check_date):
+    def check_card_info_date(self, input_file_front_name, check_date, timeout=None):
         current_card_info_text = self.find_elem(*ITPLocator.CARD_INFO_TEXT,
-                                                element_for_format=(input_file_front_name,)).text
+                                                element_for_format=(input_file_front_name,),
+                                                timeout=timeout).text
         assert check_date in current_card_info_text, \
             f'Card info text: "{current_card_info_text}" don\'t have date: "{check_date}"'
 
@@ -155,6 +161,8 @@ class InputTabOnScenarioPage(BaseScenarioPage):
                 f'Current preloader text: "{current_preloader_text}", but should be "{preloader_text}"'
 
     # @benchmark
-    def check_disappeared_preloader(self, input_file_front_name):
-        assert self.is_disappeared(*ITPLocator.PRELOADER_SPINNER_LARGE, element_for_format=(input_file_front_name,)), \
+    def check_disappeared_preloader(self, input_file_front_name, timeout=None):
+        assert self.is_disappeared(*ITPLocator.PRELOADER_SPINNER_LARGE,
+                                   element_for_format=(input_file_front_name,),
+                                   timeout=timeout), \
             'Preloader is not disappeared'

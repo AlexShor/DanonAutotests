@@ -19,7 +19,9 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
-    def find_elem(self, method, css_selector, element_for_format=(), error_text='', elem_id=0):
+    def find_elem(self, method, css_selector, element_for_format=(), error_text='', elem_id=0, timeout=None):
+        if timeout is not None:
+            self.browser.implicitly_wait(timeout)
         found_elem = self.browser.find_elements(method, css_selector.format(*element_for_format))
         if len(found_elem) == 0:
             if error_text:
@@ -27,8 +29,10 @@ class BasePage:
             else:
                 print_text = f'[No Such Element by {method}: "{css_selector.format(*element_for_format)}"]'
             print(print_text, end=' ')
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
             assert False, print_text
         else:
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
             return found_elem[elem_id]
 
     def scroll_to_element(self, method, css_selector, element_for_format=(), error_text='', elem_id=0):

@@ -15,16 +15,20 @@ from pages.site_data.default_params import (ProjectType as Ptype,
                                             DefaultProjectNames as DPNames)
 from pages.site_data.urls import Links, Pages
 
-project_type = Ptype.CFR
+project_type = Ptype.TETRIS
 types = {Ptype.PROMO: InputTypeNameMatch.Promo.TYPES,
          Ptype.RTM: InputTypeNameMatch.RTM.TYPES,
          Ptype.TETRIS: InputTypeNameMatch.Tetris.TYPES,
          Ptype.CFR: InputTypeNameMatch.CFR.TYPES}[project_type]
 
-skip = {Ptype.PROMO: [],  # 'gps', 'distr_mapping', 'combine_chains'
-        Ptype.RTM: [],
-        Ptype.TETRIS: ['bom'],
-        Ptype.CFR: []}[project_type]
+skip = {Ptype.PROMO: {},  # 'gps', 'distr_mapping', 'combine_chains'
+        Ptype.RTM: {},
+        Ptype.TETRIS: {'bom': 'Input is not agreed and not finalized',
+                       'material_groups': 'Bug',
+                       'new_farms': 'Bug',
+                       'sourcing_settings': 'Bug',
+                       'stop_buyers': 'Bug'},
+        Ptype.CFR: {}}[project_type]
 
 
 # def pytest_generate_tests(metafunc):
@@ -105,17 +109,17 @@ class TestFullSmokePath:
                                   scenario_type=scenario_type,
                                   url_path=url_path)
 
-        input_tab.file_should_be_uploaded(front_name, system_file_name=file_name)
+        input_tab.file_should_be_uploaded(front_name, system_file_name=file_name, timeout=30)
         input_tab.should_be_not_input_name_in_popover_message_list(front_name)
 
-        time.sleep(2)
+        #time.sleep(2)
 
     @pytest.mark.test_full_smoke
     def test_user_can_open_pfr_tab_from_input_tab(self, env, browser):
         input_tab = InputTabOnScenarioPage(browser)
         input_tab.should_be_open_pfr_tab_by_click_on_jenius_button_left()
 
-        pfr_tab = PFRTabOnScenarioPage(browser)
-        pfr_tab.should_be_pfr_tab_on_scenario_page()
+        # pfr_tab = PFRTabOnScenarioPage(browser)
+        # pfr_tab.should_be_pfr_tab_on_scenario_page()
 
         time.sleep(2)

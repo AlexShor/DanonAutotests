@@ -51,12 +51,22 @@ def browser(request):
 
 
 def dict_parametrize(data, arguments=(), skip=None, skip_reason='Skipped', **kwargs):
+    if skip is None:
+        skip = {}
+
     args = [key for key in list(data.values())[0].keys() if key in arguments]
     ids = list(data.keys())
 
     formatted_data = []
     for key, item in data.items():
-        formatted_data.append(
-            pytest.param(*[item[a] for a in args], marks=pytest.mark.skipif(key in skip, reason=skip_reason)))
+
+        skipif_check = key in skip
+        if type(skip) == dict:
+            reason_message = skip.get(key, skip_reason)
+        else:
+            reason_message = skip_reason
+
+        formatted_data.append(pytest.param(*[item[a] for a in args],
+                                           marks=pytest.mark.skipif(skipif_check, reason=reason_message)))
 
     return pytest.mark.parametrize(args, formatted_data, ids=ids, **kwargs)
