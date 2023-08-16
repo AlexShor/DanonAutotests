@@ -16,3 +16,6 @@ class BaseScenarioPage(BasePage):
 
     def get_scenario_id_from_url(self):
         return self.browser.current_url.split('/')[-1]
+
+    def get_scenario_title(self):
+        return self.find_elem(*BSPLocator.SCENARIO_TITLE).text

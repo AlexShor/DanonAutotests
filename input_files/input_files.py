@@ -9,8 +9,8 @@ from input_data import FillData, DataTypes, Spreadsheets, DataTypesErrorExceptio
 from input_data import ErrorLogTexts
 from pages.api.base_api_requests import BaseApiRequests as ApiReq
 from pages.site_data.credentials import Credentials as Creds
-from castom_moduls.console_design.colors import ConsoleColors as CCol
-from castom_moduls.console_design.indentation_levels import indentation_levels as Ilvl
+from custom_moduls.console_design.colors import ConsoleColors as CCol
+from custom_moduls.console_design.indentation_levels import indentation_levels as Ilvl
 
 import pandas as pd
 import ast
@@ -310,7 +310,7 @@ class InputFiles:
                 file_path = rf'{folder_name}/{file_name}{file_name_prefix}.csv'
                 if os.path.exists(file_path):
                     os.remove(file_path)
-                print(data)
+
                 df = pd.DataFrame(data, columns=column_names)
                 df.to_csv(file_path, index=False, encoding="utf_8_sig")
 
@@ -445,7 +445,7 @@ class InputFiles:
 
                     result = []
                     for k in range(len(request_data)):
-                        set_difference = str(request_data[k][1].difference(log_file_data[k][1]))
+                        set_difference = str(request_data[k][1].symmetric_difference(log_file_data[k][1]))
                         if set_difference != 'set()':
                             result.append(f'{request_data[k][0]} {set_difference}')
 
@@ -558,7 +558,8 @@ class InputFiles:
                     status = CCol.txt_red(f'[{status_code}] FAIL')
                 else:
                     status = CCol.txt_red(f'[{status_code}] FAIL')
-                print(f'{Ilvl(2)}Delete input: {url_input_type} - {input_name} {status}')
+                url_input_type = (f'{url_input_type} - ', '')[url_input_type is None]
+                print(f'{Ilvl(2)}Delete input: "{url_input_type}{input_name}" {status}')
                 if chr(10) in response.text:
                     print(Ilvl(3) + f'\n{Ilvl(3, symbol=" ")}'.join(
                         response.text.split(chr(10))[:errors_row_len]) + f'\n{Ilvl(2, symbol=" ")}...')
@@ -628,9 +629,9 @@ class Start:
                                    file_name='quarantine',
                                    file_name_prefix=k)
 
-    def start_create_invalid_files(self):
-        InputFiles.create_invalid_files(Spreadsheets.Tetris.CHECK_INPUT_OLD,
-                                        folder='tetris/check_input_old',
+    def start_create_invalid_files(self, spreadsheet, folder):
+        InputFiles.create_invalid_files(check_input_url=spreadsheet,
+                                        folder=folder,
                                         error_log_txt=ErrorLogTexts.Eng)
 
     def start_errors_logs_comparison_tetris(self):
@@ -646,11 +647,11 @@ class Start:
                                                                    env=self.environment)  # check_input check_input_old
             count_all = result_comp.get('count')
 
-    def start_errors_logs_comparison_other(self):
+    def start_errors_logs_comparison_other(self, required_inputs, folder):
         result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
-                                                               input_types=InputTypeNameMatch.CFR.TYPES,
+                                                               input_types=required_inputs,
                                                                scenario_id=self.scenario_id,
-                                                               path=f'cfr/check_input/error_logs/cfr_check_data',
+                                                               path=folder,
                                                                token=self.auth(),
                                                                env=self.environment)  # check_input check_input_old
 
@@ -672,17 +673,17 @@ class Start:
                                                   env=self.environment)
             # valid_input_files input_files check_input check_input_old
 
-    def start_upload_inputs_files_other(self):
+    def start_upload_inputs_files_other(self, required_inputs, folder):
         # required_inputs = {t: InputTypeNameMatch.Tetris.TYPES_MD[t] for t in ('materials', 'locations', 'calendars')}
 
-        required_inputs = InputTypeNameMatch.CFR.TYPES
+        # required_inputs = InputTypeNameMatch.CFR.TYPES
 
         # required_inputs = {t: InputTypeNameMatch.Promo.TYPES[t] for t in ('distr_mapping', 'combine_products')}
         # required_inputs = InputTypeNameMatch.Promo.TYPES
 
         InputFiles.ViaAPI.upload_inputs_files(scenario_id=self.scenario_id,
                                               input_types=required_inputs,
-                                              path=f'cfr/input_files',
+                                              path=folder,
                                               token=self.auth(),
                                               env=self.environment)
         # tetris/check_input_old/md cfr/input_files check_input/cfr_check_data promo/input_files/csv
@@ -695,16 +696,16 @@ class Start:
                                                   token=self.auth(),
                                                   env=self.environment)
 
-    def start_delete_inputs_files_other(self):
+    def start_delete_inputs_files_other(self, input_types):
         InputFiles.ViaAPI.delete_inputs_files(scenario_id=self.scenario_id,
-                                              input_types=InputTypeNameMatch.RTM.TYPES,
+                                              input_types=input_types,
                                               token=self.auth(),
                                               env=self.environment)
 
 
 if __name__ == '__main__':
     environment = 'DEV'
-    scenario_id = 243
+    scenario_id = 357
 
     start = Start(scen_id=scenario_id, env=environment)
 
@@ -712,14 +713,17 @@ if __name__ == '__main__':
     # start.start_get_input_file_from_spreadsheet_other()
 
     # start.start_create_file()
-    # start.start_create_invalid_files()
+    # start.start_create_invalid_files(Spreadsheets.CFR.CHECK_INPUT, folder='cfr/check_input_2')
 
+    # cfr/check_input/error_logs/cfr_check_data |
     # start.start_errors_logs_comparison_tetris()
-    # start.start_errors_logs_comparison_other()
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/cfr_check_data')
 
     # start.start_upload_valid_inputs_files_tetris()
-    # start.start_upload_invalid_inputs_files_tetris()
-    # start.start_upload_inputs_files_other()
+    # start.start_upload_invalid_inputs_files_tetris(InputTypeNameMatch.CFR.TYPES)
 
-    start.start_delete_inputs_files_tetris()
-    # start.start_delete_inputs_files_other()
+    # cfr/check_input/cfr_check_data |
+    start.start_upload_inputs_files_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/input_files')
+
+    # start.start_delete_inputs_files_tetris()
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)

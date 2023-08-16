@@ -50,7 +50,7 @@ def browser(request):
     browser.quit()
 
 
-def dict_parametrize(data, arguments=(), skip=None, skip_reason='Skipped', **kwargs):
+def custom_parametrize(data, arguments=(), skip=None, skip_reason='Skipped', **kwargs):
     if skip is None:
         skip = {}
 
@@ -60,13 +60,31 @@ def dict_parametrize(data, arguments=(), skip=None, skip_reason='Skipped', **kwa
     formatted_data = []
     for key, item in data.items():
 
-        skipif_check = key in skip
-        if type(skip) == dict:
-            reason_message = skip.get(key, skip_reason)
+        if key in skip:
+            mark = getattr(pytest.mark, skip[key]['method'])(True, reason=skip[key].get('msg', skip_reason))
         else:
-            reason_message = skip_reason
+            mark = ()
 
-        formatted_data.append(pytest.param(*[item[a] for a in args],
-                                           marks=pytest.mark.skipif(skipif_check, reason=reason_message)))
+        formatted_data.append(pytest.param(*[item[a] for a in args], marks=mark))
 
     return pytest.mark.parametrize(args, formatted_data, ids=ids, **kwargs)
+
+
+
+# def pytest_runtest_makereport(item, call):
+#     print()
+#     print('item.keywords', *item.keywords)
+#     print('call.excinfo', call.excinfo)
+#     print('item.parent', item.parent)
+#     print('item', item)
+#     print()
+#     if "incremental" in item.keywords:
+#         if call.excinfo is not None:
+#             parent = item.parent
+#             parent._previousfailed = item
+#
+#
+# def pytest_runtest_setup(item):
+#     previousfailed = getattr(item.parent, "_previousfailed", None)
+#     if previousfailed is not None:
+#         pytest.xfail("previous test failed (%s)" % previousfailed.name)

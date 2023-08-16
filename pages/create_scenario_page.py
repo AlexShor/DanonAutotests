@@ -8,13 +8,16 @@ from pages.site_data.element_texts import CreateScenarioPage as CrtTxt
 from pages.site_data.urls import Links, Pages
 from pages.site_data.default_params import (CreateScenarioDefaultParams as DefPrm,
                                             ProjectType as Ptype)
+from custom_moduls.console_design.colors import ConsoleColors as CCol
 
 language = 'en'
 
 
 class CreateScenarioPage(BasePage):
     def should_be_create_scenario_page(self):
-        self.is_url_contains('create')
+        text_from_url = 'create'
+        self.is_url_contains(text_from_url=text_from_url,
+                             error_text=f'Current url is not contains: "{CCol.txt_vio(text_from_url)}"')
         current_url = self.browser.current_url
 
         self.find_elem(*CSLocator.INPUT_NAME)

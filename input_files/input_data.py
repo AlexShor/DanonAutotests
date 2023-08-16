@@ -53,7 +53,9 @@ class FillData(DataTypes):
 
 
 class DataTypesErrorExceptions:
-    DATA = [['gps', 'SKU_SAP_CODE']]
+    DATA = [['gps', 'SKU_SAP_CODE'],
+            ['routes', 'code_plant'],
+            ['routes', 'id_sh#point1']]
 
 
 class ErrorLogTexts:

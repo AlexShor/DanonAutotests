@@ -8,6 +8,7 @@ from pages.site_data.locators import (InputTabLocators as ITPLocator,
                                       BasePageLocators as BPLocator)
 from pages.site_data.urls import Paths
 from input_files.input_data import ScenarioTypes
+from custom_moduls.console_design.colors import ConsoleColors as CCol
 
 language = 'en'
 
@@ -36,10 +37,11 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
     # @benchmark
     def should_be_not_input_name_in_popover_message_list(self, input_file_front_name):
-        assert self.is_not_element_present(*ITPLocator.MESSAGE_IN_POPOVER_MESSAGE_LIST,
-                                           element_for_format=(input_file_front_name,),
-                                           timeout=0.5), \
-            f'Input name: "{input_file_front_name}" is present in popover message list'
+        self.is_not_element_present(*ITPLocator.MESSAGE_IN_POPOVER_MESSAGE_LIST,
+                                    element_for_format=(input_file_front_name,),
+                                    timeout=0.5,
+                                    error_text=f'Input name: "{CCol.txt_vio(input_file_front_name)}" '
+                                               f'is present in popover message list')
 
     def upload_the_file(self, input_file_front_name,
                         project_type,
@@ -162,7 +164,7 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
     # @benchmark
     def check_disappeared_preloader(self, input_file_front_name, timeout=None):
-        assert self.is_disappeared(*ITPLocator.PRELOADER_SPINNER_LARGE,
-                                   element_for_format=(input_file_front_name,),
-                                   timeout=timeout), \
-            'Preloader is not disappeared'
+        self.is_disappeared(*ITPLocator.PRELOADER_SPINNER_LARGE,
+                            element_for_format=(input_file_front_name,),
+                            timeout=timeout,
+                            error_text='Preloader is not disappeared')
