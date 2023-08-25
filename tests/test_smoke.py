@@ -38,8 +38,7 @@ class TestFullSmokePath:
         link = Links(env).get('LOGIN_PAGE')
         login_page = LoginPage(browser, env, link)
         login_page.open()
-        Creds.auth()
-        login_page.authorize_user(*Creds.auth().values())
+        login_page.authorize_user(*Creds.auth(env).values())
 
         scenario_list_page = ScenarioListPage(browser, env)
         scenario_list_page.should_be_scenario_list_page()
@@ -69,8 +68,11 @@ class TestFullSmokePath:
     def test_user_can_open_create_scenario_page(self, env, browser):
         scenario_list_page = ScenarioListPage(browser, env)
         scenario_list_page.should_be_scenario_list_page()
-        scenario_list_page.should_be_open_create_scenario_page_by_click_on_jenius_button_bottom()
+        scenario_list_page.should_be_open_create_scenario_page_by_click_any_jenius_button()
+        #scenario_list_page.should_be_open_create_scenario_page_by_click_on_jenius_button_bottom()
         # scenario_list_page.should_be_open_create_scenario_page_by_click_on_jenius_button_left()
+        create_scenario_page = CreateScenarioPage(browser, env)
+        create_scenario_page.should_be_create_scenario_page()
 
     @pytest.mark.create_scenario
     @pytest.mark.test_full_smoke

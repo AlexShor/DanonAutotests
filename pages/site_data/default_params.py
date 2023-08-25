@@ -26,7 +26,7 @@ class DefaultProjectNames:
     PROJECT_NAME = {ProjectType.PROMO: 'QA_Promo_optimizer_1',
                     ProjectType.RTM: 'QA_RTM_Optimizer_1',
                     ProjectType.TETRIS: 'QA_Tetris_Optimizer_2',
-                    ProjectType.CFR: 'QA_CFR_Optimizer_2'}
+                    ProjectType.CFR: 'QA_CFR_Optimizer_1'}
 
 
 class DefaultInputFilePaths:

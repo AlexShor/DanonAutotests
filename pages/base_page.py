@@ -89,7 +89,7 @@ class BasePage:
 
         return found_elements[elem_id]
 
-    def is_clickable(self, method, css_selector, element_for_format=(), timeout=4):
+    def is_clickable(self, method, css_selector, element_for_format=(), timeout=4, return_bool=False):
         # def click(elem):
         #     elem.click()
 
@@ -103,7 +103,10 @@ class BasePage:
             # click(element)
             return element
         except TimeoutException:
-            assert_error(error_text=f'Element is not clickable: "{CCol.txt_vio(css_selector)}"')
+            if not return_bool:
+                assert_error(error_text=f'Element is not clickable: "{CCol.txt_vio(css_selector)}"')
+            else:
+                return False
 
     def is_element_scroll_height(self, method, css_selector, expected_scroll_height,
                                  element_for_format=(), error_text='', timeout=4):

@@ -705,7 +705,7 @@ class Start:
 
 if __name__ == '__main__':
     environment = 'DEV'
-    scenario_id = 357
+    scenario_id = 359
 
     start = Start(scen_id=scenario_id, env=environment)
 
@@ -722,7 +722,7 @@ if __name__ == '__main__':
     # start.start_upload_valid_inputs_files_tetris()
     # start.start_upload_invalid_inputs_files_tetris(InputTypeNameMatch.CFR.TYPES)
 
-    # cfr/check_input/cfr_check_data |
+    # cfr/check_input/cfr_check_data | cfr/input_files
     start.start_upload_inputs_files_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/input_files')
 
     # start.start_delete_inputs_files_tetris()
