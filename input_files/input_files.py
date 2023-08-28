@@ -130,18 +130,19 @@ def create_error_log(data_type, current_row, column_name, validity, del_value_na
 def increase_data_values(i, data_values, options_increasing_data_values):
     result = data_values.copy()
     for key, value in options_increasing_data_values.items():
-        if i % value['step'] == 0:
-            if type(result[key]) == int:
-                if value['value'] == random:
-                    result[key] = value['value'].randint(*value['rand_values'])
-                else:
-                    result[key] += value['value']
-            elif type(result[key]) == str:
-                string, num = result[key].split('_')
-                if value.get('value') is None:
-                    result[key] = f"{string}_{result[value['copy_value']]}"
-                else:
-                    result[key] = f"{string}_{int(num) + value['value']}"
+        if value is not None:
+            if i % value['step'] == 0:
+                if type(result[key]) == int:
+                    if value['value'] == random:
+                        result[key] = value['value'].randint(*value['rand_values'])
+                    else:
+                        result[key] += value['value']
+                elif type(result[key]) == str:
+                    string, num = result[key].split('_')
+                    if value.get('value') is None:
+                        result[key] = f"{string}_{result[value['copy_value']]}"
+                    else:
+                        result[key] = f"{string}_{int(num) + value['value']}"
     return result
 
 
@@ -323,7 +324,7 @@ class InputFiles:
     @staticmethod
     @benchmark
     def create_file(count_row, data_values, options_increasing_data_values,
-                    folder, file_name, file_name_prefix, write_step=100000):
+                    folder, file_name, file_name_prefix, write_step=100_000):
 
         folder_name = f'files/{folder}'
         file_path = rf'{folder_name}/{file_name}{file_name_prefix}.csv'
@@ -569,18 +570,27 @@ class InputFiles:
 
 
 class Start:
-    def __init__(self, scen_id, env='DEV'):
+    def __init__(self, scen_id, env='DEV', tetris_new=True):
         self.environment = env
         self.scenario_id = scen_id
-        self.tetris_name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
-                                    'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
-                                    'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
-                                    'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
 
-        self.tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
-                                    'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
-                                    'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
-                                    'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
+        if tetris_new:
+            tetris_spreadsheets = {'sourcing': Spreadsheets.TetrisNew.INPUT_SOURCING,
+                                   'milk': Spreadsheets.TetrisNew.INPUT_MILK}
+            tetris_name_matches = {'sourcing': InputTypeNameMatch.TetrisNew.TYPES_SOURCING,
+                                   'milk': InputTypeNameMatch.TetrisNew.TYPES_MILK}
+        else:
+            tetris_spreadsheets = {'md': Spreadsheets.Tetris.INPUT_MD,
+                                   'sourcing': Spreadsheets.Tetris.INPUT_SOURCING,
+                                   'industry': Spreadsheets.Tetris.INPUT_INDUSTRY,
+                                   'milkbalance': Spreadsheets.Tetris.INPUT_MILK_BALANCE}
+            tetris_name_matches = {'md': InputTypeNameMatch.Tetris.TYPES_MD,
+                                   'sourcing': InputTypeNameMatch.Tetris.TYPES_SOURCING,
+                                   'industry': InputTypeNameMatch.Tetris.TYPES_INDUSTRY,
+                                   'milkbalance': InputTypeNameMatch.Tetris.TYPES_OPTIMILK}
+
+        self.tetris_spreadsheets = tetris_spreadsheets
+        self.tetris_name_matches = tetris_name_matches
 
     def auth(self):
         access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=self.environment)
@@ -588,45 +598,79 @@ class Start:
             print('access_token', access_token)
         return access_token
 
-    def start_get_input_file_from_spreadsheet_tetris(self):
+    def start_get_input_file_from_spreadsheet_tetris(self, folder='tetris/input_files/'):
         for path, types in self.tetris_spreadsheets.items():
-            InputFiles.get_input_file_from_spreadsheet(types, folder=f'tetris/input_files/{path}')
+            InputFiles.get_input_file_from_spreadsheet(types, folder=f'{folder}{path}')
 
-    def start_get_input_file_from_spreadsheet_other(self):
-        InputFiles.get_input_file_from_spreadsheet(Spreadsheets.RTM.INPUT_RTM, folder=f'rtm/input_files/')
+    def start_get_input_file_from_spreadsheet_other(self, types, folder='rtm/input_files/', miss_worksheets=None):
+        InputFiles.get_input_file_from_spreadsheet(types, folder=folder, miss_worksheets=miss_worksheets)
 
     def start_create_file(self):
-        file_size_1gb = 23000000
-        for k, v in {'_2GB': file_size_1gb * 2,
-                     '_2.5GB': file_size_1gb * 2.5}.items():
+        file_size_1gb = 1_000_000  # 23_000_000
+        for k, v in {'_test': file_size_1gb}.items():
+            # data_v = {
+            #     'Plant': 1,
+            #     'SKU': 10000,
+            #     'SKU Name': 'SKU Name_1',
+            #     'Жесткий Карантин(дней)': 1,
+            #     'Мягкий карантин(дней)': 1,
+            #     'Частота розлива в неделю': 1,
+            #     'Срок годности': 1,
+            #     'Признак долгосрока': 1,
+            #     'Ready to ship': 1
+            # }
+            # options_increasing = {
+            #     'Plant': {'value': 1, 'step': 10},
+            #     'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
+            #     'SKU Name': {'copy_value': 'SKU', 'step': 1},
+            #     'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
+            #     'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
+            #     'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
+            #     'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+            #     'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
+            #     'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+            # }
+
             data_v = {
-                'Plant': 1,
-                'SKU': 10000,
-                'SKU Name': 'SKU Name_1',
-                'Жесткий Карантин(дней)': 1,
-                'Мягкий карантин(дней)': 1,
-                'Частота розлива в неделю': 1,
-                'Срок годности': 1,
-                'Признак долгосрока': 1,
-                'Ready to ship': 1
+                'Product id': 100000,
+                'Location id': 5000,
+                'Plant id': 1,
+                'Route id': 1,
+                'Date beg id': '2022M01',
+                'Date end id': '2022M12',
+                'Tsl': 1,
+                'Rts': 1,
+                'Tta': 1,
+                'Dlc': 1,
+                'Dt': 1,
+                'Dof': 1,
+                'Rate': 1,
+                'Tt': 1,
+                'Lt': 1
             }
             options_increasing = {
-                'Plant': {'value': 1, 'step': 10},
-                'SKU': {'value': random, 'rand_values': (0, 10000), 'step': 1},
-                'SKU Name': {'copy_value': 'SKU', 'step': 1},
-                'Жесткий Карантин(дней)': {'value': random, 'rand_values': (0, 500), 'step': 1},
-                'Мягкий карантин(дней)': {'value': random, 'rand_values': (0, 100), 'step': 1},
-                'Частота розлива в неделю': {'value': random, 'rand_values': (0, 7), 'step': 1},
-                'Срок годности': {'value': random, 'rand_values': (0, 5000), 'step': 1},
-                'Признак долгосрока': {'value': random, 'rand_values': (0, 1), 'step': 1},
-                'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
+                'Product id': {'value': 1, 'step': 100},
+                'Location id': {'value': 1, 'step': 10},
+                'Plant id': {'value': 1, 'step': 100},
+                'Route id': {'value': 1, 'step': 10},
+                'Date beg id': None,
+                'Date end id': None,
+                'Tsl': {'value': random, 'rand_values': (1, 50), 'step': 1},
+                'Rts': {'value': random, 'rand_values': (0, 1), 'step': 1},
+                'Tta': {'value': random, 'rand_values': (0, 1), 'step': 1},
+                'Dlc': {'value': random, 'rand_values': (1, 50), 'step': 1},
+                'Dt': {'value': random, 'rand_values': (0, 1), 'step': 1},
+                'Dof': {'value': random, 'rand_values': (1, 20), 'step': 1},
+                'Rate': {'value': random, 'rand_values': (1, 10), 'step': 1},
+                'Tt': {'value': random, 'rand_values': (1, 10), 'step': 1},
+                'Lt': {'value': random, 'rand_values': (1, 10), 'step': 1}
             }
 
             InputFiles.create_file(count_row=v,
                                    data_values=data_v,
                                    options_increasing_data_values=options_increasing,
-                                   folder='cfr/test/cfr_check_data',
-                                   file_name='quarantine',
+                                   folder='tetris_new/test',
+                                   file_name='deliveries',
                                    file_name_prefix=k)
 
     def start_create_invalid_files(self, spreadsheet, folder):
@@ -655,11 +699,11 @@ class Start:
                                                                token=self.auth(),
                                                                env=self.environment)  # check_input check_input_old
 
-    def start_upload_valid_inputs_files_tetris(self):
+    def start_upload_valid_inputs_files_tetris(self, folder):
         for path, types in self.tetris_name_matches.items():
             InputFiles.ViaAPI.upload_inputs_files(scenario_id=self.scenario_id,
                                                   input_types=types,
-                                                  path=f'tetris/valid_input_files/{path}',
+                                                  path=f'{folder}/{path}',
                                                   token=self.auth(),
                                                   env=self.environment)
             # valid_input_files input_files check_input check_input_old
@@ -705,12 +749,17 @@ class Start:
 
 if __name__ == '__main__':
     environment = 'DEV'
-    scenario_id = 359
+    scenario_id = 316
+    miss_worksheets = ['New Farms', 'Regular Supplies', 'Spot Supplies',
+                       'Supply Scheme', 'Reco Capabilities', 'Derivation']
+    #tetris_new_types = {k: v for k, v in InputTypeNameMatch.TetrisNew.TYPES if v['system_file_name'] not in miss_worksheets}
 
-    start = Start(scen_id=scenario_id, env=environment)
+    start = Start(scen_id=scenario_id, env=environment, tetris_new=True)
 
-    # start.start_get_input_file_from_spreadsheet_tetris()
-    # start.start_get_input_file_from_spreadsheet_other()
+    # start.start_get_input_file_from_spreadsheet_tetris(folder='tetris_new/input_files/')
+    # start.start_get_input_file_from_spreadsheet_other(types=Spreadsheets.TetrisNew.INPUT_MILK,
+    #                                                   folder='tetris_new/input_files/milk',
+    #                                                   miss_worksheets=miss_worksheets)
 
     # start.start_create_file()
     # start.start_create_invalid_files(Spreadsheets.CFR.CHECK_INPUT, folder='cfr/check_input_2')
@@ -719,11 +768,11 @@ if __name__ == '__main__':
     # start.start_errors_logs_comparison_tetris()
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/cfr_check_data')
 
-    # start.start_upload_valid_inputs_files_tetris()
+    start.start_upload_valid_inputs_files_tetris(folder='tetris_new/input_files')
     # start.start_upload_invalid_inputs_files_tetris(InputTypeNameMatch.CFR.TYPES)
 
     # cfr/check_input/cfr_check_data | cfr/input_files
-    start.start_upload_inputs_files_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/input_files')
+    # start.start_upload_inputs_files_other(required_inputs=tetris_new_types, folder=f'tetris_new/input_files')
 
     # start.start_delete_inputs_files_tetris()
     # start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)

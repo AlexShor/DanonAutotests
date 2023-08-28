@@ -35,6 +35,7 @@ def find_client_secret(path, file_name):
 
 def to_matrix(tables):
     result = []
+    #print(tables)
     for table in tables:
         list_for_table = []
         column_name = [*table[0].keys()]
