@@ -8,7 +8,7 @@ from pages.site_data.locators import PFRTabLocators as PFRTPLocator
 from pages.site_data.element_texts import PFRTabScenarioPage as PFRTxt
 
 
-language = 'en'
+# language = 'en'
 
 
 def benchmark(func):
@@ -31,9 +31,9 @@ class PFRTabOnScenarioPage(BaseScenarioPage):
         self.find_elem(*PFRTPLocator.JB_BOTTOM)
         self.find_elem(*PFRTPLocator.BLOCKS_WRAPPER)
         self.find_elem(*PFRTPLocator.BLOCKS_WITH_TITLE,
-                       element_for_format=(PFRTxt.HIERARCHY_LEVEL_BLOCK_NAME[language],))
+                       element_for_format=(PFRTxt.HIERARCHY_LEVEL_BLOCK_NAME[self.language],))
         self.find_elem(*PFRTPLocator.BLOCKS_WITH_TITLE,
-                       element_for_format=(PFRTxt.HIERARCHY_ELEMENTS_BLOCK_NAME[language],))
+                       element_for_format=(PFRTxt.HIERARCHY_ELEMENTS_BLOCK_NAME[self.language],))
         self.find_elem(*PFRTPLocator.BLOCKS_WITH_TITLE,
-                       element_for_format=(PFRTxt.TARGET_VARIABLE_BLOCK_NAME[language],))
+                       element_for_format=(PFRTxt.TARGET_VARIABLE_BLOCK_NAME[self.language],))
 

@@ -11,8 +11,12 @@ class BaseScenarioPage(BasePage):
         if project_type != Ptype.RTM:
             self.find_elem(*BSPLocator.SELECT_EDIT_ACCESS)
         self.find_elem(*BSPLocator.TAB_INPUT)
-        self.find_elem(*BSPLocator.TAB_PFR)
-        self.find_elem(*BSPLocator.TAB_OUTPUT)
+
+        if project_type == Ptype.TETRIS_NEW:
+            self.find_elem(*BSPLocator.TAB_CALCULATE_AND_RESULT)
+        else:
+            self.find_elem(*BSPLocator.TAB_PFR)
+            self.find_elem(*BSPLocator.TAB_OUTPUT)
 
     def get_scenario_id_from_url(self):
         return self.browser.current_url.split('/')[-1]

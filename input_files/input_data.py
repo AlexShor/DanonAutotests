@@ -24,8 +24,7 @@ class Spreadsheets:
         INPUT_SOURCING = f'{google_sheets_url}1vz9V5l4bta_UDHa7NpersgI6I5ve3Y_h' + '/'
 
     class TetrisNew:
-        CHECK_INPUT_OLD = f'{google_sheets_url}1YERmUHZL-cEIbWDW3NUGAnU6I8LhZcn-' + '/'
-        CHECK_INPUT = f'{google_sheets_url}1TANskCVYrdvyiYa2ki3VPwaWN-G0avos' + '/'
+        CHECK_INPUT = f'{google_sheets_url}17pAA7aja6UKXO-5ka4YBkeisRtebqe0C' + '/'
         INPUT_MILK = f'{google_sheets_url}1WMJuYwMva13dKtmRWw2g4EXckbdYImgr' + '/'
         INPUT_SOURCING = f'{google_sheets_url}15zY1rJFOlmnwTXH9ZLfH4ZaBfX1xsUI4' + '/'
 
@@ -61,7 +60,10 @@ class FillData(DataTypes):
 class DataTypesErrorExceptions:
     DATA = [['gps', 'SKU_SAP_CODE'],
             ['routes', 'code_plant'],
-            ['routes', 'id_sh#point1']]
+            ['routes', 'id_sh#point1'],
+            ['sourcing_parameters', 'parameter value'],
+            ['milk_parameters', 'parameter value'],
+            ['rejections', 'date id']]
 
 
 class ErrorLogTexts:
@@ -83,7 +85,8 @@ class ErrorLogTexts:
 class ScenarioTypes:
     TYPE = {Ptype.PROMO: 'promo-scenarios',
             Ptype.RTM: 'rtm-scenarios',
-            Ptype.TETRIS: 'tetris-scenarios',
+            Ptype.TETRIS: 'tetris-scenarios-old',
+            Ptype.TETRIS_NEW: 'tetris-scenarios',
             Ptype.CFR: 'cfr-scenarios'}
 
 
@@ -95,6 +98,10 @@ class OptimizationTypes:
             'cts': 'RTM CtS',
         },
         Ptype.TETRIS: None,
+        Ptype.TETRIS_NEW: {
+            'sourcing': 'sourcing',
+            'milk': 'milk',
+        },
         Ptype.CFR: {
             'type': {
                 'simulator': 'Simulator',
@@ -822,7 +829,9 @@ class InputTypeNameMatch:
         TYPES = {**TYPES_MD, **TYPES_SOURCING, **TYPES_INDUSTRY, **TYPES_OPTIMILK}
 
     class TetrisNew:
-        scenario_type = ScenarioTypes.TYPE[Ptype.TETRIS]
+        scenario_type = ScenarioTypes.TYPE[Ptype.TETRIS_NEW]
+        optimization_type_sourcing = OptimizationTypes.TYPE[Ptype.TETRIS_NEW]['sourcing']
+        optimization_type_milk = OptimizationTypes.TYPE[Ptype.TETRIS_NEW]['milk']
 
         TYPES_SOURCING = {
             'products': {
@@ -832,7 +841,7 @@ class InputTypeNameMatch:
                 'front_name': 'Продукты',
                 'parameter': 'products',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'innovations': {
                 'scenario_type': scenario_type,
@@ -841,7 +850,7 @@ class InputTypeNameMatch:
                 'front_name': 'Инновации',
                 'parameter': 'innovations',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'uoms': {
                 'scenario_type': scenario_type,
@@ -850,7 +859,7 @@ class InputTypeNameMatch:
                 'front_name': 'Единицы измерения',
                 'parameter': 'uoms',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'sourcing_calendars': {
                 'scenario_type': scenario_type,
@@ -859,7 +868,7 @@ class InputTypeNameMatch:
                 'front_name': 'Календари',
                 'parameter': 'sourcing_calendars',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'warehouses': {
                 'scenario_type': scenario_type,
@@ -868,7 +877,7 @@ class InputTypeNameMatch:
                 'front_name': 'Склады',
                 'parameter': 'warehouses',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'sourcing_parameters': {
                 'scenario_type': scenario_type,
@@ -877,7 +886,7 @@ class InputTypeNameMatch:
                 'front_name': 'Параметры',
                 'parameter': 'sourcing_parameters',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'min_batches': {
                 'scenario_type': scenario_type,
@@ -886,7 +895,7 @@ class InputTypeNameMatch:
                 'front_name': 'Минимальные партии',
                 'parameter': 'min_batches',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'line_capacities': {
                 'scenario_type': scenario_type,
@@ -895,7 +904,7 @@ class InputTypeNameMatch:
                 'front_name': 'Мощности линий',
                 'parameter': 'line_capacities',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'line_priorities': {
                 'scenario_type': scenario_type,
@@ -904,7 +913,7 @@ class InputTypeNameMatch:
                 'front_name': 'Приоритеты линий',
                 'parameter': 'line_priorities',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'mr_adjustments': {
                 'scenario_type': scenario_type,
@@ -913,7 +922,7 @@ class InputTypeNameMatch:
                 'front_name': 'Корректировки ПП',
                 'parameter': 'mr_adjustments',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'line_bindings': {
                 'scenario_type': scenario_type,
@@ -922,7 +931,7 @@ class InputTypeNameMatch:
                 'front_name': 'Завод-линия-скю',
                 'parameter': 'line_bindings',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'demand': {
                 'scenario_type': scenario_type,
@@ -931,7 +940,7 @@ class InputTypeNameMatch:
                 'front_name': 'План продаж',
                 'parameter': 'demand',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'sourcing_scheme': {
                 'scenario_type': scenario_type,
@@ -940,7 +949,7 @@ class InputTypeNameMatch:
                 'front_name': 'План распределения',
                 'parameter': 'sourcing_scheme',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'deliveries': {
                 'scenario_type': scenario_type,
@@ -949,7 +958,7 @@ class InputTypeNameMatch:
                 'front_name': 'Схема доставки',
                 'parameter': 'deliveries',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'itineraries': {
                 'scenario_type': scenario_type,
@@ -958,7 +967,7 @@ class InputTypeNameMatch:
                 'front_name': 'Маршруты',
                 'parameter': 'itineraries',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'shipments': {
                 'scenario_type': scenario_type,
@@ -967,7 +976,7 @@ class InputTypeNameMatch:
                 'front_name': 'Мастер данные Т1',
                 'parameter': 'shipments',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'premade_volumes': {
                 'scenario_type': scenario_type,
@@ -976,7 +985,7 @@ class InputTypeNameMatch:
                 'front_name': 'Дополнительные объемы',
                 'parameter': 'premade_volumes',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'rejections': {
                 'scenario_type': scenario_type,
@@ -985,7 +994,7 @@ class InputTypeNameMatch:
                 'front_name': 'Альтернативные источники',
                 'parameter': 'rejections',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             },
             'demand_options': {
                 'scenario_type': scenario_type,
@@ -994,7 +1003,7 @@ class InputTypeNameMatch:
                 'front_name': 'Настройки плана продаж',
                 'parameter': 'demand_options',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_sourcing
             }
         }
 
@@ -1006,7 +1015,7 @@ class InputTypeNameMatch:
                 'front_name': 'Календари',
                 'parameter': 'milk_calendars',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'plants': {
                 'scenario_type': scenario_type,
@@ -1015,7 +1024,7 @@ class InputTypeNameMatch:
                 'front_name': 'Заводы',
                 'parameter': 'plants',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'materials': {
                 'scenario_type': scenario_type,
@@ -1024,7 +1033,7 @@ class InputTypeNameMatch:
                 'front_name': 'Материалы',
                 'parameter': 'materials',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'material_contents': {
                 'scenario_type': scenario_type,
@@ -1033,7 +1042,7 @@ class InputTypeNameMatch:
                 'front_name': 'Характеристики материалов',
                 'parameter': 'material_contents',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'material_groups': {
                 'scenario_type': scenario_type,
@@ -1042,16 +1051,16 @@ class InputTypeNameMatch:
                 'front_name': 'Группы материалов',
                 'parameter': 'material_groups',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'vendors': {
                 'scenario_type': scenario_type,
                 'url_path': None,
                 'system_file_name': 'Vendors',
-                'front_name': 'Поставщика',
+                'front_name': 'Поставщики',
                 'parameter': 'vendors',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'buyers': {
                 'scenario_type': scenario_type,
@@ -1060,7 +1069,7 @@ class InputTypeNameMatch:
                 'front_name': 'Покупатели',
                 'parameter': 'buyers',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'milk_parameters': {
                 'scenario_type': scenario_type,
@@ -1069,7 +1078,7 @@ class InputTypeNameMatch:
                 'front_name': 'Параметры',
                 'parameter': 'milk_parameters',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'milk_table_parameters': {
                 'scenario_type': scenario_type,
@@ -1078,7 +1087,7 @@ class InputTypeNameMatch:
                 'front_name': 'Табличные параметры',
                 'parameter': 'milk_table_parameters',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'new_farms': {
                 'scenario_type': scenario_type,
@@ -1087,7 +1096,7 @@ class InputTypeNameMatch:
                 'front_name': 'Молоко новых ферм',
                 'parameter': 'new_farms',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'regular_supplies': {
                 'scenario_type': scenario_type,
@@ -1096,7 +1105,7 @@ class InputTypeNameMatch:
                 'front_name': 'База поставок',
                 'parameter': 'regular_supplies',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'spot_supplies': {
                 'scenario_type': scenario_type,
@@ -1105,7 +1114,7 @@ class InputTypeNameMatch:
                 'front_name': 'Спотовое молоко',
                 'parameter': 'spot_supplies',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'shortage': {
                 'scenario_type': scenario_type,
@@ -1114,7 +1123,7 @@ class InputTypeNameMatch:
                 'front_name': 'Дефицит',
                 'parameter': 'shortage',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'stock_supplies': {
                 'scenario_type': scenario_type,
@@ -1123,7 +1132,7 @@ class InputTypeNameMatch:
                 'front_name': 'Начальные стоки',
                 'parameter': 'stock_supplies',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'supply_scheme': {
                 'scenario_type': scenario_type,
@@ -1132,7 +1141,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР ферма-завод',
                 'parameter': 'supply_scheme',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'farm_sales_scheme': {
                 'scenario_type': scenario_type,
@@ -1141,7 +1150,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР ферма-покупатель',
                 'parameter': 'farm_sales_scheme',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'plant_sales_scheme': {
                 'scenario_type': scenario_type,
@@ -1150,7 +1159,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР завод-покупатель',
                 'parameter': 'plant_sales_scheme',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'movement_scheme': {
                 'scenario_type': scenario_type,
@@ -1159,7 +1168,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР завод-завод',
                 'parameter': 'movement_scheme',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'spot_buyers': {
                 'scenario_type': scenario_type,
@@ -1168,7 +1177,7 @@ class InputTypeNameMatch:
                 'front_name': 'Спотовые продажи',
                 'parameter': 'spot_buyers',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'co_packers_contracts': {
                 'scenario_type': scenario_type,
@@ -1177,7 +1186,7 @@ class InputTypeNameMatch:
                 'front_name': 'Продажи копакерам',
                 'parameter': 'co_packers_contracts',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'reco_capabilities': {
                 'scenario_type': scenario_type,
@@ -1186,7 +1195,7 @@ class InputTypeNameMatch:
                 'front_name': 'Возможности восстановления',
                 'parameter': 'reco_capabilities',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'derivation': {
                 'scenario_type': scenario_type,
@@ -1195,7 +1204,7 @@ class InputTypeNameMatch:
                 'front_name': 'Производство ингридиентов',
                 'parameter': 'derivation',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'mb_adjustments': {
                 'scenario_type': scenario_type,
@@ -1204,7 +1213,7 @@ class InputTypeNameMatch:
                 'front_name': 'Корректировки МБ',
                 'parameter': 'mb_adjustments',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'separation': {
                 'scenario_type': scenario_type,
@@ -1213,7 +1222,7 @@ class InputTypeNameMatch:
                 'front_name': 'Сепарация',
                 'parameter': 'separation',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'inbound_capacity': {
                 'scenario_type': scenario_type,
@@ -1222,7 +1231,7 @@ class InputTypeNameMatch:
                 'front_name': 'Возможности приемки',
                 'parameter': 'inbound_capacity',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'outbound_capacity': {
                 'scenario_type': scenario_type,
@@ -1231,7 +1240,7 @@ class InputTypeNameMatch:
                 'front_name': 'Возможности отгрузки',
                 'parameter': 'outbound_capacity',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'stock_bounds': {
                 'scenario_type': scenario_type,
@@ -1240,7 +1249,7 @@ class InputTypeNameMatch:
                 'front_name': 'Уровни стоков ЖС',
                 'parameter': 'stock_bounds',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'base_formulas': {
                 'scenario_type': scenario_type,
@@ -1249,7 +1258,7 @@ class InputTypeNameMatch:
                 'front_name': 'Базовые рецепты',
                 'parameter': 'base_formulas',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
             'reco_formulas': {
                 'scenario_type': scenario_type,
@@ -1258,7 +1267,7 @@ class InputTypeNameMatch:
                 'front_name': 'Рецепты восстановления',
                 'parameter': 'reco_formulas',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.TETRIS],)
+                'optimization_type': optimization_type_milk
             },
         }
 

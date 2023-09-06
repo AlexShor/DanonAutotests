@@ -10,10 +10,9 @@ from pages.site_data.default_params import (CreateScenarioDefaultParams as DefPr
                                             ProjectType as Ptype)
 from custom_moduls.console_design.colors import ConsoleColors as CCol
 
-language = 'en'
-
 
 class CreateScenarioPage(BasePage):
+
     def should_be_create_scenario_page(self):
         text_from_url = 'create'
         self.is_url_contains(text_from_url=text_from_url,
@@ -39,7 +38,7 @@ class CreateScenarioPage(BasePage):
             self.find_elem(*CSLocator.SELECT_TYPE)
             self.find_elem(*CSLocator.SELECT_RANDOMIZER_TYPE)
 
-        header = CrtTxt.HEADER[language]
+        header = CrtTxt.HEADER[self.language]
         assert self.find_elem(*CSLocator.HEADER).text == header, \
             f'Current page header is not "{header}"'
 
@@ -48,14 +47,16 @@ class CreateScenarioPage(BasePage):
             params = {}
         current_url = self.browser.current_url
 
-        name = CrtTxt.INPUT_NAME[language]
-        description = CrtTxt.INPUT_DESCRIPTION[language]
-        group = CrtTxt.SELECT_GROUP[language]
-        period = CrtTxt.SELECT_PERIOD[language]
-        _type = CrtTxt.SELECT_TYPE[language]
-        date_bucket = CrtTxt.SELECT_DATE_BUCKET[language]
-        date_format = CrtTxt.SELECT_DATE_FORMAT[language]
-        randomizer_type = CrtTxt.SELECT_RANDOMIZER_TYPE[language]
+        name = CrtTxt.INPUT_NAME[self.language]
+        description = CrtTxt.INPUT_DESCRIPTION[self.language]
+        group = CrtTxt.SELECT_GROUP[self.language]
+        period = CrtTxt.SELECT_PERIOD[self.language]
+        _type = CrtTxt.SELECT_TYPE[self.language]
+        date_bucket = CrtTxt.SELECT_DATE_BUCKET[self.language]
+        date_format = CrtTxt.SELECT_DATE_FORMAT[self.language]
+        randomizer_type = CrtTxt.SELECT_RANDOMIZER_TYPE[self.language]
+        module_sourcing = CrtTxt.CHECK_BOX_SOURCING[self.language]
+        module_milk = CrtTxt.CHECK_BOX_MILK[self.language]
 
         if params.get(name) is not None:
             input_name = self.find_elem(*CSLocator.INPUT_NAME)
@@ -71,8 +72,11 @@ class CreateScenarioPage(BasePage):
         if Pages.CREATE_SCENARIO[Ptype.RTM] in current_url:
             self.choose_rtm_params(params, _type, group)
 
-        if Pages.CREATE_SCENARIO[Ptype.TETRIS] in current_url:
-            self.choose_tetris_params(params, date_bucket, date_format, group)
+        # if Pages.CREATE_SCENARIO[Ptype.TETRIS] in current_url:
+        #     self.choose_tetris_params(params, date_bucket, date_format, group)
+
+        if Pages.CREATE_SCENARIO[Ptype.TETRIS_NEW] in current_url:
+            self.choose_tetris_new_params(params, group, module_sourcing, module_milk)
 
         if Pages.CREATE_SCENARIO[Ptype.CFR] in current_url:
             self.choose_cfr_params(params, _type, randomizer_type, group)
@@ -111,6 +115,22 @@ class CreateScenarioPage(BasePage):
         self.find_elem(*CSLocator.SELECT_GROUP).click()
         self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
                           element_for_format=(params.get(group, DefPrm.TETRIS_PARAMS[group]),)).click()
+
+    def choose_tetris_new_params(self, params, group, module_sourcing, module_milk):
+        self.find_elem(*CSLocator.SELECT_GROUP).click()
+        self.is_clickable(*CSLocator.ITEM_IN_SELECTOR,
+                          element_for_format=(params.get(group, DefPrm.TETRIS_NEW_PARAMS[group]),)).click()
+
+        if module_sourcing:
+            self.find_elem(*CSLocator.CHECK_BOX_SOURCING).click()
+            self.find_elem(*CSLocator.CHECK_BOX_SOURCING_CHECKED)
+        if module_milk:
+            self.find_elem(*CSLocator.CHECK_BOX_MILK).click()
+            self.find_elem(*CSLocator.CHECK_BOX_MILK_CHECKED)
+
+
+
+        # self.is_element_contains_text(*CSLocator.SELECT_GROUP, text=params.get(group, DefPrm.TETRIS_NEW_PARAMS[group]))
 
     def choose_cfr_params(self, params, _type, randomizer_type, group):
         self.find_elem(*CSLocator.SELECT_TYPE).click()

@@ -26,10 +26,11 @@ def assert_error(error_text, method=None, css_selector=''):
 
 
 class BasePage:
-    def __init__(self, browser, env='', url='', timeout=10):
+    def __init__(self, browser, env='', url='', timeout=10, language='en'):
         self.env = env
         self.browser = browser
         self.url = url
+        self.language = language
         self.implicitly_wait_timeout = timeout
         self.browser.implicitly_wait(timeout)
         self.browser.maximize_window()
@@ -141,6 +142,23 @@ class BasePage:
             assert_error(error_text=error_text)
         else:
             return False
+
+    def is_element_contains_text(self, method, css_selector, element_for_format=(),
+                                 error_text='', timeout=4, return_bool=False,  text=''):
+
+        css_selector = css_selector.format(*element_for_format)
+
+        try:
+            self.browser.implicitly_wait(0)
+            WebDriverWait(self.browser, timeout=timeout). \
+                until_not(EC.text_to_be_present_in_element((method, css_selector), text))
+            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+        except TimeoutException:
+            if not return_bool:
+                assert_error(error_text=error_text)
+            else:
+                return False
+        return True
 
     def is_disappeared(self, method, css_selector, element_for_format=(), error_text='', timeout=4, return_bool=False):
 

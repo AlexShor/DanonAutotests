@@ -7,7 +7,7 @@ from pages.site_data.element_texts import (BasePage as BPTxt,
                                            OutputTabScenarioPage as OtpTxt,
                                            CreateScenarioPage as CrtTxt)
 
-language = 'en'
+ui_lang = 'ru'
 
 
 class BasePageLocators:
@@ -30,7 +30,7 @@ class BasePageLocators:
 
     SIDEBAR = (By.XPATH, '//aside[contains(@class, "_sidebar_")]')
     PROJECT_SELECTOR = (By.XPATH, SIDEBAR[1] + SELECTOR[1])
-    ALL_SCENARIOS_BUTTON = (By.XPATH, SIDEBAR[1] + f'//span[text()="{BPTxt.ALL_SCENARIOS_BUTTON[language]}"]/..')
+    ALL_SCENARIOS_BUTTON = (By.XPATH, SIDEBAR[1] + f'//span[text()="{BPTxt.ALL_SCENARIOS_BUTTON[ui_lang]}"]/..')
     OPEN_MENU_BUTTON = (By.XPATH, SIDEBAR[1] + '//div[contains(@class, "_openMenu_")]')
 
 
@@ -61,17 +61,23 @@ class ScenarioListPageLocators(BasePageLocators):
 class CreateScenarioPageLocators(BasePageLocators):
     ITEM_WRAPPER = (By.XPATH, '//div[contains(@class, "_itemWrapper_")]')
     ITEM_NAME = (By.XPATH, '//span[contains(@class, "_itemName_")]')
-    INPUT_NAME = (By.XPATH, f'//span[text()="{CrtTxt.INPUT_NAME[language]}"]/..//input')
-    INPUT_DESCRIPTION = (By.XPATH, f'//span[text()="{CrtTxt.INPUT_DESCRIPTION[language]}"]/..//input')
+    INPUT_NAME = (By.XPATH, f'//span[text()="{CrtTxt.INPUT_NAME[ui_lang]}"]/..//input')
+    INPUT_DESCRIPTION = (By.XPATH, f'//span[text()="{CrtTxt.INPUT_DESCRIPTION[ui_lang]}"]/..//input')
     INPUT_GRANULARITY = (By.XPATH,
-                         f'//span[text()="{CrtTxt.INPUT_GRANULARITY[language]}"]'
+                         f'//span[text()="{CrtTxt.INPUT_GRANULARITY[ui_lang]}"]'
                          f'/..//span[contains(@class, "_input_")]')
-    SELECT_GROUP = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_GROUP[language]}"]/..//input')
-    SELECT_PERIOD = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_PERIOD[language]}"]/..//input')
-    SELECT_TYPE = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_TYPE[language]}"]/..//input')
-    SELECT_DATE_BUCKET = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_DATE_BUCKET[language]}"]/..//input')
-    SELECT_DATE_FORMAT = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_DATE_FORMAT[language]}"]/..//input')
-    SELECT_RANDOMIZER_TYPE = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_RANDOMIZER_TYPE[language]}"]/..//input')
+    SELECT_GROUP = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_GROUP[ui_lang]}"]/..//input')
+    SELECT_PERIOD = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_PERIOD[ui_lang]}"]/..//input')
+    SELECT_TYPE = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_TYPE[ui_lang]}"]/..//input')
+    SELECT_DATE_BUCKET = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_DATE_BUCKET[ui_lang]}"]/..//input')
+    SELECT_DATE_FORMAT = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_DATE_FORMAT[ui_lang]}"]/..//input')
+    SELECT_RANDOMIZER_TYPE = (By.XPATH, f'//span[text()="{CrtTxt.SELECT_RANDOMIZER_TYPE[ui_lang]}"]/..//input')
+    CHECK_BOX_SOURCING = (By.XPATH, f'//div[text()="{CrtTxt.CHECK_BOX_SOURCING[ui_lang]}"]/../.')
+    CHECK_BOX_MILK = (By.XPATH, f'//div[text()="{CrtTxt.CHECK_BOX_MILK[ui_lang]}"]/../.')
+    CHECK_BOX_SOURCING_CHECKED = (By.XPATH, f'//div[contains(@class, "_checked_")]'
+                                            f'//div[text()="{CrtTxt.CHECK_BOX_SOURCING[ui_lang]}"]')
+    CHECK_BOX_MILK_CHECKED = (By.XPATH, f'//div[contains(@class, "_checked_")]'
+                                        f'//div[text()="{CrtTxt.CHECK_BOX_MILK[ui_lang]}"]')
 
 
 class BaseScenarioPageLocators(BasePageLocators):
@@ -83,23 +89,27 @@ class BaseScenarioPageLocators(BasePageLocators):
     SELECT_GROUP_UPLOAD_FROM_SCENARIO = (
         By.XPATH,
         f'//div[@class="rc-select-selector"]//span[text()='
-        f'"{BSTxt.SELECT_GROUP_UPLOAD_FROM_SCENARIO[language]}"]')
+        f'"{BSTxt.SELECT_GROUP_UPLOAD_FROM_SCENARIO[ui_lang]}"]')
 
     TABS = (By.XPATH, '//div[contains(@class, "_tabs_")]/div[contains(@class, "_tabs_")]')
-    TAB_INPUT = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.INPUT_TAB[language]}"]/../..')
-    TAB_PFR = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.PFR_TAB[language]}"]/../..')
-    TAB_OUTPUT = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.OUTPUT_TAB[language]}"]/../..')
+    TAB_INPUT = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.INPUT_TAB[ui_lang]}"]/../..')
+    TAB_PFR = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.PFR_TAB[ui_lang]}"]/../..')
+    TAB_OUTPUT = (By.XPATH, TABS[1] + f'//span[text()="{BSTxt.OUTPUT_TAB[ui_lang]}"]/../..')
     DARK_TAB_INPUT = (By.XPATH, TABS[1] +
-                      f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.INPUT_TAB[language]}"]')
+                      f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.INPUT_TAB[ui_lang]}"]')
     DARK_TAB_PFR = (By.XPATH, TABS[1] +
-                    f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.PFR_TAB[language]}"]')
+                    f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.PFR_TAB[ui_lang]}"]')
     DARK_TAB_OUTPUT = (By.XPATH, TABS[1] +
-                       f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.OUTPUT_TAB[language]}"]')
-
+                       f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.OUTPUT_TAB[ui_lang]}"]')
+    TAB_CALCULATE_AND_RESULT = (By.XPATH, TABS[1] +
+                                f'//span[text()="{BSTxt.CALC_AND_RESULT_TAB[ui_lang]}"]/../..')
+    DARK_TAB_CALCULATE_AND_RESULT = (
+        By.XPATH, TABS[1] +
+        f'//div[contains(@class, "_dark_")]//span[text()="{BSTxt.CALC_AND_RESULT_TAB[ui_lang]}"]')
 
 class InputTabLocators(BaseScenarioPageLocators):
     TAB_TITLE = (By.XPATH,
-                 f'//div[contains(@class, "_tabTitle_") and text()="{IptTxt.INPUT_TAB_TITLE[language]}"]')
+                 f'//div[contains(@class, "_tabTitle_") and text()="{IptTxt.INPUT_TAB_TITLE[ui_lang]}"]')
 
     CARD = (By.XPATH, '//div[contains(@class, "_card_")]')
     CARD_TITLE = (By.XPATH, CARD[1] + '//div[contains(@class, "_cardTitle_") and text()="{}"]')
@@ -127,30 +137,42 @@ class InputTabLocators(BaseScenarioPageLocators):
                   '//div[contains(@class, "_inputTabs_")]/div[contains(@class, "_tabs_")]')
 
     INPUT_TAB_MD = (By.XPATH,
-                    INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_MD[language]}"]/../..')
+                    INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_MD[ui_lang]}"]/../..')
     INPUT_TAB_SOURCING = (By.XPATH,
-                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_SOURCING[language]}"]/../..')
+                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_SOURCING[ui_lang]}"]/../..')
     INPUT_TAB_INDUSTRY = (By.XPATH,
-                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_INDUSTRY[language]}"]/../..')
+                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_INDUSTRY[ui_lang]}"]/../..')
     INPUT_TAB_OPTIMILK = (By.XPATH,
-                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_OPTIMILK[language]}"]/../..')
+                          INPUT_TABS[1] + f'//span[text()="{IptTxt.TETRIS_INPUT_TAB_OPTIMILK[ui_lang]}"]/../..')
+
+    INPUT_TAB_SOURCING_LOG = (By.XPATH, INPUT_TABS[1] +
+                              f'//span[text()="{IptTxt.TETRIS_NEW_INPUT_TAB_SOURCING[ui_lang]}"]/../..')
+    INPUT_TAB_MILK = (By.XPATH, INPUT_TABS[1] +
+                      f'//span[text()="{IptTxt.TETRIS_NEW_INPUT_TAB_MILK[ui_lang]}"]/../..')
 
     ACTIVE_INPUT_TAB_MD = (
         By.XPATH, INPUT_TABS[1] +
-        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_MD[language]}"]')
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_MD[ui_lang]}"]')
     ACTIVE_INPUT_TAB_SOURCING = (
         By.XPATH, INPUT_TABS[1] +
-        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_SOURCING[language]}"]')
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_SOURCING[ui_lang]}"]')
     ACTIVE_INPUT_TAB_INDUSTRY = (
         By.XPATH, INPUT_TABS[1] +
-        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_INDUSTRY[language]}"]')
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_INDUSTRY[ui_lang]}"]')
     ACTIVE_INPUT_TAB_OPTIMILK = (
         By.XPATH, INPUT_TABS[1] +
-        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_OPTIMILK[language]}"]')
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_INPUT_TAB_OPTIMILK[ui_lang]}"]')
+
+    ACTIVE_INPUT_TAB_SOURCING_LOG = (
+        By.XPATH, INPUT_TABS[1] +
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_NEW_INPUT_TAB_SOURCING[ui_lang]}"]')
+    ACTIVE_INPUT_TAB_MILK = (
+        By.XPATH, INPUT_TABS[1] +
+        f'//div[contains(@class, "_active_")]//span[text()="{IptTxt.TETRIS_NEW_INPUT_TAB_MILK[ui_lang]}"]')
 
 
 class PFRTabLocators(BaseScenarioPageLocators):
-    TAB_TITLE = (By.XPATH, f'//h2[contains(@class, "_title_") and text()="{PFRTxt.PFR_TAB_TITLE[language]}"]')
+    TAB_TITLE = (By.XPATH, f'//h2[contains(@class, "_title_") and text()="{PFRTxt.PFR_TAB_TITLE[ui_lang]}"]')
     APPLY_BUTTON = (By.XPATH, '//button[contains(@class, "_applyButton_")]')
 
     BLOCKS_WRAPPER = (By.XPATH, '//form//div[contains(@class, "_blocksWrapper_")]')

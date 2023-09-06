@@ -24,11 +24,13 @@ class Pages:
     SCENARIO_LIST = {Ptype.PROMO: 'promo-optimizer',
                      Ptype.RTM: 'rtm-optimizer',
                      Ptype.TETRIS: 'tetris-optimizer',
+                     Ptype.TETRIS_NEW: 'tetris-optimizer',
                      Ptype.CFR: 'cfr-optimizer'}
 
     CREATE_SCENARIO = {Ptype.PROMO: 'create-promo-scenario',
                        Ptype.RTM: 'create-rtm-scenario',
                        Ptype.TETRIS: 'create-tetris-scenario',
+                       Ptype.TETRIS_NEW: 'create-tetris-scenario',
                        Ptype.CFR: 'create-cfr-scenario'}
 
 

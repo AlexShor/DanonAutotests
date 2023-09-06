@@ -222,7 +222,7 @@ class InputFiles:
     @staticmethod
     @benchmark
     def create_invalid_files(check_input_url,
-                             error_log_txt=ErrorLogTexts.Eng,
+                             error_log_lang_rus=False,
                              params=None,
                              folder='files',
                              file_name_prefix='',
@@ -230,6 +230,8 @@ class InputFiles:
                              invert_miss_worksheets=False,
                              only_files=None,
                              create_error_logs=True):
+
+        error_log_txt = (ErrorLogTexts.Eng, ErrorLogTexts.Rus)[error_log_lang_rus]
 
         if params is None:
             # validity, del_value_nan=False, negativity=False, inverse_integrity=False, bool_false, [Fill 1//2 row]
@@ -257,8 +259,7 @@ class InputFiles:
 
             for file_name in file_names.keys():
                 start_creating = time.time()
-                print(f'{Ilvl(2)}Creating file: "{worksheets_names[table]}/{file_name}{file_name_prefix}.csv"',
-                      end='\n')
+                print(f'{Ilvl(2)}Creating file: "{worksheets_names[table]}/{file_name}{file_name_prefix}.csv"', end='')
 
                 column_names = [row[1].strip() for row in tables[table] if row[0].strip() == file_name]
 
@@ -593,7 +594,9 @@ class Start:
         self.tetris_name_matches = tetris_name_matches
 
     def auth(self):
-        access_token = ApiReq.authorization(*Creds.auth().values(), get='access', env=self.environment)
+        access_token = ApiReq.authorization(*Creds.auth(env=self.environment).values(),
+                                            get='access',
+                                            env=self.environment)
         if access_token == 502:
             print('access_token', access_token)
         return access_token
@@ -673,19 +676,19 @@ class Start:
                                    file_name='deliveries',
                                    file_name_prefix=k)
 
-    def start_create_invalid_files(self, spreadsheet, folder):
+    def start_create_invalid_files(self, spreadsheet, folder, error_log_lang_rus=False):
         InputFiles.create_invalid_files(check_input_url=spreadsheet,
                                         folder=folder,
-                                        error_log_txt=ErrorLogTexts.Eng)
+                                        error_log_lang_rus=error_log_lang_rus)
 
-    def start_errors_logs_comparison_tetris(self):
+    def start_errors_logs_comparison_tetris(self, folder, error_log_lang_rus=False):
+        error_log_txt = (ErrorLogTexts.Eng, ErrorLogTexts.Rus)[error_log_lang_rus]
         count_all = 0
         for path_items, types_items in self.tetris_name_matches.items():
-            result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=ErrorLogTexts.Eng,
+            result_comp = InputFiles.ViaAPI.errors_logs_comparison(error_log_txt=error_log_txt,
                                                                    input_types=types_items,
                                                                    scenario_id=self.scenario_id,
-                                                                   path=f'tetris/check_input_old/error_logs/'
-                                                                        f'{path_items}',
+                                                                   path=f'{folder}/{path_items}',
                                                                    token=self.auth(),
                                                                    count=count_all,
                                                                    env=self.environment)  # check_input check_input_old
@@ -708,11 +711,11 @@ class Start:
                                                   env=self.environment)
             # valid_input_files input_files check_input check_input_old
 
-    def start_upload_invalid_inputs_files_tetris(self):
+    def start_upload_invalid_inputs_files_tetris(self, folder):
         for path, types in self.tetris_name_matches.items():
             InputFiles.ViaAPI.upload_inputs_files(scenario_id=self.scenario_id,
                                                   input_types=types,
-                                                  path=f'tetris/check_input_old/{path}',
+                                                  path=f'{folder}/{path}',
                                                   token=self.auth(),
                                                   env=self.environment)
             # valid_input_files input_files check_input check_input_old
@@ -748,11 +751,10 @@ class Start:
 
 
 if __name__ == '__main__':
-    environment = 'DEV'
-    scenario_id = 316
+    environment = 'STAGE'
+    scenario_id = 1
     miss_worksheets = ['New Farms', 'Regular Supplies', 'Spot Supplies',
                        'Supply Scheme', 'Reco Capabilities', 'Derivation']
-    #tetris_new_types = {k: v for k, v in InputTypeNameMatch.TetrisNew.TYPES if v['system_file_name'] not in miss_worksheets}
 
     start = Start(scen_id=scenario_id, env=environment, tetris_new=True)
 
@@ -762,17 +764,19 @@ if __name__ == '__main__':
     #                                                   miss_worksheets=miss_worksheets)
 
     # start.start_create_file()
-    # start.start_create_invalid_files(Spreadsheets.CFR.CHECK_INPUT, folder='cfr/check_input_2')
+    # start.start_create_invalid_files(Spreadsheets.TetrisNew.CHECK_INPUT, folder='tetris_new/check_input', error_log_lang_rus=True)
 
     # cfr/check_input/error_logs/cfr_check_data |
-    # start.start_errors_logs_comparison_tetris()
+    # start.start_errors_logs_comparison_tetris(folder='tetris_new/check_input/error_logs', error_log_lang_rus=True)
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/cfr_check_data')
 
-    start.start_upload_valid_inputs_files_tetris(folder='tetris_new/input_files')
-    # start.start_upload_invalid_inputs_files_tetris(InputTypeNameMatch.CFR.TYPES)
+    # start.start_upload_valid_inputs_files_tetris(folder='tetris_new/input_files')  # tetris_new/input_files
+    # start.start_upload_invalid_inputs_files_tetris(folder='tetris_new/check_input')
 
     # cfr/check_input/cfr_check_data | cfr/input_files
-    # start.start_upload_inputs_files_other(required_inputs=tetris_new_types, folder=f'tetris_new/input_files')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/input_files')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/cfr_check_data')
 
     # start.start_delete_inputs_files_tetris()
-    # start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.TetrisNew.TYPES)
+    start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)

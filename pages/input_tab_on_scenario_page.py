@@ -7,10 +7,10 @@ from pages.site_data.element_texts import InputTabScenarioPage as IptTxt
 from pages.site_data.locators import (InputTabLocators as ITPLocator,
                                       BasePageLocators as BPLocator)
 from pages.site_data.urls import Paths
-from input_files.input_data import ScenarioTypes
+from input_files.input_data import ScenarioTypes, InputTypeNameMatch
 from custom_moduls.console_design.colors import ConsoleColors as CCol
 
-language = 'en'
+# language = 'en'
 
 
 def benchmark(func):
@@ -47,31 +47,35 @@ class InputTabOnScenarioPage(BaseScenarioPage):
                         project_type,
                         scenario_type,
                         url_path,
+                        optimization_type,
                         file_name,
                         file_path=None,
                         check_preloader=False):
         if file_path is None:
             file_path = DIPaths.PATH[project_type]
 
-        input_type_file_path = self.check_scenario_type_and_open_input_tabs_and_get_file_path(scenario_type, url_path)
+        input_type_file_path = self.check_scenario_type_and_open_input_tabs_and_get_file_path(scenario_type,
+                                                                                              url_path,
+                                                                                              optimization_type)
 
         if input_type_file_path != '':
             file_path += f'{input_type_file_path}\\'
 
         self.find_elem(*ITPLocator.SELECT_TYPE_DATA, element_for_format=(input_file_front_name,)).click()
         self.is_clickable(*ITPLocator.ITEM_IN_SELECTOR,
-                          element_for_format=(IptTxt.ITEM_IN_SELECTOR_FILE[language],),
+                          element_for_format=(IptTxt.ITEM_IN_SELECTOR_FILE[self.language],),
                           timeout=1).click()
         self.find_elem(*ITPLocator.UPLOAD_FILE_BUTTON,
                        element_for_format=(input_file_front_name,)).send_keys(file_path + file_name)
 
         if check_preloader:
-            self.check_preloader(input_file_front_name, preloader_text=IptTxt.PRELOADER_LOADING[language])
-            self.check_preloader(input_file_front_name, preloader_text=IptTxt.PRELOADER_CHECK[language])
+            self.check_preloader(input_file_front_name, preloader_text=IptTxt.PRELOADER_LOADING[self.language])
+            self.check_preloader(input_file_front_name, preloader_text=IptTxt.PRELOADER_CHECK[self.language])
             self.check_disappeared_preloader(input_file_front_name)
 
-    def check_scenario_type_and_open_input_tabs_and_get_file_path(self, scenario_type, url_path):
+    def check_scenario_type_and_open_input_tabs_and_get_file_path(self, scenario_type, url_path, optimization_type):
         input_type_file_path = ''
+
         if scenario_type == ScenarioTypes.TYPE[Ptype.TETRIS]:
 
             url_type_md = Paths.URL_PATH_MD
@@ -98,6 +102,20 @@ class InputTabOnScenarioPage(BaseScenarioPage):
                 self.is_clickable(*ITPLocator.INPUT_TAB_OPTIMILK).click()
                 self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_OPTIMILK)
                 input_type_file_path = DIPaths.TETRIS_INPUT_TYPE_FILE_PATH[url_type_milkbalance]
+
+        elif scenario_type == ScenarioTypes.TYPE[Ptype.TETRIS_NEW]:
+            optimization_type_sourcing = InputTypeNameMatch.TetrisNew.optimization_type_sourcing
+            optimization_type_milk = InputTypeNameMatch.TetrisNew.optimization_type_milk
+
+            if optimization_type == optimization_type_sourcing:
+                self.is_clickable(*ITPLocator.INPUT_TAB_SOURCING_LOG).click()
+                self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_SOURCING_LOG)
+                input_type_file_path = DIPaths.TETRIS_NEW_INPUT_TYPE_FILE_PATH[optimization_type_sourcing]
+
+            if optimization_type == optimization_type_milk:
+                self.is_clickable(*ITPLocator.INPUT_TAB_MILK).click()
+                self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_MILK)
+                input_type_file_path = DIPaths.TETRIS_NEW_INPUT_TYPE_FILE_PATH[optimization_type_milk]
 
         return input_type_file_path
 
@@ -128,7 +146,7 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
     # @benchmark
     def check_preview_button(self, input_file_front_name, timeout=None):
-        button_text = IptTxt.PREVIEW_BUTTON[language]
+        button_text = IptTxt.PREVIEW_BUTTON[self.language]
         preview_button_text = self.find_elem(*ITPLocator.PREVIEW_BUTTON,
                                              element_for_format=(input_file_front_name,),
                                              timeout=timeout).text
@@ -137,8 +155,11 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
     # @benchmark
     def check_card_info_text(self, input_file_front_name,
-                             card_info_text=IptTxt.CARD_INFO_UPLOADED[language],
+                             card_info_text=None,
                              timeout=None):
+        if card_info_text is None:
+            card_info_text = IptTxt.CARD_INFO_UPLOADED[self.language]
+
         current_card_info_text = self.find_elem(*ITPLocator.CARD_INFO_TEXT,
                                                 element_for_format=(input_file_front_name,),
                                                 timeout=timeout).text
