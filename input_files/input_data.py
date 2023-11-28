@@ -12,8 +12,8 @@ class Spreadsheets:
         INPUT_PROMO = f'{google_sheets_url}1fn4PxFE6bbyOTe0aPRUpYhEVC9uTDslF' + '/'
 
     class RTM:
-        CHECK_INPUT = f'{google_sheets_url}1VYYQiF7ftxTdFj40cw1aPS_nTAvSBFWq' + '/'
-        INPUT_RTM = f'{google_sheets_url}1gKS4J3tPOn1y-s9t5W5Mnf-SChoGTbJJ' + '/'
+        CHECK_INPUT = f'{google_sheets_url}1mtOKERdwfvMzt9BYuv5hFiiSBV7JZGRqXS-XQSdjo70' + '/'
+        INPUT_RTM = f'{google_sheets_url}1L9juBdFeFfuP0k2gr9P-S1QQYEf4SHBw' + '/'
 
     class Tetris:
         CHECK_INPUT_OLD = f'{google_sheets_url}1YERmUHZL-cEIbWDW3NUGAnU6I8LhZcn-' + '/'
@@ -238,11 +238,11 @@ class InputTypeNameMatch:
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
             },
-            'drivers_break_old_version': {
+            'drivers_break_old': {
                 'scenario_type': scenario_type,
-                'system_file_name': 'drivers_break_old_version',
+                'system_file_name': 'drivers_break_old',
                 'front_name': 'Drivers break (old)',
-                'parameter': 'drivers_break_old_version',
+                'parameter': 'drivers_break_old',
                 'url_path': None,
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
@@ -265,15 +265,6 @@ class InputTypeNameMatch:
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
             },
-            'wh_cost_split_cost': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'wh_cost_split_cost',
-                'front_name': 'Cost Split Cost WH',
-                'parameter': 'wh_cost_split_cost',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
             't2_cost_split_rule': {
                 'scenario_type': scenario_type,
                 'system_file_name': 't2_cost_split_rule',
@@ -292,6 +283,73 @@ class InputTypeNameMatch:
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer')(opti_type)
             },
+            'deliveries_for_wms': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'deliveries_for_wms',
+                'front_name': 'Deliveries for WMS',
+                'parameter': 'deliveries_for_wms',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer')(opti_type)
+            },
+            'wms_delivery': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'wms_delivery',
+                'front_name': 'WMS delivery',
+                'parameter': 'wms_delivery',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer')(opti_type)
+            },
+            'wms_support': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'wms_support',
+                'front_name': 'WMS support',
+                'parameter': 'wms_support',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer')(opti_type)
+            },
+            'xd_fact_volumes': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'xd_fact_volumes',
+                'front_name': 'XD Fact volumes',
+                'parameter': 'xd_fact_volumes',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer')(opti_type)
+            },
+            'wh_cost_split_rule': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'wh_cost_split_rule',
+                'front_name': 'Cost Split Cost WH',
+                'parameter': 'wh_cost_split_rule',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
+            },
+        }
+
+        N_TYPES = {
+            'md_shipto_cust_group': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'md_shipto_cust_group',
+                'front_name': 'MD ShipTo Customer Group',
+                'parameter': 'md_shipto_cust_group',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer')(opti_type)
+            },
+            'cost_pasting_copaking': {
+                    'scenario_type': scenario_type,
+                    'system_file_name': 'cost_pasting_copaking',
+                    'front_name': 'Pasting, copaking',
+                    'parameter': 'cost_pasting_copaking',
+                    'url_path': None,
+                    'obligatory': True,
+                    'optimization_type': itemgetter('optimizer')(opti_type)
+                },
+
             'transport_capacity': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'transport_capacity',
@@ -364,29 +422,11 @@ class InputTypeNameMatch:
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer')(opti_type)
             },
-            'md_shipto_cust_group': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'md_shipto_cust_group',
-                'front_name': 'MD ShipTo Customer Group',
-                'parameter': 'md_shipto_cust_group',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
-            },
             'wh_schedule': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'wh_schedule',
                 'front_name': 'WH Schedule',
                 'parameter': 'wh_schedule',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
-            },
-            'cost_pasting_copaking': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'cost_pasting_copaking',
-                'front_name': 'Pasting, copaking',
-                'parameter': 'cost_pasting_copaking',
                 'url_path': None,
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer')(opti_type)
@@ -399,7 +439,7 @@ class InputTypeNameMatch:
                 'url_path': None,
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer')(opti_type)
-            },
+            }
         }
 
     class Tetris:

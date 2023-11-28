@@ -109,7 +109,8 @@ def data_type_in_error_exceptions(file_name, column_name):
 
 
 def create_error_log(data_type, current_row, column_name, validity, del_value_nan,
-                     negativity, nan_value, inverse_integrity, file_name, error_log_txt):
+                     negative, negativity, nan_value, inverse_integrity, file_name, error_log_txt):
+
     error_text = f'{error_log_txt.ROW} {current_row + 2} - ' \
                  f'{error_log_txt.COLUMN} {column_name.lower()}'
 
@@ -123,7 +124,7 @@ def create_error_log(data_type, current_row, column_name, validity, del_value_na
                 type_errors.append(error_text)
         if del_value_nan and 'FALSE' in nan_value:
             errors_regarding_obligatory_fields.append(error_text)
-        if negativity and (data_type == DataTypes.INT or data_type == DataTypes.DECIMAL):
+        if negativity and 'FALSE' in negative and (data_type == DataTypes.INT or data_type == DataTypes.DECIMAL):
             errors_with_non_negative_values.append(error_text)
 
 
@@ -188,6 +189,7 @@ def create_data(file_name, column_name, current_row, error_log_txt,
                 negativity=False,
                 inverse_integrity=False,
                 bool_false=False):
+
     if data_type == '':
         return 'NO_DATA_TYPE'
     value = FillData.get_value(data_type, validity)
@@ -212,7 +214,8 @@ def create_data(file_name, column_name, current_row, error_log_txt,
                 value += '.45'
     if create_error_logs:
         create_error_log(data_type, current_row, column_name, validity,
-                         del_value_nan, negativity, nan_value, inverse_integrity, file_name, error_log_txt)
+                         del_value_nan, negative, negativity, nan_value,
+                         inverse_integrity, file_name, error_log_txt)
 
     return value
 
@@ -334,7 +337,6 @@ class InputFiles:
 
         df = pd.DataFrame([data_values])
         df.to_csv(file_path, index=False, header=True, encoding="utf_8_sig")
-
         rows = count_row
         prec_i = 0
         while rows != 0 and rows >= write_step:
@@ -407,6 +409,7 @@ class InputFiles:
             comparison_fail = 0
             comparison_skip = 0
             for input_name, input_type in input_types.items():
+                print()
                 count += 1
                 url_input_type = input_type.get('url_path')
                 params_input_type = input_type.get('parameter')
@@ -445,18 +448,44 @@ class InputFiles:
                     for m in range(len(log_file_data)):
                         log_file_data[m][1] = set(log_file_data[m][1])
 
-                    result = []
+                    # result = []
+                    request_data_result = []
+                    log_file_data_result = []
                     for k in range(len(request_data)):
-                        set_difference = str(request_data[k][1].symmetric_difference(log_file_data[k][1]))
-                        if set_difference != 'set()':
-                            result.append(f'{request_data[k][0]} {set_difference}')
+                        #print(request_data[k][1])
 
-                    if len(result) > 0:
+                        # set_difference = str(request_data[k][1].symmetric_difference(log_file_data[k][1]))
+
+                        log_file_data_set_diff = str(request_data[k][1].difference(log_file_data[k][1]))
+                        request_data_set_diff = str(log_file_data[k][1].difference(request_data[k][1]))
+
+                        # if set_difference != 'set()':
+                        #     result.append(f'{request_data[k][0]} {set_difference}')
+
+                        if request_data_set_diff != 'set()':
+                            request_data_result.append(f'{request_data[k][0]} {request_data_set_diff}')
+                        if log_file_data_set_diff != 'set()':
+                            log_file_data_result.append(f'{request_data[k][0]} {log_file_data_set_diff}')
+
+                    # if len(result) > 0:
+                    #     comparison_fail += 1
+                    #     status = CCol.txt_red("FAIL")
+                    #     print(f'{Ilvl(2)}[{count}] Check: {url_input_type}{input_name} {status}')
+                    #     for err in result:
+                    #         print(Ilvl(3) + err)
+
+                    if len(request_data_result + log_file_data_result) > 0:
                         comparison_fail += 1
                         status = CCol.txt_red("FAIL")
                         print(f'{Ilvl(2)}[{count}] Check: {url_input_type}{input_name} {status}')
-                        for err in result:
-                            print(Ilvl(3) + err)
+                        if len(request_data_result) > 0:
+                            print(Ilvl(3) + 'Request data not have:')
+                            for err in request_data_result:
+                                print(Ilvl(4) + err)
+                        if len(log_file_data_result) > 0:
+                            print(Ilvl(3) + 'Log file data not have:')
+                            for err in log_file_data_result:
+                                print(Ilvl(4) + err)
                     else:
                         comparison_pass += 1
                         status = CCol.txt_grn("PASS")
@@ -609,8 +638,8 @@ class Start:
         InputFiles.get_input_file_from_spreadsheet(types, folder=folder, miss_worksheets=miss_worksheets)
 
     def start_create_file(self):
-        file_size_1gb = 1_000_000  # 23_000_000
-        for k, v in {'_test': file_size_1gb}.items():
+        file_size = 1_000_000  # 1_000_000 23_000_000
+        for k, v in {'_test_1kk': file_size}.items():
             # data_v = {
             #     'Plant': 1,
             #     'SKU': 10000,
@@ -634,46 +663,75 @@ class Start:
             #     'Ready to ship': {'value': random, 'rand_values': (0, 5000), 'step': 1},
             # }
 
+            # data_v = {
+            #     'ID_ORG_CBU': 5000,
+            #     'ID_SAD_PGI_YYYYMMDD': '01-03-2023  00:00:00',
+            #     'CD_LOG_SHIPMENT_TYPE': 'Z003',
+            #     'DS_LOG_SHIPMENT_TYPE': 'Z Internal Shipmt',
+            #     'CD_LOG_SHIPMENT': 1,
+            #     'CD_CUS_SHIP_TO': 50010976,
+            #     'DS_CUS_SHIP_TO': 'DC 5322 NV2 NOVOSIBIRSK REMOTE',
+            #     'CD_SAD_DELIVERY': 5044875394,
+            #     'CD_MAT_MATERIAL': 55139,
+            #     'CD_MAT_BATCH': 'YL20230823',
+            #     'PLANT_PREF': 'YL',
+            #     'DS_LOG_ROUTE': '5521-5501 YA1-SD1 Yalutorovsk-Shadrinsk',
+            #     'CD_VND_VENDOR': 20092033,
+            #     'DS_VND_VENDOR': 'ООО "ДЖИИКСО ЛОДЖИСТИКС"',
+            #     'TPP': 5322,
+            #     'TPP_NAME': '5000 RU DC Novosibir',
+            #     'CD_LOG_SHIPPING_TYPE_HEADER': 5322,
+            #     'TRUCK_TYPE': 'Ref truck 20t',
+            #     'DELIVERED_KG': 2220.48,
+            #     'TRANSPORT_COST_BY_WEIGHT': 2140.14,
+            #     'TRANSPORT_COST_SHIPMENT': 17529
+            # }
+            # options_increasing = {
+            #     'ID_ORG_CBU': None,
+            #     'ID_SAD_PGI_YYYYMMDD': None,
+            #     'CD_LOG_SHIPMENT_TYPE': None,
+            #     'DS_LOG_SHIPMENT_TYPE': None,
+            #     'CD_LOG_SHIPMENT': {'value': 1, 'step': 1},
+            #     'CD_CUS_SHIP_TO': {'value': 1, 'step': 5},
+            #     'DS_CUS_SHIP_TO': None,
+            #     'CD_SAD_DELIVERY': {'value': 1, 'step': 10},
+            #     'CD_MAT_MATERIAL': {'value': 1, 'step': 12},
+            #     'CD_MAT_BATCH': None,
+            #     'PLANT_PREF': None,
+            #     'DS_LOG_ROUTE': None,
+            #     'CD_VND_VENDOR': None,
+            #     'DS_VND_VENDOR': None,
+            #     'TPP': {'value': 1, 'step': 5},
+            #     'TPP_NAME': None,
+            #     'CD_LOG_SHIPPING_TYPE_HEADER': None,
+            #     'TRUCK_TYPE': None,
+            #     'DELIVERED_KG': None,
+            #     'TRANSPORT_COST_BY_WEIGHT': None,
+            #     'TRANSPORT_COST_SHIPMENT': None,
+            # }
+
             data_v = {
-                'Product id': 100000,
-                'Location id': 5000,
-                'Plant id': 1,
-                'Route id': 1,
-                'Date beg id': '2022M01',
-                'Date end id': '2022M12',
-                'Tsl': 1,
-                'Rts': 1,
-                'Tta': 1,
-                'Dlc': 1,
-                'Dt': 1,
-                'Dof': 1,
-                'Rate': 1,
-                'Tt': 1,
-                'Lt': 1
+                'Дата заказа': '01.01.2023',
+                'departmentCode': 'Chelyabinsk',
+                'ТК': 'ИП ЛЕСИК Д.М.',
+                'Клиент': 'ЗАО "ТАНДЕР"',
+                'Код клиента': 850175299,
+                'время простоя в тт факт_минуты': 20
             }
             options_increasing = {
-                'Product id': {'value': 1, 'step': 100},
-                'Location id': {'value': 1, 'step': 10},
-                'Plant id': {'value': 1, 'step': 100},
-                'Route id': {'value': 1, 'step': 10},
-                'Date beg id': None,
-                'Date end id': None,
-                'Tsl': {'value': random, 'rand_values': (1, 50), 'step': 1},
-                'Rts': {'value': random, 'rand_values': (0, 1), 'step': 1},
-                'Tta': {'value': random, 'rand_values': (0, 1), 'step': 1},
-                'Dlc': {'value': random, 'rand_values': (1, 50), 'step': 1},
-                'Dt': {'value': random, 'rand_values': (0, 1), 'step': 1},
-                'Dof': {'value': random, 'rand_values': (1, 20), 'step': 1},
-                'Rate': {'value': random, 'rand_values': (1, 10), 'step': 1},
-                'Tt': {'value': random, 'rand_values': (1, 10), 'step': 1},
-                'Lt': {'value': random, 'rand_values': (1, 10), 'step': 1}
+                'Дата заказа': None,
+                'departmentCode': None,
+                'ТК': None,
+                'Клиент': None,
+                'Код клиента': {'value': 1, 'step': 1},
+                'время простоя в тт факт_минуты': {'value': random, 'rand_values': (0, 100), 'step': 1}
             }
 
             InputFiles.create_file(count_row=v,
                                    data_values=data_v,
                                    options_increasing_data_values=options_increasing,
-                                   folder='tetris_new/test',
-                                   file_name='deliveries',
+                                   folder='rtm/big',
+                                   file_name='drivers_break_mobile',
                                    file_name_prefix=k)
 
     def start_create_invalid_files(self, spreadsheet, folder, error_log_lang_rus=False):
@@ -751,32 +809,35 @@ class Start:
 
 
 if __name__ == '__main__':
-    environment = 'STAGE'
-    scenario_id = 1
+    environment = 'DEMO_STAGE'
+    scenario_id = 39
     miss_worksheets = ['New Farms', 'Regular Supplies', 'Spot Supplies',
                        'Supply Scheme', 'Reco Capabilities', 'Derivation']
 
-    start = Start(scen_id=scenario_id, env=environment, tetris_new=True)
+    start = Start(scen_id=scenario_id, env=environment, tetris_new=False)
 
     # start.start_get_input_file_from_spreadsheet_tetris(folder='tetris_new/input_files/')
-    # start.start_get_input_file_from_spreadsheet_other(types=Spreadsheets.TetrisNew.INPUT_MILK,
-    #                                                   folder='tetris_new/input_files/milk',
-    #                                                   miss_worksheets=miss_worksheets)
+    # start.start_get_input_file_from_spreadsheet_other(types=Spreadsheets.RTM.INPUT_RTM,
+    #                                                   folder='rtm/input_files') # miss_worksheets=miss_worksheets)
 
-    # start.start_create_file()
+    start.start_create_file()
     # start.start_create_invalid_files(Spreadsheets.TetrisNew.CHECK_INPUT, folder='tetris_new/check_input', error_log_lang_rus=True)
+    # start.start_create_invalid_files(Spreadsheets.RTM.CHECK_INPUT, folder='rtm/check_input3')
 
     # cfr/check_input/error_logs/cfr_check_data |
     # start.start_errors_logs_comparison_tetris(folder='tetris_new/check_input/error_logs', error_log_lang_rus=True)
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/cfr_check_data')
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/error_logs/Sheet1')
 
-    # start.start_upload_valid_inputs_files_tetris(folder='tetris_new/input_files')  # tetris_new/input_files
+    # start.start_upload_valid_inputs_files_tetris(folder='tetris_new/validation')  # tetris_new/input_files
     # start.start_upload_invalid_inputs_files_tetris(folder='tetris_new/check_input')
 
     # cfr/check_input/cfr_check_data | cfr/input_files
-    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/input_files')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/input_files')
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/cfr_check_data')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/Sheet1')
 
     # start.start_delete_inputs_files_tetris()
     # start.start_delete_inputs_files_other(InputTypeNameMatch.TetrisNew.TYPES)
-    start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.RTM.TYPES)

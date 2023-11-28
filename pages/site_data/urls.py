@@ -2,11 +2,13 @@ from pages.site_data.default_params import ProjectType as Ptype
 
 
 class BaseUrls:
-    BASE_URLS = {'DEV': 'https://app.danon.digital-spectr.ru',
-                 'STAGE': 'https://app.danon-stage.jumeforecast.com',
+    BASE_URLS = {'DEV': 'https://app.danon-dev.digital-spectr.ru',
+                 'LOCAL_STAGE': 'https://app.danon.digital-spectr.ru',
+                 'DEMO_STAGE': 'https://app.danon-stage.jumeforecast.com',
                  'PROD': 'https://danone.jumeplatform.com'}
-    BASE_URLS_BACK = {'DEV': 'https://back.danon.digital-spectr.ru',
-                      'STAGE': 'https://back.danon-stage.jumeforecast.com',
+    BASE_URLS_BACK = {'DEV': 'https://back.danon-dev.digital-spectr.ru',
+                      'LOCAL_STAGE': 'https://back.danon.digital-spectr.ru',
+                      'DEMO_STAGE': 'https://back.danon-stage.jumeforecast.com',
                       'PROD': 'https://back.danon.jumeforecast.com'}
 
 
