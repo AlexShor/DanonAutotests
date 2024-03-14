@@ -8,6 +8,7 @@ from pages.site_data.locators import BasePageLocators as BPLocator
 from custom_moduls import custom_expected_conditions as CEC
 from custom_moduls.console_design.colors import ConsoleColors as CCol
 from custom_moduls.console_design.link_to_modules import print_link_to_modules as print_link
+from pages.site_data.element_texts import BasePage as BPTxt
 
 
 def assert_error(error_text, method=None, css_selector=''):
@@ -20,8 +21,7 @@ def assert_error(error_text, method=None, css_selector=''):
     if error_text:
         print_text_error += error_text
     else:
-        print_text_error += (f'No Such Element by {CCol.txt_yel(method)}: '
-                             f'"{CCol.txt_vio(css_selector)}"')
+        print_text_error += f'No Such Element by {CCol.txt_yel(method)}: "{CCol.txt_vio(css_selector)}"'
     assert False, print_text_error
 
 
@@ -50,7 +50,7 @@ class BasePage:
         if len(found_elements) == 0:
             assert_error(error_text, method=method, css_selector=css_selector)
 
-        return found_elements[elem_id]
+        return found_elements if elem_id is None else found_elements[elem_id]
 
     def scroll_to_element(self, method, css_selector, element_for_format=(), error_text='', elem_id=0, timeout=None):
 
@@ -192,7 +192,7 @@ class BasePage:
     def should_be_sidebar(self):
         self.find_elem(*BPLocator.SIDEBAR)
         self.find_elem(*BPLocator.PROJECT_SELECTOR)
-        self.find_elem(*BPLocator.ALL_SCENARIOS_BUTTON)
+        self.find_elem(*BPLocator.ALL_SCENARIOS_BUTTON, (BPTxt.ALL_SCENARIOS_BUTTON[self.language], ))
         self.find_elem(*BPLocator.OPEN_MENU_BUTTON)
 
     def choose_project(self, project_name):

@@ -2,13 +2,14 @@ import time
 
 import pytest
 
-from conftest import custom_parametrize
+from custom_moduls.custom_parametrize import custom_parametrize
 from input_files.input_data import InputTypeNameMatch
 from pages.base_scenario_page import BaseScenarioPage
 from pages.create_scenario_page import CreateScenarioPage
 from pages.input_tab_on_scenario_page import InputTabOnScenarioPage
 from pages.login_page import LoginPage
-from pages.pfr_tab_on_scenario_page import PFRTabOnScenarioPage
+from pages.pfr_tab_on_scenario_page import (PFRTabOnScenarioPage,
+                                            PromoPFRTabOnScenarioPage)
 from pages.scenario_list_page import ScenarioListPage
 from pages.site_data.credentials import Credentials as Creds
 from pages.site_data.default_params import (ProjectType as Ptype,
@@ -16,7 +17,8 @@ from pages.site_data.default_params import (ProjectType as Ptype,
                                             DefaultProjectLanguage as DPLang)
 from pages.site_data.urls import Links, Pages
 
-project_type = Ptype.TETRIS_NEW
+
+project_type = Ptype.PROMO
 scenario_id = None
 scenario_title = None
 types = {Ptype.PROMO: InputTypeNameMatch.Promo.TYPES,
@@ -38,6 +40,7 @@ language = DPLang.TYPE[project_type]
 class TestFullSmokePath:
     @pytest.mark.test_full_smoke
     @pytest.mark.fast_test
+    @pytest.mark.select_test
     # @pytest.mark.incremental
     def test_user_authorization(self, env, browser):
         link = Links(env).get('LOGIN_PAGE')
@@ -62,11 +65,12 @@ class TestFullSmokePath:
     @pytest.mark.open_scenario_from_scenario_list
     @pytest.mark.test_full_smoke
     @pytest.mark.fast_test
+    @pytest.mark.select_test
     # @pytest.mark.incremental
     def test_user_can_open_scenario_page_from_scenario_list(self, env, browser):
         scenario_list_page = ScenarioListPage(browser=browser, env=env, language=language)
         scenario_list_page.should_be_scenario_list_page()
-        scenario_list_page.user_can_open_scenario_page_by_click_on_scenario_title('Scenario_test_1')
+        scenario_list_page.user_can_open_scenario_page_by_click_on_scenario_title('test_select')
 
     @pytest.mark.create_scenario
     @pytest.mark.test_full_smoke
@@ -124,12 +128,18 @@ class TestFullSmokePath:
         # time.sleep(2)
 
     @pytest.mark.test_full_smoke
+    @pytest.mark.select_test
     # @pytest.mark.incremental
     def test_user_can_open_pfr_tab_from_input_tab(self, env, browser):
         input_tab = InputTabOnScenarioPage(browser=browser, env=env, language=language)
-        input_tab.should_be_open_pfr_tab_by_click_on_jenius_button_left()
+        input_tab.should_be_open_pfr_tab_by_click_on_tab_name()
 
-        # pfr_tab = PFRTabOnScenarioPage(browser)
+        # pfr_tab = PFRTabOnScenarioPage(browser=browser, env=env, language=language)
         # pfr_tab.should_be_pfr_tab_on_scenario_page()
 
+        pfr_tab = PromoPFRTabOnScenarioPage(browser=browser, env=env, language=language)
+        pfr_tab.choose_data_in_select_customers()
+
         time.sleep(2)
+
+

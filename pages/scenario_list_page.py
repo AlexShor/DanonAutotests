@@ -18,7 +18,7 @@ class ScenarioListPage(BasePage):
                                  error_text=f'Current url is not contains: "{CCol.txt_vio(project_url_path)}"')
 
     def should_be_open_create_scenario_page_by_click_any_jenius_button(self):
-        self.is_clickable(*BPLocator.JENIUS_BUTTON).click()
+        self.is_clickable(*BPLocator.JENIUS_BUTTON, timeout=15).click()
 
     def should_be_open_create_scenario_page_by_click_on_jenius_button_left(self):
         self.scroll_in_element(*BPLocator.SCROLL_BLOCK, direction='UP')

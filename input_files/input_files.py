@@ -638,8 +638,8 @@ class Start:
         InputFiles.get_input_file_from_spreadsheet(types, folder=folder, miss_worksheets=miss_worksheets)
 
     def start_create_file(self):
-        file_size = 1_000_000  # 1_000_000 23_000_000
-        for k, v in {'_test_1kk': file_size}.items():
+        file_size = 1_048_600  # 1_000_000 23_000_000
+        for k, v in {'_test_1048600': file_size}.items():
             # data_v = {
             #     'Plant': 1,
             #     'SKU': 10000,
@@ -711,27 +711,23 @@ class Start:
             # }
 
             data_v = {
-                'Дата заказа': '01.01.2023',
-                'departmentCode': 'Chelyabinsk',
-                'ТК': 'ИП ЛЕСИК Д.М.',
-                'Клиент': 'ЗАО "ТАНДЕР"',
-                'Код клиента': 850175299,
-                'время простоя в тт факт_минуты': 20
+                'Product ID': 1,
+                'Location ID': 1,
+                'Date ID': '2023M01',
+                'Total KG': 1000
             }
             options_increasing = {
-                'Дата заказа': None,
-                'departmentCode': None,
-                'ТК': None,
-                'Клиент': None,
-                'Код клиента': {'value': 1, 'step': 1},
-                'время простоя в тт факт_минуты': {'value': random, 'rand_values': (0, 100), 'step': 1}
+                'Product ID': {'value': 1, 'step': 1},
+                'Location ID': {'value': 1, 'step': 1},
+                'Date ID': None,
+                'Total KG': None
             }
 
             InputFiles.create_file(count_row=v,
                                    data_values=data_v,
                                    options_increasing_data_values=options_increasing,
-                                   folder='rtm/big',
-                                   file_name='drivers_break_mobile',
+                                   folder='tetris/big',
+                                   file_name='Demand',
                                    file_name_prefix=k)
 
     def start_create_invalid_files(self, spreadsheet, folder, error_log_lang_rus=False):
@@ -809,8 +805,8 @@ class Start:
 
 
 if __name__ == '__main__':
-    environment = 'DEMO_STAGE'
-    scenario_id = 39
+    environment = 'DEV'
+    scenario_id = 1661
     miss_worksheets = ['New Farms', 'Regular Supplies', 'Spot Supplies',
                        'Supply Scheme', 'Reco Capabilities', 'Derivation']
 
@@ -828,6 +824,7 @@ if __name__ == '__main__':
     # start.start_errors_logs_comparison_tetris(folder='tetris_new/check_input/error_logs', error_log_lang_rus=True)
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/cfr_check_data')
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/error_logs/Sheet1')
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.Promo.TYPES, folder=f'promo/check_input/error_logs/update')
 
     # start.start_upload_valid_inputs_files_tetris(folder='tetris_new/validation')  # tetris_new/input_files
     # start.start_upload_invalid_inputs_files_tetris(folder='tetris_new/check_input')
@@ -836,8 +833,11 @@ if __name__ == '__main__':
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/input_files')
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/cfr_check_data')
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/Sheet1')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.Promo.TYPES, folder=f'promo/input_files')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.Promo.TYPES, folder=f'promo/check_input/update')
 
     # start.start_delete_inputs_files_tetris()
     # start.start_delete_inputs_files_other(InputTypeNameMatch.TetrisNew.TYPES)
     # start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)
     # start.start_delete_inputs_files_other(InputTypeNameMatch.RTM.TYPES)
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.Promo.TYPES)
