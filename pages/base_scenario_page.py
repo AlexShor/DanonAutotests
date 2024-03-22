@@ -10,13 +10,13 @@ class BaseScenarioPage(BasePage):
         self.find_elem(*BSPLocator.SCENARIO_SUBTITLE)
         if project_type != Ptype.RTM:
             self.find_elem(*BSPLocator.SELECT_EDIT_ACCESS)
-        self.find_elem(*BSPLocator.TAB_INPUT, (BSTxt.INPUT_TAB[self.language], ))
+        self.find_elem(*BSPLocator.TAB_WITH_NAME, (BSTxt.INPUT_TAB[self.language], ))
 
         if project_type == Ptype.TETRIS_NEW:
             self.find_elem(*BSPLocator.TAB_CALCULATE_AND_RESULT, (BSTxt.CALC_AND_RESULT_TAB[self.language], ))
         else:
-            self.find_elem(*BSPLocator.TAB_PFR, (BSTxt.PFR_TAB[self.language], ))
-            self.find_elem(*BSPLocator.TAB_OUTPUT, (BSTxt.OUTPUT_TAB[self.language], ))
+            self.find_elem(*BSPLocator.TAB_WITH_NAME, (BSTxt.PFR_TAB[self.language], ))
+            self.find_elem(*BSPLocator.TAB_WITH_NAME, (BSTxt.OUTPUT_TAB[self.language], ))
 
     def get_scenario_id_from_url(self):
         return self.browser.current_url.split('/')[-1]

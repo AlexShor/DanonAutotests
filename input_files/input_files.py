@@ -805,24 +805,51 @@ class Start:
 
 
 if __name__ == '__main__':
-    environment = 'DEV'
-    scenario_id = 1661
+    environment = 'DEMO_STAGE'
+    scenario_id = 80
     miss_worksheets = ['New Farms', 'Regular Supplies', 'Spot Supplies',
                        'Supply Scheme', 'Reco Capabilities', 'Derivation']
 
     start = Start(scen_id=scenario_id, env=environment, tetris_new=False)
 
     # start.start_get_input_file_from_spreadsheet_tetris(folder='tetris_new/input_files/')
-    # start.start_get_input_file_from_spreadsheet_other(types=Spreadsheets.RTM.INPUT_RTM,
-    #                                                   folder='rtm/input_files') # miss_worksheets=miss_worksheets)
+    # start.start_get_input_file_from_spreadsheet_other(types=Spreadsheets.RTM.INPUT_RTM, folder='rtm/input_files') # miss_worksheets=miss_worksheets)
 
-    start.start_create_file()
+    # start.start_create_file()
+
+    # PROMO
+    # start.start_create_invalid_files(Spreadsheets.Promo.CHECK_INPUT, folder='promo/check_input')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.Promo.TYPES, folder=f'promo/input_files')
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.Promo.TYPES, folder=f'promo/check_input/error_logs/update')
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.Promo.TYPES)
+
+    # RTM
+    # start.start_create_invalid_files(Spreadsheets.RTM.CHECK_INPUT, folder='rtm/check_input')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/input_files')
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/error_logs/update')
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.RTM.TYPES)
+
+    # CFR
+    # start.start_create_invalid_files(Spreadsheets.CFR.CHECK_INPUT, folder='cfr/check_input')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/input_files')
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/update')
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.CFR.TYPES)
+
+    # TETRIS
     # start.start_create_invalid_files(Spreadsheets.TetrisNew.CHECK_INPUT, folder='tetris_new/check_input', error_log_lang_rus=True)
-    # start.start_create_invalid_files(Spreadsheets.RTM.CHECK_INPUT, folder='rtm/check_input3')
+    # start.start_upload_valid_inputs_files_tetris(folder='tetris_new/validation')  # tetris_new/input_files
+    # start.start_upload_invalid_inputs_files_tetris(folder='tetris_new/check_input')
+    # start.start_errors_logs_comparison_tetris(folder='tetris_new/check_input/error_logs', error_log_lang_rus=True)
+    # start.start_delete_inputs_files_other(InputTypeNameMatch.TetrisNew.TYPES)
+    # ----------------
+
+
+
+    # start.start_create_invalid_files(Spreadsheets.CFR.CHECK_INPUT, folder='cfr/check_input2')
 
     # cfr/check_input/error_logs/cfr_check_data |
     # start.start_errors_logs_comparison_tetris(folder='tetris_new/check_input/error_logs', error_log_lang_rus=True)
-    # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/error_logs/cfr_check_data')
+    # start.start_errors_logs_comparison_other(InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input2/error_logs/cfr_check_data')
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/error_logs/Sheet1')
     # start.start_errors_logs_comparison_other(InputTypeNameMatch.Promo.TYPES, folder=f'promo/check_input/error_logs/update')
 
@@ -831,7 +858,7 @@ if __name__ == '__main__':
 
     # cfr/check_input/cfr_check_data | cfr/input_files
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/input_files')
-    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input/cfr_check_data')
+    # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.CFR.TYPES, folder=f'cfr/check_input2/cfr_check_data')
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.RTM.TYPES, folder=f'rtm/check_input/Sheet1')
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.Promo.TYPES, folder=f'promo/input_files')
     # start.start_upload_inputs_files_other(required_inputs=InputTypeNameMatch.Promo.TYPES, folder=f'promo/check_input/update')

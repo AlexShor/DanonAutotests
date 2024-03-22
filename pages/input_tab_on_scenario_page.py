@@ -26,11 +26,11 @@ def benchmark(func):
 
 class InputTabOnScenarioPage(BaseScenarioPage):
     def should_be_input_tab_on_scenario_page(self):
-        self.find_elem(*ITPLocator.TAB_TITLE, (IptTxt.INPUT_TAB_TITLE[self.language], ))
+        self.find_elem(*ITPLocator.TAB_TITLE, (IptTxt.INPUT_TAB_TITLE[self.language],))
         self.find_elem(*ITPLocator.SELECT_GROUP_UPLOAD_FROM_SCENARIO,
-                       (BSTxt.SELECT_GROUP_UPLOAD_FROM_SCENARIO[self.language], ))
+                       (BSTxt.SELECT_GROUP_UPLOAD_FROM_SCENARIO[self.language],))
         self.find_elem(*ITPLocator.CARD)
-        self.find_elem(*ITPLocator.DARK_TAB_INPUT, (BSTxt.INPUT_TAB[self.language], ))
+        self.find_elem(*ITPLocator.DARK_TAB_WITH_NAME, (BSTxt.INPUT_TAB[self.language],))
 
     def should_be_input_name_in_popover_message_list(self, input_file_front_name):
         self.find_elem(*ITPLocator.MESSAGE_IN_POPOVER_MESSAGE_LIST, (input_file_front_name,))
@@ -81,20 +81,20 @@ class InputTabOnScenarioPage(BaseScenarioPage):
             url_type_milkbalance = Paths.URL_PATH_OPTIMILK
 
             if url_path == url_type_md:
-                self.is_clickable(*ITPLocator.INPUT_TAB_MD, (IptTxt.TETRIS_INPUT_TAB_MD[self.language], )).click()
-                self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_MD, (IptTxt.TETRIS_INPUT_TAB_MD[self.language], ))
+                self.is_clickable(*ITPLocator.INPUT_TAB_MD, (IptTxt.TETRIS_INPUT_TAB_MD[self.language],)).click()
+                self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_MD, (IptTxt.TETRIS_INPUT_TAB_MD[self.language],))
                 input_type_file_path = DIPaths.TETRIS_INPUT_TYPE_FILE_PATH[url_type_md]
 
             if url_path == url_type_sourcing:
                 self.is_clickable(*ITPLocator.INPUT_TAB_SOURCING,
-                                  (IptTxt.TETRIS_INPUT_TAB_SOURCING[self.language], )).click()
+                                  (IptTxt.TETRIS_INPUT_TAB_SOURCING[self.language],)).click()
                 self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_SOURCING,
-                               (IptTxt.TETRIS_INPUT_TAB_SOURCING[self.language], ))
+                               (IptTxt.TETRIS_INPUT_TAB_SOURCING[self.language],))
                 input_type_file_path = DIPaths.TETRIS_INPUT_TYPE_FILE_PATH[url_type_sourcing]
 
             if url_path == url_type_industry:
                 self.is_clickable(*ITPLocator.INPUT_TAB_INDUSTRY,
-                                  (IptTxt.TETRIS_INPUT_TAB_INDUSTRY[self.language], )).click()
+                                  (IptTxt.TETRIS_INPUT_TAB_INDUSTRY[self.language],)).click()
                 self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_INDUSTRY, (IptTxt.TETRIS_INPUT_TAB_INDUSTRY[self.language]))
                 input_type_file_path = DIPaths.TETRIS_INPUT_TYPE_FILE_PATH[url_type_industry]
 
@@ -102,7 +102,7 @@ class InputTabOnScenarioPage(BaseScenarioPage):
                 self.is_clickable(*ITPLocator.INPUT_TAB_OPTIMILK,
                                   (IptTxt.TETRIS_INPUT_TAB_OPTIMILK[self.language])).click()
                 self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_OPTIMILK,
-                               (IptTxt.TETRIS_INPUT_TAB_OPTIMILK[self.language], ))
+                               (IptTxt.TETRIS_INPUT_TAB_OPTIMILK[self.language],))
                 input_type_file_path = DIPaths.TETRIS_INPUT_TYPE_FILE_PATH[url_type_milkbalance]
 
         elif scenario_type == ScenarioTypes.TYPE[Ptype.TETRIS_NEW]:
@@ -111,14 +111,14 @@ class InputTabOnScenarioPage(BaseScenarioPage):
 
             if optimization_type == optimization_type_sourcing:
                 self.is_clickable(*ITPLocator.INPUT_TAB_SOURCING_LOG,
-                                  (IptTxt.TETRIS_NEW_INPUT_TAB_SOURCING[self.language], )).click()
+                                  (IptTxt.TETRIS_NEW_INPUT_TAB_SOURCING[self.language],)).click()
                 self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_SOURCING_LOG,
-                               (IptTxt.TETRIS_NEW_INPUT_TAB_SOURCING[self.language], ))
+                               (IptTxt.TETRIS_NEW_INPUT_TAB_SOURCING[self.language],))
                 input_type_file_path = DIPaths.TETRIS_NEW_INPUT_TYPE_FILE_PATH[optimization_type_sourcing]
 
             if optimization_type == optimization_type_milk:
                 self.is_clickable(*ITPLocator.INPUT_TAB_MILK,
-                                  (IptTxt.TETRIS_NEW_INPUT_TAB_MILK[self.language], )).click()
+                                  (IptTxt.TETRIS_NEW_INPUT_TAB_MILK[self.language],)).click()
                 self.find_elem(*ITPLocator.ACTIVE_INPUT_TAB_MILK, (IptTxt.TETRIS_NEW_INPUT_TAB_MILK[self.language]))
                 input_type_file_path = DIPaths.TETRIS_NEW_INPUT_TYPE_FILE_PATH[optimization_type_milk]
 
@@ -142,7 +142,10 @@ class InputTabOnScenarioPage(BaseScenarioPage):
         self.is_clickable(*ITPLocator.JB_BOTTOM).click()
 
     def should_be_open_pfr_tab_by_click_on_tab_name(self):
-        self.is_clickable(*ITPLocator.TAB_PFR, (BSTxt.PFR_TAB[self.language], )).click()
+        if self.is_element_not_contains_class(*ITPLocator.TAB_WITH_NAME, '_disabled_',
+                                              (BSTxt.PFR_TAB[self.language],), timeout=5,
+                                              error_text='PFR tab is disabled'):
+            self.is_clickable(*ITPLocator.TAB_WITH_NAME, (BSTxt.PFR_TAB[self.language],), timeout=5).click()
 
     # @benchmark
     def check_text_in_info_tag(self, input_file_front_name, text_in_info_tag, timeout=None):

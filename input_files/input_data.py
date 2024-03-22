@@ -29,7 +29,7 @@ class Spreadsheets:
         INPUT_SOURCING = f'{google_sheets_url}15zY1rJFOlmnwTXH9ZLfH4ZaBfX1xsUI4' + '/'
 
     class CFR:
-        CHECK_INPUT = f'{google_sheets_url}1szjepPIIj3qt2B5aLqncG2yegI50-_t2' + '/'
+        CHECK_INPUT = f'{google_sheets_url}14irOmFBvcSye3_yg9VkA51Ku_vw93yjaky8_LVo2pe8' + '/' # 1szjepPIIj3qt2B5aLqncG2yegI50-_t2
         INPUT_CFR = f'{google_sheets_url}1RlZwjrDmh0xecyDm9RrA0qXPI66k532f' + '/'
 
 
@@ -341,15 +341,14 @@ class InputTypeNameMatch:
                 'optimization_type': itemgetter('optimizer')(opti_type)
             },
             'cost_pasting_copaking': {
-                    'scenario_type': scenario_type,
-                    'system_file_name': 'cost_pasting_copaking',
-                    'front_name': 'Pasting, copaking',
-                    'parameter': 'cost_pasting_copaking',
-                    'url_path': None,
-                    'obligatory': True,
-                    'optimization_type': itemgetter('optimizer')(opti_type)
-                },
-
+                'scenario_type': scenario_type,
+                'system_file_name': 'cost_pasting_copaking',
+                'front_name': 'Pasting, copaking',
+                'parameter': 'cost_pasting_copaking',
+                'url_path': None,
+                'obligatory': True,
+                'optimization_type': itemgetter('optimizer')(opti_type)
+            },
             'transport_capacity': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'transport_capacity',
@@ -1328,14 +1327,23 @@ class InputTypeNameMatch:
                 'obligatory': True,
                 'optimization_type': itemgetter('optimizer', 'optimizer_multi_level')(opti_type['type'])
             },
-            'delta_fa_bias': {
+            # 'delta_fa_bias': {
+            #     'scenario_type': scenario_type,
+            #     'system_file_name': 'delta_fa_bias',
+            #     'front_name': 'Delta FA bias',
+            #     'parameter': 'delta_fa_bias',
+            #     'url_path': None,
+            #     'obligatory': True,
+            #     'optimization_type': itemgetter('demand_randomizer')(opti_type['rnd_mode'])
+            # },
+            'filters': {
                 'scenario_type': scenario_type,
-                'system_file_name': 'delta_fa_bias',
-                'front_name': 'Delta FA bias',
-                'parameter': 'delta_fa_bias',
+                'system_file_name': 'filters',
+                'front_name': 'Filters',
+                'parameter': 'filters',
                 'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('demand_randomizer')(opti_type['rnd_mode'])
+                'obligatory': False,
+                'optimization_type': all_opti_type
             },
             'safety_days': {
                 'scenario_type': scenario_type,
@@ -1436,15 +1444,15 @@ class InputTypeNameMatch:
                 'obligatory': False,
                 'optimization_type': all_opti_type
             },
-            'frozen_horizon': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'frozen_horizon',
-                'front_name': 'Frozen horizon',
-                'parameter': 'frozen_horizon',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
-            },
+            # 'frozen_horizon': {
+            #     'scenario_type': scenario_type,
+            #     'system_file_name': 'frozen_horizon',
+            #     'front_name': 'Frozen horizon',
+            #     'parameter': 'frozen_horizon',
+            #     'url_path': None,
+            #     'obligatory': False,
+            #     'optimization_type': all_opti_type
+            # },
             'hubbing_days': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'hubbing_days',

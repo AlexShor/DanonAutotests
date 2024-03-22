@@ -8,8 +8,7 @@ from pages.base_scenario_page import BaseScenarioPage
 from pages.create_scenario_page import CreateScenarioPage
 from pages.input_tab_on_scenario_page import InputTabOnScenarioPage
 from pages.login_page import LoginPage
-from pages.pfr_tab_on_scenario_page import (PFRTabOnScenarioPage,
-                                            PromoPFRTabOnScenarioPage)
+from pages.pfr_tab_on_scenario_page.promo_pfr_tab_on_scenario_page import PromoPFRTabOnScenarioPage
 from pages.scenario_list_page import ScenarioListPage
 from pages.site_data.credentials import Credentials as Creds
 from pages.site_data.default_params import (ProjectType as Ptype,
@@ -134,12 +133,23 @@ class TestFullSmokePath:
         input_tab = InputTabOnScenarioPage(browser=browser, env=env, language=language)
         input_tab.should_be_open_pfr_tab_by_click_on_tab_name()
 
-        # pfr_tab = PFRTabOnScenarioPage(browser=browser, env=env, language=language)
-        # pfr_tab.should_be_pfr_tab_on_scenario_page()
-
         pfr_tab = PromoPFRTabOnScenarioPage(browser=browser, env=env, language=language)
-        pfr_tab.choose_data_in_select_customers()
 
-        time.sleep(2)
+        # elems1 = ['NATIONAL KEY ACCOUNT', 'Hypermarket', 'ATAC', 'AUCHAN', 'DC DA!']
+        #pfr_tab.choose_data_in_hierarchy_elements_select('select customers')
+
+        # elems2 = ['MODERN', 'MILKS', 'TRADI', 'MILKS']
+        #pfr_tab.choose_data_in_hierarchy_elements_select('select products')
+
+        pfr_tab.search_data_in_hierarchy_elements_select('select customers', 'test')
+
+        # pfr_tab.choose_data_in_target_variable_select('select variable', 'NS, Abs')
+        # time.sleep(1)
+        pfr_tab.input_data_in_target_variable_input('holdout', 'test')
+
+        pfr_tab.choose_data_in_target_variable_select('min/max', 'max')
+        pfr_tab.choose_data_in_target_variable_select('select variable', 'NS, Abs')
+
+        time.sleep(5)
 
 

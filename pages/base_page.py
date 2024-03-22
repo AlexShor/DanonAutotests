@@ -1,9 +1,11 @@
 import inspect
+import time
 
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.site_data.locators import BasePageLocators as BPLocator
+from pages.site_data.locators import (BasePageLocators as BPLocator,
+                                      PFRTabLocators as PFRTPLocator)
 
 from custom_moduls import custom_expected_conditions as CEC
 from custom_moduls.console_design.colors import ConsoleColors as CCol
@@ -38,7 +40,8 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
-    def find_elem(self, method, css_selector, element_for_format=(), error_text='', elem_id=0, timeout=None):
+    def find_elem(self, method, css_selector, element_for_format=(), error_text='',
+                  elem_id: int | None = 0, timeout=None):
 
         css_selector = css_selector.format(*element_for_format)
 
@@ -91,23 +94,22 @@ class BasePage:
         return found_elements[elem_id]
 
     def is_clickable(self, method, css_selector, element_for_format=(), timeout=4, return_bool=False):
-        # def click(elem):
-        #     elem.click()
 
         css_selector = css_selector.format(*element_for_format)
 
         try:
-            self.browser.implicitly_wait(0)
-            element = WebDriverWait(self.browser, timeout=timeout). \
-                until(EC.element_to_be_clickable((method, css_selector)))
-            self.browser.implicitly_wait(self.implicitly_wait_timeout)
-            # click(element)
-            return element
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until(EC.element_to_be_clickable((method, css_selector)))
         except TimeoutException:
             if not return_bool:
                 assert_error(error_text=f'Element is not clickable: "{CCol.txt_vio(css_selector)}"')
             else:
                 return False
+        # except ElementClickInterceptedException:
+        #     element = self.find_elem(method, css_selector, element_for_format, timeout=timeout)
+        #     self.browser.execute_script("arguments[0].click();", element)
+
+        return self.find_elem(method, css_selector, element_for_format, timeout=timeout)
 
     def is_element_scroll_height(self, method, css_selector, expected_scroll_height,
                                  element_for_format=(), error_text='', timeout=4):
@@ -115,15 +117,30 @@ class BasePage:
         css_selector = css_selector.format(*element_for_format)
 
         try:
-            self.browser.implicitly_wait(0)
-            WebDriverWait(self.browser, timeout=timeout). \
-                until(CEC.element_has_scroll_size(css_selector, expected_scroll_height))
-            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until(CEC.element_has_scroll_size(css_selector, expected_scroll_height))
         except TimeoutException:
             if error_text == '':
                 error_text = (f'Scroll height by element: "{CCol.txt_vio(css_selector)}" '
                               f'lower then expected scroll height: "{CCol.txt_vio(expected_scroll_height)}"')
             assert_error(error_text=error_text)
+        return True
+
+    def is_element_not_contains_class(self, method, css_selector, class_name, element_for_format=(),
+                                      error_text='', timeout=4, return_bool=False):
+
+        css_selector = css_selector.format(*element_for_format)
+
+        try:
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until_not(CEC.element_has_css_class(method, css_selector, class_name))
+        except TimeoutException:
+
+            if not return_bool:
+                assert_error(error_text=error_text)
+            else:
+                return False
+
         return True
 
     def is_not_element_present(self, method, css_selector, element_for_format=(),
@@ -132,10 +149,8 @@ class BasePage:
         css_selector = css_selector.format(*element_for_format)
 
         try:
-            self.browser.implicitly_wait(0)
-            WebDriverWait(self.browser, timeout=timeout). \
-                until(EC.presence_of_element_located((method, css_selector)))
-            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until(EC.presence_of_element_located((method, css_selector)))
         except TimeoutException:
             return True
         if not return_bool:
@@ -149,10 +164,8 @@ class BasePage:
         css_selector = css_selector.format(*element_for_format)
 
         try:
-            self.browser.implicitly_wait(0)
-            WebDriverWait(self.browser, timeout=timeout). \
-                until_not(EC.text_to_be_present_in_element((method, css_selector), text))
-            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until_not(EC.text_to_be_present_in_element((method, css_selector), text))
         except TimeoutException:
             if not return_bool:
                 assert_error(error_text=error_text)
@@ -165,10 +178,8 @@ class BasePage:
         css_selector = css_selector.format(*element_for_format)
 
         try:
-            self.browser.implicitly_wait(0)
-            WebDriverWait(self.browser, timeout=timeout). \
-                until_not(EC.visibility_of_element_located((method, css_selector)))
-            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until_not(EC.visibility_of_element_located((method, css_selector)))
         except TimeoutException:
             if not return_bool:
                 assert_error(error_text=error_text)
@@ -178,10 +189,8 @@ class BasePage:
 
     def is_url_contains(self, text_from_url, error_text='', timeout=4, return_bool=False):
         try:
-            self.browser.implicitly_wait(0)
-            WebDriverWait(self.browser, timeout=timeout). \
-                until(EC.url_contains(text_from_url))
-            self.browser.implicitly_wait(self.implicitly_wait_timeout)
+            wait = WebDriverWait(self.browser, timeout=timeout)
+            wait.until(EC.url_contains(text_from_url))
         except TimeoutException:
             if not return_bool:
                 assert_error(error_text=error_text)
@@ -203,3 +212,25 @@ class BasePage:
         if not project_name == project_selector_text:
             assert_error(error_text=f'Project name: "{CCol.txt_vio(project_name)}" not in project selector, '
                                     f'project selector have: "{CCol.txt_vio(project_selector_text)}"')
+
+    def choose_data_in_multiple_select(self, tree_elements=None, timeout=0.3):
+        if tree_elements is None:
+            tree_elements = ['Select all']
+
+        virtual_list_items = self.find_elem(*PFRTPLocator.SELECT_VIRTUAL_LIST_ITEM, elem_id=None)
+
+        def find_and_click(list_items, item_name):
+            for i in range(len(list_items)):
+                if list_items[i].text == item_name:
+                    time.sleep(timeout)
+                    list_items[i].click()
+                    return list_items[i:]
+
+        for element in tree_elements:
+            virtual_list_items = find_and_click(virtual_list_items, element)
+
+    def search_data_in_multiple_select(self, method, css_selector, tree_elements=None, timeout=0.3):
+        if tree_elements is None:
+            tree_elements = ['Select all']
+
+        virtual_list_items = self.find_elem(method, css_selector, elem_id=None)

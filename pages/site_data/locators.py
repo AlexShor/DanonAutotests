@@ -16,14 +16,20 @@ class BasePageLocators:
     BLOCK = (By.XPATH, '//div[contains(@class, "_wrap_") and contains(@class, "_block_")]')
 
     SELECTOR = (By.XPATH, '//div[@class="rc-select-selector"]')
-    MULTIPLE_SELECTOR_WINT_PH = (By.XPATH, SELECTOR[1] + '/../..//span[contains(@class, "_labelPlaceholder_")]/span[text()="{}"]')
+    SELECT_BY_PLACE_HOLDER = (By.XPATH, SELECTOR[1] + '/../..//span[text()="{}"]/../../..')
+
+    #MULTIPLE_SELECTOR_WITH_PH = (By.XPATH, SELECTOR[1] + '/../..//span[contains(@class, "_labelPlaceholder_")]/span[text()="{}"]')
 
     __c_select_dropdown = '//div[contains(@class, "rc-select-dropdown ") and not(contains(@class, "rc-select-dropdown-hidden"))]'
     ITEM_IN_SELECTOR = (By.XPATH, __c_select_dropdown + '//div[@class="rc-select-item-option-content"]//span[text()="{}"]/../..')
     SELECT_DROPDOWN = (By.XPATH, '//div[contains(@class, "rc-select-dropdown-cont")]//div[text()="{}]')
 
+    INPUT_IN_MULTIPLE_SELECT = (By.XPATH, __c_select_dropdown + '//input')
+
     SELECT_VIRTUAL_LIST = (By.XPATH, __c_select_dropdown + '//div[contains(@class, "rc-virtual-list-holder-inner")]')
-    SELECT_VIRTUAL_LIST_ITEM = (By.XPATH, SELECT_VIRTUAL_LIST[1] + '/div')
+    SELECT_VIRTUAL_LIST_ITEM = (By.XPATH, SELECT_VIRTUAL_LIST[1] + '/div' + '//div[@class="rc-select-item-option-content"]')
+
+    INPUT_FIELD_BY_PLACE_HOLDER = (By.XPATH, '//input[@placeholder="{}"]')
 
     SIDEBAR = (By.XPATH, '//aside[contains(@class, "_sidebar_")]')
     PROJECT_SELECTOR = (By.XPATH, SIDEBAR[1] + SELECTOR[1])
@@ -87,12 +93,18 @@ class BaseScenarioPageLocators(BasePageLocators):
     SELECT_GROUP_UPLOAD_FROM_SCENARIO = (By.XPATH, '//div[@class="rc-select-selector"]//span[text()="{}"]')
 
     TABS = (By.XPATH, '//div[contains(@class, "_tabs_")]')
-    TAB_INPUT = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
-    TAB_PFR = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
-    TAB_OUTPUT = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
-    DARK_TAB_INPUT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
-    DARK_TAB_PFR = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
-    DARK_TAB_OUTPUT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
+
+    TAB_WITH_NAME = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
+
+    # TAB_INPUT = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
+    # TAB_PFR = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
+    # TAB_OUTPUT = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
+
+    DARK_TAB_WITH_NAME = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
+
+    # DARK_TAB_INPUT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
+    # DARK_TAB_PFR = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
+    # DARK_TAB_OUTPUT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
     TAB_CALCULATE_AND_RESULT = (By.XPATH, TABS[1] + '//span[text()="{}"]/../..')
     DARK_TAB_CALCULATE_AND_RESULT = (By.XPATH, TABS[1] + '//div[contains(@class, "_dark_")]//span[text()="{}"]')
 
@@ -150,4 +162,5 @@ class PFRTabLocators(BaseScenarioPageLocators):
     RADIO_BUTTONS_CHECKED = (By.XPATH, RADIO_GROUP[1] + '//div[contains(@class, "_radioButton_") and contains(@class, "_checked_")]')
     RADIO_BUTTONS_NOT_CHECKED = (By.XPATH, RADIO_GROUP[1] + '//div[contains(@class, "_radioButton_") and not(contains(@class, "_checked_"))]')
 
-    SELECT_IN_BLOCKS_WITH_TITLE = (By.XPATH, BLOCKS_WITH_TITLE[1] + BasePageLocators.MULTIPLE_SELECTOR_WINT_PH[1])
+    SELECT_IN_BLOCKS_WITH_TITLE = (By.XPATH, BLOCKS_WITH_TITLE[1] + BasePageLocators.SELECT_BY_PLACE_HOLDER[1])
+    INPUT_IN_BLOCKS_WITH_TITLE = (By.XPATH, BLOCKS_WITH_TITLE[1] + BasePageLocators.INPUT_FIELD_BY_PLACE_HOLDER[1])
