@@ -39,8 +39,6 @@ class PFRTabScenarioPage(BaseScenarioPage):
     TARGET_VARIABLE_BLOCK_NAME = {'en': 'Target variable', 'ru': ''}
 
 
-
-
 class OutputTabScenarioPage(BaseScenarioPage):
     OUTPUT_TAB_TITLE = {'en': 'Output', 'ru': ''}
 
