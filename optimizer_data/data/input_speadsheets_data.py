@@ -19,28 +19,62 @@ class Spreadsheets:
         INPUT_CFR_ID = f'1RlZwjrDmh0xecyDm9RrA0qXPI66k532f' + '/'
 
 
+# class ValidateRules:
+#     class Promo:
+#         pass
+#
+#     class RTM:
+#         pass
+#
+#     class Tetris:
+#         _valid_rules_col_names = {'system_file_name': 'Файл',
+#                                   'col': 'Столбцы',
+#                                   'data_type': 'Тип данных',
+#                                   'negativity': 'Значение>=0',
+#                                   'obligatory': 'Отсутствие пустых полей'}
+#
+#         _valid_rules_data_type = {'str': str, 'float': float, 'int': int}
+#         _valid_rules_negativity = {'': True, '+': False}
+#         _valid_rules_obligatory = {'': False, '+': True}
+#
+#         VALID_RULES = {'col_names': _valid_rules_col_names,
+#                        'data_type': _valid_rules_data_type,
+#                        'negativity': _valid_rules_negativity,
+#                        'obligatory': _valid_rules_obligatory}
+#
+#     class CFR:
+#         pass
+
+
 class ValidateRules:
-    class Promo:
-        pass
+    __rules = {
+        'promo': {},
+        'rtm': {},
+        'tetris': {
+            'file_params': {
+                'worksheet_name': 'Validation rules',
+                'skip_footer_rows': 291
+            },
+            'col_names': {
+                'system_file_name': 'Файл',
+                'col': 'Столбцы',
+                'data_type': 'Тип данных',
+                'negativity': 'Значение>=0',
+                'obligatory': 'Отсутствие пустых полей',
+                'key': 'Ключ',
+                'validation': 'Валидация',
+                'only_for_download_and_preview': 'Только для выгрзуки и превью (нет в input)',
+                'auto_mapping': 'Автоматический маппинг из источника для выгрузки'
+            },
+            'data_type': {'str': str, 'float': float, 'int': int},
+            'negativity': {'': True, '+': False},
+            'obligatory': {'': False, '+': True},
+            'key': {'': None, '1': 1},
+            'only_for_download_and_preview': {'': None, '1': True}
+        },
+        'cfr': {}
+    }
 
-    class RTM:
-        pass
-
-    class Tetris:
-        _valid_rules_col_names = {'system_file_name': 'Файл',
-                                  'col': 'Столбцы',
-                                  'data_type': 'Тип данных',
-                                  'negativity': 'Значение>=0',
-                                  'obligatory': 'Отсутствие пустых полей'}
-
-        _valid_rules_data_type = {'str': str, 'float': float, 'int': int}
-        _valid_rules_negativity = {'': True, '+': False}
-        _valid_rules_obligatory = {'': False, '+': True}
-
-        VALID_RULES = {'col_names': _valid_rules_col_names,
-                       'data_type': _valid_rules_data_type,
-                       'negativity': _valid_rules_negativity,
-                       'obligatory': _valid_rules_obligatory}
-
-    class CFR:
-        pass
+    @classmethod
+    def get(cls, optimizer_type: str):
+        return cls.__rules[optimizer_type]

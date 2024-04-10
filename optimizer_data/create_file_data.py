@@ -2,7 +2,7 @@ import os
 from copy import deepcopy
 
 from optimizer_data.data.input_speadsheets_data import ValidateRules
-from optimizer_data.data.default_data_for_filling import DefaultDataFill, ErrorLogText
+from optimizer_data.data.default_data import DefaultDataFill, ErrorLogText, FileDirectory
 from optimizer_data.operations_file_data import OperationsFileData
 
 import pandas as pd
@@ -15,8 +15,7 @@ class CreateFileData:
         file_data: dict,
         save_directory: str,
         file_type: str = 'xlsx',
-        as_error_log=False
-    ) -> None:
+        as_error_log=False) -> None:
 
         file_path = f'{save_directory}/{file_name}'
 
@@ -44,17 +43,23 @@ class CreateFileData:
     def invalid_files(
         cls,
         valid_rules_data: dict,
-        save_directory: str = 'files/test',
+        save_directory: str | FileDirectory,
         file_type: str = 'xlsx',
-        error_log_text_lang: str = 'eng'
-    ) -> None:
+        error_log_text_lang: str = 'eng') -> None:
+
+        if isinstance(save_directory, str):
+            invalid_files_directory = save_directory
+            error_logs_directory = invalid_files_directory + '/errors_logs'
+        else:
+            invalid_files_directory = save_directory.invalid_input_files
+            error_logs_directory = save_directory.input_files_error_logs
 
         for file_name, file_data in valid_rules_data.items():
 
             created_invalid_data, error_log_data = cls._creating_invalid_data(file_data, error_log_text_lang)
 
-            cls._save_file(file_name, created_invalid_data, save_directory, file_type)
-            cls._save_file(file_name, error_log_data, save_directory + '/error_logs', as_error_log=True)
+            cls._save_file(file_name, created_invalid_data, invalid_files_directory, file_type)
+            cls._save_file(file_name, error_log_data, error_logs_directory, as_error_log=True)
 
     @classmethod
     def _creating_invalid_data(cls, file_data: dict, error_log_text_lang: str = 'eng') -> (dict, dict):
@@ -140,15 +145,17 @@ class CreateFileData:
 
 if __name__ == "__main__":
 
-    file_name = "test_file.xlsx"
+    file_name = "validation_rules_tetris.xlsx"
+    validation_rules_path = FileDirectory().validation_rules
+    # invalid_input_files_path = FileDirectory('tetris').validation_rules
 
-    tetris_valid_rules = ValidateRules.Tetris.VALID_RULES
+    tetris_valid_rules = ValidateRules.get('tetris')
     columns = tetris_valid_rules['col_names'].values()
 
-    xlsx_data = OperationsFileData().read_xlsx(file_name, 'Validation rules', get_columns=columns, skip_footer_rows=291)
-    valid_rules_data = OperationsFileData().convert_validation_rules_data_to_dict(xlsx_data, tetris_valid_rules)
-
-    CreateFileData.invalid_files(valid_rules_data, error_log_text_lang='rus')
+    xlsx_data = OperationsFileData(validation_rules_path).read_xlsx(file_name, 'Validation rules', get_columns=columns, skip_footer_rows=291)
+    valid_rules_data = OperationsFileData.convert_validation_rules_data_to_dict(xlsx_data, tetris_valid_rules)
+    print(valid_rules_data)
+    # CreateFileData.invalid_files(valid_rules_data, save_directory=invalid_input_files_path, error_log_text_lang='rus')
 
     # res = CreateFileData._creating_invalid_data(valid_rules_data['Buyers contracts'], error_log_text_lang='rus')
 

@@ -1,0 +1,3513 @@
+{
+    "calendars": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Calendars",
+        "front_name": "Календари",
+        "parameter": "calendars",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing",
+            "industry",
+            "milk"
+        ],
+        "columns": {
+            "Descriptor": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Season ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Section ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "parameters": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Parameters",
+        "front_name": "Параметры",
+        "parameter": "parameters",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing",
+            "industry",
+            "milk"
+        ],
+        "columns": {
+            "Parameter ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Parameter Value": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Tetris Block": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Parameter Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "plants": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Plants",
+        "front_name": "Заводы",
+        "parameter": "plants",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing",
+            "industry",
+            "milk"
+        ],
+        "columns": {
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Code": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "products": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Products",
+        "front_name": "Продукты",
+        "parameter": "products",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "innovations": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Innovations",
+        "front_name": "Инновации",
+        "parameter": "innovations",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "uoms": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Uoms",
+        "front_name": "Единицы измерения",
+        "parameter": "uoms",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Uom ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Capacity PC": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Net Weight KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Gross Weight KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "warehouses": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Warehouses",
+        "front_name": "Склады",
+        "parameter": "warehouses",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Code": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "demand": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Demand",
+        "front_name": "План продаж",
+        "parameter": "demand",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Total KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "sourcing_scheme": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Sourcing Scheme",
+        "front_name": "План распределения",
+        "parameter": "sourcing_scheme",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Min KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Max KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "deliveries": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Deliveries",
+        "front_name": "Схема доставки",
+        "parameter": "deliveries",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Route ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date Beg ID (Date ID)": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date End ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "TSL": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RTS": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "TT": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "TTA": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "DLC": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "LT": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "DT": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "DOF": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Rate": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "HUC": {
+                "data_type": "float",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #1": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #2": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #3": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #4": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #5": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #6": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #7": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Point #8": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "itineraries": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Itineraries",
+        "front_name": "Маршруты",
+        "parameter": "itineraries",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Route ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Del. Date Beg ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Del. Date End ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Source ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Destination ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Ship. Date Beg ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Ship. Date End ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "shipments": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Shipments",
+        "front_name": "Мастер данные Т1",
+        "parameter": "shipments",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Source ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Destination ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date-Beg ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date-End ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "LT": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "TT": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck RUB": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck PAL": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "premade_volumes": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Premade Volumes",
+        "front_name": "Дополнительные объемы",
+        "parameter": "premade_volumes",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing",
+            "industry"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Total KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "rejections": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Rejections",
+        "front_name": "Альтернативные источники",
+        "parameter": "rejections",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing",
+            "industry"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "demand_options": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Demand Options",
+        "front_name": "Настройки плана продаж",
+        "parameter": "demand_options",
+        "obligatory": false,
+        "calculation_block": [
+            "sourcing"
+        ],
+        "columns": {
+            "Product ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "products",
+                    "innovations"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Product Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "products",
+                    "innovations"
+                ]
+            },
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Location Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Calendar Descriptor": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Batch Count": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Batch KG Precision": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "min_batches": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Min-batches",
+        "front_name": "Минимальные партии",
+        "parameter": "min_batches",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Min-Batch KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "industrial_costs": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Industrial Costs",
+        "front_name": "Индустриальные затраты",
+        "parameter": "industrial_costs",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Unit Cost RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "line_capacities": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Line Capacities",
+        "front_name": "Мощности линий",
+        "parameter": "line_capacities",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Line ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Capacity KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "line_priorities": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Line Priorities",
+        "front_name": "Приоритеты линий",
+        "parameter": "line_priorities",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Line ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Priority Factor": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "mr_adjustments": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "MR Adjustments",
+        "front_name": "Корректировки ПП",
+        "parameter": "mr_adjustments",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Total KG": {
+                "data_type": "float",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Prod. Rate": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "line_bindings": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Line Bindings",
+        "front_name": "Завод-линия-скю",
+        "parameter": "line_bindings",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Line ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "material_contents": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Material Contents",
+        "front_name": "Характеристики материалов",
+        "parameter": "material_contents",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Pro %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "base_formulas": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Base Formulas",
+        "front_name": "Базовые рецепты",
+        "parameter": "base_formulas",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Component ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Component Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Usage Factor": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Scrap Factor": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "reco_formulas": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Reco Formulas",
+        "front_name": "Рецепты восстановления",
+        "parameter": "reco_formulas",
+        "obligatory": false,
+        "calculation_block": [
+            "industry"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Component ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Component Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Usage Factor": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Scrap Factor": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "materials": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Materials",
+        "front_name": "Материалы",
+        "parameter": "materials",
+        "obligatory": false,
+        "calculation_block": [
+            "industry",
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Allow Balancing": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Default Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Default Pro %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "material_groups": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Material Groups",
+        "front_name": "Группы материалов",
+        "parameter": "material_groups",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Group ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Group Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            }
+        }
+    },
+    "table_parameters": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Table Parameters",
+        "front_name": "Табличные параметры",
+        "parameter": "table_parameters",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Parameter ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Stock Age": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "contracts": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Contracts",
+        "front_name": "Контракты поставщиков",
+        "parameter": "contracts",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Vendor ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Contractor ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Contractor Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Min KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Max KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Total KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Pro %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Fat Bonus": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Batch Count": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Batch KG Precision": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Cancellation Allowance": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Commitment Allowance": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Contract Type": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "supply_scheme": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Supply Scheme",
+        "front_name": "ТЗР ферма-завод",
+        "parameter": "supply_scheme",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Vendor ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Truck RUB": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Lead Time": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "farm_sales_scheme": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Farm Sales Scheme",
+        "front_name": "ТЗР ферма-покупатель",
+        "parameter": "farm_sales_scheme",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Vendor ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Buyer ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck RUB": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "plant_sales_scheme": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Plant Sales Scheme",
+        "front_name": "ТЗР завод-покупатель",
+        "parameter": "plant_sales_scheme",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Buyer ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "movement_scheme": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Movement Scheme",
+        "front_name": "ТЗР завод-завод",
+        "parameter": "movement_scheme",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Source ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Source Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Destination ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Destination Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Lead Time": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck RUB": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Truck KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Integral Trucks": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Min-Batch KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "buyers_contracts": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Buyers contracts",
+        "front_name": "Контракты покупателей",
+        "parameter": "buyers_contracts",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Buyer ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Min KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Max KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Contract type": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "reco_capabilities": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Reco Capabilities",
+        "front_name": "Возможности восстановления",
+        "parameter": "reco_capabilities",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Total KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Pro %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "derivation": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Derivation",
+        "front_name": "Производство ингридиентов",
+        "parameter": "derivation",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Total KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Pro %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "mb_adjustments": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "MB Adjustments",
+        "front_name": "Корректировки МБ",
+        "parameter": "mb_adjustments",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Fat KG": {
+                "data_type": "float",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Pro KG": {
+                "data_type": "float",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Reco Fat KG": {
+                "data_type": "float",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Reco Pro KG": {
+                "data_type": "float",
+                "negativity": null,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "separation": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Separation",
+        "front_name": "Сепарация",
+        "parameter": "separation",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Material ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Material RUB/KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Scrap %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Main ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Main Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Main Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Main Share %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Co-Pr. ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": [
+                    "materials"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Co-Pr. Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "materials"
+                ]
+            },
+            "Co-Pr. Fat %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Co-Pr. Share %": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "inbound_capacity": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Inbound Capacity",
+        "front_name": "Возможности приемки",
+        "parameter": "inbound_capacity",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material Group ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "material groups"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Group Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "material groups"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Inbound KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "outbound_capacity": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Outbound Capacity",
+        "front_name": "Возможности отгрузки",
+        "parameter": "outbound_capacity",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material Group ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "material groups"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Group Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "material groups"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Outbound KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    },
+    "stock_bounds": {
+        "scenario_type": "tetris-scenarios",
+        "url_path": null,
+        "system_file_name": "Stock Bounds",
+        "front_name": "Уровни стоков ЖС",
+        "parameter": "stock_bounds",
+        "obligatory": false,
+        "calculation_block": [
+            "milk"
+        ],
+        "columns": {
+            "Material Group ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "material groups"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Material Group Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "material groups"
+                ]
+            },
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "warehouses",
+                    "plants"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Plant Description": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": true,
+                "auto_mapping": [
+                    "warehouses",
+                    "plants"
+                ]
+            },
+            "Date ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": true,
+                "key": 1,
+                "validation": [
+                    "calendars"
+                ],
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Min KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            },
+            "Max KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null
+            }
+        }
+    }
+}

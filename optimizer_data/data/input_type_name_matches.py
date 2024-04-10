@@ -362,192 +362,25 @@ class InputTypeNameMatch:
 
     class Tetris:
         scenario_type = ScenarioTypes.TYPE[Ptype.TETRIS_NEW]
-        optimization_type_sourcing = OptimizationTypes.TYPE[Ptype.TETRIS_NEW]['sourcing']
-        optimization_type_milk = OptimizationTypes.TYPE[Ptype.TETRIS_NEW]['milk']
 
-        TYPES_SOURCING = {
-            'products': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Products',
-                'front_name': 'Продукты',
-                'parameter': 'products',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'innovations': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Innovations',
-                'front_name': 'Инновации',
-                'parameter': 'innovations',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'uoms': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Uoms',
-                'front_name': 'Единицы измерения',
-                'parameter': 'uoms',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'sourcing_calendars': {
+        TYPES = {
+            'calendars': {
                 'scenario_type': scenario_type,
                 'url_path': None,
                 'system_file_name': 'Calendars',
                 'front_name': 'Календари',
-                'parameter': 'sourcing_calendars',
+                'parameter': 'calendars',
                 'obligatory': False,
-                'optimization_type': optimization_type_sourcing
+                'calculation_block': ['sourcing', 'industry', 'milk']
             },
-            'warehouses': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Warehouses',
-                'front_name': 'Склады',
-                'parameter': 'warehouses',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'sourcing_parameters': {
+            'parameters': {
                 'scenario_type': scenario_type,
                 'url_path': None,
                 'system_file_name': 'Parameters',
                 'front_name': 'Параметры',
-                'parameter': 'sourcing_parameters',
+                'parameter': 'parameters',
                 'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'min_batches': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Min-batches',
-                'front_name': 'Минимальные партии',
-                'parameter': 'min_batches',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'line_capacities': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Line Capacities',
-                'front_name': 'Мощности линий',
-                'parameter': 'line_capacities',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'line_priorities': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Line Priorities',
-                'front_name': 'Приоритеты линий',
-                'parameter': 'line_priorities',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'mr_adjustments': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'MR Adjustments',
-                'front_name': 'Корректировки ПП',
-                'parameter': 'mr_adjustments',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'line_bindings': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Line Bindings',
-                'front_name': 'Завод-линия-скю',
-                'parameter': 'line_bindings',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'demand': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Demand',
-                'front_name': 'План продаж',
-                'parameter': 'demand',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'sourcing_scheme': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Sourcing Scheme',
-                'front_name': 'План распределения',
-                'parameter': 'sourcing_scheme',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'deliveries': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Deliveries',
-                'front_name': 'Схема доставки',
-                'parameter': 'deliveries',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'itineraries': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Itineraries',
-                'front_name': 'Маршруты',
-                'parameter': 'itineraries',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'shipments': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Shipments',
-                'front_name': 'Мастер данные Т1',
-                'parameter': 'shipments',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'premade_volumes': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Premade Volumes',
-                'front_name': 'Дополнительные объемы',
-                'parameter': 'premade_volumes',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'rejections': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Rejections',
-                'front_name': 'Альтернативные источники',
-                'parameter': 'rejections',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            },
-            'demand_options': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Demand Options',
-                'front_name': 'Настройки плана продаж',
-                'parameter': 'demand_options',
-                'obligatory': False,
-                'optimization_type': optimization_type_sourcing
-            }
-        }
-
-        TYPES_MILK = {
-            'milk_calendars': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Calendars',
-                'front_name': 'Календари',
-                'parameter': 'milk_calendars',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
+                'calculation_block': ['sourcing', 'industry', 'milk']
             },
             'plants': {
                 'scenario_type': scenario_type,
@@ -556,16 +389,169 @@ class InputTypeNameMatch:
                 'front_name': 'Заводы',
                 'parameter': 'plants',
                 'obligatory': False,
-                'optimization_type': optimization_type_milk
+                'calculation_block': ['sourcing', 'industry', 'milk']
             },
-            'materials': {
+            'products': {
                 'scenario_type': scenario_type,
                 'url_path': None,
-                'system_file_name': 'Materials',
-                'front_name': 'Материалы',
-                'parameter': 'materials',
+                'system_file_name': 'Products',
+                'front_name': 'Продукты',
+                'parameter': 'products',
                 'obligatory': False,
-                'optimization_type': optimization_type_milk
+                'calculation_block': ['sourcing']
+            },
+            'innovations': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Innovations',
+                'front_name': 'Инновации',
+                'parameter': 'innovations',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'uoms': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Uoms',
+                'front_name': 'Единицы измерения',
+                'parameter': 'uoms',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'warehouses': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Warehouses',
+                'front_name': 'Склады',
+                'parameter': 'warehouses',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'demand': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Demand',
+                'front_name': 'План продаж',
+                'parameter': 'demand',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'sourcing_scheme': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Sourcing Scheme',
+                'front_name': 'План распределения',
+                'parameter': 'sourcing_scheme',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'deliveries': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Deliveries',
+                'front_name': 'Схема доставки',
+                'parameter': 'deliveries',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'itineraries': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Itineraries',
+                'front_name': 'Маршруты',
+                'parameter': 'itineraries',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'shipments': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Shipments',
+                'front_name': 'Мастер данные Т1',
+                'parameter': 'shipments',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'premade_volumes': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Premade Volumes',
+                'front_name': 'Дополнительные объемы',
+                'parameter': 'premade_volumes',
+                'obligatory': False,
+                'calculation_block': ['sourcing', 'industry']
+            },
+            'rejections': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Rejections',
+                'front_name': 'Альтернативные источники',
+                'parameter': 'rejections',
+                'obligatory': False,
+                'calculation_block': ['sourcing', 'industry']
+            },
+            'demand_options': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Demand Options',
+                'front_name': 'Настройки плана продаж',
+                'parameter': 'demand_options',
+                'obligatory': False,
+                'calculation_block': ['sourcing']
+            },
+            'min_batches': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Min-batches',
+                'front_name': 'Минимальные партии',
+                'parameter': 'min_batches',
+                'obligatory': False,
+                'calculation_block': ['industry']
+            },
+            'industrial_costs': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Industrial Costs',
+                'front_name': 'Индустриальные затраты',
+                'parameter': 'industrial_costs',
+                'obligatory': False,
+                'calculation_block': ['industry']
+            },
+            'line_capacities': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Line Capacities',
+                'front_name': 'Мощности линий',
+                'parameter': 'line_capacities',
+                'obligatory': False,
+                'calculation_block': ['industry']
+            },
+            'line_priorities': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Line Priorities',
+                'front_name': 'Приоритеты линий',
+                'parameter': 'line_priorities',
+                'obligatory': False,
+                'calculation_block': ['industry']
+            },
+            'mr_adjustments': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'MR Adjustments',
+                'front_name': 'Корректировки ПП',
+                'parameter': 'mr_adjustments',
+                'obligatory': False,
+                'calculation_block': ['industry']
+            },
+            'line_bindings': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Line Bindings',
+                'front_name': 'Завод-линия-скю',
+                'parameter': 'line_bindings',
+                'obligatory': False,
+                'calculation_block': ['industry']
             },
             'material_contents': {
                 'scenario_type': scenario_type,
@@ -574,214 +560,7 @@ class InputTypeNameMatch:
                 'front_name': 'Характеристики материалов',
                 'parameter': 'material_contents',
                 'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'material_groups': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Material Groups',
-                'front_name': 'Группы материалов',
-                'parameter': 'material_groups',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            # 'vendors': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Vendors',
-            #     'front_name': 'Поставщики',
-            #     'parameter': 'vendors',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            # 'buyers': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Buyers',
-            #     'front_name': 'Покупатели',
-            #     'parameter': 'buyers',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            'milk_parameters': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Parameters',
-                'front_name': 'Параметры',
-                'parameter': 'milk_parameters',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'milk_table_parameters': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Table Parameters',
-                'front_name': 'Табличные параметры',
-                'parameter': 'milk_table_parameters',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            # 'new_farms': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'New Farms',
-            #     'front_name': 'Молоко новых ферм',
-            #     'parameter': 'new_farms',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            # 'regular_supplies': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Regular Supplies',
-            #     'front_name': 'База поставок',
-            #     'parameter': 'regular_supplies',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            # 'spot_supplies': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Spot Supplies',
-            #     'front_name': 'Спотовое молоко',
-            #     'parameter': 'spot_supplies',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            # 'shortage': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Shortage',
-            #     'front_name': 'Дефицит',
-            #     'parameter': 'shortage',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            # 'stock_supplies': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Stock Supplies',
-            #     'front_name': 'Начальные стоки',
-            #     'parameter': 'stock_supplies',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            'supply_scheme': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Supply Scheme',
-                'front_name': 'ТЗР ферма-завод',
-                'parameter': 'supply_scheme',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'farm_sales_scheme': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Farm Sales Scheme',
-                'front_name': 'ТЗР ферма-покупатель',
-                'parameter': 'farm_sales_scheme',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'plant_sales_scheme': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Plant Sales Scheme',
-                'front_name': 'ТЗР завод-покупатель',
-                'parameter': 'plant_sales_scheme',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'movement_scheme': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Movement Scheme',
-                'front_name': 'ТЗР завод-завод',
-                'parameter': 'movement_scheme',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            # 'spot_buyers': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Spot Buyers',
-            #     'front_name': 'Спотовые продажи',
-            #     'parameter': 'spot_buyers',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            # 'co_packers_contracts': {
-            #     'scenario_type': scenario_type,
-            #     'url_path': None,
-            #     'system_file_name': 'Copacker Contracts',
-            #     'front_name': 'Продажи копакерам',
-            #     'parameter': 'co_packers_contracts',
-            #     'obligatory': False,
-            #     'optimization_type': optimization_type_milk
-            # },
-            'reco_capabilities': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Reco Capabilities',
-                'front_name': 'Возможности восстановления',
-                'parameter': 'reco_capabilities',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'derivation': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Derivation',
-                'front_name': 'Производство ингридиентов',
-                'parameter': 'derivation',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'mb_adjustments': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'MB Adjustments',
-                'front_name': 'Корректировки МБ',
-                'parameter': 'mb_adjustments',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'separation': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Separation',
-                'front_name': 'Сепарация',
-                'parameter': 'separation',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'inbound_capacity': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Inbound Capacity',
-                'front_name': 'Возможности приемки',
-                'parameter': 'inbound_capacity',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'outbound_capacity': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Outbound Capacity',
-                'front_name': 'Возможности отгрузки',
-                'parameter': 'outbound_capacity',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
-            },
-            'stock_bounds': {
-                'scenario_type': scenario_type,
-                'url_path': None,
-                'system_file_name': 'Stock Bounds',
-                'front_name': 'Уровни стоков ЖС',
-                'parameter': 'stock_bounds',
-                'obligatory': False,
-                'optimization_type': optimization_type_milk
+                'calculation_block': ['industry']
             },
             'base_formulas': {
                 'scenario_type': scenario_type,
@@ -790,7 +569,7 @@ class InputTypeNameMatch:
                 'front_name': 'Базовые рецепты',
                 'parameter': 'base_formulas',
                 'obligatory': False,
-                'optimization_type': optimization_type_milk
+                'calculation_block': ['industry']
             },
             'reco_formulas': {
                 'scenario_type': scenario_type,
@@ -799,11 +578,153 @@ class InputTypeNameMatch:
                 'front_name': 'Рецепты восстановления',
                 'parameter': 'reco_formulas',
                 'obligatory': False,
-                'optimization_type': optimization_type_milk
+                'calculation_block': ['industry']
             },
+            'materials': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Materials',
+                'front_name': 'Материалы',
+                'parameter': 'materials',
+                'obligatory': False,
+                'calculation_block': ['industry', 'milk']
+            },
+            'material_groups': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Material Groups',
+                'front_name': 'Группы материалов',
+                'parameter': 'material_groups',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'table_parameters': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Table Parameters',
+                'front_name': 'Табличные параметры',
+                'parameter': 'table_parameters',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'contracts': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Contracts',
+                'front_name': 'Контракты поставщиков',
+                'parameter': 'contracts',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'supply_scheme': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Supply Scheme',
+                'front_name': 'ТЗР ферма-завод',
+                'parameter': 'supply_scheme',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'farm_sales_scheme': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Farm Sales Scheme',
+                'front_name': 'ТЗР ферма-покупатель',
+                'parameter': 'farm_sales_scheme',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'plant_sales_scheme': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Plant Sales Scheme',
+                'front_name': 'ТЗР завод-покупатель',
+                'parameter': 'plant_sales_scheme',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'movement_scheme': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Movement Scheme',
+                'front_name': 'ТЗР завод-завод',
+                'parameter': 'movement_scheme',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'buyers_contracts': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Buyers contracts',
+                'front_name': 'Контракты покупателей',
+                'parameter': 'buyers_contracts',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'reco_capabilities': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Reco Capabilities',
+                'front_name': 'Возможности восстановления',
+                'parameter': 'reco_capabilities',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'derivation': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Derivation',
+                'front_name': 'Производство ингридиентов',
+                'parameter': 'derivation',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'mb_adjustments': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'MB Adjustments',
+                'front_name': 'Корректировки МБ',
+                'parameter': 'mb_adjustments',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'separation': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Separation',
+                'front_name': 'Сепарация',
+                'parameter': 'separation',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'inbound_capacity': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Inbound Capacity',
+                'front_name': 'Возможности приемки',
+                'parameter': 'inbound_capacity',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'outbound_capacity': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Outbound Capacity',
+                'front_name': 'Возможности отгрузки',
+                'parameter': 'outbound_capacity',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            },
+            'stock_bounds': {
+                'scenario_type': scenario_type,
+                'url_path': None,
+                'system_file_name': 'Stock Bounds',
+                'front_name': 'Уровни стоков ЖС',
+                'parameter': 'stock_bounds',
+                'obligatory': False,
+                'calculation_block': ['milk']
+            }
         }
-
-        TYPES = {**TYPES_SOURCING, **TYPES_MILK}
 
     class CFR:
         scenario_type = ScenarioTypes.TYPE[Ptype.CFR]
