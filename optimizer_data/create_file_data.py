@@ -1,17 +1,14 @@
 import os
 from copy import deepcopy
 
-# from optimizer_data.data.input_speadsheets_data import ValidateRules
 from optimizer_data.data.default_data import DefaultDataFill, ErrorLogText, FileDirectory
-# from optimizer_data.operations_file_data import OperationsFileData
+from optimizer_data.data.excluded_data import ExcludeValidateColumns
 
 import pandas as pd
 
-from optimizer_data.data.excluded_data import ExcludeValidateColumns
-
 
 class CreateFileData:
-    def __init__(self, optimizer_type: str, inputs_data: dict):
+    def __init__(self, optimizer_type: str, inputs_data: dict) -> None:
         self._optimizer_type = optimizer_type
         self._inputs_data = inputs_data
 
@@ -50,8 +47,6 @@ class CreateFileData:
                       error_logs_directory: str | FileDirectory,
                       error_log_text_lang: str = 'eng',
                       file_type: str = 'xlsx') -> None:
-
-        #names = {value['system_file_name']: key for key, value in self._inputs_data.items()}  # костыль
 
         for file_name, file_data in valid_rules_data.items():
 

@@ -2,7 +2,8 @@ from api.input_api_requests import InputApiRequests
 
 
 class ApiOperations:
-    def __init__(self, environment: str, scenario_id: int = None, auth_creds: tuple = None):
+    def __init__(self, environment: str, scenario_id: int = None, auth_creds: tuple = None) -> None:
+
         self._environment = environment
         self._scenario_id = scenario_id
         self._input_api = InputApiRequests(environment)
@@ -10,7 +11,7 @@ class ApiOperations:
         if auth_creds:
             self._input_api.authorization(*auth_creds)
 
-    def upload_input_files(self, inputs_data: dict, files_directory: str, files_type: str = 'xlsx'):
+    def upload_input_files(self, inputs_data: dict, files_directory: str, files_type: str = 'xlsx') -> None:
 
         for input_name, input_data in inputs_data.items():
 
@@ -23,7 +24,7 @@ class ApiOperations:
 
                 print(input_name, response.status_code)
 
-    def delete_input_files(self, inputs_data: dict):
+    def delete_input_files(self, inputs_data: dict) -> None:
 
         for input_name, input_data in inputs_data.items():
 
@@ -31,7 +32,7 @@ class ApiOperations:
 
             print(input_name, response.status_code)
 
-    def get_input_logs(self, inputs_data: dict):
+    def get_input_logs(self, inputs_data: dict) -> dict:
 
         input_logs = {}
 
@@ -47,7 +48,7 @@ class ApiOperations:
 
         return input_logs
 
-    def get_preview_data(self, inputs_data: dict):
+    def get_preview_data(self, inputs_data: dict) -> dict:
 
         preview_data = {}
 

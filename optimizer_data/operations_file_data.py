@@ -9,7 +9,7 @@ import requests
 
 
 class OperationsFileData:
-    def __init__(self, inputs_data: dict, destination: str):
+    def __init__(self, inputs_data: dict, destination: str) -> None:
 
         if not os.path.exists(destination):
             os.makedirs(destination)
@@ -75,12 +75,14 @@ class OperationsFileData:
     class __convert_rules:
         class base:
             @staticmethod
-            def str_to_type(string: str, type_rule: dict):
+            def str_to_type(
+                string: str, type_rule: dict
+            ) -> Type[int] | Type[float] | Type[str] | Type[date] | Type[bool]:
 
                 return type_rule[string]
 
             @staticmethod
-            def split_by(validation: str, separator: str = '+'):
+            def split_by(validation: str, separator: str = '+') -> list | None:
 
                 if validation:
                     return validation.lower().split(separator)
@@ -91,7 +93,7 @@ class OperationsFileData:
             def negativity(
                 negativity: str,
                 negativity_rules: dict,
-                data_type: Type[int] | Type[float] | Type[str] | Type[date] | Type[bool] = None):
+                data_type: Type[int] | Type[float] | Type[str] | Type[date] | Type[bool] = None) -> bool | None:
 
                 if not isinstance(data_type, int | float) and negativity == '':
                     return None
@@ -99,13 +101,13 @@ class OperationsFileData:
 
         class preview:
             @staticmethod
-            def decimal_places(string: str):
+            def decimal_places(string: str) -> int | None:
 
                 if string.isdigit():
                     return int(string)
                 return None
 
-    def convert_validation_rules_data_to_dict(self, validation_rules_data: list[dict], valid_rules: dict):
+    def convert_validation_rules_data_to_dict(self, validation_rules_data: list[dict], valid_rules: dict) -> dict:
 
         input_names = {value['system_file_name']: key for key, value in self._inputs_data.items()}
 
@@ -160,7 +162,7 @@ class OperationsFileData:
         return converted_validation_rules_data
 
     @classmethod
-    def convert_preview_rules_data_to_dict(cls, preview_rules_data: list[dict], preview_rules: dict):
+    def convert_preview_rules_data_to_dict(cls, preview_rules_data: list[dict], preview_rules: dict) -> dict:
 
         converted_preview_rules_data = {}
 
@@ -188,13 +190,13 @@ class OperationsFileData:
         return converted_preview_rules_data
 
     @staticmethod
-    def read_txt(file_path: str, file_type: str = 'txt'):
+    def read_txt(file_path: str, file_type: str = 'txt') -> str:
         with open(f'{file_path}.{file_type}', 'r', encoding='utf8') as file:
             file_data = file.read()
 
         return file_data
 
-    def convert_txt_err_log_to_dict(self, txt_err_logs_data: dict, error_log_lang: str):
+    def convert_txt_err_log_to_dict(self, txt_err_logs_data: dict, error_log_lang: str) -> dict:
         error_log_text_lang = {v: k for k, v in ErrorLogText.get(error_log_lang).items()}
 
         converted_error_logs = {}
@@ -233,7 +235,7 @@ class OperationsFileData:
         return error_logs
 
     @staticmethod
-    def errors_logs_comparison(created_error_logs: dict, received_error_logs: dict):
+    def errors_logs_comparison(created_error_logs: dict, received_error_logs: dict) -> None:
         print(created_error_logs)
         print(received_error_logs)
 

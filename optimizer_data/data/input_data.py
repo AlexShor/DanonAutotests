@@ -8,7 +8,7 @@ from optimizer_data.data.input_type_name_matches import InputTypeNameMatch
 
 
 class InputData:
-    def __init__(self, optimizer_type: str):
+    def __init__(self, optimizer_type: str) -> None:
         self._file_path = FileDirectory().input_data_json
         self._optimizer_type = optimizer_type
 
@@ -81,14 +81,14 @@ class InputData:
         with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
             json.dump(new_data, file, indent=4, ensure_ascii=False)
 
-    def create_json(self, optimizer_type: str):
+    def create_json(self, optimizer_type: str) -> None:
         data = InputTypeNameMatch.Tetris.TYPES
         file_name = 'tetris.json'
 
         with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
 
-    def update_json(self):
+    def update_json(self) -> None:
         pass
 
     def get_from_json(self, file_name: str = None) -> dict:

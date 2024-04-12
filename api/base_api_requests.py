@@ -9,7 +9,8 @@ urllib3.disable_warnings()
 
 
 class BaseApiRequests:
-    def __init__(self, environment: str = 'DEV'):
+    def __init__(self, environment: str = 'DEV') -> None:
+
         self._environment = environment
         self._base_url = f'{BaseUrls.BASE_URLS_BACK.get(environment)}/api'
         self._login = None

@@ -1,14 +1,6 @@
-# from dotenv import load_dotenv
-
-from pages.site_data.credentials import Credentials as Creds
 from api.base_api_requests import BaseApiRequests
-from optimizer_data.data.input_type_name_matches import InputTypeNameMatch
 
 import requests
-# import urllib3
-
-# load_dotenv()
-# urllib3.disable_warnings()
 
 
 class InputApiRequests(BaseApiRequests):
@@ -57,14 +49,18 @@ class InputApiRequests(BaseApiRequests):
                           file_path: str) -> requests.Response | str:
 
         try:
+
             files = {'file': open(f'{file_path}', 'rb')}
             request_parameters = self.__extract_input_params(scenario_id, input_data)
             response = requests.post(files=files, **request_parameters)
             response.encoding = 'UTF-8'
 
             return response
+
         except FileNotFoundError:
+
             print('No such file or directory:', file_path)  # Доработать
+
             return 'Error'
 
     def delete_input_file(self, scenario_id: int, input_data: dict) -> requests.Response:

@@ -11,6 +11,7 @@ from optimizer_data.operations_file_data import OperationsFileData
 
 class Operations:
     def __init__(self, optimizer_type: str, environment: str, scenario_id: int = None):
+
         self._optimizer_type = optimizer_type
         self._inputs_data = InputData(optimizer_type).get_from_json()
 
@@ -18,15 +19,18 @@ class Operations:
         if scenario_id:
             self._api_operation = ApiOperations(environment, scenario_id, creds)
 
-    def upload_valid_input_files(self, files_type: str = 'xlsx'):
+    def upload_valid_input_files(self, files_type: str = 'xlsx') -> None:
+
         files_directory = FileDirectory(self._optimizer_type).valid_input_files
         self._api_operation.upload_input_files(self._inputs_data, files_directory, files_type=files_type)
 
-    def upload_invalid_input_files(self, files_type: str = 'xlsx'):
+    def upload_invalid_input_files(self, files_type: str = 'xlsx') -> None:
+
         files_directory = FileDirectory(self._optimizer_type).invalid_input_files
         self._api_operation.upload_input_files(self._inputs_data, files_directory, files_type=files_type)
 
-    def create_invalid_files(self):
+    def create_invalid_files(self) -> None:
+
         file_name = f'validation_rules_{self._optimizer_type}.xlsx'
         valid_rules = ValidateRules.get(self._optimizer_type)
         columns = valid_rules['col_names'].values()
@@ -46,10 +50,12 @@ class Operations:
         create_file_data = CreateFileData(self._optimizer_type, self._inputs_data)
         create_file_data.invalid_files(converted_valid_rules, invalid_files_directory, error_logs_directory, 'rus')
 
-    def delete_input_files(self):
+    def delete_input_files(self) -> None:
+
         self._api_operation.delete_input_files(self._inputs_data)
 
-    def errors_logs_comparison(self):
+    def errors_logs_comparison(self) -> None:
+
         error_log_lang = 'rus'
 
         preview_rules_path = FileDirectory(self._optimizer_type).input_files_error_logs
@@ -62,6 +68,16 @@ class Operations:
 
         operations_file_data.errors_logs_comparison(created_error_logs, received_error_logs)
 
+    def show_inactive_inputs_data(self) -> None:
+
+        for input_name, input_data in self._inputs_data.items():
+            if not input_data['active']:
+                print(f'Not active input: {input_name}')
+
+            for col_name, col_data in input_data['columns'].items():
+                if not col_data['active']:
+                    print(f'Not active col: {col_name} in {input_name}')
+
 
 if __name__ == "__main__":
     optimizer_type = 'tetris'
@@ -72,5 +88,7 @@ if __name__ == "__main__":
 
     # operation.create_invalid_files()
     # operation.upload_invalid_input_files()
-    operation.errors_logs_comparison()
+    # operation.errors_logs_comparison()
     # operation.delete_input_files()
+
+    # operation.show_inactive_inputs_data()
