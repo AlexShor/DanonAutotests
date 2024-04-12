@@ -54,16 +54,18 @@ class InputApiRequests(BaseApiRequests):
     def upload_input_file(self,
                           scenario_id: int,
                           input_data: dict,
-                          file_path: str,
-                          root_data_directory: str = '../optimizer_data') -> requests.Response:
-        print('upload_input_file')
-        files = {'file': open(f'{root_data_directory}/{file_path}', 'rb')}
+                          file_path: str) -> requests.Response | str:
 
-        request_parameters = self.__extract_input_params(scenario_id, input_data)
-        response = requests.post(files=files, **request_parameters)
-        response.encoding = 'UTF-8'
+        try:
+            files = {'file': open(f'{file_path}', 'rb')}
+            request_parameters = self.__extract_input_params(scenario_id, input_data)
+            response = requests.post(files=files, **request_parameters)
+            response.encoding = 'UTF-8'
 
-        return response
+            return response
+        except FileNotFoundError:
+            print('No such file or directory:', file_path)  # Доработать
+            return 'Error'
 
     def delete_input_file(self, scenario_id: int, input_data: dict) -> requests.Response:
 
@@ -74,14 +76,14 @@ class InputApiRequests(BaseApiRequests):
         return response
 
 
-if __name__ == "__main__":
-    environment = 'LOCAL_STAGE'
-    scenario_id = 466
-    inputs_data = InputTypeNameMatch.Tetris.TYPES
-
-    session = InputApiRequests(environment).authorization(*Creds.auth(env=environment).values())
-
-
-    data = session.get_preview_data(scenario_id, inputs_data['parameters'])
-
-    print(data.text)
+# if __name__ == "__main__":
+#     environment = 'LOCAL_STAGE'
+#     scenario_id = 466
+#     inputs_data = InputTypeNameMatch.Tetris.TYPES
+#
+#     session = InputApiRequests(environment).authorization(*Creds.auth(env=environment).values())
+#
+#
+#     data = session.get_preview_data(scenario_id, inputs_data['parameters'])
+#
+#     print(data.text)

@@ -1,16 +1,4 @@
-# from dotenv import load_dotenv
-
-from pages.site_data.credentials import Credentials as Creds
-from api.base_api_requests import BaseApiRequests
 from api.input_api_requests import InputApiRequests
-from optimizer_data.data.input_type_name_matches import InputTypeNameMatch
-from optimizer_data.data.default_data import FileDirectory
-
-import requests
-# import urllib3
-
-# load_dotenv()
-# urllib3.disable_warnings()
 
 
 class ApiOperations:
@@ -26,33 +14,65 @@ class ApiOperations:
 
         for input_name, input_data in inputs_data.items():
 
-            file_name = f'{input_data.get("system_file_name")}.{files_type}'
-            file_path = f'{files_directory}/{file_name}'
+            if input_data['active']:
 
-            response = self._input_api.upload_input_file(self._scenario_id, input_data, file_path)
+                file_name = f'{input_name}.{files_type}'
+                file_path = f'{files_directory}/{file_name}'
 
-            print(response)
+                response = self._input_api.upload_input_file(self._scenario_id, input_data, file_path)
+
+                print(input_name, response.status_code)
+
+    def delete_input_files(self, inputs_data: dict):
+
+        for input_name, input_data in inputs_data.items():
+
+            response = self._input_api.delete_input_file(self._scenario_id, input_data)
+
+            print(input_name, response.status_code)
 
     def get_input_logs(self, inputs_data: dict):
+
+        input_logs = {}
 
         for input_name, input_data in inputs_data.items():
 
             response = self._input_api.get_input_log(self._scenario_id, input_data)
-            print(type(response))
-            print(response)
+
+            if response.status_code < 300:
+
+                input_logs[input_name] = response.text
+
+            print(input_name, response.status_code)
+
+        return input_logs
+
+    def get_preview_data(self, inputs_data: dict):
+
+        preview_data = {}
+
+        for input_name, input_data in inputs_data.items():
+
+            response = self._input_api.get_preview_data(self._scenario_id, input_data)
+
+            print(input_name, response.status_code)
+            if 200 <= response.status_code < 300:
+                print(response.json())
 
 
-if __name__ == "__main__":
-    pass
-    # environment = 'LOCAL_STAGE'
-    # scenario_id = 469
-    # inputs_data = InputTypeNameMatch.Tetris.TYPES
-    # creds = Creds.auth(env=environment).values()
-    # files_directory = FileDirectory('tetris')
-    #
-    # operation = ApiOperations(environment, scenario_id, creds)
-    #
-    # operation.upload_input_files(inputs_data, files_directory.invalid_input_files)
+# if __name__ == "__main__":
+#     optimizer_type = 'tetris'
+#     environment = 'LOCAL_STAGE'
+#     scenario_id = 470
+#     inputs_data = InputData(optimizer_type).get_from_json()
+#     creds = Creds.auth(env=environment).values()
+#     files_directory = FileDirectory(optimizer_type)
+#
+#     operation = ApiOperations(environment, scenario_id, creds)
+#
+#     operation.upload_input_files(inputs_data, files_directory.valid_input_files, files_type='csv')
+#     # operation.delete_input_files(inputs_data)
+#     operation.get_preview_data(inputs_data)
 
-    #print(data.text)
+
 

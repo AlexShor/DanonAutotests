@@ -1,5 +1,6 @@
 {
     "calendars": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Calendars",
@@ -19,7 +20,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -28,7 +35,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Season ID": {
                 "data_type": "str",
@@ -37,7 +50,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": false,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Section ID": {
                 "data_type": "str",
@@ -46,11 +65,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": false,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "parameters": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Parameters",
@@ -70,7 +96,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Parameter Value": {
                 "data_type": "str",
@@ -79,7 +111,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Tetris Block": {
                 "data_type": "str",
@@ -88,7 +126,9 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             },
             "Parameter Description": {
                 "data_type": "str",
@@ -97,11 +137,14 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             }
         }
     },
     "plants": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Plants",
@@ -121,7 +164,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -130,7 +179,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Code": {
                 "data_type": "str",
@@ -139,11 +194,14 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             }
         }
     },
     "products": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Products",
@@ -161,7 +219,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -170,11 +234,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "innovations": {
+        "active": false,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Innovations",
@@ -192,7 +263,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -201,11 +278,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "uoms": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Uoms",
@@ -226,7 +310,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -238,7 +328,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Uom ID": {
                 "data_type": "str",
@@ -247,7 +343,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Capacity PC": {
                 "data_type": "float",
@@ -256,7 +358,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Net Weight KG": {
                 "data_type": "float",
@@ -265,7 +373,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Gross Weight KG": {
                 "data_type": "float",
@@ -274,11 +388,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "warehouses": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Warehouses",
@@ -296,7 +417,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -305,7 +432,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Code": {
                 "data_type": "str",
@@ -314,11 +447,14 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             }
         }
     },
     "demand": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Demand",
@@ -339,7 +475,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -351,7 +493,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location ID": {
                 "data_type": "int",
@@ -363,7 +511,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -375,7 +529,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -386,7 +546,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Total KG": {
                 "data_type": "float",
@@ -395,11 +561,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "sourcing_scheme": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Sourcing Scheme",
@@ -420,7 +593,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -432,7 +611,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location ID": {
                 "data_type": "int",
@@ -444,7 +629,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -456,7 +647,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -468,7 +665,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -480,7 +683,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -491,7 +700,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Min KG": {
                 "data_type": "float",
@@ -500,7 +715,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Max KG": {
                 "data_type": "float",
@@ -509,11 +730,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "deliveries": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Deliveries",
@@ -534,7 +762,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -546,7 +780,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location ID": {
                 "data_type": "int",
@@ -558,7 +798,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -570,7 +816,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -582,7 +834,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -594,7 +852,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Route ID": {
                 "data_type": "str",
@@ -603,9 +867,15 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
-            "Date Beg ID (Date ID)": {
+            "Date Beg ID": {
                 "data_type": "str",
                 "negativity": null,
                 "obligatory": true,
@@ -614,7 +884,9 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             },
             "Date End ID": {
                 "data_type": "str",
@@ -625,7 +897,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "TSL": {
                 "data_type": "float",
@@ -634,7 +912,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "RTS": {
                 "data_type": "float",
@@ -643,7 +927,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "TT": {
                 "data_type": "float",
@@ -652,7 +942,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "TTA": {
                 "data_type": "float",
@@ -661,7 +957,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "DLC": {
                 "data_type": "float",
@@ -670,7 +972,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "LT": {
                 "data_type": "int",
@@ -679,7 +987,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "DT": {
                 "data_type": "float",
@@ -688,7 +1002,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "DOF": {
                 "data_type": "float",
@@ -697,7 +1017,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Rate": {
                 "data_type": "float",
@@ -706,7 +1032,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 1,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "HUC": {
                 "data_type": "float",
@@ -715,7 +1047,9 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             },
             "Point #1": {
                 "data_type": "int",
@@ -724,7 +1058,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #2": {
                 "data_type": "int",
@@ -733,7 +1073,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #3": {
                 "data_type": "int",
@@ -742,7 +1088,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #4": {
                 "data_type": "int",
@@ -751,7 +1103,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #5": {
                 "data_type": "int",
@@ -760,7 +1118,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #6": {
                 "data_type": "int",
@@ -769,7 +1133,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #7": {
                 "data_type": "int",
@@ -778,7 +1148,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Point #8": {
                 "data_type": "int",
@@ -787,11 +1163,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "itineraries": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Itineraries",
@@ -812,7 +1195,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -824,7 +1213,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location ID": {
                 "data_type": "int",
@@ -836,7 +1231,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -848,7 +1249,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -860,7 +1267,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -872,7 +1285,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Route ID": {
                 "data_type": "str",
@@ -881,7 +1300,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Del. Date Beg ID": {
                 "data_type": "str",
@@ -892,7 +1317,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Del. Date End ID": {
                 "data_type": "str",
@@ -903,7 +1334,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Source ID": {
                 "data_type": "int",
@@ -915,7 +1352,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Destination ID": {
                 "data_type": "int",
@@ -927,7 +1370,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Ship. Date Beg ID": {
                 "data_type": "str",
@@ -938,7 +1387,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Ship. Date End ID": {
                 "data_type": "str",
@@ -949,11 +1404,18 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "shipments": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Shipments",
@@ -974,7 +1436,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Destination ID": {
                 "data_type": "int",
@@ -986,7 +1454,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date-Beg ID": {
                 "data_type": "str",
@@ -997,7 +1471,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date-End ID": {
                 "data_type": "str",
@@ -1008,7 +1488,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "LT": {
                 "data_type": "int",
@@ -1017,7 +1503,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "TT": {
                 "data_type": "float",
@@ -1026,7 +1518,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Truck RUB": {
                 "data_type": "float",
@@ -1035,7 +1533,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Truck KG": {
                 "data_type": "float",
@@ -1044,7 +1548,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Truck PAL": {
                 "data_type": "float",
@@ -1053,11 +1563,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "premade_volumes": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Premade Volumes",
@@ -1079,7 +1596,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -1091,7 +1614,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1103,7 +1632,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1115,7 +1650,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -1126,7 +1667,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Total KG": {
                 "data_type": "float",
@@ -1135,11 +1682,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "rejections": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Rejections",
@@ -1161,7 +1715,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -1173,7 +1733,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1185,7 +1751,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1197,7 +1769,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -1208,7 +1786,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -1217,11 +1801,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "demand_options": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Demand Options",
@@ -1242,7 +1833,13 @@
                     "innovations"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Product Description": {
                 "data_type": "str",
@@ -1254,7 +1851,13 @@
                 "auto_mapping": [
                     "products",
                     "innovations"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location ID": {
                 "data_type": "int",
@@ -1266,7 +1869,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Location Description": {
                 "data_type": "str",
@@ -1278,7 +1887,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Calendar Descriptor": {
                 "data_type": "str",
@@ -1289,7 +1904,9 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             },
             "Batch Count": {
                 "data_type": "int",
@@ -1298,7 +1915,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Batch KG Precision": {
                 "data_type": "int",
@@ -1307,11 +1930,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "min_batches": {
+        "active": false,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Min-batches",
@@ -1331,7 +1961,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1342,7 +1978,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1354,7 +1996,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1366,7 +2014,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Min-Batch KG": {
                 "data_type": "float",
@@ -1375,11 +2029,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "industrial_costs": {
+        "active": false,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Industrial Costs",
@@ -1399,7 +2060,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1410,7 +2077,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1422,7 +2095,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1434,7 +2113,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Unit Cost RUB/KG": {
                 "data_type": "float",
@@ -1443,11 +2128,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "line_capacities": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Line Capacities",
@@ -1468,7 +2160,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1480,7 +2178,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Line ID": {
                 "data_type": "str",
@@ -1489,7 +2193,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -1500,7 +2210,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Capacity KG": {
                 "data_type": "float",
@@ -1509,11 +2225,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "line_priorities": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Line Priorities",
@@ -1534,7 +2257,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1546,7 +2275,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Line ID": {
                 "data_type": "str",
@@ -1555,7 +2290,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Priority Factor": {
                 "data_type": "float",
@@ -1564,11 +2305,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 1,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "mr_adjustments": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "MR Adjustments",
@@ -1588,7 +2336,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1599,7 +2353,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1611,7 +2371,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1623,7 +2389,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -1634,7 +2406,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Total KG": {
                 "data_type": "float",
@@ -1643,7 +2421,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Prod. Rate": {
                 "data_type": "float",
@@ -1652,11 +2436,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 1,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "line_bindings": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Line Bindings",
@@ -1676,7 +2467,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1687,7 +2484,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1699,7 +2502,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1711,7 +2520,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Line ID": {
                 "data_type": "str",
@@ -1720,11 +2535,18 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "material_contents": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Material Contents",
@@ -1745,7 +2567,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1757,7 +2585,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material ID": {
                 "data_type": "int",
@@ -1768,7 +2602,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1779,7 +2619,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -1790,7 +2636,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Fat %": {
                 "data_type": "float",
@@ -1799,7 +2651,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Pro %": {
                 "data_type": "float",
@@ -1808,11 +2666,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             }
         }
     },
     "base_formulas": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Base Formulas",
@@ -1832,7 +2697,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1843,7 +2714,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1855,7 +2732,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1867,7 +2750,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Component ID": {
                 "data_type": "int",
@@ -1878,7 +2767,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Component Description": {
                 "data_type": "str",
@@ -1889,7 +2784,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Usage Factor": {
                 "data_type": "float",
@@ -1898,7 +2799,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 4,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Scrap Factor": {
                 "data_type": "float",
@@ -1907,11 +2814,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 4,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "reco_formulas": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Reco Formulas",
@@ -1931,7 +2845,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -1942,7 +2862,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -1954,7 +2880,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -1966,7 +2898,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Component ID": {
                 "data_type": "int",
@@ -1977,7 +2915,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Component Description": {
                 "data_type": "str",
@@ -1988,7 +2932,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Usage Factor": {
                 "data_type": "float",
@@ -1997,7 +2947,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 4,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Scrap Factor": {
                 "data_type": "float",
@@ -2006,11 +2962,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 4,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "materials": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Materials",
@@ -2029,7 +2992,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2038,7 +3007,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Allow Balancing": {
                 "data_type": "int",
@@ -2047,7 +3022,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Default Fat %": {
                 "data_type": "float",
@@ -2056,7 +3037,9 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             },
             "Default Pro %": {
                 "data_type": "float",
@@ -2065,11 +3048,14 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             }
         }
     },
     "material_groups": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Material Groups",
@@ -2087,7 +3073,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Group Description": {
                 "data_type": "str",
@@ -2096,7 +3088,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material ID": {
                 "data_type": "int",
@@ -2107,7 +3105,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2118,11 +3122,18 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "table_parameters": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Table Parameters",
@@ -2140,7 +3151,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Stock Age": {
                 "data_type": "int",
@@ -2149,7 +3166,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -2158,11 +3181,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "contracts": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Contracts",
@@ -2182,7 +3212,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2193,7 +3229,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Vendor ID": {
                 "data_type": "int",
@@ -2202,7 +3244,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Contractor ID": {
                 "data_type": "int",
@@ -2214,7 +3262,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Contractor Description": {
                 "data_type": "str",
@@ -2226,7 +3280,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -2237,7 +3297,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Min KG": {
                 "data_type": "float",
@@ -2246,7 +3312,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Max KG": {
                 "data_type": "float",
@@ -2255,7 +3327,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Total KG": {
                 "data_type": "float",
@@ -2264,7 +3342,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Fat %": {
                 "data_type": "float",
@@ -2273,7 +3357,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Pro %": {
                 "data_type": "float",
@@ -2282,7 +3372,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -2291,7 +3387,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Fat Bonus": {
                 "data_type": "float",
@@ -2300,7 +3402,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Batch Count": {
                 "data_type": "int",
@@ -2309,7 +3417,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Batch KG Precision": {
                 "data_type": "int",
@@ -2318,7 +3432,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Cancellation Allowance": {
                 "data_type": "int",
@@ -2327,7 +3447,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Commitment Allowance": {
                 "data_type": "int",
@@ -2336,7 +3462,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Contract Type": {
                 "data_type": "str",
@@ -2345,11 +3477,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "supply_scheme": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Supply Scheme",
@@ -2369,7 +3508,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2380,7 +3525,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Vendor ID": {
                 "data_type": "int",
@@ -2389,7 +3540,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -2401,7 +3558,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -2413,7 +3576,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Truck RUB": {
                 "data_type": "float",
@@ -2422,7 +3591,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Lead Time": {
                 "data_type": "int",
@@ -2431,7 +3606,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Truck KG": {
                 "data_type": "float",
@@ -2440,11 +3621,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "farm_sales_scheme": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Farm Sales Scheme",
@@ -2464,7 +3652,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2475,7 +3669,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Vendor ID": {
                 "data_type": "int",
@@ -2484,7 +3684,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Buyer ID": {
                 "data_type": "int",
@@ -2493,7 +3699,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Truck RUB": {
                 "data_type": "float",
@@ -2502,7 +3714,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Truck KG": {
                 "data_type": "float",
@@ -2511,11 +3729,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "plant_sales_scheme": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Plant Sales Scheme",
@@ -2535,7 +3760,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2546,7 +3777,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -2558,7 +3795,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -2570,7 +3813,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Buyer ID": {
                 "data_type": "int",
@@ -2579,7 +3828,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -2588,11 +3843,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "movement_scheme": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Movement Scheme",
@@ -2612,7 +3874,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2623,7 +3891,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Source ID": {
                 "data_type": "int",
@@ -2635,7 +3909,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Source Description": {
                 "data_type": "str",
@@ -2647,7 +3927,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Destination ID": {
                 "data_type": "int",
@@ -2659,7 +3945,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Destination Description": {
                 "data_type": "str",
@@ -2671,7 +3963,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Lead Time": {
                 "data_type": "int",
@@ -2680,7 +3978,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Truck RUB": {
                 "data_type": "float",
@@ -2689,7 +3993,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Truck KG": {
                 "data_type": "float",
@@ -2698,7 +4008,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Integral Trucks": {
                 "data_type": "int",
@@ -2707,7 +4023,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Min-Batch KG": {
                 "data_type": "float",
@@ -2716,11 +4038,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "buyers_contracts": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Buyers contracts",
@@ -2740,7 +4069,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2751,7 +4086,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Buyer ID": {
                 "data_type": "int",
@@ -2760,7 +4101,13 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -2771,7 +4118,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Min KG": {
                 "data_type": "float",
@@ -2780,7 +4133,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Max KG": {
                 "data_type": "float",
@@ -2789,7 +4148,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -2798,7 +4163,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Contract type": {
                 "data_type": "str",
@@ -2807,11 +4178,14 @@
                 "key": 1,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
             }
         }
     },
     "reco_capabilities": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Reco Capabilities",
@@ -2831,7 +4205,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2842,7 +4222,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -2854,7 +4240,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -2866,7 +4258,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -2877,7 +4275,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Total KG": {
                 "data_type": "float",
@@ -2886,7 +4290,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Fat %": {
                 "data_type": "float",
@@ -2895,7 +4305,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Pro %": {
                 "data_type": "float",
@@ -2904,7 +4320,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -2913,11 +4335,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "derivation": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Derivation",
@@ -2937,7 +4366,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -2948,7 +4383,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -2960,7 +4401,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -2972,7 +4419,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -2983,7 +4436,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Total KG": {
                 "data_type": "float",
@@ -2992,7 +4451,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Fat %": {
                 "data_type": "float",
@@ -3001,7 +4466,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Pro %": {
                 "data_type": "float",
@@ -3010,7 +4481,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "RUB/KG": {
                 "data_type": "float",
@@ -3019,11 +4496,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             }
         }
     },
     "mb_adjustments": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "MB Adjustments",
@@ -3044,7 +4528,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -3056,7 +4546,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -3067,7 +4563,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Fat KG": {
                 "data_type": "float",
@@ -3076,7 +4578,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Pro KG": {
                 "data_type": "float",
@@ -3085,7 +4593,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Reco Fat KG": {
                 "data_type": "float",
@@ -3094,7 +4608,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Reco Pro KG": {
                 "data_type": "float",
@@ -3103,11 +4623,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "separation": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Separation",
@@ -3128,7 +4655,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -3140,7 +4673,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material ID": {
                 "data_type": "int",
@@ -3151,7 +4690,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Description": {
                 "data_type": "str",
@@ -3162,7 +4707,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material RUB/KG": {
                 "data_type": "float",
@@ -3171,7 +4722,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Scrap %": {
                 "data_type": "float",
@@ -3180,7 +4737,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Main ID": {
                 "data_type": "int",
@@ -3191,7 +4754,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Main Description": {
                 "data_type": "str",
@@ -3202,7 +4771,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Main Fat %": {
                 "data_type": "float",
@@ -3211,7 +4786,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Main Share %": {
                 "data_type": "float",
@@ -3220,7 +4801,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Co-Pr. ID": {
                 "data_type": "int",
@@ -3231,7 +4818,13 @@
                     "materials"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Co-Pr. Description": {
                 "data_type": "str",
@@ -3242,7 +4835,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "materials"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Co-Pr. Fat %": {
                 "data_type": "float",
@@ -3251,7 +4850,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             },
             "Co-Pr. Share %": {
                 "data_type": "float",
@@ -3260,11 +4865,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 2,
+                    "percentage": true,
+                    "separator": false
+                }
             }
         }
     },
     "inbound_capacity": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Inbound Capacity",
@@ -3284,7 +4896,13 @@
                     "material groups"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Group Description": {
                 "data_type": "str",
@@ -3295,7 +4913,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "material groups"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -3307,7 +4931,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -3319,7 +4949,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -3330,7 +4966,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Inbound KG": {
                 "data_type": "float",
@@ -3339,11 +4981,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "outbound_capacity": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Outbound Capacity",
@@ -3363,7 +5012,13 @@
                     "material groups"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Group Description": {
                 "data_type": "str",
@@ -3374,7 +5029,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "material groups"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -3386,7 +5047,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -3398,7 +5065,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -3409,7 +5082,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Outbound KG": {
                 "data_type": "float",
@@ -3418,11 +5097,18 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     },
     "stock_bounds": {
+        "active": true,
         "scenario_type": "tetris-scenarios",
         "url_path": null,
         "system_file_name": "Stock Bounds",
@@ -3442,7 +5128,13 @@
                     "material groups"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Material Group Description": {
                 "data_type": "str",
@@ -3453,7 +5145,13 @@
                 "only_for_download_and_preview": true,
                 "auto_mapping": [
                     "material groups"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant ID": {
                 "data_type": "int",
@@ -3465,7 +5163,13 @@
                     "plants"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Plant Description": {
                 "data_type": "str",
@@ -3477,7 +5181,13 @@
                 "auto_mapping": [
                     "warehouses",
                     "plants"
-                ]
+                ],
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Date ID": {
                 "data_type": "str",
@@ -3488,7 +5198,13 @@
                     "calendars"
                 ],
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": null,
+                    "percentage": false,
+                    "separator": false
+                }
             },
             "Min KG": {
                 "data_type": "float",
@@ -3497,7 +5213,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             },
             "Max KG": {
                 "data_type": "float",
@@ -3506,7 +5228,13 @@
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
-                "auto_mapping": null
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": {
+                    "decimal_places": 0,
+                    "percentage": false,
+                    "separator": true
+                }
             }
         }
     }

@@ -7,5 +7,19 @@ class DataTypesErrorExceptions:
             ['rejections', 'date id']]
 
 
-class ExcludeColumns:
-    pass
+class ExcludeValidateColumns:
+    __excluded = {
+        'promo': {},
+        'rtm': {},
+        'tetris': {
+            'parameters': ['Parameter ID', 'Parameter Value'],
+            'plants': ['Location Code'],
+            'warehouses': ['Location Code'],
+            'rejections': ['Date ID']
+        },
+        'cfr': {}
+    }
+
+    @classmethod
+    def get(cls, optimizer_type: str):
+        return cls.__excluded[optimizer_type]
