@@ -63,7 +63,7 @@ class CreateFileData:
 
         invalid_data = {}
         error_log_data = {}
-        error_log_text = ErrorLogText.get(error_log_text_lang)
+        error_log_text = ErrorLogText().get(error_log_text_lang)
         exclude_valid_cols = ExcludeValidateColumns.get(self._optimizer_type)
 
         def __error_log_data(col_name: str, type_error: str, row: int) -> None:
@@ -149,6 +149,7 @@ class CreateFileData:
                 obligatory_switch = not obligatory_switch
 
         return invalid_data, error_log_data
+
 
 # if __name__ == "__main__":
 #

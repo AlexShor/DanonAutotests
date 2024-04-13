@@ -371,6 +371,7 @@ class InputTypeNameMatch:
                 'front_name': 'Календари',
                 'parameter': 'calendars',
                 'obligatory': False,
+                'upload_queue': 1,
                 'calculation_block': ['sourcing', 'industry', 'milk']
             },
             'parameters': {
@@ -380,6 +381,7 @@ class InputTypeNameMatch:
                 'front_name': 'Параметры',
                 'parameter': 'parameters',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing', 'industry', 'milk']
             },
             'plants': {
@@ -389,6 +391,7 @@ class InputTypeNameMatch:
                 'front_name': 'Заводы',
                 'parameter': 'plants',
                 'obligatory': False,
+                'upload_queue': 1,
                 'calculation_block': ['sourcing', 'industry', 'milk']
             },
             'products': {
@@ -398,6 +401,7 @@ class InputTypeNameMatch:
                 'front_name': 'Продукты',
                 'parameter': 'products',
                 'obligatory': False,
+                'upload_queue': 1,
                 'calculation_block': ['sourcing']
             },
             'innovations': {
@@ -407,6 +411,7 @@ class InputTypeNameMatch:
                 'front_name': 'Инновации',
                 'parameter': 'innovations',
                 'obligatory': False,
+                'upload_queue': 1,
                 'calculation_block': ['sourcing']
             },
             'uoms': {
@@ -416,6 +421,7 @@ class InputTypeNameMatch:
                 'front_name': 'Единицы измерения',
                 'parameter': 'uoms',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'warehouses': {
@@ -425,6 +431,7 @@ class InputTypeNameMatch:
                 'front_name': 'Склады',
                 'parameter': 'warehouses',
                 'obligatory': False,
+                'upload_queue': 1,
                 'calculation_block': ['sourcing']
             },
             'demand': {
@@ -434,6 +441,7 @@ class InputTypeNameMatch:
                 'front_name': 'План продаж',
                 'parameter': 'demand',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'sourcing_scheme': {
@@ -443,6 +451,7 @@ class InputTypeNameMatch:
                 'front_name': 'План распределения',
                 'parameter': 'sourcing_scheme',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'deliveries': {
@@ -452,6 +461,7 @@ class InputTypeNameMatch:
                 'front_name': 'Схема доставки',
                 'parameter': 'deliveries',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'itineraries': {
@@ -461,6 +471,7 @@ class InputTypeNameMatch:
                 'front_name': 'Маршруты',
                 'parameter': 'itineraries',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'shipments': {
@@ -470,6 +481,7 @@ class InputTypeNameMatch:
                 'front_name': 'Мастер данные Т1',
                 'parameter': 'shipments',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'premade_volumes': {
@@ -479,6 +491,7 @@ class InputTypeNameMatch:
                 'front_name': 'Дополнительные объемы',
                 'parameter': 'premade_volumes',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing', 'industry']
             },
             'rejections': {
@@ -488,6 +501,7 @@ class InputTypeNameMatch:
                 'front_name': 'Альтернативные источники',
                 'parameter': 'rejections',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing', 'industry']
             },
             'demand_options': {
@@ -497,6 +511,7 @@ class InputTypeNameMatch:
                 'front_name': 'Настройки плана продаж',
                 'parameter': 'demand_options',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['sourcing']
             },
             'min_batches': {
@@ -506,6 +521,7 @@ class InputTypeNameMatch:
                 'front_name': 'Минимальные партии',
                 'parameter': 'min_batches',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'industrial_costs': {
@@ -515,6 +531,7 @@ class InputTypeNameMatch:
                 'front_name': 'Индустриальные затраты',
                 'parameter': 'industrial_costs',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'line_capacities': {
@@ -524,6 +541,7 @@ class InputTypeNameMatch:
                 'front_name': 'Мощности линий',
                 'parameter': 'line_capacities',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'line_priorities': {
@@ -533,6 +551,7 @@ class InputTypeNameMatch:
                 'front_name': 'Приоритеты линий',
                 'parameter': 'line_priorities',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'mr_adjustments': {
@@ -542,6 +561,7 @@ class InputTypeNameMatch:
                 'front_name': 'Корректировки ПП',
                 'parameter': 'mr_adjustments',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'line_bindings': {
@@ -551,6 +571,7 @@ class InputTypeNameMatch:
                 'front_name': 'Завод-линия-скю',
                 'parameter': 'line_bindings',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'material_contents': {
@@ -560,6 +581,7 @@ class InputTypeNameMatch:
                 'front_name': 'Характеристики материалов',
                 'parameter': 'material_contents',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'base_formulas': {
@@ -569,6 +591,7 @@ class InputTypeNameMatch:
                 'front_name': 'Базовые рецепты',
                 'parameter': 'base_formulas',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'reco_formulas': {
@@ -578,6 +601,7 @@ class InputTypeNameMatch:
                 'front_name': 'Рецепты восстановления',
                 'parameter': 'reco_formulas',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['industry']
             },
             'materials': {
@@ -587,6 +611,7 @@ class InputTypeNameMatch:
                 'front_name': 'Материалы',
                 'parameter': 'materials',
                 'obligatory': False,
+                'upload_queue': 1,
                 'calculation_block': ['industry', 'milk']
             },
             'material_groups': {
@@ -596,6 +621,7 @@ class InputTypeNameMatch:
                 'front_name': 'Группы материалов',
                 'parameter': 'material_groups',
                 'obligatory': False,
+                'upload_queue': 2,
                 'calculation_block': ['milk']
             },
             'table_parameters': {
@@ -605,6 +631,7 @@ class InputTypeNameMatch:
                 'front_name': 'Табличные параметры',
                 'parameter': 'table_parameters',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'contracts': {
@@ -614,6 +641,7 @@ class InputTypeNameMatch:
                 'front_name': 'Контракты поставщиков',
                 'parameter': 'contracts',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'supply_scheme': {
@@ -623,6 +651,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР ферма-завод',
                 'parameter': 'supply_scheme',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'farm_sales_scheme': {
@@ -632,6 +661,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР ферма-покупатель',
                 'parameter': 'farm_sales_scheme',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'plant_sales_scheme': {
@@ -641,6 +671,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР завод-покупатель',
                 'parameter': 'plant_sales_scheme',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'movement_scheme': {
@@ -650,6 +681,7 @@ class InputTypeNameMatch:
                 'front_name': 'ТЗР завод-завод',
                 'parameter': 'movement_scheme',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'buyers_contracts': {
@@ -659,6 +691,7 @@ class InputTypeNameMatch:
                 'front_name': 'Контракты покупателей',
                 'parameter': 'buyers_contracts',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'reco_capabilities': {
@@ -668,6 +701,7 @@ class InputTypeNameMatch:
                 'front_name': 'Возможности восстановления',
                 'parameter': 'reco_capabilities',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'derivation': {
@@ -677,6 +711,7 @@ class InputTypeNameMatch:
                 'front_name': 'Производство ингридиентов',
                 'parameter': 'derivation',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'mb_adjustments': {
@@ -686,6 +721,7 @@ class InputTypeNameMatch:
                 'front_name': 'Корректировки МБ',
                 'parameter': 'mb_adjustments',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'separation': {
@@ -695,6 +731,7 @@ class InputTypeNameMatch:
                 'front_name': 'Сепарация',
                 'parameter': 'separation',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'inbound_capacity': {
@@ -704,6 +741,7 @@ class InputTypeNameMatch:
                 'front_name': 'Возможности приемки',
                 'parameter': 'inbound_capacity',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'outbound_capacity': {
@@ -713,6 +751,7 @@ class InputTypeNameMatch:
                 'front_name': 'Возможности отгрузки',
                 'parameter': 'outbound_capacity',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             },
             'stock_bounds': {
@@ -722,6 +761,7 @@ class InputTypeNameMatch:
                 'front_name': 'Уровни стоков ЖС',
                 'parameter': 'stock_bounds',
                 'obligatory': False,
+                'upload_queue': 3,
                 'calculation_block': ['milk']
             }
         }

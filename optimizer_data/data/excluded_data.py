@@ -1,3 +1,6 @@
+from project_data.main_data import ProjectType
+
+
 class DataTypesErrorExceptions:
     DATA = [['gps', 'SKU_SAP_CODE'],
             ['routes', 'code_plant'],
@@ -9,15 +12,21 @@ class DataTypesErrorExceptions:
 
 class ExcludeValidateColumns:
     __excluded = {
-        'promo': {},
-        'rtm': {},
-        'tetris': {
+        ProjectType.PROMO: {
+
+        },
+        ProjectType.RTM: {
+
+        },
+        ProjectType.TETRIS: {
             'parameters': ['Parameter ID', 'Parameter Value'],
             'plants': ['Location Code'],
             'warehouses': ['Location Code'],
             'rejections': ['Date ID']
         },
-        'cfr': {}
+        ProjectType.CFR: {
+
+        }
     }
 
     @classmethod

@@ -73,7 +73,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 1
     },
     "parameters": {
         "active": true,
@@ -141,7 +142,8 @@
                 "active": true,
                 "preview_rules": null
             }
-        }
+        },
+        "upload_queue": 3
     },
     "plants": {
         "active": true,
@@ -198,7 +200,8 @@
                 "active": true,
                 "preview_rules": null
             }
-        }
+        },
+        "upload_queue": 1
     },
     "products": {
         "active": true,
@@ -242,7 +245,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 1
     },
     "innovations": {
         "active": false,
@@ -286,7 +290,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 1
     },
     "uoms": {
         "active": true,
@@ -396,7 +401,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "warehouses": {
         "active": true,
@@ -451,7 +457,8 @@
                 "active": true,
                 "preview_rules": null
             }
-        }
+        },
+        "upload_queue": 1
     },
     "demand": {
         "active": true,
@@ -569,7 +576,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "sourcing_scheme": {
         "active": true,
@@ -738,7 +746,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "deliveries": {
         "active": true,
@@ -1171,7 +1180,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "itineraries": {
         "active": true,
@@ -1412,7 +1422,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "shipments": {
         "active": true,
@@ -1571,7 +1582,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "premade_volumes": {
         "active": true,
@@ -1690,7 +1702,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "rejections": {
         "active": true,
@@ -1809,7 +1822,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "demand_options": {
         "active": true,
@@ -1938,7 +1952,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "min_batches": {
         "active": false,
@@ -2037,7 +2052,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "industrial_costs": {
         "active": false,
@@ -2136,7 +2152,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "line_capacities": {
         "active": true,
@@ -2233,7 +2250,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "line_priorities": {
         "active": true,
@@ -2313,7 +2331,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "mr_adjustments": {
         "active": true,
@@ -2444,7 +2463,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "line_bindings": {
         "active": true,
@@ -2543,7 +2563,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "material_contents": {
         "active": true,
@@ -2674,7 +2695,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "base_formulas": {
         "active": true,
@@ -2822,7 +2844,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "reco_formulas": {
         "active": true,
@@ -2970,7 +2993,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "materials": {
         "active": true,
@@ -3052,7 +3076,8 @@
                 "active": true,
                 "preview_rules": null
             }
-        }
+        },
+        "upload_queue": 1
     },
     "material_groups": {
         "active": true,
@@ -3130,7 +3155,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 2
     },
     "table_parameters": {
         "active": true,
@@ -3189,7 +3215,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "contracts": {
         "active": true,
@@ -3485,7 +3512,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "supply_scheme": {
         "active": true,
@@ -3629,7 +3657,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "farm_sales_scheme": {
         "active": true,
@@ -3737,7 +3766,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "plant_sales_scheme": {
         "active": true,
@@ -3851,7 +3881,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "movement_scheme": {
         "active": true,
@@ -4046,7 +4077,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "buyers_contracts": {
         "active": true,
@@ -4182,7 +4214,8 @@
                 "active": true,
                 "preview_rules": null
             }
-        }
+        },
+        "upload_queue": 3
     },
     "reco_capabilities": {
         "active": true,
@@ -4343,7 +4376,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "derivation": {
         "active": true,
@@ -4504,7 +4538,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "mb_adjustments": {
         "active": true,
@@ -4631,7 +4666,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "separation": {
         "active": true,
@@ -4873,7 +4909,8 @@
                     "separator": false
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "inbound_capacity": {
         "active": true,
@@ -4989,7 +5026,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "outbound_capacity": {
         "active": true,
@@ -5105,7 +5143,8 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     },
     "stock_bounds": {
         "active": true,
@@ -5236,6 +5275,7 @@
                     "separator": true
                 }
             }
-        }
+        },
+        "upload_queue": 3
     }
 }

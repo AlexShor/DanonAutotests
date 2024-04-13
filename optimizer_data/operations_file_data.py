@@ -197,13 +197,13 @@ class OperationsFileData:
         return file_data
 
     def convert_txt_err_log_to_dict(self, txt_err_logs_data: dict, error_log_lang: str) -> dict:
-        error_log_text_lang = {v: k for k, v in ErrorLogText.get(error_log_lang).items()}
+        error_log_text_lang = {v: k for k, v in ErrorLogText().get(error_log_lang).items()}
 
         converted_error_logs = {}
 
         for input_name, txt_err_log in txt_err_logs_data.items():
 
-            if self._inputs_data[input_name]['active']:
+            if self._inputs_data.get(input_name, {}).get('active'):
 
                 converted_error_log = {}
 
@@ -224,11 +224,9 @@ class OperationsFileData:
 
         for input_name, input_data in self._inputs_data.items():
 
-            if input_data['active']:
+            file_path = f'{self._destination}/{input_name}'
 
-                file_path = f'{self._destination}/{input_name}'
-
-                error_logs_text[input_name] = self.read_txt(file_path)
+            error_logs_text[input_name] = self.read_txt(file_path)
 
         error_logs = self.convert_txt_err_log_to_dict(error_logs_text, error_log_lang)
 

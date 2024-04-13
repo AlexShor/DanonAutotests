@@ -2,6 +2,11 @@ from api.base_api_requests import BaseApiRequests
 
 import requests
 
+from optimizer_data.data.input_data import InputData
+from pages.site_data.credentials import Credentials
+
+import pandas as pd
+
 
 class InputApiRequests(BaseApiRequests):
 
@@ -43,6 +48,16 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
+    def get_input_data(self, scenario_id: int, input_data: dict) -> requests.Response:
+
+        request_url_param = '/download'
+
+        request_parameters = self.__extract_input_params(scenario_id, input_data, request_url_param)
+        response = requests.get(**request_parameters)
+        response.encoding = 'UTF-8'
+
+        return response
+
     def upload_input_file(self,
                           scenario_id: int,
                           input_data: dict,
@@ -72,14 +87,15 @@ class InputApiRequests(BaseApiRequests):
         return response
 
 
-# if __name__ == "__main__":
-#     environment = 'LOCAL_STAGE'
-#     scenario_id = 466
-#     inputs_data = InputTypeNameMatch.Tetris.TYPES
-#
-#     session = InputApiRequests(environment).authorization(*Creds.auth(env=environment).values())
-#
-#
-#     data = session.get_preview_data(scenario_id, inputs_data['parameters'])
-#
-#     print(data.text)
+if __name__ == "__main__":
+    environment = 'LOCAL_STAGE'
+    scenario_id = 473
+    inputs_data = InputData('tetris').get_from_json()
+
+    session = InputApiRequests(environment).authorization(*Credentials.auth(env=environment).values())
+
+
+    data = session.get_input_data(scenario_id, inputs_data['parameters'])
+
+    with open(f'test.xlsx', 'wb') as file:
+        file.write(data.content)

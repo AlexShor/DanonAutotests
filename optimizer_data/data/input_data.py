@@ -1,5 +1,6 @@
 import json
 from copy import deepcopy
+from collections.abc import Mapping
 
 from optimizer_data.data.default_data import FileDirectory
 from optimizer_data.data.input_speadsheets_data import ValidateRules, PreviewRules, Spreadsheets
@@ -8,9 +9,14 @@ from optimizer_data.data.input_type_name_matches import InputTypeNameMatch
 
 
 class InputData:
-    def __init__(self, optimizer_type: str) -> None:
+    def __init__(self, optimizer_type: str, file_name: str = None) -> None:
         self._file_path = FileDirectory().input_data_json
         self._optimizer_type = optimizer_type
+
+        if file_name is None:
+            self._file_name = f'{optimizer_type}.json'
+        else:
+            self._file_name = file_name
 
     def _get_valid_rules_data(self) -> dict:
 
@@ -43,6 +49,7 @@ class InputData:
         return converted_preview_rules
 
     def test(self):
+
         data = deepcopy(InputTypeNameMatch.Tetris.TYPES)
         valid_rules_data = self._get_valid_rules_data()
         preview_rules_data = self._get_preview_rules_data()
@@ -81,22 +88,53 @@ class InputData:
         with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
             json.dump(new_data, file, indent=4, ensure_ascii=False)
 
-    def create_json(self, optimizer_type: str) -> None:
-        data = InputTypeNameMatch.Tetris.TYPES
-        file_name = 'tetris.json'
 
-        with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
-            json.dump(data, file, indent=4, ensure_ascii=False)
+    def _write_json(self, write_data: dict):
 
-    def update_json(self) -> None:
+        with open(f'{self._file_path}/{self._file_name}', 'w', encoding='utf8') as file:
+            json.dump(write_data, file, indent=4, ensure_ascii=False)
+
+    def create_json(self) -> None:
         pass
+        # data = InputTypeNameMatch.Tetris.TYPES
+        # file_name = 'tetris.json'
+        #
+        # with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
+        #     json.dump(data, file, indent=4, ensure_ascii=False)
 
-    def get_from_json(self, file_name: str = None) -> dict:
-        if file_name is None:
-            file_name = f'{self._optimizer_type}.json'
+    @classmethod
+    def __deep_update(cls, source: dict, overrides: Mapping):
+        for key, value in overrides.items():
+            if isinstance(value, Mapping) and value:
+                returned = cls.__deep_update(source.get(key, {}), value)
+                source[key] = returned
+            else:
+                source[key] = overrides[key]
+        return source
 
-        with open(f'{self._file_path}/{file_name}', 'r', encoding='utf8') as file:
+    def update_json(self, add_data: dict) -> None:
+
+        input_data = self.get_from_json()
+
+        result = self.__deep_update(input_data, add_data)
+
+        self._write_json(result)
+
+    def get_from_json(self, only_active_inputs: bool = True) -> dict:
+
+        with open(f'{self._file_path}/{self._file_name}', 'r', encoding='utf8') as file:
             data = json.load(file)
+
+        if only_active_inputs:
+
+            only_active_inputs_data = {}
+
+            for data_name, data_values in data.items():
+
+                if data_values['active']:
+                    only_active_inputs_data[data_name] = data_values
+
+            return only_active_inputs_data
 
         return data
 
@@ -105,6 +143,21 @@ if __name__ == "__main__":
 
     input_data = InputData('tetris')
     # input_data.test()
-    # data = input_data.get_from_json()
+    data = input_data.get_from_json()
+
+    # new_data = {}
+    #
+    # for i_name, i_data in data.items():
+    #     if i_name in ['calendars', 'plants', 'products', 'innovations', 'warehouses', 'materials']:
+    #         new_data[i_name] = {'upload_queue': 1}
+    #     elif i_name in ['material_groups']:
+    #         new_data[i_name] = {'upload_queue': 2}
+    #     else:
+    #         new_data[i_name] = {'upload_queue': 3}
+    #
+    # print(new_data)
+    #
+    # input_data.update_json(new_data)
+
 
 
