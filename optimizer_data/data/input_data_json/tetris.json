@@ -2,11 +2,11 @@
     "calendars": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Calendars",
         "front_name": "Календари",
         "parameter": "calendars",
         "obligatory": false,
+        "upload_queue": 1,
         "calculation_block": [
             "sourcing",
             "industry",
@@ -73,17 +73,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 1
+        }
     },
     "parameters": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Parameters",
         "front_name": "Параметры",
         "parameter": "parameters",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing",
             "industry",
@@ -142,17 +141,16 @@
                 "active": true,
                 "preview_rules": null
             }
-        },
-        "upload_queue": 3
+        }
     },
     "plants": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Plants",
         "front_name": "Заводы",
         "parameter": "plants",
         "obligatory": false,
+        "upload_queue": 1,
         "calculation_block": [
             "sourcing",
             "industry",
@@ -200,17 +198,16 @@
                 "active": true,
                 "preview_rules": null
             }
-        },
-        "upload_queue": 1
+        }
     },
     "products": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Products",
         "front_name": "Продукты",
         "parameter": "products",
         "obligatory": false,
+        "upload_queue": 1,
         "calculation_block": [
             "sourcing"
         ],
@@ -245,17 +242,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 1
+        }
     },
     "innovations": {
         "active": false,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Innovations",
         "front_name": "Инновации",
         "parameter": "innovations",
         "obligatory": false,
+        "upload_queue": 1,
         "calculation_block": [
             "sourcing"
         ],
@@ -290,17 +286,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 1
+        }
     },
     "uoms": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Uoms",
         "front_name": "Единицы измерения",
         "parameter": "uoms",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -401,17 +396,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "warehouses": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Warehouses",
         "front_name": "Склады",
         "parameter": "warehouses",
         "obligatory": false,
+        "upload_queue": 1,
         "calculation_block": [
             "sourcing"
         ],
@@ -457,17 +451,16 @@
                 "active": true,
                 "preview_rules": null
             }
-        },
-        "upload_queue": 1
+        }
     },
     "demand": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Demand",
         "front_name": "План продаж",
         "parameter": "demand",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -576,17 +569,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "sourcing_scheme": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Sourcing Scheme",
         "front_name": "План распределения",
         "parameter": "sourcing_scheme",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -746,17 +738,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "deliveries": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Deliveries",
         "front_name": "Схема доставки",
         "parameter": "deliveries",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -1180,17 +1171,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "itineraries": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Itineraries",
         "front_name": "Маршруты",
         "parameter": "itineraries",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -1422,17 +1412,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "shipments": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Shipments",
         "front_name": "Мастер данные Т1",
         "parameter": "shipments",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -1582,17 +1571,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "premade_volumes": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Premade Volumes",
         "front_name": "Дополнительные объемы",
         "parameter": "premade_volumes",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing",
             "industry"
@@ -1702,17 +1690,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "rejections": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Rejections",
         "front_name": "Альтернативные источники",
         "parameter": "rejections",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing",
             "industry"
@@ -1822,17 +1809,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "demand_options": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Demand Options",
         "front_name": "Настройки плана продаж",
         "parameter": "demand_options",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "sourcing"
         ],
@@ -1952,17 +1938,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "min_batches": {
         "active": false,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Min-batches",
         "front_name": "Минимальные партии",
         "parameter": "min_batches",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2052,17 +2037,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "industrial_costs": {
         "active": false,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Industrial Costs",
         "front_name": "Индустриальные затраты",
         "parameter": "industrial_costs",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2152,17 +2136,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "line_capacities": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Line Capacities",
         "front_name": "Мощности линий",
         "parameter": "line_capacities",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2250,17 +2233,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "line_priorities": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Line Priorities",
         "front_name": "Приоритеты линий",
         "parameter": "line_priorities",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2331,17 +2313,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "mr_adjustments": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "MR Adjustments",
         "front_name": "Корректировки ПП",
         "parameter": "mr_adjustments",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2463,17 +2444,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "line_bindings": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Line Bindings",
         "front_name": "Завод-линия-скю",
         "parameter": "line_bindings",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2563,17 +2543,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "material_contents": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Material Contents",
         "front_name": "Характеристики материалов",
         "parameter": "material_contents",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2695,17 +2674,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "base_formulas": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Base Formulas",
         "front_name": "Базовые рецепты",
         "parameter": "base_formulas",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2844,17 +2822,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "reco_formulas": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Reco Formulas",
         "front_name": "Рецепты восстановления",
         "parameter": "reco_formulas",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "industry"
         ],
@@ -2993,17 +2970,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "materials": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Materials",
         "front_name": "Материалы",
         "parameter": "materials",
         "obligatory": false,
+        "upload_queue": 1,
         "calculation_block": [
             "industry",
             "milk"
@@ -3076,17 +3052,16 @@
                 "active": true,
                 "preview_rules": null
             }
-        },
-        "upload_queue": 1
+        }
     },
     "material_groups": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Material Groups",
         "front_name": "Группы материалов",
         "parameter": "material_groups",
         "obligatory": false,
+        "upload_queue": 2,
         "calculation_block": [
             "milk"
         ],
@@ -3155,17 +3130,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 2
+        }
     },
     "table_parameters": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Table Parameters",
         "front_name": "Табличные параметры",
         "parameter": "table_parameters",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -3215,17 +3189,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "contracts": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Contracts",
         "front_name": "Контракты поставщиков",
         "parameter": "contracts",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -3512,17 +3485,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "supply_scheme": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Supply Scheme",
         "front_name": "ТЗР ферма-завод",
         "parameter": "supply_scheme",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -3657,17 +3629,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "farm_sales_scheme": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Farm Sales Scheme",
         "front_name": "ТЗР ферма-покупатель",
         "parameter": "farm_sales_scheme",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -3766,17 +3737,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "plant_sales_scheme": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Plant Sales Scheme",
         "front_name": "ТЗР завод-покупатель",
         "parameter": "plant_sales_scheme",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -3881,17 +3851,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "movement_scheme": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Movement Scheme",
         "front_name": "ТЗР завод-завод",
         "parameter": "movement_scheme",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -4077,17 +4046,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "buyers_contracts": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Buyers contracts",
         "front_name": "Контракты покупателей",
         "parameter": "buyers_contracts",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -4214,17 +4182,16 @@
                 "active": true,
                 "preview_rules": null
             }
-        },
-        "upload_queue": 3
+        }
     },
     "reco_capabilities": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Reco Capabilities",
         "front_name": "Возможности восстановления",
         "parameter": "reco_capabilities",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -4376,17 +4343,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "derivation": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Derivation",
         "front_name": "Производство ингридиентов",
         "parameter": "derivation",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -4538,17 +4504,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "mb_adjustments": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "MB Adjustments",
         "front_name": "Корректировки МБ",
         "parameter": "mb_adjustments",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -4666,17 +4631,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "separation": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Separation",
         "front_name": "Сепарация",
         "parameter": "separation",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -4909,17 +4873,16 @@
                     "separator": false
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "inbound_capacity": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Inbound Capacity",
         "front_name": "Возможности приемки",
         "parameter": "inbound_capacity",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -5026,17 +4989,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "outbound_capacity": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Outbound Capacity",
         "front_name": "Возможности отгрузки",
         "parameter": "outbound_capacity",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -5143,17 +5105,16 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     },
     "stock_bounds": {
         "active": true,
         "scenario_type": "tetris-scenarios",
-        "url_path": null,
         "system_file_name": "Stock Bounds",
         "front_name": "Уровни стоков ЖС",
         "parameter": "stock_bounds",
         "obligatory": false,
+        "upload_queue": 3,
         "calculation_block": [
             "milk"
         ],
@@ -5275,7 +5236,6 @@
                     "separator": true
                 }
             }
-        },
-        "upload_queue": 3
+        }
     }
 }

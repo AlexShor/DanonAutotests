@@ -11,14 +11,26 @@ from project_data.main_data import ProjectLanguage, ProjectType
 
 
 class Operations:
-    def __init__(self, optimizer_type: str, environment: str, scenario_id: int = None):
+    def __init__(self,
+                 optimizer_type: str,
+                 environment: str = None,
+                 scenario_id: int = None,
+                 use_inputs_data: bool = True):
 
         self._optimizer_type = optimizer_type
-        self._inputs_data = InputData(optimizer_type).get_from_json()
 
-        creds = Credentials.auth(env=environment).values()
-        if scenario_id:
+        if use_inputs_data:
+
+            self._inputs_data = InputData(optimizer_type).get_from_json()
+
+        if environment and scenario_id:
+
+            creds = Credentials.auth(env=environment).values()
             self._api_operation = ApiOperations(environment, scenario_id, creds)
+
+        elif environment:
+
+            self._api_operation = ApiOperations(environment)
 
     def __get_upload_queue_for_tetris(self) -> dict:
 
@@ -61,6 +73,19 @@ class Operations:
         files_directory = FileDirectory(self._optimizer_type).invalid_input_files
         self.__upload_input_files(files_directory, files_type, delay_between_queue)
 
+    def get_validation_rules_from_google_drive(self):
+
+        file_name = f'validation_rules_{self._optimizer_type}.xlsx'
+
+        spreadsheet_link = Spreadsheets().get(self._optimizer_type, 'validation_rules')
+
+        file_directory = FileDirectory(self._optimizer_type)
+        validation_rules_directory = file_directory.validation_rules
+
+        operations_file_data = OperationsFileData(validation_rules_directory)
+
+        operations_file_data.get_from_google_drive(spreadsheet_link, file_name)
+
     def create_invalid_files(self) -> None:
 
         file_name = f'validation_rules_{self._optimizer_type}.xlsx'
@@ -72,7 +97,7 @@ class Operations:
         invalid_files_directory = file_directory.invalid_input_files
         error_logs_directory = file_directory.input_files_error_logs
 
-        operations_file_data = OperationsFileData(self._inputs_data, validation_rules_directory)
+        operations_file_data = OperationsFileData(validation_rules_directory, self._inputs_data)
 
         spreadsheet_params = Spreadsheets.get(self._optimizer_type, 'validation_rules')[1]['params']
 
@@ -91,7 +116,7 @@ class Operations:
         error_log_lang = ProjectLanguage.get(self._optimizer_type)
 
         preview_rules_path = FileDirectory(self._optimizer_type).input_files_error_logs
-        operations_file_data = OperationsFileData(self._inputs_data, preview_rules_path)
+        operations_file_data = OperationsFileData(preview_rules_path, self._inputs_data)
 
         received_error_logs_txt = self._api_operation.get_input_logs(self._inputs_data)
 
@@ -121,13 +146,21 @@ class Operations:
 
 
 if __name__ == "__main__":
-    optimizer_type = 'tetris'
-    environment = 'LOCAL_STAGE'
-    scenario_id = 477
+    optimizer_type = 'promo'
 
-    operation = Operations(optimizer_type, environment, scenario_id)
+    # -------
+    operation = Operations(optimizer_type, use_inputs_data=False)
+    operation.get_validation_rules_from_google_drive()
 
-    # operation.create_invalid_files()
+    # -------
+    operation = Operations(optimizer_type)
+    operation.create_invalid_files()
+
+    # -------
+    # environment = 'LOCAL_STAGE'
+    # scenario_id = 477
+    # operation = Operations(optimizer_type, environment, scenario_id)
+
     # operation.upload_invalid_input_files()
     # operation.errors_logs_comparison()
     # operation.delete_input_files()
@@ -136,4 +169,4 @@ if __name__ == "__main__":
 
     # operation.get_input_files_data()
 
-    operation.upload_valid_input_files(files_type='csv', delay_between_queue=10)
+    # operation.upload_valid_input_files(files_type='csv', delay_between_queue=10)

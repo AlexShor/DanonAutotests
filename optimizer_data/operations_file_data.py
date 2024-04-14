@@ -1,20 +1,27 @@
 import os
-from datetime import date
+from re import findall
+from datetime import date, datetime
 from typing import Type, Iterable
 
-from optimizer_data.data.default_data import ErrorLogText
+from optimizer_data.data.default_data import ErrorLogText, FileDirectory
 
 import pandas as pd
 import requests
 
+from optimizer_data.data.input_speadsheets_data import ValidateRules, Spreadsheets
+
 
 class OperationsFileData:
-    def __init__(self, inputs_data: dict, destination: str) -> None:
+    def __init__(self, destination: str, inputs_data: dict = None) -> None:
 
         if not os.path.exists(destination):
             os.makedirs(destination)
         self._destination = destination
-        self._inputs_data = inputs_data
+
+        if inputs_data:
+            self._inputs_data = inputs_data
+        else:
+            self._inputs_data = {}
 
     @staticmethod
     def _get_confirm_token(response: requests.Response) -> str | None:
@@ -75,11 +82,22 @@ class OperationsFileData:
     class __convert_rules:
         class base:
             @staticmethod
-            def str_to_type(
-                string: str, type_rule: dict
-            ) -> Type[int] | Type[float] | Type[str] | Type[date] | Type[bool]:
+            def str_to_type(string: str, type_rule: dict) \
+                -> (Type[int] | Type[float]
+                  | Type[str] | Type[date]
+                  | Type[datetime] | Type[bool]
+                  | tuple | str | None):
 
-                return type_rule[string]
+                if type_rule is not None:
+
+                    _type = type_rule.get(string, 'nan_check')
+
+                    if _type != 'nan_check':
+                        return _type
+
+                    string, additional_value = findall(r'(\w+)\(([\w-]*)\)', string)[0]
+
+                    return type_rule.get(string), additional_value
 
             @staticmethod
             def split_by(validation: str, separator: str = '+') -> list | None:
@@ -109,14 +127,17 @@ class OperationsFileData:
 
     def convert_validation_rules_data_to_dict(self, validation_rules_data: list[dict], valid_rules: dict) -> dict:
 
-        input_names = {value['system_file_name']: key for key, value in self._inputs_data.items()}
+        if self._inputs_data:
+            input_names = {value['system_file_name']: key for key, value in self._inputs_data.items()}
+        else:
+            input_names = {}
 
         converted_validation_rules_data = {}
 
         for row in validation_rules_data:
 
             file_name = row[valid_rules['col_names']['system_file_name']]
-            system_file_name = input_names[file_name]
+            system_file_name = input_names.get(file_name, file_name)
 
             col = row[valid_rules['col_names']['col']]
 
@@ -127,31 +148,51 @@ class OperationsFileData:
             negativity = self.__convert_rules.validate.negativity(
                 row[valid_rules['col_names']['negativity']],
                 valid_rules['negativity'],
-                data_type)
+                data_type
+            )
 
             obligatory = self.__convert_rules.base.str_to_type(
                 row[valid_rules['col_names']['obligatory']],
-                valid_rules['obligatory'])
+                valid_rules['obligatory']
+            )
+
+            if isinstance(obligatory, tuple):
+                obligatory, default_if_obligatory_null = obligatory
+            else:
+                obligatory, default_if_obligatory_null = obligatory, None
 
             key = self.__convert_rules.base.str_to_type(
-                row[valid_rules['col_names']['key']],
-                valid_rules['key'])
+                row.get(
+                    valid_rules['col_names'].get('key')
+                ),
+                valid_rules.get('key')
+            )
 
             validation = self.__convert_rules.base.split_by(
-                row[valid_rules['col_names']['validation']])
+                row.get(
+                    valid_rules['col_names'].get('validation')
+                )
+            )
 
             only_for_download_and_preview = self.__convert_rules.base.str_to_type(
-                row[valid_rules['col_names']['only_for_download_and_preview']],
-                valid_rules['only_for_download_and_preview'])
+                row.get(
+                    valid_rules['col_names'].get('only_for_download_and_preview')
+                ),
+                valid_rules.get('only_for_download_and_preview')
+            )
 
             auto_mapping = self.__convert_rules.base.split_by(
-                row[valid_rules['col_names']['auto_mapping']])
+                row.get(
+                    valid_rules['col_names'].get('auto_mapping')
+                )
+            )
 
             converted_validation_rules_data.setdefault(system_file_name, {}).update(
                 {col: {
                     'data_type': data_type,
                     'negativity': negativity,
                     'obligatory': obligatory,
+                    'default_if_obligatory_null': default_if_obligatory_null,
                     'key': key,
                     'validation': validation,
                     'only_for_download_and_preview': only_for_download_and_preview,
@@ -257,19 +298,24 @@ class OperationsFileData:
                         print('received_not_have_errors:', received_not_have_errors)
 
 
-# if __name__ == "__main__":
-#     optimizer_type = 'tetris'
-#     inputs_data = InputData(optimizer_type).get_from_json()
-#
-#     preview_rules_path = FileDirectory(optimizer_type).input_files_error_logs
-#
-#
-#     operation = OperationsFileData(preview_rules_path)
-#
-#     created_error_logs = operation.read_error_logs(inputs_data, error_log_lang='rus')
-#     print(created_error_logs)
-#
-#
-#
-#     received_error_logs = operation.convert_txt_err_log_to_dict()
+if __name__ == "__main__":
+    optimizer_type = 'cfr'
 
+    file_directory = FileDirectory(optimizer_type)
+    validation_rules_directory = file_directory.validation_rules
+
+    operations_file_data = OperationsFileData(validation_rules_directory)
+
+    file_name = f'validation_rules_{optimizer_type}.xlsx'
+    valid_rules = ValidateRules.get(optimizer_type)
+    columns = valid_rules['col_names'].values()
+
+    spreadsheet_params = Spreadsheets.get(optimizer_type, 'validation_rules')[1]['params']
+
+    rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
+
+    print(rules_data)
+
+    converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
+
+    print(converted_valid_rules)

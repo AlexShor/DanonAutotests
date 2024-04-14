@@ -26,7 +26,7 @@ class InputData:
 
         operation = OperationsFileData(FileDirectory().validation_rules)
 
-        spreadsheet_params = Spreadsheets.get('tetris', 'validation_rules')[1]['params']
+        spreadsheet_params = Spreadsheets.get(self._optimizer_type, 'validation_rules')[1]['params']
         rules_data = operation.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
 
         converted_valid_rules = operation.convert_validation_rules_data_to_dict(rules_data, valid_rules)
@@ -35,31 +35,37 @@ class InputData:
 
     def _get_preview_rules_data(self) -> dict:
 
-        file_name = f'preview_rules_{self._optimizer_type}.xlsx'
         preview_rules = PreviewRules.get(self._optimizer_type)
+
+        if preview_rules is None:
+            return {}
+
+        file_name = f'preview_rules_{self._optimizer_type}.xlsx'
+
         columns = preview_rules['col_names'].values()
 
         operation = OperationsFileData(FileDirectory().preview_rules)
 
-        spreadsheet_params = Spreadsheets.get('tetris', 'preview_rules')[1]['params']
+        spreadsheet_params = Spreadsheets.get(self._optimizer_type, 'preview_rules')[1]['params']
         rules_data = operation.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
 
         converted_preview_rules = operation.convert_preview_rules_data_to_dict(rules_data, preview_rules)
-        print('converted_preview_rules')
+
         return converted_preview_rules
 
-    def test(self):
+    def _write_json(self, write_data: dict):
 
-        data = deepcopy(InputTypeNameMatch.Tetris.TYPES)
+        with open(f'{self._file_path}/{self._file_name}', 'w', encoding='utf8') as file:
+            json.dump(write_data, file, indent=4, ensure_ascii=False)
+
+    def create_json(self, input_type_name_match: dict) -> None:
+
         valid_rules_data = self._get_valid_rules_data()
         preview_rules_data = self._get_preview_rules_data()
-        # print(data)
-        # print(valid_rules_data)
-        # print(preview_rules_data)
 
         new_data = {}
 
-        for in_name, in_data in data.items():
+        for in_name, in_data in input_type_name_match.items():
             new_in_data = {}
             for n_in_data, d_in_data in in_data.items():
                 new_in_data['active'] = True
@@ -81,26 +87,10 @@ class InputData:
 
             new_data[in_name]['columns'] = new_valid_rule
 
-        # print(data)
-
-        file_name = 'tetris.json'
+        file_name = f'{self._optimizer_type}.json'
 
         with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
             json.dump(new_data, file, indent=4, ensure_ascii=False)
-
-
-    def _write_json(self, write_data: dict):
-
-        with open(f'{self._file_path}/{self._file_name}', 'w', encoding='utf8') as file:
-            json.dump(write_data, file, indent=4, ensure_ascii=False)
-
-    def create_json(self) -> None:
-        pass
-        # data = InputTypeNameMatch.Tetris.TYPES
-        # file_name = 'tetris.json'
-        #
-        # with open(f'{self._file_path}/{file_name}', 'w', encoding='utf8') as file:
-        #     json.dump(data, file, indent=4, ensure_ascii=False)
 
     @classmethod
     def __deep_update(cls, source: dict, overrides: Mapping):
@@ -140,10 +130,12 @@ class InputData:
 
 
 if __name__ == "__main__":
+    data = deepcopy(InputTypeNameMatch.CFR.TYPES)
 
-    input_data = InputData('tetris')
-    # input_data.test()
-    data = input_data.get_from_json()
+    input_data = InputData('cfr')
+    input_data.create_json(data)
+
+    # data = input_data.get_from_json()
 
     # new_data = {}
     #

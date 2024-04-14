@@ -42,68 +42,76 @@ class InputTypeNameMatch:
 
         TYPES = {
             'gps': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-gps',
                 'system_file_name': 'gps',
                 'front_name': 'GPS',
                 'obligatory': True,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'distr_mapping': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-distr-mappings',
                 'system_file_name': 'distr_mapping',
                 'front_name': 'Distribution Mapping',
                 'obligatory': True,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'combine_products': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-combine-products',
                 'system_file_name': 'combine_products',
                 'front_name': 'Combine Products',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'combine_chains': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-combine-chains',
                 'system_file_name': 'combine_chains',
                 'front_name': 'Combine Chains',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'up_down_size': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-up-down-sizes',
                 'system_file_name': 'up_down_size',
                 'front_name': 'Up/Down Size',
                 'obligatory': False,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'prod_md': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-product-mds',
                 'system_file_name': 'prod_md',
                 'front_name': 'Product Masterdata',
                 'obligatory': True,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'cust_md': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-customer-mds',
                 'system_file_name': 'cust_md',
                 'front_name': 'Customer Masterdata',
                 'obligatory': True,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             },
             'lib': {
+                'active': True,
                 'scenario_type': scenario_type,
                 'url_path': 'promo-libs',
                 'system_file_name': 'lib',
                 'front_name': 'Promo Library',
                 'obligatory': True,
-                'optimization_type': (OptimizationTypes.TYPE[Ptype.PROMO],)
+                'upload_queue': 1
             }
         }
 
@@ -115,83 +123,18 @@ class InputTypeNameMatch:
             'fin_log_model': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'fin_log_model',
-                'front_name': 'Fin Log Model',
+                'front_name': 'LOG&FIN model',
                 'parameter': 'fin_log_model',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
             'fin_scorecard': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'fin_scorecard',
                 'front_name': 'Fin Scorecard',
                 'parameter': 'fin_scorecard',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            'md_ship_to': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'md_ship_to',
-                'front_name': 'MD shipTo',
-                'parameter': 'md_ship_to',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            'plants_info': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'plants_info',
-                'front_name': 'Plants info',
-                'parameter': 'plants_info',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            'wh_mapping': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'wh_mapping',
-                'front_name': 'WH mapping',
-                'parameter': 'wh_mapping',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            'drivers_break_old': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'drivers_break_old',
-                'front_name': 'Drivers break (old)',
-                'parameter': 'drivers_break_old',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            'drivers_break_mobile': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'drivers_break_mobile',
-                'front_name': 'Drivers break (mobile)',
-                'parameter': 'drivers_break_mobile',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            'distance_data': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'distance_data',
-                'front_name': 'Distance',
-                'parameter': 'distance_data',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
-            },
-            't2_cost_split_rule': {
-                'scenario_type': scenario_type,
-                'system_file_name': 't2_cost_split_rule',
-                'front_name': 'Cost Split Rule T2',
-                'parameter': 't2_cost_split_rule',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
             'conso_eod': {
                 'scenario_type': scenario_type,
@@ -199,54 +142,104 @@ class InputTypeNameMatch:
                 'front_name': 'Conso EOD',
                 'parameter': 'conso_eod',
                 'url_path': None,
+                'optimization_type': 'Cost to serve'
+            },
+            'md_ship_to': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'md_ship_to',
+                'front_name': 'MD shipTo',
+                'parameter': 'md_ship_to',
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
+                'optimization_type': 'Cost to serve'
+            },
+            'plants_info': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'plants_info',
+                'front_name': 'Plants info',
+                'parameter': 'plants_info',
+                'obligatory': True,
+                'optimization_type': 'Cost to serve'
+            },
+            'wh_mapping': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'wh_mapping',
+                'front_name': 'WH mapping',
+                'parameter': 'wh_mapping',
+                'obligatory': True,
+                'optimization_type': 'Cost to serve'
+            },
+            'drivers_break_old': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'drivers_break_old',
+                'front_name': 'Drivers break (old)',
+                'parameter': 'drivers_break_old',
+                'obligatory': True,
+                'optimization_type': 'Cost to serve'
+            },
+            'drivers_break_mobile': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'drivers_break_mobile',
+                'front_name': 'Drivers break (mobile)',
+                'parameter': 'drivers_break_mobile',
+                'obligatory': True,
+                'optimization_type': 'Cost to serve'
+            },
+            'distance_data': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'distance_data',
+                'front_name': 'Distance',
+                'parameter': 'distance_data',
+                'obligatory': True,
+                'optimization_type': 'Cost to serve'
             },
             'deliveries_for_wms': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'deliveries_for_wms',
                 'front_name': 'Deliveries for WMS',
                 'parameter': 'deliveries_for_wms',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
             'wms_delivery': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'wms_delivery',
                 'front_name': 'WMS delivery',
                 'parameter': 'wms_delivery',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
             'wms_support': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'wms_support',
                 'front_name': 'WMS support',
                 'parameter': 'wms_support',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
             'xd_fact_volumes': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'xd_fact_volumes',
                 'front_name': 'XD Fact volumes',
                 'parameter': 'xd_fact_volumes',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
             'wh_cost_split_rule': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'wh_cost_split_rule',
                 'front_name': 'Cost Split Cost WH',
                 'parameter': 'wh_cost_split_rule',
-                'url_path': None,
                 'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'cts')(opti_type)
+                'optimization_type': 'Cost to serve'
             },
+            't2_cost_split_rule': {
+                'scenario_type': scenario_type,
+                'system_file_name': 't2_cost_split_rule',
+                'front_name': 'Cost Split Rule T2',
+                'parameter': 't2_cost_split_rule',
+                'obligatory': True,
+                'optimization_type': 'Cost to serve'
+            }
         }
 
         N_TYPES = {
@@ -768,170 +761,152 @@ class InputTypeNameMatch:
 
     class CFR:
         scenario_type = ScenarioTypes.TYPE[Ptype.CFR]
-        opti_type = OptimizationTypes.TYPE[Ptype.CFR]
-        all_opti_type = dict(type=tuple(opti_type['type'].values()), rnd_mode=tuple(opti_type['type'].values()))
+        # opti_type = OptimizationTypes.TYPE[Ptype.CFR]
+        # all_opti_type = dict(type=tuple(opti_type['type'].values()), rnd_mode=tuple(opti_type['type'].values()))
 
         TYPES = {
-            'min_cfr_max_pped': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'min_cfr_max_pped',
-                'front_name': 'Min CFR/Max PPED',
-                'parameter': 'min_cfr_max_pped',
-                'url_path': None,
-                'obligatory': True,
-                'optimization_type': itemgetter('optimizer', 'optimizer_multi_level')(opti_type['type'])
-            },
-            # 'delta_fa_bias': {
-            #     'scenario_type': scenario_type,
-            #     'system_file_name': 'delta_fa_bias',
-            #     'front_name': 'Delta FA bias',
-            #     'parameter': 'delta_fa_bias',
-            #     'url_path': None,
-            #     'obligatory': True,
-            #     'optimization_type': itemgetter('demand_randomizer')(opti_type['rnd_mode'])
-            # },
-            'filters': {
-                'scenario_type': scenario_type,
-                'system_file_name': 'filters',
-                'front_name': 'Filters',
-                'parameter': 'filters',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
-            },
             'safety_days': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'safety_days',
                 'front_name': 'Safety days',
                 'parameter': 'safety_days',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'coef': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'coef',
                 'front_name': 'Coef',
                 'parameter': 'coef',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'routes': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'routes',
                 'front_name': 'Routes',
                 'parameter': 'routes',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'moq': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'moq',
                 'front_name': 'Moq',
                 'parameter': 'moq',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'fc': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'fc',
                 'front_name': 'FC',
                 'parameter': 'fc',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'fact': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'fact',
                 'front_name': 'Fact',
                 'parameter': 'fact',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'quarantine': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'quarantine',
                 'front_name': 'Quarantine',
                 'parameter': 'quarantine',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'step_table': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'step_table',
                 'front_name': 'Step table',
                 'parameter': 'step_table',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'dlc': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'dlc',
                 'front_name': 'DLC',
                 'parameter': 'dlc',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'shipment_freq': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'shipment_freq',
                 'front_name': 'Shipment freq',
                 'parameter': 'shipment_freq',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'costs': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'costs',
                 'front_name': 'Costs',
                 'parameter': 'costs',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
-            # 'frozen_horizon': {
-            #     'scenario_type': scenario_type,
-            #     'system_file_name': 'frozen_horizon',
-            #     'front_name': 'Frozen horizon',
-            #     'parameter': 'frozen_horizon',
-            #     'url_path': None,
-            #     'obligatory': False,
-            #     'optimization_type': all_opti_type
-            # },
             'hubbing_days': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'hubbing_days',
                 'front_name': 'Hubbing days',
                 'parameter': 'hubbing_days',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'md_locations': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'md_locations',
                 'front_name': 'Md locations',
                 'parameter': 'md_locations',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
             },
             'uom': {
                 'scenario_type': scenario_type,
                 'system_file_name': 'uom',
                 'front_name': 'UOM',
                 'parameter': 'uom',
-                'url_path': None,
-                'obligatory': False,
-                'optimization_type': all_opti_type
-            }
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
+            },
+            'min_cfr_max_pped': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'min_cfr_max_pped',
+                'front_name': 'Min CFR/Max PPED',
+                'parameter': 'min_cfr_max_pped',
+                'obligatory': True,
+                'optimization_type': ['Optimizer'],
+                'randomizer_regime': ['No randomizer']
+            },
+            'filters': {
+                'scenario_type': scenario_type,
+                'system_file_name': 'filters',
+                'front_name': 'Filters',
+                'parameter': 'filters',
+                'obligatory': True,
+                'optimization_type': ['Simulator', 'Optimizer'],
+                'randomizer_regime': ['No randomizer']
+            },
         }

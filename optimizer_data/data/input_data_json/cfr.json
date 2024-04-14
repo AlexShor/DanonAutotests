@@ -1,0 +1,1317 @@
+{
+    "safety_days": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "safety_days",
+        "front_name": "Safety days",
+        "parameter": "safety_days",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Plant ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Запасы в днях": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "coef": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "coef",
+        "front_name": "Coef",
+        "parameter": "coef",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "CHAIN": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Max CFR": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Min CFR": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Коэффициент потерь": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "routes": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "routes",
+        "front_name": "Routes",
+        "parameter": "routes",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Code Plant": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Site": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point1": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point2": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point3": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point4": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point5": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point6": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point7": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ID_Sh#point8": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Квота": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "moq": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "moq",
+        "front_name": "Moq",
+        "parameter": "moq",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Location": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Car": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "fc": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "fc",
+        "front_name": "FC",
+        "parameter": "fc",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "MAT_COD": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "PLT_COD": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "KEY_FIG_DAT": {
+                "data_type": "date",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "CUS_LV4_COD": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "CUS_LV5_COD": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "FC": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "fact": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "fact",
+        "front_name": "Fact",
+        "parameter": "fact",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "MAD_DATE": {
+                "data_type": "date",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "WH": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "CHAIN": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "RFA_ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ORDERED": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "DELIVERED": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "quarantine": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "quarantine",
+        "front_name": "Quarantine",
+        "parameter": "quarantine",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Plant": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "SKU Name": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Жесткий Карантин(дней)": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Мягкий карантин(дней)": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Частота розлива в неделю": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Срок годности": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Признак долгосрока": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Ready to ship": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "step_table": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "step_table",
+        "front_name": "Step table",
+        "parameter": "step_table",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Срок годности от": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Срок годности до": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Шаг": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "dlc": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "dlc",
+        "front_name": "DLC",
+        "parameter": "dlc",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Chain": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "WH": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "MAX(MIN_DLC)": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Delivery Time, days": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "RFA": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "shipment_freq": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "shipment_freq",
+        "front_name": "Shipment freq",
+        "parameter": "shipment_freq",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Пункт погрузки": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Пункт выгрузки": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Частота в неделю": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "бакет девиации (интервал дни)": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Транзиты лето, дней": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Транзиты зима, дней": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "максимальное отклонение, дни": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "costs": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "costs",
+        "front_name": "Costs",
+        "parameter": "costs",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Стандартная цена кг": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "NS на кг": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "CO,%": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "hubbing_days": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "hubbing_days",
+        "front_name": "Hubbing days",
+        "parameter": "hubbing_days",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Point #1": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #2": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #3": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #4": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #5": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #6": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #7": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Point #8": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "HT, days": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "md_locations": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "md_locations",
+        "front_name": "Md locations",
+        "parameter": "md_locations",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "Location ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Location Desc": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "uom": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "uom",
+        "front_name": "UOM",
+        "parameter": "uom",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Uom ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Capacity PC": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Net Weight KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Gross Weight KG": {
+                "data_type": "float",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "min_cfr_max_pped": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "min_cfr_max_pped",
+        "front_name": "Min CFR/Max PPED",
+        "parameter": "min_cfr_max_pped",
+        "obligatory": true,
+        "optimization_type": [
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Log_DC_ID": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "min CFR": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "max PPED": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": true,
+                "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "filters": {
+        "active": true,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "filters",
+        "front_name": "Filters",
+        "parameter": "filters",
+        "obligatory": true,
+        "optimization_type": [
+            "Simulator",
+            "Optimizer"
+        ],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "sku": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "WH": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    }
+}

@@ -1,3 +1,6 @@
+from datetime import date, datetime
+
+
 from project_data.main_data import ProjectType
 
 
@@ -6,12 +9,24 @@ class Spreadsheets:
 
     __spreadsheet_id = {
         ProjectType.PROMO: {
-            'validation_rules': '1uYnl-r1F9AIMgAE4PNJSBXVmgvhcnu8PNcjWArUMYSI',
-            'inputs': '1fn4PxFE6bbyOTe0aPRUpYhEVC9uTDslF'
+            'validation_rules': {
+                'id': '1uYnl-r1F9AIMgAE4PNJSBXVmgvhcnu8PNcjWArUMYSI',
+                'params': {
+                    'worksheet_name': 'update',
+                    'skip_footer_rows': 0
+                }
+            },
+            'preview_rules': None
         },
         ProjectType.RTM: {
-            'validation_rules': '1mtOKERdwfvMzt9BYuv5hFiiSBV7JZGRqXS-XQSdjo70',
-            'inputs': '1L9juBdFeFfuP0k2gr9P-S1QQYEf4SHBw'
+            'validation_rules': {
+                'id': '14LQ_3TwsgQ8K69AEBR5IcnbCXxJHUqSj',
+                'params': {
+                    'worksheet_name': 'Sheet1',
+                    'skip_footer_rows': 0
+                }
+            },
+            'preview_rules': None
         },
         ProjectType.TETRIS: {
             'validation_rules': {
@@ -31,20 +46,52 @@ class Spreadsheets:
             'inputs': ''
         },
         ProjectType.CFR: {
-            'validation_rules': '14irOmFBvcSye3_yg9VkA51Ku_vw93yjaky8_LVo2pe8',
-            'inputs': '1RlZwjrDmh0xecyDm9RrA0qXPI66k532f'
+            'validation_rules': {
+                'id': '1szjepPIIj3qt2B5aLqncG2yegI50-_t2',
+                'params': {
+                    'worksheet_name': 'cfr_check_data',
+                    'skip_footer_rows': 0
+                }
+            },
+            'preview_rules': None
         }
     }
 
     @classmethod
     def get(cls, optimizer_type: str, type_id: str):
-        return cls.__GOOGLE_EXPORT_URL, cls.__spreadsheet_id[optimizer_type][type_id]
+        return cls.__GOOGLE_EXPORT_URL, cls.__spreadsheet_id[optimizer_type].get(type_id)
 
 
 class ValidateRules:
     __rules = {
-        ProjectType.PROMO: {},
-        ProjectType.RTM: {},
+        ProjectType.PROMO: {
+            'col_names': {
+                'system_file_name': 'Source',
+                'col': 'Column name',
+                'data_type': 'Type',
+                'negativity': 'Negative**',
+                'obligatory': 'NaN(default value)*',
+                'key': 'key'
+            },
+            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date},
+            'negativity': {'': True, 'FALSE': False, 'False': False},
+            'obligatory': {'FALSE': False, 'TRUE': True, 'False': False},
+            'key': {'': None, '1': 1}
+        },
+        ProjectType.RTM: {
+            'col_names': {
+                'system_file_name': 'Source',
+                'col': 'Column name',
+                'data_type': 'Type',
+                'negativity': 'Negative**',
+                'obligatory': 'NaN(default value)*',
+                'key': 'Key'
+            },
+            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date},
+            'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
+            'obligatory': {'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
+            'key': {'': None, '1': 1}
+        },
         ProjectType.TETRIS: {
             'col_names': {
                 'system_file_name': 'Файл',
@@ -63,7 +110,20 @@ class ValidateRules:
             'key': {'': None, '1': 1},
             'only_for_download_and_preview': {'': None, '1': True}
         },
-        ProjectType.CFR: {}
+        ProjectType.CFR: {
+            'col_names': {
+                'system_file_name': 'Source',
+                'col': 'Column name',
+                'data_type': 'Type',
+                'negativity': 'Negative**',
+                'obligatory': 'NaN(default value)*',
+                'key': 'Key'
+            },
+            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date, 'DATETIME': datetime},
+            'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
+            'obligatory': {'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
+            'key': {'': None, '1': 1}
+        }
     }
 
     @classmethod
@@ -73,8 +133,8 @@ class ValidateRules:
 
 class PreviewRules:
     __rules = {
-        ProjectType.PROMO: {},
-        ProjectType.RTM: {},
+        ProjectType.PROMO: None,
+        ProjectType.RTM: None,
         ProjectType.TETRIS: {
             'col_names': {
                 'col': 'Название столбца',
@@ -87,7 +147,7 @@ class PreviewRules:
             'percentage': {'No': False, 'Yes': True},
             'separator': {'No': False, 'Yes': True}
         },
-        ProjectType.CFR: {}
+        ProjectType.CFR: None
     }
 
     @classmethod
