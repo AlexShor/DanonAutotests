@@ -1,3 +1,5 @@
+import functools
+
 from pages.site_data.urls import BaseUrls
 from dotenv import load_dotenv
 
@@ -9,47 +11,71 @@ urllib3.disable_warnings()
 
 
 class BaseApiRequests:
-    def __init__(self, environment: str = 'DEV') -> None:
+    def __init__(self, environment: str = 'DEV', auth_creds: tuple = None) -> None:
 
         self._environment = environment
         self._base_url = f'{BaseUrls.BASE_URLS_BACK.get(environment)}/api'
-        self._login = None
-        self._password = None
+
         self._access_token = None
         self._refresh_token = None
 
-    @staticmethod
-    def __check_status_code(response: requests):
-        status_code = response.status_code
+        self.request = self.Request(self)
 
-        if status_code >= 500:
-            return status_code, None
-        elif status_code >= 400:
-            return status_code, response.text
-        elif status_code >= 300:
-            return status_code, response
-        elif status_code >= 200:
-            return status_code, response
-        elif status_code >= 100:
-            return status_code, response
-        else:
-            return None
+        if auth_creds:
+            self._login, self._password = auth_creds
+            self.get_tokens()
 
-    def authorization(self, login: str, password: str):
-        print('authorization')
+    class Request:
+        def __init__(self, cls):
+            """ cls - instance ...ApiRequests """
+
+            self._cls = cls
+
+        @staticmethod
+        def __check_status_code(func):
+            @functools.wraps(func)
+            def wrapper(self, *args, **kwargs):
+
+                response = func(self, *args, **kwargs)
+                response.encoding = 'UTF-8'
+
+                status_code = response.status_code
+
+                if status_code == 401:
+
+                    access_token = self._cls.get_tokens()[0]
+                    args[0]['headers'] = {'Authorization': f'Bearer {access_token}'}
+
+                    response = wrapper(self, *args, **kwargs)
+
+                return response
+
+            return wrapper
+
+        @__check_status_code
+        def get(self, request_parameters: dict):
+            return requests.get(**request_parameters)
+
+        @__check_status_code
+        def post(self, request_parameters: dict):
+            return requests.post(**request_parameters)
+
+        @__check_status_code
+        def delete(self, request_parameters: dict):
+            return requests.delete(**request_parameters)
+
+    def get_tokens(self):
+
+        print('get_tokens')
+
         url = f'{self._base_url}/auth/login'
-        form_data = {"email": login, "password": password}
+        form_data = {"email": self._login, "password": self._password}
 
-        response = requests.post(url=url, verify=False, data=form_data)
+        request_parameters = {'url': url, 'data': form_data, 'verify': False}
 
-        response.encoding = 'UTF-8'
+        response = self.request.post(request_parameters)
 
         self._access_token = response.json().get('access')
         self._refresh_token = response.json().get('refresh')
 
-        return self
-
-
-if __name__ == "__main__":
-    environment = 'LOCAL_STAGE'
-    scenario_id = 466
+        return self._access_token, self._refresh_token

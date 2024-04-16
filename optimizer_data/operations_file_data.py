@@ -12,14 +12,21 @@ from optimizer_data.data.input_speadsheets_data import ValidateRules, Spreadshee
 
 
 class OperationsFileData:
-    def __init__(self, destination: str, inputs_data: dict = None) -> None:
+    def __init__(self, destination: str = None, inputs_data: dict = None) -> None:
 
-        if not os.path.exists(destination):
-            os.makedirs(destination)
-        self._destination = destination
+        if destination is not None:
+
+            if not os.path.exists(destination):
+                os.makedirs(destination)
+
+            self._destination = destination
+
+        else:
+            self._destination = ''
 
         if inputs_data:
             self._inputs_data = inputs_data
+
         else:
             self._inputs_data = {}
 
@@ -275,12 +282,13 @@ class OperationsFileData:
 
     @staticmethod
     def errors_logs_comparison(created_error_logs: dict, received_error_logs: dict) -> None:
-        print(created_error_logs)
-        print(received_error_logs)
+
+        print()
+        print('errors logs comparison:')
 
         for input_name, received_error_log_data in received_error_logs.items():
             created_error_log_data = created_error_logs.get(input_name)
-
+            print()
             print(input_name.upper())
             for error_type in ('obligation', 'type', 'negative'):
 
@@ -297,25 +305,66 @@ class OperationsFileData:
                     if received_not_have_errors:
                         print('received_not_have_errors:', received_not_have_errors)
 
+    def split_file(self, file_name: str, size: int = 1_000_000, file_type: str = 'csv') -> None:
+
+        readable_file_path = self._destination
+
+        if readable_file_path != '':
+            readable_file_path = readable_file_path + '/'
+
+        creatable_file_path = f'{readable_file_path}{file_name}'
+
+        if not os.path.exists(creatable_file_path):
+            os.makedirs(creatable_file_path)
+
+        with open(f'{readable_file_path}{file_name}.{file_type}', 'r', encoding='utf8') as csv_file:
+
+            column_names = [csv_file.readline()]
+            file_data = csv_file.readlines()
+
+        file_number = 1
+
+        for i in range(0, len(file_data), size):
+
+            new_file_name = f'{file_name}_{file_number}.{file_type}'
+
+            print(new_file_name)
+
+            with open(f'{creatable_file_path}/{new_file_name}', 'w+', encoding='utf8') as new_file:
+
+                new_file_data = column_names + file_data[i:i + size]
+
+                new_file.writelines(new_file_data)
+
+            file_number += 1
+
 
 if __name__ == "__main__":
-    optimizer_type = 'cfr'
+    file_name = 'fact'
 
-    file_directory = FileDirectory(optimizer_type)
-    validation_rules_directory = file_directory.validation_rules
+    operations_file_data = OperationsFileData()
 
-    operations_file_data = OperationsFileData(validation_rules_directory)
+    operations_file_data.split_file(file_name, size=100_000)
 
-    file_name = f'validation_rules_{optimizer_type}.xlsx'
-    valid_rules = ValidateRules.get(optimizer_type)
-    columns = valid_rules['col_names'].values()
 
-    spreadsheet_params = Spreadsheets.get(optimizer_type, 'validation_rules')[1]['params']
 
-    rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
-
-    print(rules_data)
-
-    converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
-
-    print(converted_valid_rules)
+    # optimizer_type = 'cfr'
+    #
+    # file_directory = FileDirectory(optimizer_type)
+    # validation_rules_directory = file_directory.validation_rules
+    #
+    # operations_file_data = OperationsFileData(validation_rules_directory)
+    #
+    # file_name = f'validation_rules_{optimizer_type}.xlsx'
+    # valid_rules = ValidateRules.get(optimizer_type)
+    # columns = valid_rules['col_names'].values()
+    #
+    # spreadsheet_params = Spreadsheets.get(optimizer_type, 'validation_rules')[1]['params']
+    #
+    # rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
+    #
+    # print(rules_data)
+    #
+    # converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
+    #
+    # print(converted_valid_rules)

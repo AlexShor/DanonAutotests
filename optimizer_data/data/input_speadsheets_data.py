@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, time
 
 
 from project_data.main_data import ProjectType
@@ -87,7 +87,7 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'Key'
             },
-            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date},
+            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date, 'TIME': time},
             'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
             'obligatory': {'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
             'key': {'': None, '1': 1}
@@ -119,7 +119,7 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'Key'
             },
-            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date, 'DATETIME': datetime},
+            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date, 'TIME': time},
             'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
             'obligatory': {'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
             'key': {'': None, '1': 1}

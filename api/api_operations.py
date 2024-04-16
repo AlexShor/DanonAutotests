@@ -11,12 +11,11 @@ class ApiOperations:
 
         self._environment = environment
         self._scenario_id = scenario_id
-        self._input_api = InputApiRequests(environment)
+        self._input_api = InputApiRequests(environment, auth_creds)
 
-        if auth_creds:
-            self._input_api.authorization(*auth_creds)
+    def upload_input_files(self, inputs_data: dict, files_directory: str, files_type: str = 'xlsx') -> dict:
 
-    def upload_input_files(self, inputs_data: dict, files_directory: str, files_type: str = 'xlsx') -> None:
+        response_data = {}
 
         for input_name, input_data in inputs_data.items():
 
@@ -25,15 +24,21 @@ class ApiOperations:
 
             response = self._input_api.upload_input_file(self._scenario_id, input_data, file_path)
 
-            print(input_name, response.status_code)
+            response_data[input_name] = response
 
-    def delete_input_files(self, inputs_data: dict) -> None:
+        return response_data
+
+    def delete_input_files(self, inputs_data: dict) -> dict:
+
+        response_about_deletion = {}
 
         for input_name, input_data in inputs_data.items():
 
             response = self._input_api.delete_input_file(self._scenario_id, input_data)
 
-            print(input_name, response.status_code)
+            response_about_deletion[input_name] = response
+
+        return response_about_deletion
 
     def get_input_logs(self, inputs_data: dict) -> dict:
 
@@ -47,8 +52,6 @@ class ApiOperations:
 
                 input_logs[input_name] = response.text
 
-            print(input_name, response.status_code)
-
         return input_logs
 
     def get_preview_data(self, inputs_data: dict) -> dict:
@@ -59,9 +62,11 @@ class ApiOperations:
 
             response = self._input_api.get_preview_data(self._scenario_id, input_data)
 
-            print(input_name, response.status_code)
             if 200 <= response.status_code < 300:
-                print(response.json())
+
+                preview_data[input_name] = response.json()
+
+        return preview_data
 
     def get_input_files_data(self, inputs_data: dict, files_directory: str) -> None:
 
@@ -78,6 +83,20 @@ class ApiOperations:
 
             with open(file_path, 'wb') as file:
                 file.write(response.content)
+
+    def get_input_info(self, inputs_data: dict) -> dict:
+
+        input_info = {}
+
+        for input_name, input_data in inputs_data.items():
+
+            response = self._input_api.get_input_info(self._scenario_id, input_data)
+
+            if response.status_code < 300:
+
+                input_info[input_name] = response.json()
+
+        return input_info
 
 
 # if __name__ == "__main__":

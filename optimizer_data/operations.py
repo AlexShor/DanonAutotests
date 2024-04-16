@@ -1,4 +1,6 @@
+import os
 import time
+import datetime
 
 from api.api_operations import ApiOperations
 from optimizer_data.create_file_data import CreateFileData
@@ -61,6 +63,9 @@ class Operations:
 
         else:
 
+            # input_data_test = {k: v for k, v in self._inputs_data.items() if k == 'gps'}  # удалить
+            # print(input_data_test)
+
             self._api_operation.upload_input_files(self._inputs_data, files_directory, files_type)
 
     def upload_valid_input_files(self, files_type: str = 'xlsx', delay_between_queue: int = None) -> None:
@@ -91,6 +96,7 @@ class Operations:
         file_name = f'validation_rules_{self._optimizer_type}.xlsx'
         valid_rules = ValidateRules.get(self._optimizer_type)
         columns = valid_rules['col_names'].values()
+        error_log_lang = ProjectLanguage.get(self._optimizer_type)
 
         file_directory = FileDirectory(self._optimizer_type)
         validation_rules_directory = file_directory.validation_rules
@@ -105,7 +111,10 @@ class Operations:
         converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
 
         create_file_data = CreateFileData(self._optimizer_type, self._inputs_data)
-        create_file_data.invalid_files(converted_valid_rules, invalid_files_directory, error_logs_directory, 'rus')
+        create_file_data.invalid_files(converted_valid_rules,
+                                       invalid_files_directory,
+                                       error_logs_directory,
+                                       error_log_lang)
 
     def delete_input_files(self) -> None:
 
@@ -144,21 +153,58 @@ class Operations:
                 if not col_data['active']:
                     print(f'Not active col: {col_name} in {input_name}')
 
+    def upload_multiple_files(self, input_name: str = None, timeout_input_info: int = 5):
+
+        start_time = time.time()
+
+        files_count = len(next(os.walk(input_name))[-1])
+
+        _inputs_data = self._inputs_data[input_name]
+
+        for i in range(1, files_count + 1):
+
+            current_input_name = f'{input_name}_{i}'
+
+            input_data = {current_input_name: _inputs_data}
+
+            upload_input_response = self._api_operation.upload_input_files(input_data, input_name, 'csv')
+
+            if upload_input_response:
+
+                while True:
+                    get_input_info_response = self._api_operation.get_input_info(input_data)
+
+                    data_uploading_status = get_input_info_response[current_input_name].get('data_uploading_status')
+
+                    print('Elapsed time: ', datetime.timedelta(seconds=time.time()-start_time))
+
+                    if data_uploading_status == 'Data successfully uploaded':
+                        break
+
+                    time.sleep(timeout_input_info)
+
+
 
 if __name__ == "__main__":
-    optimizer_type = 'promo'
+    optimizer_type = ProjectType.CFR
 
     # -------
-    operation = Operations(optimizer_type, use_inputs_data=False)
-    operation.get_validation_rules_from_google_drive()
+    environment = 'LOCAL_STAGE'
+    scenario_id = 413
+    operation = Operations(optimizer_type, environment, scenario_id)
+    operation.upload_multiple_files('fact')
 
     # -------
-    operation = Operations(optimizer_type)
-    operation.create_invalid_files()
+    # operation = Operations(optimizer_type, use_inputs_data=False)
+    # operation.get_validation_rules_from_google_drive()
+
+    # -------
+    # operation = Operations(optimizer_type)
+    # operation.create_invalid_files()
 
     # -------
     # environment = 'LOCAL_STAGE'
-    # scenario_id = 477
+    # scenario_id = 1692
     # operation = Operations(optimizer_type, environment, scenario_id)
 
     # operation.upload_invalid_input_files()

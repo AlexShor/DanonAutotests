@@ -1,4 +1,5 @@
 import os
+from datetime import date, time
 from copy import deepcopy
 
 from optimizer_data.data.default_data import DefaultDataFill, ErrorLogText, FileDirectory
@@ -50,7 +51,9 @@ class CreateFileData:
 
         for file_name, file_data in valid_rules_data.items():
 
-            if self._inputs_data[file_name]['active']:
+            input_data = self._inputs_data.get(file_name)
+
+            if input_data and input_data['active']:
 
                 created_invalid_data, error_log_data = self._creating_invalid_data(file_name,
                                                                                    file_data,
@@ -66,45 +69,45 @@ class CreateFileData:
         error_log_text = ErrorLogText().get(error_log_text_lang)
         exclude_valid_cols = ExcludeValidateColumns.get(self._optimizer_type)
 
-        def __error_log_data(col_name: str, type_error: str, row: int) -> None:
+        def __error_log_data(column_name: str, type_error: str, row: int) -> None:
 
             error_log_data.setdefault(error_log_text[type_error], []).append(
-                f'{error_log_text["row"]} {row} - {error_log_text["col"]} {col_name.lower()}'
+                f'{error_log_text["row"]} {row} - {error_log_text["col"]} {column_name.lower()}'
             )
 
-        def __get_validity_data(col_name: str, data: dict, validity: bool, row: int) -> str:
+        def __get_validity_data(column_name: str, data: dict, row: int, validity: bool) -> str:
 
             if not validity:
 
-                if col_name not in exclude_valid_cols.get(file_name, []):
+                if column_name not in exclude_valid_cols.get(file_name, []):
 
-                    __error_log_data(col_name, 'type', row)
+                    __error_log_data(column_name, 'type', row)
 
             return DefaultDataFill.get(data['data_type'], validity)
 
-        def __get_obligatory_data(col_name: str, data: dict, row: tuple, switch: bool) -> tuple:
+        def __get_obligatory_data(column_name: str, data: dict, row: tuple, switch: bool) -> tuple:
 
             if data['obligatory']:
-                __error_log_data(col_name, 'obligation', row[not switch])
+                __error_log_data(column_name, 'obligation', row[not switch])
 
             if switch:
-                return '', __get_validity_data(col_name, data, True, row[switch])
+                return '', __get_validity_data(column_name, data, row[switch], True)
 
-            return __get_validity_data(col_name, data, True, row[not switch]), ''
+            return __get_validity_data(column_name, data, row[not switch], True), ''
 
-        def __get_negativity_data(col_name: str, data: dict, row: int) -> str:
+        def __get_negativity_data(column_name: str, data: dict, row: int) -> str:
 
             data_type = data['data_type']
             if data_type in (int, float):
 
                 if data['negativity'] is False:
-                    __error_log_data(col_name, 'negative', row)
+                    __error_log_data(column_name, 'negative', row)
 
                 return '-' + DefaultDataFill.get(data_type, True)
 
-            return __get_validity_data(col_name, data, True, row)
+            return __get_validity_data(column_name, data, row, True)
 
-        def __get_integrity_data(col_name: str, data: dict, row: int, negativity: bool = False) -> str:
+        def __get_integrity_data(column_name: str, data: dict, row: int, negativity: bool = False) -> str:
 
             types = [int, float]
             data = deepcopy(data)
@@ -114,34 +117,72 @@ class CreateFileData:
                 types.remove(data_type)
 
                 if data_type is int:
-                    __error_log_data(col_name, 'type', row)
+                    __error_log_data(column_name, 'type', row)
                     data['negativity'] = None
 
                 if negativity:
                     data['data_type'] = types[0]
-                    return __get_negativity_data(col_name, data, row)
+                    return __get_negativity_data(column_name, data, row)
                 else:
                     return DefaultDataFill.get(types[0], True)
 
-            return __get_validity_data(col_name, data, True, row)
+            return __get_validity_data(column_name, data, row, True)
+
+        def __get_validation_date_data(column_name: str, data: dict, row: tuple) -> tuple:
+
+            if data['data_type'] == date:
+                date_1 = '01.07.2024'
+                date_2 = '01/07/2024'
+                date_3 = '2024-07-01'
+                date_4 = '1.7.24'
+
+                validity_datas = (date_1, date_2, date_3, date_4)
+
+                __error_log_data(column_name, 'type', 4)
+
+                return validity_datas
+
+            validity_datas = tuple(__get_validity_data(column_name, data, r, True) for r in row)
+
+            return validity_datas
+
+        def __get_validation_time_data(column_name: str, data: dict, row: tuple) -> tuple:
+
+            if data['data_type'] == time:
+                time_1 = '09:45:00 AM'
+                time_2 = '09:45:00 PM'
+                time_3 = '09:45:00'
+                time_4 = '09:45'
+
+                validity_datas = (time_1, time_2, time_3, time_4)
+
+                __error_log_data(column_name, 'type', 3)
+                __error_log_data(column_name, 'type', 4)
+
+                return validity_datas
+
+            validity_datas = tuple(__get_validity_data(column_name, data, r, True) for r in row)
+
+            return validity_datas
 
         obligatory_switch = True
 
         for col_name, col_valid_data in file_data.items():
 
-            only_preview = self._inputs_data[file_name]['columns'][col_name]['only_for_download_and_preview']
-            active = self._inputs_data[file_name]['columns'][col_name]['active']
+            only_preview = self._inputs_data[file_name]['columns'][col_name]['only_for_download_and_preview']  # костыль
+            active = self._inputs_data[file_name]['columns'][col_name]['active']  # костыль
 
             if not only_preview and active:  # костыль
 
                 new_col_data = [
-                    __get_validity_data(col_name=col_name, data=col_valid_data, validity=False, row=2),
-                    *__get_obligatory_data(col_name=col_name, data=col_valid_data, row=(3, 4),
-                                           switch=obligatory_switch),
-                    __get_negativity_data(col_name=col_name, data=col_valid_data, row=5),
-                    __get_integrity_data(col_name=col_name, data=col_valid_data, row=6, negativity=False),
-                    __get_integrity_data(col_name=col_name, data=col_valid_data, row=7, negativity=True),
-                    __get_validity_data(col_name=col_name, data=col_valid_data, validity=True, row=8)
+                    __get_validity_data(col_name, col_valid_data, row=2, validity=False),
+                    *__get_obligatory_data(col_name, col_valid_data, row=(3, 4), switch=obligatory_switch),
+                    __get_negativity_data(col_name, col_valid_data, row=5),
+                    __get_integrity_data(col_name, col_valid_data, row=6, negativity=False),
+                    __get_integrity_data(col_name, col_valid_data, row=7, negativity=True),
+                    __get_validity_data(col_name, col_valid_data, row=8, validity=True),
+                    *__get_validation_date_data(col_name, col_valid_data, row=(9, 10, 11, 12)),
+                    *__get_validation_time_data(col_name, col_valid_data, row=(13, 14, 15, 16)),
                 ]
 
                 invalid_data.update({col_name: new_col_data})
