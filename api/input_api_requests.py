@@ -52,7 +52,7 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
-    @log_api_status
+    @log_api_status(2)
     def get_preview_data(self, scenario_id: int, input_data: dict) -> requests.Response:
 
         request_url_param = '/data'
@@ -61,7 +61,7 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
-    @log_api_status
+    @log_api_status(2)
     def get_input_log(self, scenario_id: int, input_data: dict) -> requests.Response:
 
         request_url_param = '/log'
@@ -70,7 +70,7 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
-    @log_api_status
+    @log_api_status(2)
     def get_input_data(self, scenario_id: int, input_data: dict) -> requests.Response:
 
         request_url_param = '/download'
@@ -79,7 +79,7 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
-    @log_api_status
+    @log_api_status(2)
     def get_input_info(self, scenario_id: int, input_data: dict) -> requests.Response:
 
         request_url_param = '/info'
@@ -88,7 +88,7 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
-    @log_api_status
+    @log_api_status(2)
     def upload_input_file(self, scenario_id: int, input_data: dict, file_path: str) -> requests.Response:
 
         files = {'files': {'file': open(f'{file_path}', 'rb')}}
@@ -97,7 +97,7 @@ class InputApiRequests(BaseApiRequests):
 
         return response
 
-    @log_api_status
+    @log_api_status(2)
     def delete_input_file(self, scenario_id: int, input_data: dict) -> requests.Response:
 
         response = self._requests_delete(scenario_id, input_data)
@@ -117,5 +117,5 @@ class InputApiRequests(BaseApiRequests):
 #
 #     print(data.json())
 #
-#     # with open(f'test.xlsx', 'wb') as file:
+#     # with open(f'optimizer_data_tests.xlsx', 'wb') as file:
 #     #     file.write(data.content)

@@ -73,9 +73,9 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'key'
             },
-            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date},
+            'data_type': {'VARCHAR': 'str', 'DECIMAL': 'float', 'INT': 'int', 'DATE': 'date'},
             'negativity': {'': True, 'FALSE': False, 'False': False},
-            'obligatory': {'FALSE': False, 'TRUE': True, 'False': False},
+            'obligatory': {'FALSE': True, 'TRUE': False, 'False': True},
             'key': {'': None, '1': 1}
         },
         ProjectType.RTM: {
@@ -87,9 +87,9 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'Key'
             },
-            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date, 'TIME': time},
+            'data_type': {'VARCHAR': 'str', 'STR': 'str', 'DECIMAL': 'float', 'INT': 'int', 'DATE': 'date', 'TIME': 'time'},
             'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
-            'obligatory': {'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
+            'obligatory': {'TRUE': False, 'True': False, 'FALSE': True, 'False': True},
             'key': {'': None, '1': 1}
         },
         ProjectType.TETRIS: {
@@ -104,7 +104,7 @@ class ValidateRules:
                 'only_for_download_and_preview': 'Только для выгрзуки и превью (нет в input)',
                 'auto_mapping': 'Автоматический маппинг из источника для выгрузки'
             },
-            'data_type': {'str': str, 'float': float, 'int': int},
+            'data_type': {'str': 'str', 'float': 'float', 'int': 'int'},
             'negativity': {'': True, '+': False},
             'obligatory': {'': False, '+': True},
             'key': {'': None, '1': 1},
@@ -119,9 +119,9 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'Key'
             },
-            'data_type': {'VARCHAR': str, 'DECIMAL': float, 'INT': int, 'DATE': date, 'TIME': time},
+            'data_type': {'VARCHAR': 'str', 'DECIMAL': 'float', 'INT': 'int', 'DATE': 'date', 'TIME': 'time'},
             'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
-            'obligatory': {'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
+            'obligatory': {'TRUE': False, 'True': False, 'FALSE': True, 'False': True},
             'key': {'': None, '1': 1}
         }
     }

@@ -4,11 +4,10 @@ from datetime import date, datetime
 from typing import Type, Iterable
 
 from optimizer_data.data.default_data import ErrorLogText, FileDirectory
+from optimizer_data.data.input_speadsheets_data import ValidateRules, Spreadsheets
 
 import pandas as pd
 import requests
-
-from optimizer_data.data.input_speadsheets_data import ValidateRules, Spreadsheets
 
 
 class OperationsFileData:
@@ -281,15 +280,15 @@ class OperationsFileData:
         return error_logs
 
     @staticmethod
-    def errors_logs_comparison(created_error_logs: dict, received_error_logs: dict) -> None:
+    def errors_logs_comparison(created_error_logs: dict, received_error_logs: dict) -> dict:
 
-        print()
-        print('errors logs comparison:')
+        errors_logs_comparison_result = {}
 
         for input_name, received_error_log_data in received_error_logs.items():
             created_error_log_data = created_error_logs.get(input_name)
-            print()
-            print(input_name.upper())
+
+            errors = {}
+
             for error_type in ('obligation', 'type', 'negative'):
 
                 received_errors = set(received_error_log_data.get(error_type, []))
@@ -299,11 +298,18 @@ class OperationsFileData:
                 received_not_have_errors = created_errors.difference(received_errors)
 
                 if created_not_have_errors or received_not_have_errors:
-                    print(error_type)
-                    if created_not_have_errors:
-                        print('created_not_have_errors:', created_not_have_errors)
-                    if received_not_have_errors:
-                        print('received_not_have_errors:', received_not_have_errors)
+
+                    errors[error_type] = {
+                        'created_not_have_errors': created_not_have_errors,
+                        'received_not_have_errors': received_not_have_errors
+                    }
+
+                else:
+                    errors[error_type] = None
+
+            errors_logs_comparison_result[input_name] = errors
+
+        return errors_logs_comparison_result
 
     def split_file(self, file_name: str, size: int = 1_000_000, file_type: str = 'csv') -> None:
 
@@ -333,18 +339,17 @@ class OperationsFileData:
             with open(f'{creatable_file_path}/{new_file_name}', 'w+', encoding='utf8') as new_file:
 
                 new_file_data = column_names + file_data[i:i + size]
-
                 new_file.writelines(new_file_data)
 
             file_number += 1
 
 
 if __name__ == "__main__":
-    file_name = 'fact'
+    file_name = 'fc'
 
     operations_file_data = OperationsFileData()
 
-    operations_file_data.split_file(file_name, size=100_000)
+    operations_file_data.split_file(file_name, size=1_000_000)
 
 
 

@@ -1,6 +1,6 @@
 import os
 import time
-import datetime
+from datetime import date, timedelta
 
 from api.api_operations import ApiOperations
 from optimizer_data.create_file_data import CreateFileData
@@ -63,9 +63,6 @@ class Operations:
 
         else:
 
-            # input_data_test = {k: v for k, v in self._inputs_data.items() if k == 'gps'}  # удалить
-            # print(input_data_test)
-
             self._api_operation.upload_input_files(self._inputs_data, files_directory, files_type)
 
     def upload_valid_input_files(self, files_type: str = 'xlsx', delay_between_queue: int = None) -> None:
@@ -93,28 +90,14 @@ class Operations:
 
     def create_invalid_files(self) -> None:
 
-        file_name = f'validation_rules_{self._optimizer_type}.xlsx'
-        valid_rules = ValidateRules.get(self._optimizer_type)
-        columns = valid_rules['col_names'].values()
         error_log_lang = ProjectLanguage.get(self._optimizer_type)
 
         file_directory = FileDirectory(self._optimizer_type)
-        validation_rules_directory = file_directory.validation_rules
         invalid_files_directory = file_directory.invalid_input_files
         error_logs_directory = file_directory.input_files_error_logs
 
-        operations_file_data = OperationsFileData(validation_rules_directory, self._inputs_data)
-
-        spreadsheet_params = Spreadsheets.get(self._optimizer_type, 'validation_rules')[1]['params']
-
-        rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
-        converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
-
         create_file_data = CreateFileData(self._optimizer_type, self._inputs_data)
-        create_file_data.invalid_files(converted_valid_rules,
-                                       invalid_files_directory,
-                                       error_logs_directory,
-                                       error_log_lang)
+        create_file_data.invalid_files(invalid_files_directory, error_logs_directory, error_log_lang)
 
     def delete_input_files(self) -> None:
 
@@ -132,7 +115,12 @@ class Operations:
         created_error_logs = operations_file_data.read_error_logs(error_log_lang)
         received_error_logs = operations_file_data.convert_txt_err_log_to_dict(received_error_logs_txt, error_log_lang)
 
-        operations_file_data.errors_logs_comparison(created_error_logs, received_error_logs)
+        comparison_result = operations_file_data.errors_logs_comparison(created_error_logs, received_error_logs)
+
+        import pytest
+        pytest.main(['-c', 'optimizer_data_tests/opti_data_pytest.ini',
+                     'optimizer_data_tests/test_optimizer_data.py::test_errors_logs_comparison',
+                     '--comparison_result', repr(comparison_result)])
 
     def get_input_files_data(self):
 
@@ -176,35 +164,41 @@ class Operations:
 
                     data_uploading_status = get_input_info_response[current_input_name].get('data_uploading_status')
 
-                    print('Elapsed time: ', datetime.timedelta(seconds=time.time()-start_time))
+                    print('Elapsed time: ', timedelta(seconds=time.time()-start_time))
 
                     if data_uploading_status == 'Data successfully uploaded':
                         break
 
                     time.sleep(timeout_input_info)
 
+    def create_custom_csv_file(self, file_name: str, creating_data: dict, row_count: int):
+
+        create_file_data = CreateFileData()
+
+        created_input_files_directory = FileDirectory(self._optimizer_type).created_input_files
+        file_path = f'{created_input_files_directory}/{file_name}'
+
+        create_file_data.create_custom_csv_file(file_path, creating_data, row_count)
 
 
 if __name__ == "__main__":
-    optimizer_type = ProjectType.CFR
+    environment = 'LOCAL_STAGE'
+    optimizer_type = ProjectType.PROMO
+    scenario_id = 488
 
     # -------
-    environment = 'LOCAL_STAGE'
-    scenario_id = 413
-    operation = Operations(optimizer_type, environment, scenario_id)
-    operation.upload_multiple_files('fact')
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.upload_multiple_files('fc')
 
     # -------
     # operation = Operations(optimizer_type, use_inputs_data=False)
     # operation.get_validation_rules_from_google_drive()
 
     # -------
-    # operation = Operations(optimizer_type)
-    # operation.create_invalid_files()
+    operation = Operations(optimizer_type)
+    operation.create_invalid_files()
 
     # -------
-    # environment = 'LOCAL_STAGE'
-    # scenario_id = 1692
     # operation = Operations(optimizer_type, environment, scenario_id)
 
     # operation.upload_invalid_input_files()
@@ -216,3 +210,22 @@ if __name__ == "__main__":
     # operation.get_input_files_data()
 
     # operation.upload_valid_input_files(files_type='csv', delay_between_queue=10)
+
+    # -------
+    # operation = Operations(optimizer_type, use_inputs_data=False)
+    # creating_data = {
+    #     'mad_date': {'value': date(2024, 1, 1), 'options': {'operation': 'increase', 'value': timedelta(1), 'step': 1}},
+    #     'sku': {'value': 1, 'options': {'operation': 'increase', 'value': 1, 'step': 10}},
+    #     'wh': {'value': 5000, 'options': {'operation': 'increase', 'value': 10, 'step': 1}},
+    #     'chain': {'value': 'chain_1', 'options': {'operation': 'increase_str', 'value': 1, 'step': 1}},
+    #     'rfa_id': {'value': 100, 'options': {'operation': 'increase', 'value': 1, 'step': 1}},
+    #     'ordered': {'value': 10.01, 'options': {'operation': 'increase', 'value': 0.01, 'step': 1, 'rounding': 2}},
+    #     'delivered': {'value': 10.01, 'options': {'operation': 'increase', 'value': 0.01, 'step': 1, 'rounding': 2}},
+    #     'test_1': {'value': 'text_value', 'options': None},
+    #     'test_2': {'value': 999, 'options': None},
+    #     'test_3': {'value': None, 'options': {'operation': 'random', 'rand_range': (0, 100), 'step': 5}},
+    #     'test_4': {'value': None, 'options': {'operation': 'copy', 'value': 'test_1', 'step': 1}},
+    #     'test_5': {'value': None, 'options': {'operation': 'copy', 'value': 'sku', 'step': 1}}
+    # }
+    # operation.create_custom_csv_file('fact.csv', creating_data, 1_000_000)
+

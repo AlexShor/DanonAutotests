@@ -1,5 +1,6 @@
 import functools
 
+from custom_moduls.console_design.console_decorator import log_api_status
 from pages.site_data.urls import BaseUrls
 from dotenv import load_dotenv
 
@@ -64,9 +65,10 @@ class BaseApiRequests:
         def delete(self, request_parameters: dict):
             return requests.delete(**request_parameters)
 
+    @log_api_status(1)
     def get_tokens(self):
 
-        print('get_tokens')
+        #print('get_tokens')
 
         url = f'{self._base_url}/auth/login'
         form_data = {"email": self._login, "password": self._password}
@@ -78,4 +80,4 @@ class BaseApiRequests:
         self._access_token = response.json().get('access')
         self._refresh_token = response.json().get('refresh')
 
-        return self._access_token, self._refresh_token
+        return response

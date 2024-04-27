@@ -110,6 +110,14 @@ class InputData:
 
         self._write_json(result)
 
+    def update_validation_rules(self) -> None:
+
+        valid_rules_data = self._get_valid_rules_data()
+
+        updated_data = {input_name: {'columns': valid_ruls} for input_name, valid_ruls in valid_rules_data.items()}
+
+        self.update_json(updated_data)
+
     def get_from_json(self, only_active_inputs: bool = True) -> dict:
 
         with open(f'{self._file_path}/{self._file_name}', 'r', encoding='utf8') as file:
@@ -130,10 +138,10 @@ class InputData:
 
 
 if __name__ == "__main__":
-    data = deepcopy(InputTypeNameMatch.CFR.TYPES)
+    #data = deepcopy(InputTypeNameMatch.CFR.TYPES)
 
-    input_data = InputData('cfr')
-    input_data.create_json(data)
+    input_data = InputData('rtm')
+    # input_data.update_validation_rules()
 
     # data = input_data.get_from_json()
 

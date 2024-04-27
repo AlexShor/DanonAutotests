@@ -17,7 +17,7 @@
             "Plant ID": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -29,7 +29,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -41,7 +41,7 @@
             "Запасы в днях": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -70,7 +70,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -82,7 +82,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -94,7 +94,7 @@
             "Max CFR": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -106,7 +106,7 @@
             "Min CFR": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -118,7 +118,7 @@
             "Коэффициент потерь": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -147,7 +147,7 @@
             "Code Plant": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -159,7 +159,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -171,7 +171,7 @@
             "Site": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -183,7 +183,7 @@
             "ID_Sh#point1": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -195,7 +195,7 @@
             "ID_Sh#point2": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -207,7 +207,7 @@
             "ID_Sh#point3": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -219,7 +219,7 @@
             "ID_Sh#point4": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -231,7 +231,7 @@
             "ID_Sh#point5": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -243,7 +243,7 @@
             "ID_Sh#point6": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -255,7 +255,7 @@
             "ID_Sh#point7": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -267,7 +267,7 @@
             "ID_Sh#point8": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -279,7 +279,7 @@
             "Квота": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -308,7 +308,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -320,7 +320,7 @@
             "Location": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -332,7 +332,7 @@
             "Car": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -361,7 +361,7 @@
             "MAT_COD": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -373,7 +373,7 @@
             "PLT_COD": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -385,7 +385,7 @@
             "KEY_FIG_DAT": {
                 "data_type": "date",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -397,7 +397,7 @@
             "CUS_LV4_COD": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -409,7 +409,7 @@
             "CUS_LV5_COD": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -421,7 +421,7 @@
             "FC": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -450,7 +450,7 @@
             "MAD_DATE": {
                 "data_type": "date",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -462,7 +462,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -474,7 +474,7 @@
             "WH": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -486,7 +486,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -498,7 +498,7 @@
             "RFA_ID": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -510,7 +510,7 @@
             "ORDERED": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -522,7 +522,7 @@
             "DELIVERED": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -551,7 +551,7 @@
             "Plant": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -563,7 +563,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -572,10 +572,10 @@
                 "active": true,
                 "preview_rules": null
             },
-            "SKU Name": {
+            "ProductName": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -587,7 +587,7 @@
             "Жесткий Карантин(дней)": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -599,7 +599,7 @@
             "Мягкий карантин(дней)": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -611,7 +611,7 @@
             "Частота розлива в неделю": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -623,7 +623,7 @@
             "Срок годности": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -635,7 +635,7 @@
             "Признак долгосрока": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -647,7 +647,7 @@
             "Ready to ship": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -676,7 +676,7 @@
             "Срок годности от": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -688,7 +688,7 @@
             "Срок годности до": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -700,7 +700,7 @@
             "Шаг": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -729,7 +729,7 @@
             "Chain": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -741,7 +741,7 @@
             "WH": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -753,7 +753,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -765,7 +765,7 @@
             "MAX(MIN_DLC)": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -777,7 +777,7 @@
             "Delivery Time, days": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -789,7 +789,7 @@
             "RFA": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -818,7 +818,7 @@
             "Пункт погрузки": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -830,7 +830,7 @@
             "Пункт выгрузки": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -842,7 +842,7 @@
             "Частота в неделю": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -854,7 +854,7 @@
             "бакет девиации (интервал дни)": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -866,7 +866,7 @@
             "Транзиты лето, дней": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -878,7 +878,7 @@
             "Транзиты зима, дней": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -890,7 +890,7 @@
             "максимальное отклонение, дни": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -919,7 +919,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -931,7 +931,7 @@
             "Стандартная цена кг": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -942,8 +942,8 @@
             },
             "NS на кг": {
                 "data_type": "float",
-                "negativity": false,
-                "obligatory": false,
+                "negativity": true,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -954,8 +954,8 @@
             },
             "CO,%": {
                 "data_type": "float",
-                "negativity": false,
-                "obligatory": false,
+                "negativity": true,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -984,7 +984,7 @@
             "Point #1": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -996,7 +996,7 @@
             "Point #2": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1008,7 +1008,7 @@
             "Point #3": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1020,7 +1020,7 @@
             "Point #4": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1032,7 +1032,7 @@
             "Point #5": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1044,7 +1044,7 @@
             "Point #6": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1056,7 +1056,7 @@
             "Point #7": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1068,7 +1068,7 @@
             "Point #8": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1080,7 +1080,7 @@
             "HT, days": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1109,7 +1109,7 @@
             "Location ID": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1121,7 +1121,7 @@
             "Location Desc": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1150,7 +1150,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1162,7 +1162,7 @@
             "Uom ID": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1174,7 +1174,7 @@
             "Capacity PC": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1186,7 +1186,7 @@
             "Net Weight KG": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1198,7 +1198,7 @@
             "Gross Weight KG": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1226,7 +1226,7 @@
             "SKU": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1238,7 +1238,7 @@
             "Log_DC_ID": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1250,7 +1250,7 @@
             "min CFR": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1262,7 +1262,7 @@
             "max PPED": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1291,7 +1291,7 @@
             "sku": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1303,7 +1303,7 @@
             "WH": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,

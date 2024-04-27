@@ -11,7 +11,7 @@
             "GPS_DATE": {
                 "data_type": "date",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -23,7 +23,7 @@
             "GPS_SOURCE": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -35,7 +35,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -47,7 +47,7 @@
             "SKU_SAP_CODE": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -59,7 +59,7 @@
             "GS_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -71,7 +71,7 @@
             "PROMO_ON_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -83,7 +83,7 @@
             "TT_OFF_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -95,7 +95,7 @@
             "VOL_BASE_TN": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -107,7 +107,7 @@
             "NS_BASE_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -119,7 +119,7 @@
             "VOL_UPLIFT_TN": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -131,7 +131,7 @@
             "NS_UPLIFT_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -143,7 +143,7 @@
             "VOD_TN": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -155,7 +155,7 @@
             "VOD_GS_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -167,7 +167,7 @@
             "LP_NON_PROMO_VOL_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -179,7 +179,7 @@
             "VOL_PROMO_BASE_TN": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -191,7 +191,7 @@
             "MC_VAR_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -203,7 +203,7 @@
             "IC_VAR_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -215,7 +215,7 @@
             "LC_VAR_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -227,7 +227,7 @@
             "FIX_COST_INCL_EXP_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -239,7 +239,7 @@
             "TT_ON_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -251,7 +251,7 @@
             "PROMO_OFF_KRUB": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -274,7 +274,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -286,7 +286,7 @@
             "DISTR_CHANNEL": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "Other",
                 "key": null,
                 "validation": null,
@@ -309,7 +309,7 @@
             "GR_SKU_SEGMENT_OPTI": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -321,7 +321,7 @@
             "SKU_SEGMENT": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -344,7 +344,7 @@
             "GR_CHAIN_OPTI": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -356,7 +356,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -379,7 +379,7 @@
             "INITIAL_PRODUCT": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -391,7 +391,7 @@
             "PRODUCT_AFTER_DOWNSIZING": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -403,7 +403,7 @@
             "SWITCHOVER_DATE": {
                 "data_type": "date",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -426,7 +426,7 @@
             "FAMILY": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -438,7 +438,7 @@
             "PRODUCT_NATURE": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -450,7 +450,7 @@
             "PORTFOLIO_CATEGORY": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -462,7 +462,7 @@
             "MODERN_TRADI": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -474,7 +474,7 @@
             "SKU_SEGMENT": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -486,7 +486,7 @@
             "SKU_SAP_CODE": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -498,7 +498,7 @@
             "SKU_DESCRIPTION_EN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -521,7 +521,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -533,7 +533,7 @@
             "CHANNEL": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -556,7 +556,7 @@
             "CHAIN": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -568,7 +568,7 @@
             "SKU_SEGMENT": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -580,7 +580,7 @@
             "ELASTICITY": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "0",
                 "key": 1,
                 "validation": null,
@@ -592,7 +592,7 @@
             "DURATION_TYPE": {
                 "data_type": "str",
                 "negativity": null,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -604,7 +604,7 @@
             "DURATION": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "0",
                 "key": 1,
                 "validation": null,
@@ -616,7 +616,7 @@
             "DISCOUNT": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "0",
                 "key": 1,
                 "validation": null,
@@ -628,7 +628,7 @@
             "MIN_SLOTS": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
@@ -640,7 +640,7 @@
             "MAX_SLOTS": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "100",
                 "key": null,
                 "validation": null,
@@ -652,7 +652,7 @@
             "MIN_SATURATION": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
@@ -664,7 +664,7 @@
             "MAX_SATURATION": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": "1",
                 "key": null,
                 "validation": null,

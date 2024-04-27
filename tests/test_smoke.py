@@ -99,8 +99,15 @@ class TestFullSmokePath:
         scenario_title = scenario_page.get_scenario_title()
 
     @pytest.mark.test_full_smoke
-    @custom_parametrize(data=types, skip=skip,
-                        arguments=('system_file_name', 'front_name', 'scenario_type', 'url_path', 'optimization_type'))
+    @custom_parametrize(data=types,
+                        skip=skip,
+                        arguments=(
+                            'system_file_name',
+                            'front_name',
+                            'scenario_type',
+                            'url_path',
+                            'optimization_type'
+                        ))
     # @pytest.mark.incremental
     def test_user_can_add_input_file(self, env, browser,
                                      system_file_name,
@@ -141,11 +148,11 @@ class TestFullSmokePath:
         # elems2 = ['MODERN', 'MILKS', 'TRADI', 'MILKS']
         #pfr_tab.choose_data_in_hierarchy_elements_select('select products')
 
-        pfr_tab.search_data_in_hierarchy_elements_select('select customers', 'test')
+        pfr_tab.search_data_in_hierarchy_elements_select('select customers', 'text')
 
         # pfr_tab.choose_data_in_target_variable_select('select variable', 'NS, Abs')
         # time.sleep(1)
-        pfr_tab.input_data_in_target_variable_input('holdout', 'test')
+        pfr_tab.input_data_in_target_variable_input('holdout', 'text')
 
         pfr_tab.choose_data_in_target_variable_select('min/max', 'max')
         pfr_tab.choose_data_in_target_variable_select('select variable', 'NS, Abs')

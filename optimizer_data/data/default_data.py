@@ -7,20 +7,20 @@ class DefaultDataFill:
     def get(data_type, validity=True):
         types = {
             True: {
-                str: 'string',
-                float: '111.45',
-                int: '222',
-                bool: '1|TRUE:0|FALSE',
-                date: '01-01-2024',
-                time: '9:45:00 AM',
+                'str': 'string',
+                'float': '111.45',
+                'int': '222',
+                'bool': '1|TRUE:0|FALSE',
+                'date': '01-01-2024',
+                'time': '9:45:00 AM',
             },
             False: {
-                str: '555',
-                float: 'float',
-                int: 'int',
-                bool: '888',
-                date: 'date',
-                time: 'time',
+                'str': '555',
+                'float': 'float',
+                'int': 'int',
+                'bool': '888',
+                'date': 'date',
+                'time': 'time',
             }
         }
 
@@ -69,6 +69,7 @@ class FileDirectory:
         __input = f'{self.__ROOT_DIRECTORY}/optimizer_data/files/input/{self._optimizer_type}'
 
         self.downloaded_input_files = f'{__input}/downloaded_input_files'
+        self.created_input_files = f'{__input}/created_input_files'
         self.valid_input_files = f'{__input}/valid_input_files/files'
         self.invalid_input_files = f'{__input}/invalid_input_files/files'
         self.input_files_error_logs = f'{__input}/invalid_input_files/error_logs'

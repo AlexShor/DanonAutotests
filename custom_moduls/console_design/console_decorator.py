@@ -20,36 +20,92 @@ def benchmark(func):
     return wrapper
 
 
-def response_status_code_color(status_code):
+def _response_status_code_and_data(response):
+    status_code = response.status_code
 
     if 200 <= status_code <= 299:
-        return CCol.txt_grn(status_code)
-    elif 400 <= status_code <= 599:
-        return CCol.txt_red(status_code)
+        colored_status_code = CCol.txt_grn(status_code)
+
+    elif 400 <= status_code <= 499:
+        colored_status_code = CCol.txt_red(status_code)
+        status_code_data = f'{colored_status_code}\n{response.content}'
+
+        return status_code_data
+
+    elif 500 <= status_code <= 599:
+        colored_status_code = CCol.txt_red(status_code)
+
     else:
-        return CCol.txt_yel(status_code)
+        colored_status_code = CCol.txt_yel(status_code)
+
+    return colored_status_code
 
 
-def log_api_status(func):
-    @functools.wraps(func)
-    def _wrapper(*args, **kwargs):
+def log_api_status(indentation_levels:int = 0):
+    def _decorator(func):
+        @functools.wraps(func)
+        def _wrapper(*args, **kwargs):
 
-        input_data = args[2]
+            system_file_name = ''
 
-        func_name = func.__name__.capitalize().replace('_', ' ')
-        system_file_name = input_data.get('system_file_name')
+            if len(args) >= 3:
 
-        console_log = f'{Ilvl(2)}{func_name}: "{system_file_name}"'
+                input_data = args[2]
 
-        print(f'{console_log}...', end=' ')
+                system_file_name = input_data.get('system_file_name')
+                system_file_name = f': "{system_file_name}"'
 
-        response = func(*args, **kwargs)
+            func_name = func.__name__.capitalize().replace('_', ' ')
 
-        status_code = response_status_code_color(response.status_code)
+            console_log = f'{Ilvl(indentation_levels)}{func_name}{system_file_name}'
 
-        print(f'\r{console_log} {status_code}')
+            print(f'{console_log}...', end=' ')
 
-        return response
+            response = func(*args, **kwargs)
 
-    return _wrapper
+            print(f'\r{console_log} {_response_status_code_and_data(response)}')
 
+            return response
+
+        return _wrapper
+
+    return _decorator
+
+
+def log_file_operation(indentation_levels:int = 0, main_func: bool = False):
+    def _decorator(func):
+        @functools.wraps(func)
+        def _wrapper(*args, **kwargs):
+
+            file_name = ''
+
+            if not main_func:
+
+                attr = 'file_name'
+                attrs = list(func.__code__.co_varnames)[:len(args)]
+
+                if attr in attrs:
+
+                    file_name_index = attrs.index(attr)
+                    file_name = f': "{args[file_name_index]}"'
+
+            func_name = func.__name__.lstrip('_').capitalize().replace('_', ' ')
+
+            console_log = f'{Ilvl(indentation_levels)}{func_name}{file_name}'
+
+            ending_text = ('...', ':')[main_func]
+
+            print(f'{console_log}{ending_text}', end=(' ', '\n')[main_func])
+
+            response = func(*args, **kwargs)
+
+            if not main_func:
+                print(f'\r{console_log} {CCol.txt_grn("DONE")}')
+            else:
+                print()
+
+            return response
+
+        return _wrapper
+
+    return _decorator

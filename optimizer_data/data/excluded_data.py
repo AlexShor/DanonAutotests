@@ -13,10 +13,13 @@ class DataTypesErrorExceptions:
 class ExcludeValidateColumns:
     __excluded = {
         ProjectType.PROMO: {
-
+            'gps': ['SKU_SAP_CODE'],
+            'prod_md': ['SKU_SAP_CODE']
         },
         ProjectType.RTM: {
-
+            'fin_log_model': ['CD_LOG_SHIPPING_TYPE_HEADER'],
+            'distance_data': ['ShipToID'],
+            'wms_support': ['Номер клиента', 'Номер заказа']
         },
         ProjectType.TETRIS: {
             'parameters': ['Parameter ID', 'Parameter Value'],
@@ -25,7 +28,7 @@ class ExcludeValidateColumns:
             'rejections': ['Date ID']
         },
         ProjectType.CFR: {
-
+            'routes': ['Code Plant', 'ID_Sh#point1'],
         }
     }
 

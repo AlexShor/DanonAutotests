@@ -2043,7 +2043,7 @@
         "active": false,
         "scenario_type": "tetris-scenarios",
         "system_file_name": "Industrial Costs",
-        "front_name": "Индустриальные затраты",
+        "front_name": "Инд. затраты RUB/KG",
         "parameter": "industrial_costs",
         "obligatory": false,
         "upload_queue": 3,
