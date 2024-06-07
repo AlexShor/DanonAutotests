@@ -183,8 +183,8 @@ class Operations:
 
 if __name__ == "__main__":
     environment = 'LOCAL_STAGE'
-    optimizer_type = ProjectType.PROMO
-    scenario_id = 488
+    optimizer_type = ProjectType.CFR
+    scenario_id = 455
 
     # -------
     # operation = Operations(optimizer_type, environment, scenario_id)

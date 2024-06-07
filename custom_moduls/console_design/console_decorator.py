@@ -41,7 +41,7 @@ def _response_status_code_and_data(response):
     return colored_status_code
 
 
-def log_api_status(indentation_levels:int = 0):
+def log_api_status(indentation_levels: int = 0):
     def _decorator(func):
         @functools.wraps(func)
         def _wrapper(*args, **kwargs):
@@ -72,7 +72,7 @@ def log_api_status(indentation_levels:int = 0):
     return _decorator
 
 
-def log_file_operation(indentation_levels:int = 0, main_func: bool = False):
+def log_file_operation(indentation_levels: int = 0, main_func: bool = False):
     def _decorator(func):
         @functools.wraps(func)
         def _wrapper(*args, **kwargs):
@@ -100,7 +100,15 @@ def log_file_operation(indentation_levels:int = 0, main_func: bool = False):
             response = func(*args, **kwargs)
 
             if not main_func:
-                print(f'\r{console_log} {CCol.txt_grn("DONE")}')
+
+                if isinstance(response, Exception):
+
+                    print(f'\r{console_log} {CCol.txt_red("FAIL")}')
+                    print(f'{Ilvl(indentation_levels + 1)}Error: {CCol.txt_red(str(response))}')
+
+                else:
+
+                    print(f'\r{console_log} {CCol.txt_grn("DONE")}')
             else:
                 print()
 
