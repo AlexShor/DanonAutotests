@@ -829,7 +829,7 @@
         "optimization_type": "Cost to serve",
         "columns": {
             "PlantID": {
-                "data_type": "int",
+                "data_type": "str",
                 "negativity": false,
                 "obligatory": true,
                 "default_if_obligatory_null": null,

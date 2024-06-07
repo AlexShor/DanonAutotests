@@ -41,8 +41,8 @@
             "Запасы в днях": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": true,
-                "default_if_obligatory_null": null,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -93,7 +93,7 @@
             },
             "Max CFR": {
                 "data_type": "float",
-                "negativity": false,
+                "negativity": true,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
@@ -105,7 +105,7 @@
             },
             "Min CFR": {
                 "data_type": "float",
-                "negativity": false,
+                "negativity": true,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
@@ -117,7 +117,7 @@
             },
             "Коэффициент потерь": {
                 "data_type": "float",
-                "negativity": false,
+                "negativity": true,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
@@ -420,9 +420,9 @@
             },
             "FC": {
                 "data_type": "float",
-                "negativity": false,
-                "obligatory": true,
-                "default_if_obligatory_null": null,
+                "negativity": true,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -509,9 +509,9 @@
             },
             "ORDERED": {
                 "data_type": "float",
-                "negativity": false,
-                "obligatory": true,
-                "default_if_obligatory_null": null,
+                "negativity": true,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -521,9 +521,9 @@
             },
             "DELIVERED": {
                 "data_type": "float",
-                "negativity": false,
-                "obligatory": true,
-                "default_if_obligatory_null": null,
+                "negativity": true,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -588,7 +588,7 @@
                 "data_type": "int",
                 "negativity": false,
                 "obligatory": false,
-                "default_if_obligatory_null": null,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -600,7 +600,7 @@
                 "data_type": "int",
                 "negativity": false,
                 "obligatory": false,
-                "default_if_obligatory_null": null,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -609,9 +609,9 @@
                 "preview_rules": null
             },
             "Частота розлива в неделю": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -646,9 +646,9 @@
             },
             "Ready to ship": {
                 "data_type": "int",
-                "negativity": false,
+                "negativity": true,
                 "obligatory": false,
-                "default_if_obligatory_null": null,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -777,7 +777,7 @@
             "Delivery Time, days": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -789,7 +789,7 @@
             "RFA": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -840,7 +840,7 @@
                 "preview_rules": null
             },
             "Частота в неделю": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
@@ -852,11 +852,11 @@
                 "preview_rules": null
             },
             "бакет девиации (интервал дни)": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
                 "obligatory": false,
                 "default_if_obligatory_null": null,
-                "key": 1,
+                "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
                 "auto_mapping": null,
@@ -888,11 +888,11 @@
                 "preview_rules": null
             },
             "максимальное отклонение, дни": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
                 "obligatory": false,
                 "default_if_obligatory_null": null,
-                "key": 1,
+                "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
                 "auto_mapping": null,
@@ -931,7 +931,7 @@
             "Стандартная цена кг": {
                 "data_type": "float",
                 "negativity": false,
-                "obligatory": false,
+                "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
                 "validation": null,
@@ -1079,9 +1079,9 @@
             },
             "HT, days": {
                 "data_type": "int",
-                "negativity": false,
-                "obligatory": true,
-                "default_if_obligatory_null": null,
+                "negativity": true,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -1172,7 +1172,7 @@
                 "preview_rules": null
             },
             "Capacity PC": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
@@ -1248,7 +1248,7 @@
                 "preview_rules": null
             },
             "min CFR": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
                 "obligatory": false,
                 "default_if_obligatory_null": null,
@@ -1260,7 +1260,7 @@
                 "preview_rules": null
             },
             "max PPED": {
-                "data_type": "int",
+                "data_type": "float",
                 "negativity": false,
                 "obligatory": false,
                 "default_if_obligatory_null": null,
