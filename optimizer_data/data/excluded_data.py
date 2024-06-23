@@ -1,13 +1,13 @@
 from project_data.main_data import ProjectType
 
 
-class DataTypesErrorExceptions:
-    DATA = [['gps', 'SKU_SAP_CODE'],
-            ['routes', 'code_plant'],
-            ['routes', 'id_sh#point1'],
-            ['sourcing_parameters', 'parameter value'],
-            ['milk_parameters', 'parameter value'],
-            ['rejections', 'date id']]
+# class DataTypesErrorExceptions:
+#     DATA = [['gps', 'SKU_SAP_CODE'],
+#             ['routes', 'code_plant'],
+#             ['routes', 'id_sh#point1'],
+#             ['sourcing_parameters', 'parameter value'],
+#             ['milk_parameters', 'parameter value'],
+#             ['rejections', 'date id']]
 
 
 class ExcludeValidateColumns:
@@ -18,7 +18,7 @@ class ExcludeValidateColumns:
         },
         ProjectType.RTM: {
             'fin_log_model': ['CD_LOG_SHIPPING_TYPE_HEADER'],
-            'distance_data': ['ShipToID'],
+            'distance_data': ['ShipToID', 'PlantID'],
             'wms_support': ['Номер клиента', 'Номер заказа']
         },
         ProjectType.TETRIS: {

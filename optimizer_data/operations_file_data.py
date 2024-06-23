@@ -1,13 +1,16 @@
 import os
+import re
 from re import findall
 from datetime import date, datetime
 from typing import Type, Iterable
 
 from optimizer_data.data.default_data import ErrorLogText, FileDirectory
 from optimizer_data.data.input_speadsheets_data import ValidateRules, Spreadsheets
+from custom_moduls.console_design.console_decorator import log_file_operation, log_api_status
 
 import pandas as pd
 import requests
+from styleframe import StyleFrame, utils, Styler
 
 
 class OperationsFileData:
@@ -29,15 +32,16 @@ class OperationsFileData:
         else:
             self._inputs_data = {}
 
-    @staticmethod
-    def _get_confirm_token(response: requests.Response) -> str | None:
+    # @staticmethod
+    # def _get_confirm_token(response: requests.Response) -> str | None:
+    #
+    #     for key, value in response.cookies.items():
+    #         if key.startswith("download_warning"):
+    #             return value
+    #     return None
 
-        for key, value in response.cookies.items():
-            if key.startswith("download_warning"):
-                return value
-        return None
-
     @staticmethod
+    @log_file_operation(2)
     def _save_response_content(
         response: requests.Response,
         destination: str,
@@ -49,20 +53,24 @@ class OperationsFileData:
                 if chunk:  # filter out keep-alive new chunks
                     f.write(chunk)
 
-    def get_from_google_drive(self, spreadsheet_link: str, file_name: str) -> None:
+    @log_api_status(1)
+    def _get_data_from_google_drive(self, spreadsheet_link: str):
 
         url, spreadsheet_data = spreadsheet_link
         file_id = spreadsheet_data['id']
 
-        session = requests.Session()
-        response = session.get(url, params={"id": file_id}, stream=True)
+        response = requests.get(url, params={"id": file_id}, stream=True)
 
-        token = self._get_confirm_token(response)
-        if token:
-            params = {"id": file_id, "confirm": token}
-            response = session.get(url, params=params, stream=True)
+        return response
 
-        self._save_response_content(response, self._destination, file_name)
+    def get_from_google_drive(self, spreadsheet_link: str, file_name: str) -> int:
+
+        response = self._get_data_from_google_drive(spreadsheet_link)
+
+        if 200 <= response.status_code < 300:
+            self._save_response_content(response, self._destination, file_name)
+
+        return response.status_code
 
     def delete(self, file_name: str) -> None:
 
@@ -73,26 +81,56 @@ class OperationsFileData:
         file_name: str,
         worksheet_name: str | int = 0,
         get_columns: int | Iterable[str] | None = None,
-        skip_footer_rows: int = 0) -> list[dict]:
+        skip_footer_rows: int = 0,
+        style_conditions: dict = None) -> list[dict]:
 
-        spreadsheet = pd.read_excel(io=f'{self._destination}/{file_name}',
-                                    usecols=get_columns,
-                                    index_col=None,
-                                    sheet_name=worksheet_name,
-                                    dtype=str,
-                                    keep_default_na=False,
-                                    skipfooter=skip_footer_rows)
+        if style_conditions:
 
-        return spreadsheet.to_dict('records')
+            sf = StyleFrame.read_excel(path=f'{self._destination}/{file_name}',
+                                       usecols=get_columns,
+                                       index_col=None,
+                                       sheet_name=worksheet_name,
+                                       dtype=str,
+                                       keep_default_na=False,
+                                       skipfooter=skip_footer_rows,
+                                       read_style=True)
+
+            columns = sf.columns
+
+            checked_style_conditions = []
+            for row in sf[columns[0]].style:
+                check = all([row.__dict__.get(key) == style_conditions.get(key) for key in style_conditions])
+                checked_style_conditions.append(check)
+
+            rows_without_strikethrough = sf.loc[checked_style_conditions]
+
+            result = []
+
+            for i in range(len(rows_without_strikethrough)):
+                result.append({str(column): str(rows_without_strikethrough[column][i]) for column in columns})
+
+            return result
+
+        else:
+
+            df = pd.read_excel(io=f'{self._destination}/{file_name}',
+                               usecols=get_columns,
+                               index_col=None,
+                               sheet_name=worksheet_name,
+                               dtype=str,
+                               keep_default_na=False,
+                               skipfooter=skip_footer_rows)
+
+            return df.to_dict('records')
 
     class __convert_rules:
         class base:
             @staticmethod
             def str_to_type(string: str, type_rule: dict) \
                 -> (Type[int] | Type[float]
-                  | Type[str] | Type[date]
-                  | Type[datetime] | Type[bool]
-                  | tuple | str | None):
+                    | Type[str] | Type[date]
+                    | Type[datetime] | Type[bool]
+                    | tuple | str | None):
 
                 if type_rule is not None:
 
@@ -118,15 +156,16 @@ class OperationsFileData:
                 negativity: str,
                 negativity_rules: dict,
                 data_type: Type[int] | Type[float] | Type[str] | Type[date] | Type[bool] = None) -> bool | None:
-
                 if not isinstance(data_type, int | float) and negativity == '':
                     return None
+
+                negativity = re.search(r'[A-Za-z+]+', negativity).group()
+
                 return negativity_rules[negativity]
 
         class preview:
             @staticmethod
             def decimal_places(string: str) -> int | None:
-
                 if string.isdigit():
                     return int(string)
                 return None
@@ -214,7 +253,6 @@ class OperationsFileData:
         converted_preview_rules_data = {}
 
         for row in preview_rules_data:
-
             col = row[preview_rules['col_names']['col']]
 
             decimal_places = cls.__convert_rules.preview.decimal_places(
@@ -229,10 +267,10 @@ class OperationsFileData:
                 preview_rules['separator'])
 
             converted_preview_rules_data[col] = {
-                    'decimal_places': decimal_places,
-                    'percentage': percentage,
-                    'separator': separator
-                }
+                'decimal_places': decimal_places,
+                'percentage': percentage,
+                'separator': separator
+            }
 
         return converted_preview_rules_data
 
@@ -255,7 +293,6 @@ class OperationsFileData:
                 converted_error_log = {}
 
                 for error_type in txt_err_log.rstrip().split('\n\n'):
-
                     error_name, errors_data = error_type.split(" ['")
                     errors_data = errors_data.strip("']").split("', '")
 
@@ -270,7 +307,6 @@ class OperationsFileData:
         error_logs_text = {}
 
         for input_name, input_data in self._inputs_data.items():
-
             file_path = f'{self._destination}/{input_name}'
 
             error_logs_text[input_name] = self.read_txt(file_path)
@@ -331,45 +367,41 @@ class OperationsFileData:
         file_number = 1
 
         for i in range(0, len(file_data), size):
-
             new_file_name = f'{file_name}_{file_number}.{file_type}'
 
             print(new_file_name)
 
             with open(f'{creatable_file_path}/{new_file_name}', 'w+', encoding='utf8') as new_file:
-
                 new_file_data = column_names + file_data[i:i + size]
                 new_file.writelines(new_file_data)
 
             file_number += 1
 
-
-if __name__ == "__main__":
-    file_name = 'fc'
-
-    operations_file_data = OperationsFileData()
-
-    operations_file_data.split_file(file_name, size=1_000_000)
-
+# if __name__ == "__main__":
+#     file_name = 'fc'
+#
+#     operations_file_data = OperationsFileData()
+#
+#     operations_file_data.split_file(file_name, size=1_000_000)
 
 
-    # optimizer_type = 'cfr'
-    #
-    # file_directory = FileDirectory(optimizer_type)
-    # validation_rules_directory = file_directory.validation_rules
-    #
-    # operations_file_data = OperationsFileData(validation_rules_directory)
-    #
-    # file_name = f'validation_rules_{optimizer_type}.xlsx'
-    # valid_rules = ValidateRules.get(optimizer_type)
-    # columns = valid_rules['col_names'].values()
-    #
-    # spreadsheet_params = Spreadsheets.get(optimizer_type, 'validation_rules')[1]['params']
-    #
-    # rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
-    #
-    # print(rules_data)
-    #
-    # converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
-    #
-    # print(converted_valid_rules)
+# optimizer_type = 'cfr'
+#
+# file_directory = FileDirectory(optimizer_type)
+# validation_rules_directory = file_directory.validation_rules
+#
+# operations_file_data = OperationsFileData(validation_rules_directory)
+#
+# file_name = f'validation_rules_{optimizer_type}.xlsx'
+# valid_rules = ValidateRules.get(optimizer_type)
+# columns = valid_rules['col_names'].values()
+#
+# spreadsheet_params = Spreadsheets.get(optimizer_type, 'validation_rules')[1]['params']
+#
+# rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
+#
+# print(rules_data)
+#
+# converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
+#
+# print(converted_valid_rules)

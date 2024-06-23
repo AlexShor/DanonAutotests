@@ -8,7 +8,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -56,12 +57,13 @@
         "active": true,
         "scenario_type": "cfr-scenarios",
         "system_file_name": "coef",
-        "front_name": "Coef",
+        "front_name": "Coef for CFR loss",
         "parameter": "coef",
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -133,12 +135,13 @@
         "active": true,
         "scenario_type": "cfr-scenarios",
         "system_file_name": "routes",
-        "front_name": "Routes",
+        "front_name": "Routes+Quota",
         "parameter": "routes",
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -299,7 +302,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -352,7 +356,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -441,7 +446,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -542,7 +548,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -667,7 +674,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -720,7 +728,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -804,12 +813,13 @@
         "active": true,
         "scenario_type": "cfr-scenarios",
         "system_file_name": "shipment_freq",
-        "front_name": "Shipment freq",
+        "front_name": "Transit",
         "parameter": "shipment_freq",
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -910,7 +920,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -975,7 +986,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -1100,7 +1112,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -1141,7 +1154,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -1200,6 +1214,104 @@
                 "negativity": false,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            }
+        }
+    },
+    "delta_fa_bias": {
+        "active": false,
+        "scenario_type": "cfr-scenarios",
+        "system_file_name": "delta_fa_bias",
+        "front_name": "Delta SFA, BIAS",
+        "parameter": "delta_fa_bias",
+        "obligatory": true,
+        "optimization_type": [],
+        "randomizer_regime": [
+            "No randomizer"
+        ],
+        "columns": {
+            "SKU": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "WH": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Chain ID": {
+                "data_type": "str",
+                "negativity": null,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "RFA": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "Yearweek": {
+                "data_type": "int",
+                "negativity": false,
+                "obligatory": false,
+                "default_if_obligatory_null": null,
+                "key": 1,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ДЕЛЬТА SFA": {
+                "data_type": "float",
+                "negativity": true,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
+                "key": null,
+                "validation": null,
+                "only_for_download_and_preview": null,
+                "auto_mapping": null,
+                "active": true,
+                "preview_rules": null
+            },
+            "ДЕЛЬТА BIAS": {
+                "data_type": "float",
+                "negativity": true,
+                "obligatory": false,
+                "default_if_obligatory_null": "0",
                 "key": null,
                 "validation": null,
                 "only_for_download_and_preview": null,
@@ -1282,7 +1394,8 @@
         "obligatory": true,
         "optimization_type": [
             "Simulator",
-            "Optimizer"
+            "Optimizer",
+            "Simulation (multi-level)"
         ],
         "randomizer_regime": [
             "No randomizer"
@@ -1291,7 +1404,7 @@
             "sku": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,
@@ -1303,7 +1416,7 @@
             "WH": {
                 "data_type": "int",
                 "negativity": false,
-                "obligatory": true,
+                "obligatory": false,
                 "default_if_obligatory_null": null,
                 "key": 1,
                 "validation": null,

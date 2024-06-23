@@ -12,19 +12,27 @@ urllib3.disable_warnings()
 
 
 class BaseApiRequests:
-    def __init__(self, environment: str = 'DEV', auth_creds: tuple = None) -> None:
+    def __init__(self,
+                 environment: str,
+                 auth_tokens: dict = None,
+                 optimizer_type: str = None,
+                 auth_creds: tuple = None) -> None:
 
         self._environment = environment
+        self._optimizer_type = optimizer_type
         self._base_url = f'{BaseUrls.BASE_URLS_BACK.get(environment)}/api'
 
-        self._access_token = None
-        self._refresh_token = None
+        if auth_tokens:
+            self._access_token = auth_tokens.get('access')
+            self._refresh_token = auth_tokens.get('refresh')
+
+        #self._auth_tokens = auth_tokens
 
         self.request = self.Request(self)
 
         if auth_creds:
             self._login, self._password = auth_creds
-            self.get_tokens()
+            #self.get_tokens()
 
     class Request:
         def __init__(self, cls):
@@ -68,8 +76,6 @@ class BaseApiRequests:
     @log_api_status(1)
     def get_tokens(self):
 
-        #print('get_tokens')
-
         url = f'{self._base_url}/auth/login'
         form_data = {"email": self._login, "password": self._password}
 
@@ -79,5 +85,7 @@ class BaseApiRequests:
 
         self._access_token = response.json().get('access')
         self._refresh_token = response.json().get('refresh')
+
+        #self._auth_tokens = response.json()
 
         return response

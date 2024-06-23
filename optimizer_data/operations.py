@@ -1,15 +1,16 @@
 import os
 import time
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 from api.api_operations import ApiOperations
 from optimizer_data.create_file_data import CreateFileData
 from optimizer_data.data.input_data import InputData
-from optimizer_data.data.input_speadsheets_data import Spreadsheets, ValidateRules
+from optimizer_data.data.input_speadsheets_data import Spreadsheets
 from optimizer_data.data.default_data import FileDirectory
 from optimizer_data.operations_file_data import OperationsFileData
 from pages.site_data.credentials import Credentials
 from project_data.main_data import ProjectLanguage, ProjectType
+from project_data.default_params import CreateScenarioDefaultParams
 
 
 class Operations:
@@ -19,20 +20,22 @@ class Operations:
                  scenario_id: int = None,
                  use_inputs_data: bool = True):
 
+        self._environment = environment
         self._optimizer_type = optimizer_type
 
         if use_inputs_data:
 
             self._inputs_data = InputData(optimizer_type).get_from_json()
 
+        creds = Credentials.auth(env=environment).values()
+
         if environment and scenario_id:
 
-            creds = Credentials.auth(env=environment).values()
-            self._api_operation = ApiOperations(environment, scenario_id, creds)
+            self._api_operation = ApiOperations(environment, optimizer_type, scenario_id, creds)
 
         elif environment:
 
-            self._api_operation = ApiOperations(environment)
+            self._api_operation = ApiOperations(environment, optimizer_type, auth_creds=creds)
 
     def __get_upload_queue_for_tetris(self) -> dict:
 
@@ -75,18 +78,43 @@ class Operations:
         files_directory = FileDirectory(self._optimizer_type).invalid_input_files
         self.__upload_input_files(files_directory, files_type, delay_between_queue)
 
-    def get_validation_rules_from_google_drive(self):
+    def get_validation_rules_from_google_drive(self) -> dict:
 
-        file_name = f'validation_rules_{self._optimizer_type}.xlsx'
+        save_time = datetime.now().strftime('%y%m%d_%H%M%S_%f')
+
+        file_name = f'validation_rules_{self._optimizer_type}_{save_time}.xlsx'
 
         spreadsheet_link = Spreadsheets().get(self._optimizer_type, 'validation_rules')
 
         file_directory = FileDirectory(self._optimizer_type)
-        validation_rules_directory = file_directory.validation_rules
+        validation_rules_directory = f'{file_directory.validation_rules}/{self._optimizer_type}'
 
         operations_file_data = OperationsFileData(validation_rules_directory)
 
-        operations_file_data.get_from_google_drive(spreadsheet_link, file_name)
+        status_code = operations_file_data.get_from_google_drive(spreadsheet_link, file_name)
+
+        if 200 <= status_code < 300:
+            return {'directory': validation_rules_directory, 'file_name': file_name}
+
+    def validation_rules_comparison(self):
+
+        file_dir = self.get_validation_rules_from_google_drive()
+
+        # CFR
+        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/cfr', 'file_name': 'validation_rules_cfr_240621_180713_023870.xlsx'}
+
+        # RTM
+        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/rtm', 'file_name': 'validation_rules_rtm_240623_145748_669202.xlsx'}
+
+        # PROMO
+        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/promo', 'file_name': 'validation_rules_promo_240623_023855_203891.xlsx'}
+
+        # TETRIS
+        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/tetris', 'file_name': 'validation_rules_tetris_240623_203803_784338.xlsx'}
+
+        if file_dir:
+            input_data = InputData(self._optimizer_type)
+            input_data.validation_rules_comparison(file_dir)
 
     def create_invalid_files(self) -> None:
 
@@ -141,7 +169,7 @@ class Operations:
                 if not col_data['active']:
                     print(f'Not active col: {col_name} in {input_name}')
 
-    def upload_multiple_files(self, input_name: str = None, timeout_input_info: int = 5):
+    def upload_multiple_files(self, input_name: str = None, timeout_input_info: int = 5) -> None:
 
         start_time = time.time()
 
@@ -171,7 +199,7 @@ class Operations:
 
                     time.sleep(timeout_input_info)
 
-    def create_custom_csv_file(self, file_name: str, creating_data: dict, row_count: int):
+    def create_custom_csv_file(self, file_name: str, creating_data: dict, row_count: int) -> None:
 
         create_file_data = CreateFileData()
 
@@ -180,23 +208,84 @@ class Operations:
 
         create_file_data.create_custom_csv_file(file_path, creating_data, row_count)
 
+    def create_scenario(self, json_body: dict = None) -> dict:
+
+        if json_body is None:
+            json_body = CreateScenarioDefaultParams().get(self._environment, self._optimizer_type)
+
+        scenario_data = self._api_operation.create_scenario(json_body)
+
+        return scenario_data
+
+    def get_scenarios(self, params: dict = None) -> dict:
+
+        if params is None:
+            params = {'page': 1, 'per_page': 500}
+
+        scenarios = self._api_operation.get_list_of_scenarios(params)
+
+        return scenarios
+
+    def get_scenario(self) -> dict:
+
+        scenario_data = self._api_operation.get_scenario()
+
+        return scenario_data
+
+    def delete_scenario(self) -> None:
+
+        self._api_operation.delete_scenario()
+
+    def get_data_from_scenarios(self, list_of_data: list, params: dict = None) -> list:
+
+        list_of_scenarios = self.get_scenarios(params).get('results')
+
+        result = []
+
+        for scenario in list_of_scenarios:
+
+            result.append({data: scenario[data] for data in list_of_data if data in scenario})
+
+        return result
+
 
 if __name__ == "__main__":
-    environment = 'LOCAL_STAGE'
-    optimizer_type = ProjectType.CFR
-    scenario_id = 455
+    environment = 'LOCAL_STAGE'  # DEV LOCAL_STAGE DEMO_STAGE PROD
+    optimizer_type = ProjectType.RTM
+    scenario_id = 478
+
+    # -------
+    # operation = Operations(optimizer_type, environment)
+    # operation.get_data_from_scenarios(['id', 'is_in_progress'])
+
+    # -------
+    # operation = Operations(optimizer_type, environment)
+    # operation.create_scenario()
+
+    # -------
+    # operation = Operations(optimizer_type, environment)
+    # operation.get_scenarios()
+
+    # -------
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.get_scenario()
+
+    # -------
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.delete_scenario()
 
     # -------
     # operation = Operations(optimizer_type, environment, scenario_id)
     # operation.upload_multiple_files('fc')
 
     # -------
-    # operation = Operations(optimizer_type, use_inputs_data=False)
+    operation = Operations(optimizer_type)
     # operation.get_validation_rules_from_google_drive()
+    operation.validation_rules_comparison()
 
     # -------
-    operation = Operations(optimizer_type)
-    operation.create_invalid_files()
+    # operation = Operations(optimizer_type)
+    # operation.create_invalid_files()
 
     # -------
     # operation = Operations(optimizer_type, environment, scenario_id)

@@ -10,15 +10,16 @@ class InputApiRequests(BaseApiRequests):
 
         url_input_path = input_data.get('url_path')
         params_input_type = input_data.get('parameter')
-        scenario_type = input_data.get('scenario_type')
+        optimizer_type = self._optimizer_type
 
         url_input_path = (f'/{url_input_path}', '')[url_input_path is None]
-        inputs_in_url = ('/inputs', '')['promo' in scenario_type]
+        inputs_in_url = ('/inputs', '')[optimizer_type == 'promo']
 
         params = ({'input_type': params_input_type}, None)[params_input_type is None]
         headers = {'Authorization': f'Bearer {self._access_token}'}
 
-        url = f'{self._base_url}/{scenario_type}/{scenario_id}{url_input_path}{inputs_in_url}{request_url_param}'
+        url = (f'{self._base_url}/{optimizer_type}-scenarios/{scenario_id}'
+               f'{url_input_path}{inputs_in_url}{request_url_param}')
 
         request_parameters = {'url': url, 'headers': headers, 'params': params, 'verify': False}
 

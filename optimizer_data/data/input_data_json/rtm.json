@@ -6,7 +6,7 @@
         "front_name": "LOG&FIN model",
         "parameter": "fin_log_model",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "ID_SAD_PGI_YYYYMMDD": {
                 "data_type": "date",
@@ -233,7 +233,7 @@
         "front_name": "Fin Scorecard",
         "parameter": "fin_scorecard",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "Year": {
                 "data_type": "int",
@@ -316,7 +316,7 @@
         "front_name": "Conso EOD",
         "parameter": "conso_eod",
         "url_path": null,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "CD_LOG_SHIPMENT": {
                 "data_type": "int",
@@ -471,7 +471,7 @@
         "front_name": "MD shipTo",
         "parameter": "md_ship_to",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "(CUS) Ship To Code": {
                 "data_type": "int",
@@ -566,7 +566,7 @@
         "front_name": "Plants info",
         "parameter": "plants_info",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "CBU ID": {
                 "data_type": "int",
@@ -613,7 +613,7 @@
         "front_name": "WH mapping",
         "parameter": "wh_mapping",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "DC_Name": {
                 "data_type": "str",
@@ -696,7 +696,7 @@
         "front_name": "Drivers break (old)",
         "parameter": "drivers_break_old",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "RDD": {
                 "data_type": "str",
@@ -767,7 +767,7 @@
         "front_name": "Drivers break (mobile)",
         "parameter": "drivers_break_mobile",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "Дата заказа": {
                 "data_type": "date",
@@ -826,7 +826,7 @@
         "front_name": "Distance",
         "parameter": "distance_data",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "PlantID": {
                 "data_type": "str",
@@ -878,7 +878,7 @@
             },
             "Distance KM": {
                 "data_type": "float",
-                "negativity": false,
+                "negativity": null,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
                 "key": null,
@@ -897,7 +897,7 @@
         "front_name": "Deliveries for WMS",
         "parameter": "deliveries_for_wms",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "ID_SAD_PGI_YYYYMMDD": {
                 "data_type": "date",
@@ -956,7 +956,7 @@
         "front_name": "WMS delivery",
         "parameter": "wms_delivery",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "Plant": {
                 "data_type": "int",
@@ -1039,7 +1039,7 @@
         "front_name": "WMS support",
         "parameter": "wms_support",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "Площадка": {
                 "data_type": "int",
@@ -1054,7 +1054,7 @@
                 "preview_rules": null
             },
             "Дата поставки": {
-                "data_type": "str",
+                "data_type": "date",
                 "negativity": false,
                 "obligatory": true,
                 "default_if_obligatory_null": null,
@@ -1170,7 +1170,7 @@
         "front_name": "XD Fact volumes",
         "parameter": "xd_fact_volumes",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "Номер планта отгрузки": {
                 "data_type": "int",
@@ -1241,7 +1241,7 @@
         "front_name": "Cost Split Cost WH",
         "parameter": "wh_cost_split_rule",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "PlantId": {
                 "data_type": "int",
@@ -1360,7 +1360,7 @@
         "front_name": "Cost Split Rule T2",
         "parameter": "t2_cost_split_rule",
         "obligatory": true,
-        "optimization_type": "Cost to serve",
+        "optimization_type": ["Cost to serve", "CtS"],
         "columns": {
             "Plant_Id": {
                 "data_type": "int",

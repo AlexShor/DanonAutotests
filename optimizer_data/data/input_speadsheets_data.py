@@ -10,20 +10,22 @@ class Spreadsheets:
     __spreadsheet_id = {
         ProjectType.PROMO: {
             'validation_rules': {
-                'id': '1uYnl-r1F9AIMgAE4PNJSBXVmgvhcnu8PNcjWArUMYSI',
+                'id': '1yq7hJh2hPRy64ZpV1gypRdJ4aEM_6CM8',  # google doc spec- 1uYnl-r1F9AIMgAE4PNJSBXVmgvhcnu8PNcjWArUMYSI
                 'params': {
                     'worksheet_name': 'update',
-                    'skip_footer_rows': 0
+                    'skip_footer_rows': 0,
+                    'style_conditions': {'strikethrough': None}
                 }
             },
             'preview_rules': None
         },
         ProjectType.RTM: {
             'validation_rules': {
-                'id': '14LQ_3TwsgQ8K69AEBR5IcnbCXxJHUqSj',
+                'id': '1VYYQiF7ftxTdFj40cw1aPS_nTAvSBFWq',  # 14LQ_3TwsgQ8K69AEBR5IcnbCXxJHUqSj
                 'params': {
-                    'worksheet_name': 'Sheet1',
-                    'skip_footer_rows': 0
+                    'worksheet_name': 'check',  # Sheet1
+                    'skip_footer_rows': 0,
+                    'style_conditions': {'bg_color': 'FFCFE2F3', 'strikethrough': None}
                 }
             },
             'preview_rules': None
@@ -33,14 +35,16 @@ class Spreadsheets:
                 'id': '1i2Z1yXfFoqofzOp467YZG0_rVrtmo5G4',
                 'params': {
                     'worksheet_name': 'Validation rules',
-                    'skip_footer_rows': 291
+                    'skip_footer_rows': 291,
+                    'style_conditions': {'strikethrough': None}
                 }
             },
             'preview_rules': {
                 'id': '1bp9O6oAG5jXWJyegybjkbTVZHZHAoQVa',
                 'params': {
                     'worksheet_name': 'Правила отображения в preview',
-                    'skip_footer_rows': 0
+                    'skip_footer_rows': 0,
+                    'style_conditions': None
                 }
             },
             'inputs': ''
@@ -50,7 +54,8 @@ class Spreadsheets:
                 'id': '1szjepPIIj3qt2B5aLqncG2yegI50-_t2',
                 'params': {
                     'worksheet_name': 'cfr_check_data',
-                    'skip_footer_rows': 0
+                    'skip_footer_rows': 0,
+                    'style_conditions': {'strikethrough': None}
                 }
             },
             'preview_rules': None
@@ -87,7 +92,7 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'Key'
             },
-            'data_type': {'VARCHAR': 'str', 'STR': 'str', 'DECIMAL': 'float', 'INT': 'int', 'DATE': 'date', 'TIME': 'time'},
+            'data_type': {'VARCHAR': 'str', 'varchar': 'str', 'STR': 'str', 'DECIMAL': 'float', 'float': 'float', 'INT': 'int', 'int': 'int', 'DATE': 'date', 'date': 'date', 'TIME': 'time', 'time': 'time'},
             'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
             'obligatory': {'TRUE': False, 'True': False, 'FALSE': True, 'False': True},
             'key': {'': None, '1': 1}
@@ -119,8 +124,8 @@ class ValidateRules:
                 'obligatory': 'NaN(default value)*',
                 'key': 'Key'
             },
-            'data_type': {'VARCHAR': 'str', 'DECIMAL': 'float', 'INT': 'int', 'DATE': 'date', 'TIME': 'time'},
-            'negativity': {'': True, 'True': True, 'FALSE': False, 'False': False},
+            'data_type': {'VARCHAR': 'str', 'DECIMAL': 'float', 'FLOAT': 'float', 'INT': 'int', 'DATE': 'date', 'TIME': 'time'},
+            'negativity': {'': True, 'TRUE': True, 'True': True, 'FALSE': False, 'False': False},
             'obligatory': {'TRUE': False, 'True': False, 'FALSE': True, 'False': True},
             'key': {'': None, '1': 1}
         }

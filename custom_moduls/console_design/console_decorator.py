@@ -1,4 +1,7 @@
 import functools
+import inspect
+
+from dataclasses import dataclass, field
 
 from custom_moduls.console_design.colors import ConsoleColors as CCol
 from custom_moduls.console_design.indentation_levels import indentation_levels as Ilvl
@@ -20,19 +23,28 @@ def benchmark(func):
     return wrapper
 
 
-def _response_status_code_and_data(response):
+def _response_status_code_and_data(response, indentation_levels=0):
     status_code = response.status_code
 
     if 200 <= status_code <= 299:
         colored_status_code = CCol.txt_grn(status_code)
 
     elif 400 <= status_code <= 499:
+
         colored_status_code = CCol.txt_red(status_code)
-        status_code_data = f'{colored_status_code}\n{response.content}'
+        error_text = response.text
+
+        if '\n' in error_text:
+
+            error_text = error_text.split('\n')[:5] + ['...']
+            error_text = [' ' * (indentation_levels + 1) + line for line in error_text]
+            error_text = '\n' + '\n'.join(error_text)
+
+        status_code_data = f'{colored_status_code}\n{Ilvl(indentation_levels + 1)}Error: {error_text}'
 
         return status_code_data
 
-    elif 500 <= status_code <= 599:
+    elif 500 <= status_code:
         colored_status_code = CCol.txt_red(status_code)
 
     else:
@@ -41,29 +53,85 @@ def _response_status_code_and_data(response):
     return colored_status_code
 
 
-def log_api_status(indentation_levels: int = 0):
+@dataclass
+class FunctionData:
+    class_name: str
+    console_class_name: str
+    args: dict = field(default_factory=dict)
+    kwargs: dict = field(default_factory=dict)
+
+
+def inspect_decorator(func, args, kwargs):
+
+    func_name = func.__name__
+
+    console_func_name = func_name.replace('_', ' ').lstrip().capitalize()
+
+    args_name = inspect.getfullargspec(func).args
+    full_args = {args_name[i]: args[i] for i in range(len(args_name))}
+
+    return FunctionData(func_name, console_func_name, full_args, kwargs)
+
+    # funcname = func.__name__
+    # print("function {}()".format(funcname))
+    #
+    # # get description of function params expected
+    # argspec = inspect.getfullargspec(func)
+    #
+    # # go through each position based argument
+    # counter = 0
+    # if argspec.args and type(argspec.args is list):
+    #     for arg in args:
+    #         # when you run past the formal positional arguments
+    #         try:
+    #             print(str(argspec.args[counter]) + "=" + str(arg))
+    #             counter += 1
+    #         except IndexError as e:
+    #             # then fallback to using the positional varargs name
+    #             if argspec.varargs:
+    #                 varargsname = argspec.varargs
+    #                 print("*" + varargsname + "=" + str(arg))
+    #             pass
+
+    # finally show the named varargs
+    # if argspec.keywords:
+    #     kwargsname = argspec.keywords
+    #     for k, v in kwargs.items():
+    #         print("**" + kwargsname + " " + k + "=" + str(v))
+
+
+def log_api_status(indentation_levels: int = 0, additional_info: str = None):
+
     def _decorator(func):
+
         @functools.wraps(func)
         def _wrapper(*args, **kwargs):
 
+            func_info = inspect_decorator(func, args, kwargs)
+
             system_file_name = ''
 
-            if len(args) >= 3:
+            if 'input_data' in func_info.args:
 
-                input_data = args[2]
-
-                system_file_name = input_data.get('system_file_name')
+                system_file_name = func_info.args['input_data'].get('system_file_name')
                 system_file_name = f': "{system_file_name}"'
 
-            func_name = func.__name__.capitalize().replace('_', ' ')
+            add_info = ''
 
-            console_log = f'{Ilvl(indentation_levels)}{func_name}{system_file_name}'
+            if additional_info is not None:
+
+                if additional_info in func_info.args:
+
+                    add_info = func_info.args[additional_info]
+                    add_info = f': [{add_info}]'
+
+            console_log = f'{Ilvl(indentation_levels)}{func_info.console_class_name}{system_file_name}{add_info}'
 
             print(f'{console_log}...', end=' ')
 
             response = func(*args, **kwargs)
 
-            print(f'\r{console_log} {_response_status_code_and_data(response)}')
+            print(f'\r{console_log}: {_response_status_code_and_data(response, indentation_levels)}')
 
             return response
 
@@ -113,6 +181,80 @@ def log_file_operation(indentation_levels: int = 0, main_func: bool = False):
                 print()
 
             return response
+
+        return _wrapper
+
+    return _decorator
+
+def _print_log_validation_rules_comparison(data: str, indent: str):
+
+    for input_name, input_data in data.items():
+
+        print(f'{indent}Input name: {CCol.txt_vio(input_name)}', end='')
+
+        if isinstance(input_data, str):
+
+            print(f' - {CCol.txt_red(input_data)}')
+
+        else:
+            print()
+            for column_name, column_data in input_data.items():
+
+                print(f'{indent * 2}Column name: {CCol.txt_blu(column_name)}', end='')
+
+                if isinstance(column_data, str):
+                    print(f' - {CCol.txt_red(column_data)}')
+
+                else:
+
+                    for option in column_data:
+                        print(f'\n{indent * 3}Option: {CCol.txt_cyn(option)}')
+
+                        file_value = column_data[option]['file_value']
+                        saved_value = column_data[option]['saved_value']
+
+                        print(f'{indent * 4}File value - {CCol.txt_yel(file_value)}')
+                        print(f'{indent * 4}Saved value - {CCol.txt_yel(saved_value)}', end='')
+
+                    print()
+        print()
+
+
+def log_validation_rules_comparison(indentation_levels: int = 0):
+    def _decorator(func):
+        @functools.wraps(func)
+        def _wrapper(*args, **kwargs):
+
+            func_info = inspect_decorator(func, args, kwargs)
+
+            console_log = f'{Ilvl(indentation_levels)}{func_info.console_class_name}: '
+
+            print(f'{console_log}...', end=' ')
+
+            result = func(*args, **kwargs)
+
+            if result is None:
+
+                print(f'\r{console_log}{CCol.txt_grn("PASS")}')
+
+            else:
+
+                print(f'\r{console_log}{CCol.txt_red("HAVE INCONSISTENCIES")}')
+
+                indent = Ilvl(indentation_levels + 2, symbol=' ')
+
+                miss_data = result.get('miss_data')
+                extra_data = result.get('extra_data')
+
+                if miss_data:
+                    print(f'{Ilvl(indentation_levels + 1)}MISS DATA:')
+                    _print_log_validation_rules_comparison(miss_data, indent)
+
+                if extra_data:
+                    print(f'{Ilvl(indentation_levels + 1)}EXTRA DATA:')
+                    _print_log_validation_rules_comparison(extra_data, indent)
+
+            return result
 
         return _wrapper
 

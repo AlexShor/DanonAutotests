@@ -6,6 +6,7 @@ from optimizer_data.data.default_data import FileDirectory
 from optimizer_data.data.input_speadsheets_data import ValidateRules, PreviewRules, Spreadsheets
 from optimizer_data.operations_file_data import OperationsFileData
 from optimizer_data.data.input_type_name_matches import InputTypeNameMatch
+from custom_moduls.console_design.console_decorator import log_validation_rules_comparison
 
 
 class InputData:
@@ -18,13 +19,12 @@ class InputData:
         else:
             self._file_name = file_name
 
-    def _get_valid_rules_data(self) -> dict:
+    def _get_valid_rules_data(self, file_directory: str, file_name: str) -> dict:
 
-        file_name = f'validation_rules_{self._optimizer_type}.xlsx'
         valid_rules = ValidateRules.get(self._optimizer_type)
         columns = valid_rules['col_names'].values()
 
-        operation = OperationsFileData(FileDirectory().validation_rules)
+        operation = OperationsFileData(file_directory)
 
         spreadsheet_params = Spreadsheets.get(self._optimizer_type, 'validation_rules')[1]['params']
         rules_data = operation.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
@@ -136,28 +136,53 @@ class InputData:
 
         return data
 
+    @log_validation_rules_comparison(1)
+    def validation_rules_comparison(self, validation_rules_file_dir: dict):
 
-if __name__ == "__main__":
-    #data = deepcopy(InputTypeNameMatch.CFR.TYPES)
+        valid_rules_data = self._get_valid_rules_data(*validation_rules_file_dir.values())
+        inputs_data = self.get_from_json(only_active_inputs=False)
 
-    input_data = InputData('rtm')
-    # input_data.update_validation_rules()
+        miss_data = {}
+        extra_data = {}
 
-    # data = input_data.get_from_json()
+        make_lower_input_name = lambda name: name.lower().replace(' ', '_').replace('-', '_')
 
-    # new_data = {}
-    #
-    # for i_name, i_data in data.items():
-    #     if i_name in ['calendars', 'plants', 'products', 'innovations', 'warehouses', 'materials']:
-    #         new_data[i_name] = {'upload_queue': 1}
-    #     elif i_name in ['material_groups']:
-    #         new_data[i_name] = {'upload_queue': 2}
-    #     else:
-    #         new_data[i_name] = {'upload_queue': 3}
-    #
-    # print(new_data)
-    #
-    # input_data.update_json(new_data)
+        extra_inputs = set(inputs_data.keys()).difference(map(make_lower_input_name, valid_rules_data.keys()))
+        extra_data.update({input: 'no data in file' for input in extra_inputs})
 
+        for input_name, input_data in valid_rules_data.items():
 
+            lower_input_name = make_lower_input_name(input_name)
 
+            if lower_input_name in inputs_data.keys():
+
+                columns = inputs_data[lower_input_name]['columns']
+
+                extra_columns = set(columns.keys()).difference(valid_rules_data[input_name].keys())
+
+                if extra_columns:
+                    for col in extra_columns:
+                        if columns[col]['active']:
+                            extra_data[lower_input_name] = {col: 'no data in file'}
+
+                for column_name, column_data in input_data.items():
+
+                    if column_name in columns.keys():
+
+                        for key, value in column_data.items():
+
+                            saved_value = columns[column_name].get(key)
+
+                            if value != saved_value:
+
+                                option = {key: {'file_value': value, 'saved_value': saved_value}}
+                                miss_data.setdefault(lower_input_name, {}).setdefault(column_name, {}).update(option)
+
+                    else:
+                        miss_data.setdefault(lower_input_name, {}).update({column_name: 'no data'})
+
+            else:
+                miss_data[lower_input_name] = 'no data'
+
+        if miss_data or extra_data:
+            return {'miss_data': miss_data, 'extra_data': extra_data}

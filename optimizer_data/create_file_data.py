@@ -1,7 +1,6 @@
 import os
-from datetime import date, time, timedelta
 from copy import deepcopy
-from random import random, randint, randrange
+from random import randint
 
 from optimizer_data.data.default_data import DefaultDataFill, ErrorLogText, FileDirectory
 from optimizer_data.data.excluded_data import ExcludeValidateColumns
@@ -309,41 +308,3 @@ class CreateFileData:
             rows -= write_step
             if rows < write_step:
                 write_step = rows
-
-# if __name__ == "__main__":
-# d = CreateFileData('cfr')
-#
-# data = {
-#     'mad_date': {'value': date(2024, 1, 1), 'options': {'operation': 'increase', 'value': timedelta(1), 'step': 1}},
-#     'sku': {'value': 1, 'options': {'operation': 'increase', 'value': 1, 'step': 10}},
-#     'wh': {'value': 5000, 'options': {'operation': 'increase', 'value': 10, 'step': 1}},
-#     'chain': {'value': 'chain_1', 'options': {'operation': 'increase_str', 'value': 1, 'step': 1}},
-#     'rfa_id': {'value': 100, 'options': {'operation': 'increase', 'value': 1, 'step': 1}},
-#     'ordered': {'value': 10.01, 'options': {'operation': 'increase', 'value': 0.01, 'step': 1, 'rounding': 2}},
-#     'delivered': {'value': 10.01, 'options': {'operation': 'increase', 'value': 0.01, 'step': 1, 'rounding': 2}},
-#     'test_1': {'value': 'text_value', 'options': None},
-#     'test_2': {'value': 999, 'options': None},
-#     'test_3': {'value': None, 'options': {'operation': 'random', 'rand_range': (0, 100), 'step': 5}},
-#     'test_4': {'value': None, 'options': {'operation': 'copy', 'value': 'test_1', 'step': 1}},
-#     'test_5': {'value': None, 'options': {'operation': 'copy', 'value': 'sku', 'step': 1}}
-# }
-#
-# d.create_custom_csv_file('test_fact.csv', data, 10000)
-
-
-#
-#     file_name = "validation_rules_tetris.xlsx"
-#     validation_rules_path = FileDirectory().validation_rules
-#     # invalid_input_files_path = FileDirectory('tetris').validation_rules
-#
-#     tetris_valid_rules = ValidateRules.get('tetris')
-#     columns = tetris_valid_rules['col_names'].values()
-#
-#     xlsx_data = OperationsFileData(validation_rules_path).read_xlsx(file_name, 'Validation rules', get_columns=columns, skip_footer_rows=291)
-#     valid_rules_data = OperationsFileData.convert_validation_rules_data_to_dict(xlsx_data, tetris_valid_rules)
-#     print(valid_rules_data)
-#     # CreateFileData.invalid_files(valid_rules_data, save_directory=invalid_input_files_path, error_log_text_lang='rus')
-#
-#     # res = CreateFileData._creating_invalid_data(valid_rules_data['Buyers contracts'], error_log_text_lang='rus')
-#
-#     # print(res)
