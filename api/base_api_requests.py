@@ -70,6 +70,10 @@ class BaseApiRequests:
             return requests.post(**request_parameters)
 
         @__check_status_code
+        def patch(self, request_parameters: dict):
+            return requests.patch(**request_parameters)
+
+        @__check_status_code
         def delete(self, request_parameters: dict):
             return requests.delete(**request_parameters)
 

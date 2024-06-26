@@ -9,7 +9,7 @@ class BaseUrls:
     BASE_URLS_BACK = {'DEV': 'https://back.danon-dev.digital-spectr.ru',
                       'LOCAL_STAGE': 'https://back.danon.digital-spectr.ru',
                       'DEMO_STAGE': 'https://back.danon-stage.jumeforecast.com',
-                      'PROD': 'https://back.danon.jumeforecast.com'}
+                      'PROD': 'https://back.danone.jumeplatform.com'}
 
 
 class Paths:

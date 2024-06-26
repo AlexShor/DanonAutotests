@@ -32,14 +32,6 @@ class OperationsFileData:
         else:
             self._inputs_data = {}
 
-    # @staticmethod
-    # def _get_confirm_token(response: requests.Response) -> str | None:
-    #
-    #     for key, value in response.cookies.items():
-    #         if key.startswith("download_warning"):
-    #             return value
-    #     return None
-
     @staticmethod
     @log_file_operation(2)
     def _save_response_content(
@@ -377,31 +369,87 @@ class OperationsFileData:
 
             file_number += 1
 
-# if __name__ == "__main__":
-#     file_name = 'fc'
-#
-#     operations_file_data = OperationsFileData()
-#
-#     operations_file_data.split_file(file_name, size=1_000_000)
+    def get_durectory_to_last_validation_ruls(self, optimizer_type: str) -> dict:
+
+        files = [f'{self._destination}/{file}' for file in os.listdir(self._destination)]
+
+        last_created_file = max(files, key=os.path.getctime).split('/')
+        last_created_file = {'file_directory': '/'.join(last_created_file[:-1]), 'file_name': last_created_file[-1]}
+
+        return last_created_file
+
+    @staticmethod
+    def determine_file_type(file_directory: str, file_name: str):
+
+        files = [f'{file_directory}/{file}' for file in os.listdir(file_directory)]
 
 
-# optimizer_type = 'cfr'
-#
-# file_directory = FileDirectory(optimizer_type)
-# validation_rules_directory = file_directory.validation_rules
-#
-# operations_file_data = OperationsFileData(validation_rules_directory)
-#
-# file_name = f'validation_rules_{optimizer_type}.xlsx'
-# valid_rules = ValidateRules.get(optimizer_type)
-# columns = valid_rules['col_names'].values()
-#
-# spreadsheet_params = Spreadsheets.get(optimizer_type, 'validation_rules')[1]['params']
-#
-# rules_data = operations_file_data.read_xlsx(file_name, get_columns=columns, **spreadsheet_params)
-#
-# print(rules_data)
-#
-# converted_valid_rules = operations_file_data.convert_validation_rules_data_to_dict(rules_data, valid_rules)
-#
-# print(converted_valid_rules)
+        for file in files:
+            if file_name == file.split('/')[-1].split('.')[0]:
+                return file
+
+    @log_file_operation(1)
+    def extract_downloaded_file_from_zip_and_update_input_data(self):
+
+        from zipfile import ZipFile
+
+        zip_directory = self._destination
+        inputs_data = self._inputs_data
+
+        result = []
+
+        try:
+
+            with ZipFile(f'{zip_directory}.zip') as zip_file:
+                zip_file.extractall(zip_directory)
+
+            files = [f'{zip_directory}/{file}' for file in os.listdir(zip_directory)]
+            for file in files:
+
+                file_name_type = file.split('/')[-1].split('.')
+                if file_name_type[0].lower().startswith('input'):
+                    if file_name_type[1] == 'zip':
+
+                        big_input = f'{zip_directory}/{file_name_type[0]}'
+
+                        with ZipFile(f'{big_input}.zip') as zip_file:
+                            zip_file.extractall(big_input)
+
+                        big_input_files = [f'{big_input}/{file}' for file in os.listdir(big_input)]
+
+                        big_input_file_name = big_input_files[0].split('/')[-1].split('.')[0]
+
+                        for input_name, input_data in inputs_data.items():
+
+                            download_file_name = input_data['download_file_name']
+                            if download_file_name is not None and download_file_name in big_input_file_name:
+                                inputs_data[input_name].update({'full_path': big_input_files})
+
+                    else:
+
+                        for input_name, input_data in inputs_data.items():
+                            if input_data['download_file_name'] == file_name_type[0]:
+                                inputs_data[input_name].update({'full_path': file})
+
+        except Exception as exc:
+            return exc
+
+        return inputs_data
+
+    @log_file_operation(1)
+    def remove_data(self):
+
+        try:
+            os.remove(self._destination)
+        except Exception as exc:
+            return exc
+
+if __name__ == '__main__':
+    # dir = 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/input/promo/valid_input_files/files'
+    # dir = 'C:/Users/LexSh/Downloads/25_Detailed_20240617_mb_Copy_1_20240626-09_24'
+    # res = OperationsFileData.determine_file_type(dir, 'Input_FC')
+    #
+    # print(res)
+
+    dir = 'C:/Users/LexSh/Downloads/test/25_Detailed_20240617_mb_Copy_1_20240626-10_39'
+    OperationsFileData.extract_downloaded_file_from_zip_and_update_input_data(dir)

@@ -131,7 +131,14 @@ def log_api_status(indentation_levels: int = 0, additional_info: str = None):
 
             response = func(*args, **kwargs)
 
-            print(f'\r{console_log}: {_response_status_code_and_data(response, indentation_levels)}')
+            if isinstance(response, Exception):
+
+                print(f'\r{console_log} {CCol.txt_red("FAIL")}')
+                print(f'{Ilvl(indentation_levels + 1)}Error: {CCol.txt_red(str(response))}')
+
+            else:
+
+                print(f'\r{console_log}: {_response_status_code_and_data(response, indentation_levels)}')
 
             return response
 

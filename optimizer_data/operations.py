@@ -10,7 +10,7 @@ from optimizer_data.data.default_data import FileDirectory
 from optimizer_data.operations_file_data import OperationsFileData
 from pages.site_data.credentials import Credentials
 from project_data.main_data import ProjectLanguage, ProjectType
-from project_data.default_params import CreateScenarioDefaultParams
+from project_data.default_params import CreateScenarioDefaultParams, DefaultProject, DefaultPFRdata
 
 
 class Operations:
@@ -49,7 +49,11 @@ class Operations:
 
         return uploading_queue
 
-    def __upload_input_files(self, files_directory: str, files_type: str = 'xlsx', delay_between_queue: int = None):
+    def __upload_input_files(self,
+                             files_directory: str = None,
+                             files_type: str = None,
+                             delay_between_queue: int = None,
+                             wait_file_validation: bool = False):
 
         if self._optimizer_type == ProjectType.TETRIS:
 
@@ -59,24 +63,54 @@ class Operations:
 
             for i in queue:
 
-                self._api_operation.upload_input_files(inputs_data_upload_queue[i], files_directory, files_type)
+                self._api_operation.upload_input_files(inputs_data_upload_queue[i],
+                                                       files_directory,
+                                                       files_type,
+                                                       wait_file_validation)
 
                 if delay_between_queue and i != queue[-1]:
                     time.sleep(delay_between_queue)
 
         else:
 
-            self._api_operation.upload_input_files(self._inputs_data, files_directory, files_type)
+            self._api_operation.upload_input_files(self._inputs_data,
+                                                   files_directory,
+                                                   files_type,
+                                                   wait_file_validation)
 
-    def upload_valid_input_files(self, files_type: str = 'xlsx', delay_between_queue: int = None) -> None:
+    def _checking_uploaded_data_status(self):
+
+        while True:
+            if self._api_operation.get_scenario().get('uploaded_data_status'):
+                break
+
+            time.sleep(5)
+
+    def upload_valid_input_files(self, files_type: str = None, delay_between_queue: int = None) -> None:
 
         files_directory = FileDirectory(self._optimizer_type).valid_input_files
         self.__upload_input_files(files_directory, files_type, delay_between_queue)
 
-    def upload_invalid_input_files(self, files_type: str = 'xlsx', delay_between_queue: int = None) -> None:
+        self._checking_uploaded_data_status()
+
+    def upload_invalid_input_files(self, files_type: str = None, delay_between_queue: int = None) -> None:
 
         files_directory = FileDirectory(self._optimizer_type).invalid_input_files
         self.__upload_input_files(files_directory, files_type, delay_between_queue)
+
+        self._checking_uploaded_data_status()
+
+    def upload_downloaded_input_files(self, zip_directory: str):
+
+        operation_file_data = OperationsFileData(zip_directory, self._inputs_data)
+        self._inputs_data = operation_file_data.extract_downloaded_file_from_zip_and_update_input_data()
+
+        self.__upload_input_files(wait_file_validation=True)
+
+        self._checking_uploaded_data_status()
+
+        operation_file_data.remove_data()
+
 
     def get_validation_rules_from_google_drive(self) -> dict:
 
@@ -96,25 +130,26 @@ class Operations:
         if 200 <= status_code < 300:
             return {'directory': validation_rules_directory, 'file_name': file_name}
 
-    def validation_rules_comparison(self):
+    def validation_rules_comparison(self, use_last_created_file: bool = True) -> dict | None:
 
-        file_dir = self.get_validation_rules_from_google_drive()
+        if use_last_created_file:
 
-        # CFR
-        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/cfr', 'file_name': 'validation_rules_cfr_240621_180713_023870.xlsx'}
+            file_directory = FileDirectory(optimizer_type)
+            validation_rules_directory = f'{file_directory.validation_rules}/{self._optimizer_type}'
 
-        # RTM
-        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/rtm', 'file_name': 'validation_rules_rtm_240623_145748_669202.xlsx'}
+            operations_file_data = OperationsFileData(validation_rules_directory)
+            file_dir = operations_file_data.get_durectory_to_last_validation_ruls(self._optimizer_type)
 
-        # PROMO
-        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/promo', 'file_name': 'validation_rules_promo_240623_023855_203891.xlsx'}
+        else:
 
-        # TETRIS
-        # file_dir = {'directory': 'C:/Users/LexSh/YandexDisk-Alex.Shor/Spectr/Projects/Advanced/Danon/DanonAutotests/optimizer_data/files/rules/validation_rules/tetris', 'file_name': 'validation_rules_tetris_240623_203803_784338.xlsx'}
+            file_dir = self.get_validation_rules_from_google_drive()
 
         if file_dir:
+
             input_data = InputData(self._optimizer_type)
-            input_data.validation_rules_comparison(file_dir)
+            result = input_data.validation_rules_comparison(file_dir)
+
+            return result
 
     def create_invalid_files(self) -> None:
 
@@ -183,7 +218,7 @@ class Operations:
 
             input_data = {current_input_name: _inputs_data}
 
-            upload_input_response = self._api_operation.upload_input_files(input_data, input_name, 'csv')
+            upload_input_response = self._api_operation.upload_input_files(input_data, input_name)
 
             if upload_input_response:
 
@@ -248,11 +283,69 @@ class Operations:
 
         return result
 
+    def get_personal_info(self) -> dict:
+
+        personal_info = self._api_operation.get_personal_info()
+
+        return personal_info
+
+    def change_personal_info(self, json_body: dict) -> dict:
+
+        personal_info = self._api_operation.change_personal_info(json_body)
+
+        return personal_info
+
+    def change_active_project(self, project_id: int = None) -> dict:
+
+        if project_id is None:
+            project_id = DefaultProject.get(self._environment, self._optimizer_type)['id']
+
+        personal_info = self.change_personal_info({'active_project_id': project_id})
+
+        return personal_info
+
+    def save_defoult_scenario_pfr(self) -> dict:
+
+        pfr_data = DefaultPFRdata().get(self._optimizer_type)
+
+        scenario_data = self._api_operation.get_scenario()
+
+        if self._optimizer_type == ProjectType.CFR:
+
+            cfr_type = scenario_data['cfr_type']['code']
+
+            results = self._api_operation.save_scenario_pfr(pfr_data[cfr_type])
+
+        else:
+
+            results = self._api_operation.save_scenario_pfr(pfr_data)
+
+        return results
+
+
+
 
 if __name__ == "__main__":
     environment = 'LOCAL_STAGE'  # DEV LOCAL_STAGE DEMO_STAGE PROD
-    optimizer_type = ProjectType.RTM
-    scenario_id = 478
+    optimizer_type = ProjectType.CFR
+    scenario_id = 279
+
+    # -------
+    # dir = 'C:/Users/LexSh/Downloads/test/25_Detailed_20240617_mb_Copy_1_20240626-10_39'
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.upload_downloaded_input_files(dir)
+
+    # -------
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.save_defoult_scenario_pfr()
+
+    # -------
+    # operation = Operations(optimizer_type, environment)
+    # operation.change_personal_info({'active_project_id': 11})
+
+    # -------
+    # operation = Operations(optimizer_type, environment)
+    # operation.get_personal_info()
 
     # -------
     # operation = Operations(optimizer_type, environment)
@@ -279,9 +372,9 @@ if __name__ == "__main__":
     # operation.upload_multiple_files('fc')
 
     # -------
-    operation = Operations(optimizer_type)
+    # operation = Operations(optimizer_type)
+    # operation.validation_rules_comparison()
     # operation.get_validation_rules_from_google_drive()
-    operation.validation_rules_comparison()
 
     # -------
     # operation = Operations(optimizer_type)

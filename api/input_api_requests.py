@@ -92,7 +92,10 @@ class InputApiRequests(BaseApiRequests):
     @log_api_status(2)
     def upload_input_file(self, scenario_id: int, input_data: dict, file_path: str) -> requests.Response:
 
-        files = {'files': {'file': open(f'{file_path}', 'rb')}}
+        try:
+            files = {'files': {'file': open(f'{file_path}', 'rb')}}
+        except FileNotFoundError as exc:
+            return exc
 
         response = self._requests_post(scenario_id, input_data, files=files)
 
