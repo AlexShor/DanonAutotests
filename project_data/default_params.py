@@ -16,13 +16,13 @@ class CreateScenarioDefaultParams:
             ProjectType.PROMO: {'promo_group_id': 1, 'promo_period_id': 16},
             ProjectType.RTM: {'rtm_group_id': 1, 'rtm_type_id': 1},
             ProjectType.TETRIS: {'tetris_group_id': 1, 'tetris_modules_id': [1, 2, 3]},
-            ProjectType.CFR: {'cfr_group_id': 1, 'cfr_type_id': 2, 'cfr_randomizer_regime_id': 1}
+            ProjectType.CFR: {'cfr_group_id': 1, 'cfr_type_id': 1, 'cfr_randomizer_regime_id': 1}
         },
         'DEMO_STAGE': {
             ProjectType.PROMO: {'promo_group_id': 1, 'promo_period_id': 11},
             ProjectType.RTM: {'rtm_group_id': 1, 'rtm_type_id': 1},
             ProjectType.TETRIS: {'tetris_group_id': 1, 'tetris_modules_id': [1, 2, 3]},
-            ProjectType.CFR: {'cfr_group_id': 1, 'cfr_type_id': 2, 'cfr_randomizer_regime_id': 1}
+            ProjectType.CFR: {'cfr_group_id': 1, 'cfr_type_id': 1, 'cfr_randomizer_regime_id': 1}
         },
         'PROD': {
             ProjectType.PROMO: {'promo_group_id': 1, 'promo_period_id': 8},
@@ -103,12 +103,12 @@ class DefaultPFRdata:
     __params = {
         ProjectType.PROMO: {
             'main_params': {
-                'promo-objectives': {"objective_func": "MVC, Abs", "direction": "max", "cust_level": "total customer", "prod_level": "total products", "holdout": "4"},
-                'promo-customer-objectives': {"customer_objective":[{"distr_channel":"Dixy","chain":"DIXY","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"ATAC","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"AUCHAN","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"DC DA!","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"HYPERGLOBUS","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"LENTA","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"METRO","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Hypermarket","chain":"OKEY","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"KIB&Bristol","chain":"DC BRISTOL","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"KIB&Bristol","chain":"KRASNOE&BELOE","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Magnit","chain":"MAGNIT","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"X5 Retail","chain":"DC CHIZHIK","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"X5 Retail","chain":"DETSKIY MIR","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"X5 Retail","chain":"PEREKRESTOK","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"X5 Retail","chain":"PEREKRESTOK ONLINE","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"X5 Retail","chain":"PYATEROCHKA","channel":"NATIONAL KEY ACCOUNT"}]},
-                'promo-product-objectives': {"product_objective":[{"modern_tradi":"MODERN","portfolio_category":"CHILLED SNACKS"},{"modern_tradi":"MODERN","portfolio_category":"MILKS"},{"modern_tradi":"MODERN","portfolio_category":"PLANT-BASED"},{"modern_tradi":"MODERN","portfolio_category":"YOGHURTS & MODERNIZED CURDS"},{"modern_tradi":"TEMA","portfolio_category":"BABY FOOD"},{"modern_tradi":"TRADI","portfolio_category":"KEFIRS"},{"modern_tradi":"TRADI","portfolio_category":"MILKS"},{"modern_tradi":"TRADI","portfolio_category":"SMETANA, CREAM & BUTTER"},{"modern_tradi":"TRADI","portfolio_category":"TRADITIONAL CURDS"},{"modern_tradi":"TRADI","portfolio_category":"YOGHURTS & MODERNIZED CURDS"}]},
+                'promo-objectives': {"objective_func":"MVC, Abs","direction":"max","cust_level":"Chain","prod_level":"total products","holdout":"0"},
+                'promo-customer-objectives': {"customer_objective":[{"distr_channel":"Others","chain":"YANDEX LAVKA","channel":"LOCAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"OZON","channel":"LOCAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"SAMOKAT","channel":"LOCAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"ATAC","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"AUCHAN","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"DC DIXY","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"HYPERGLOBUS","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"LENTA","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"MAGNIT","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"METRO","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"MONETKA","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"OKEY","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"PEREKRESTOK","channel":"NATIONAL KEY ACCOUNT"},{"distr_channel":"Others","chain":"PYATEROCHKA","channel":"NATIONAL KEY ACCOUNT"}]},
+                'promo-product-objectives': {"product_objective":[{"modern_tradi":"TRADI","portfolio_category":"KEFIRS"},{"modern_tradi":"TRADI","portfolio_category":"MILKS"},{"modern_tradi":"TRADI","portfolio_category":"SMETANA, CREAM & BUTTER"},{"modern_tradi":"TRADI","portfolio_category":"TRADI_OTHER"},{"modern_tradi":"TRADI","portfolio_category":"TRADITIONAL CURDS"},{"modern_tradi":"TRADI","portfolio_category":"YOGHURTS & MODERNIZED CURDS"}]},
             },
             'additional_params': {
-                'promo-constraint-coef': {"constraint_list":[{"constraint":"Promo Budget, %","sign":"=","ratio":1,"error":5,"type_hier":"Product group"}]},
+                'promo-constraint-coef': {"constraint_list":[{"constraint":"Promo Budget, Abs","sign":"=","ratio":1,"error":5,"type_hier":"total products"}]},
                 'promo-constraint-ratio-first': {"constraint_ratio_first_list":[]},
                 'promo-constraint-ratio-second': {"constraint_ratio_second_list":[]}
             }

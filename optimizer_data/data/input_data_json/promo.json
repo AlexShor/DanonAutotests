@@ -5,6 +5,7 @@
         "url_path": "promo-gps",
         "system_file_name": "gps",
         "front_name": "GPS",
+        "download_file_name": "Input_GPS",
         "obligatory": true,
         "upload_queue": 1,
         "columns": {
@@ -268,6 +269,7 @@
         "url_path": "promo-distr-mappings",
         "system_file_name": "distr_mapping",
         "front_name": "Distribution Mapping",
+        "download_file_name": "Input_Distr_Mapping",
         "obligatory": true,
         "upload_queue": 1,
         "columns": {
@@ -303,6 +305,7 @@
         "url_path": "promo-combine-products",
         "system_file_name": "combine_products",
         "front_name": "Combine Products",
+        "download_file_name": "Input_Combine_Products",
         "obligatory": false,
         "upload_queue": 1,
         "columns": {
@@ -338,6 +341,7 @@
         "url_path": "promo-combine-chains",
         "system_file_name": "combine_chains",
         "front_name": "Combine Chains",
+        "download_file_name": "Input_Combine_Chains",
         "obligatory": false,
         "upload_queue": 1,
         "columns": {
@@ -373,6 +377,7 @@
         "url_path": "promo-up-down-sizes",
         "system_file_name": "up_down_size",
         "front_name": "Up/Down Size",
+        "download_file_name": "Input_UpDown_Size",
         "obligatory": false,
         "upload_queue": 1,
         "columns": {
@@ -420,6 +425,7 @@
         "url_path": "promo-product-mds",
         "system_file_name": "prod_md",
         "front_name": "Product Masterdata",
+        "download_file_name": "Input_Product_Masterdata",
         "obligatory": true,
         "upload_queue": 1,
         "columns": {
@@ -515,6 +521,7 @@
         "url_path": "promo-customer-mds",
         "system_file_name": "cust_md",
         "front_name": "Customer Masterdata",
+        "download_file_name": "Input_Customer_Masterdata",
         "obligatory": true,
         "upload_queue": 1,
         "columns": {
@@ -550,6 +557,7 @@
         "url_path": "promo-libs",
         "system_file_name": "lib",
         "front_name": "Promo Library",
+        "download_file_name": "Input_Promo_Library",
         "obligatory": true,
         "upload_queue": 1,
         "columns": {

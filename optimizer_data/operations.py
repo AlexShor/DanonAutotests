@@ -9,7 +9,7 @@ from optimizer_data.data.input_speadsheets_data import Spreadsheets
 from optimizer_data.data.default_data import FileDirectory
 from optimizer_data.operations_file_data import OperationsFileData
 from pages.site_data.credentials import Credentials
-from project_data.main_data import ProjectLanguage, ProjectType
+from project_data.main_data import ProjectLanguage, ProjectType, ProjectOutputTables
 from project_data.default_params import CreateScenarioDefaultParams, DefaultProject, DefaultPFRdata
 
 
@@ -37,11 +37,11 @@ class Operations:
 
             self._api_operation = ApiOperations(environment, optimizer_type, auth_creds=creds)
 
-    def __get_upload_queue_for_tetris(self) -> dict:
+    def __get_upload_queue_for_tetris(self, inputs_data: dict) -> dict:
 
         uploading_queue = {}
 
-        for input_name, input_data in self._inputs_data.items():
+        for input_name, input_data in inputs_data.items():
 
             queue = input_data['upload_queue']
 
@@ -53,64 +53,110 @@ class Operations:
                              files_directory: str = None,
                              files_type: str = None,
                              delay_between_queue: int = None,
-                             wait_file_validation: bool = False):
+                             wait_file_validation: bool = True,
+                             not_download_list: list = None,
+                             use_download_file_name: bool = False) -> dict:
+
+        inputs_data = self._inputs_data
+
+        if not_download_list is not None:
+            for input_name in not_download_list:
+                if input_name in inputs_data.keys():
+                    inputs_data[input_name].update({'not_download': True})
+
+        result = {}
 
         if self._optimizer_type == ProjectType.TETRIS:
 
-            inputs_data_upload_queue = self.__get_upload_queue_for_tetris()
+            inputs_data_upload_queue = self.__get_upload_queue_for_tetris(inputs_data)
 
             queue = sorted(inputs_data_upload_queue.keys())
 
             for i in queue:
 
-                self._api_operation.upload_input_files(inputs_data_upload_queue[i],
-                                                       files_directory,
-                                                       files_type,
-                                                       wait_file_validation)
+                responses = self._api_operation.upload_input_files(inputs_data_upload_queue[i],
+                                                                   files_directory,
+                                                                   files_type,
+                                                                   wait_file_validation,
+                                                                   use_download_file_name)
+                result.update(responses)
 
                 if delay_between_queue and i != queue[-1]:
                     time.sleep(delay_between_queue)
 
         else:
 
-            self._api_operation.upload_input_files(self._inputs_data,
-                                                   files_directory,
-                                                   files_type,
-                                                   wait_file_validation)
+            result = self._api_operation.upload_input_files(inputs_data,
+                                                            files_directory,
+                                                            files_type,
+                                                            wait_file_validation,
+                                                            use_download_file_name)
 
-    def _checking_uploaded_data_status(self):
+        return result
 
-        while True:
-            if self._api_operation.get_scenario().get('uploaded_data_status'):
-                break
+    def _checking_uploaded_data_status(self, result_uploading_inputs: dict):
 
-            time.sleep(5)
+        if all(map(lambda resp: resp.status_code < 300, result_uploading_inputs.values())):
 
-    def upload_valid_input_files(self, files_type: str = None, delay_between_queue: int = None) -> None:
+            while True:
+                if self._api_operation.get_scenario().get('uploaded_data_status'):
+                    break
+
+                time.sleep(5)
+
+    def upload_valid_input_files(self,
+                                 files_type: str = None,
+                                 delay_between_queue: int = None,
+                                 not_download_list: list = None,
+                                 folder: str = None,
+                                 from_zip: str = None,
+                                 use_download_file_name: bool = False) -> None:
 
         files_directory = FileDirectory(self._optimizer_type).valid_input_files
-        self.__upload_input_files(files_directory, files_type, delay_between_queue)
 
-        self._checking_uploaded_data_status()
+        if from_zip is None:
 
-    def upload_invalid_input_files(self, files_type: str = None, delay_between_queue: int = None) -> None:
+            if folder is not None:
+                files_directory = f'{files_directory}/{folder}'
+
+            result = self.__upload_input_files(files_directory,
+                                               files_type,
+                                               delay_between_queue,
+                                               not_download_list=not_download_list,
+                                               use_download_file_name=use_download_file_name)
+
+            self._checking_uploaded_data_status(result)
+
+        else:
+
+            zip_dir = f'{files_directory}/{from_zip}'
+            self.upload_downloaded_input_files(zip_dir, not_download_list)
+
+    def upload_invalid_input_files(self,
+                                   files_type: str = None,
+                                   delay_between_queue: int = None,
+                                   not_download_list: list = None,
+                                   use_download_file_name: bool = False) -> None:
 
         files_directory = FileDirectory(self._optimizer_type).invalid_input_files
-        self.__upload_input_files(files_directory, files_type, delay_between_queue)
+        result = self.__upload_input_files(files_directory,
+                                           files_type,
+                                           delay_between_queue,
+                                           not_download_list=not_download_list,
+                                           use_download_file_name=use_download_file_name)
 
-        self._checking_uploaded_data_status()
+        self._checking_uploaded_data_status(result)
 
-    def upload_downloaded_input_files(self, zip_directory: str):
+    def upload_downloaded_input_files(self, zip_directory: str, not_download_list: list = None):
 
         operation_file_data = OperationsFileData(zip_directory, self._inputs_data)
         self._inputs_data = operation_file_data.extract_downloaded_file_from_zip_and_update_input_data()
 
-        self.__upload_input_files(wait_file_validation=True)
+        result = self.__upload_input_files(not_download_list=not_download_list)
 
-        self._checking_uploaded_data_status()
+        self._checking_uploaded_data_status(result)
 
-        operation_file_data.remove_data()
-
+        #operation_file_data.remove_data()
 
     def get_validation_rules_from_google_drive(self) -> dict:
 
@@ -304,7 +350,7 @@ class Operations:
 
         return personal_info
 
-    def save_defoult_scenario_pfr(self) -> dict:
+    def save_defoult_scenario_pfr(self, use_additional_params: bool = False) -> dict:
 
         pfr_data = DefaultPFRdata().get(self._optimizer_type)
 
@@ -314,21 +360,69 @@ class Operations:
 
             cfr_type = scenario_data['cfr_type']['code']
 
-            results = self._api_operation.save_scenario_pfr(pfr_data[cfr_type])
+            results = self._api_operation.save_scenario_pfr(pfr_data[cfr_type], use_additional_params)
 
         else:
 
-            results = self._api_operation.save_scenario_pfr(pfr_data)
+            results = self._api_operation.save_scenario_pfr(pfr_data, use_additional_params)
 
         return results
 
+    def calculate_scenario(self):
 
+        scenario_data = self._api_operation.get_scenario()
+
+        if scenario_data.get('params_for_run_status') is True:
+
+            results = self._api_operation.calculation()
+
+            return results
+
+    def get_calculation_status(self):
+        return self._api_operation.scenario_data.get('calculation_status')
+
+    def get_kpi_data(self):
+
+        result = self._api_operation.get_kpi_data()
+
+        return result
+
+
+    def get_preview_output_table(self, output_table_type: str, query_params: dict = None):
+
+        result = self._api_operation.get_preview_output_table(output_table_type, query_params)
+
+        return result
+
+    def get_preview_defoult_output_tables(self, query_params: dict = None):
+
+        resultes = {}
+
+        output_table_types = ProjectOutputTables.get(self._optimizer_type)
+
+        if output_table_types is None:
+            return None
+
+        for output_table in output_table_types:
+            resultes[output_table] = self.get_preview_output_table(output_table, query_params)
+
+
+        return resultes
 
 
 if __name__ == "__main__":
     environment = 'LOCAL_STAGE'  # DEV LOCAL_STAGE DEMO_STAGE PROD
-    optimizer_type = ProjectType.CFR
-    scenario_id = 279
+    optimizer_type = ProjectType.PROMO
+    scenario_id = 1758
+
+    # -------
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.upload_valid_input_files(not_download_list=['up_down_size'])
+
+    # -------
+    # operation = Operations(optimizer_type, environment, scenario_id)
+    # operation.get_kpi_data()
+    # operation.get_preview_output_table('rtm_cts_wh')
 
     # -------
     # dir = 'C:/Users/LexSh/Downloads/test/25_Detailed_20240617_mb_Copy_1_20240626-10_39'

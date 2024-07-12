@@ -42,12 +42,12 @@ class Test:
             print()
 
     @staticmethod
-    def create_scenario_and_filling_full_data(optimizer_type: str, environment: str):
+    def create_scenario_and_filling_full_data(optimizer_type: str, environment: str, creating_scenario_data: dict = None):
 
         operation = Operations(optimizer_type, environment)
 
         operation.change_active_project()
-        operation.create_scenario()
+        operation.create_scenario(creating_scenario_data)
         operation.upload_valid_input_files()
         operation.save_defoult_scenario_pfr()
 
@@ -64,10 +64,39 @@ class Test:
         operation.upload_downloaded_input_files(zip_dir)
         operation.save_defoult_scenario_pfr()
 
+    @staticmethod
+    def fill_new_scenario_and_calculate(optimizer_type: str,
+                                        environment: str,
+                                        creating_scenario_data: dict = None,
+                                        not_download_input_list: list = None,
+                                        valid_input_files_folder: str = None,
+                                        from_zip: str = None):
+
+        operation = Operations(optimizer_type, environment)
+
+        operation.change_active_project()
+        operation.create_scenario(creating_scenario_data)
+        operation.upload_valid_input_files(not_download_list=not_download_input_list,
+                                           folder=valid_input_files_folder,
+                                           from_zip=from_zip)
+        operation.save_defoult_scenario_pfr(True)
+        operation.calculate_scenario()
+        scenario_data = operation.get_scenario()
+
+        if scenario_data.get('calculation_status') == 'success':
+
+            kpi_data = operation.get_kpi_data()
+            print(kpi_data)
+            preview_output_tables = operation.get_preview_defoult_output_tables()
+            print(preview_output_tables)
+
+        else:
+            print(scenario_data.get('calculation_message'))
+
 
 if __name__ == "__main__":
-    environment = 'PROD'  # DEV LOCAL_STAGE DEMO_STAGE PROD
-    optimizer_type = ProjectType.CFR
+    environment = 'LOCAL_STAGE'  # DEV LOCAL_STAGE DEMO_STAGE PROD
+    optimizer_type = ProjectType.PROMO
     # scenario_id = 478
 
     # test = Test(optimizer_type, environment)
@@ -77,8 +106,14 @@ if __name__ == "__main__":
     # Test.check_validation_rules(optimizer_type)
     # Test.check_all_validation_rules()
 
-    # Test.create_scenario_and_filling_full_data(optimizer_type, environment)
+    creating_scenario_data = None
+    not_download_list = ['up_down_size']
+    folder = 'calculation_success'
+    Test.fill_new_scenario_and_calculate(optimizer_type, environment, creating_scenario_data, not_download_list, folder)
 
-    _zip = 'C:/Users/LexSh/Downloads/test/25_Detailed_20240617_mb_Copy_1_20240626-10_39'
-    scenario_data = {'cfr_group_id': 1, 'cfr_type_id': 1, 'cfr_randomizer_regime_id': 1}
-    Test.create_scenario_and_filling_downloaded_data(optimizer_type, environment, _zip, scenario_data)
+    # creating_scenario_data = None
+    # zip_name = 'downloaded_inputs_9m'
+    # Test.fill_new_scenario_and_calculate(optimizer_type, environment, creating_scenario_data, from_zip=zip_name)
+
+    # _zip = 'C:/Users/LexSh/Downloads/test/25_Detailed_20240617_mb_Copy_1_20240626-10_39'
+    # Test.create_scenario_and_filling_downloaded_data(optimizer_type, environment, _zip)

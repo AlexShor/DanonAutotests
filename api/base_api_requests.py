@@ -26,15 +26,13 @@ class BaseApiRequests:
             self._access_token = auth_tokens.get('access')
             self._refresh_token = auth_tokens.get('refresh')
 
-        #self._auth_tokens = auth_tokens
-
-        self.request = self.Request(self)
+        self._request = self.__Request(self)
+        self._create_params = self.__Create_params(self)
 
         if auth_creds:
             self._login, self._password = auth_creds
-            #self.get_tokens()
 
-    class Request:
+    class __Request:
         def __init__(self, cls):
             """ cls - instance ...ApiRequests """
 
@@ -43,19 +41,29 @@ class BaseApiRequests:
         @staticmethod
         def __check_status_code(func):
             @functools.wraps(func)
-            def wrapper(self, *args, **kwargs):
+            def wrapper(self, *args, lvl_rec=1, **kwargs):
 
                 response = func(self, *args, **kwargs)
                 response.encoding = 'UTF-8'
 
                 status_code = response.status_code
 
-                if status_code == 401:
+                match status_code:
 
-                    access_token = self._cls.get_tokens()[0]
-                    args[0]['headers'] = {'Authorization': f'Bearer {access_token}'}
+                    case 401:
+                        print('lvl_rec', lvl_rec)
+                        print('response', response)
 
-                    response = wrapper(self, *args, **kwargs)
+                        access_token = self._cls.refresh_tokens().json().get('access')
+                        print('access_token', access_token)
+                        args[0]['headers'] = {'Authorization': f'Bearer {access_token}'}
+                        print('args', args)
+                        lvl_rec += 1
+                        response = wrapper(self, *args, lvl_rec, **kwargs)
+                        print('response', response)
+
+                    case 502:
+                        raise requests.exceptions.ConnectionError()
 
                 return response
 
@@ -77,19 +85,103 @@ class BaseApiRequests:
         def delete(self, request_parameters: dict):
             return requests.delete(**request_parameters)
 
+    class __Create_params:
+        def __init__(self, base_api):
+            self._base_api = base_api
+            self.__dict__.update(base_api.__dict__)
+
+        def __collect_params(self, url: str, params: dict = None, json: dict = None,
+                             form_data: dict = None, have_access_token: bool = True):
+
+            headers = {'Authorization': f'Bearer {self._access_token}'} if have_access_token else None
+            request_parameters = {'url': url,
+                                  'headers': headers,
+                                  'params': params,
+                                  'json': json,
+                                  'data': form_data,
+                                  'verify': False}
+
+            return request_parameters
+
+        def for_scenario(self, scenario_id: int = None, params: dict = None,
+                         url_additional_path: str = None, json: dict = None) -> dict:
+
+            scenario_id = '' if scenario_id is None else '/' + str(scenario_id)
+            url_additional_path = '' if url_additional_path is None else '/' + str(url_additional_path)
+
+            url = f'{self._base_url}/{self._optimizer_type}-scenarios{scenario_id}{url_additional_path}'
+            return self.__collect_params(url, params, json)
+
+        def for_input(self, scenario_id: int, input_data: dict, request_url_param: str = '', params: dict = None) -> dict:
+
+            query_params = {}
+            if params is not None:
+                query_params.update(params)
+
+            params_input_type = input_data.get('parameter')
+            if params_input_type is not None:
+                query_params.update({'input_type': params_input_type})
+
+            url_input_path = input_data.get('url_path')
+            optimizer_type = self._optimizer_type
+
+            url_input_path = (f'/{url_input_path}', '')[url_input_path is None]
+            inputs_in_url = ('/inputs', '')[optimizer_type == 'promo']
+
+            url = (f'{self._base_url}/{optimizer_type}-scenarios/{scenario_id}'
+                   f'{url_input_path}{inputs_in_url}{request_url_param}')
+            return self.__collect_params(url, query_params)
+
+        def for_output_kpi(self, scenario_id: int) -> dict:
+
+            url_path = ('/results/kpi', '/promo-result-kpi')[self._optimizer_type == 'promo']
+
+            url = f'{self._base_url}/{self._optimizer_type}-scenarios/{scenario_id}{url_path}'
+            return self.__collect_params(url)
+
+        def for_output_tables(self, scenario_id: int, output_table_type: str, query_params: dict = None) -> dict:
+
+            optimizer_type = self._optimizer_type
+
+            if optimizer_type == 'promo':
+                url_path = output_table_type
+            else:
+                url_path = 'outputs'
+                query_params.update({'output_type': output_table_type})
+
+            url = f'{self._base_url}/{optimizer_type}-scenarios/{scenario_id}/results/{url_path}'
+            return self.__collect_params(url, query_params)
+
+        def for_account(self, route: str, params: dict = None, json: dict = None) -> dict:
+
+            url = f'{self._base_url}/account/{route}'
+            return self.__collect_params(url, params, json)
+
+        def for_tokens(self, url_param: str, form_data: dict = None):
+
+            url = f'{self._base_url}/auth/{url_param}'
+            return self.__collect_params(url, form_data=form_data, have_access_token=False)
+
     @log_api_status(1)
     def get_tokens(self):
 
-        url = f'{self._base_url}/auth/login'
         form_data = {"email": self._login, "password": self._password}
 
-        request_parameters = {'url': url, 'data': form_data, 'verify': False}
+        response = self._request.post(self._create_params.for_tokens('login', form_data))
 
-        response = self.request.post(request_parameters)
-
+        # if response.status_code < 300:
         self._access_token = response.json().get('access')
         self._refresh_token = response.json().get('refresh')
 
-        #self._auth_tokens = response.json()
+        return response
+
+    @log_api_status(1)
+    def refresh_tokens(self):
+
+        form_data = {"refresh": self._refresh_token}
+        response = self._request.post(self._create_params.for_tokens('refresh', form_data))
+
+        self._access_token = response.json().get('access')
+        self._refresh_token = response.json().get('refresh')
 
         return response

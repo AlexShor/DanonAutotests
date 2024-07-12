@@ -388,6 +388,8 @@ class OperationsFileData:
             if file_name == file.split('/')[-1].split('.')[0]:
                 return file
 
+        return FileNotFoundError(f'{file_name} [Determine file type]')
+
     @log_file_operation(1)
     def extract_downloaded_file_from_zip_and_update_input_data(self):
 
@@ -400,22 +402,25 @@ class OperationsFileData:
 
         try:
 
-            with ZipFile(f'{zip_directory}.zip') as zip_file:
-                zip_file.extractall(zip_directory)
+            if not os.path.exists(zip_directory):
+                with ZipFile(f'{zip_directory}.zip') as zip_file:
+                    zip_file.extractall(zip_directory)
 
-            files = [f'{zip_directory}/{file}' for file in os.listdir(zip_directory)]
+            files = [f'{zip_directory}/{file}' for file in os.listdir(zip_directory) if len(file.split('.')) > 1]
             for file in files:
 
                 file_name_type = file.split('/')[-1].split('.')
                 if file_name_type[0].lower().startswith('input'):
+
                     if file_name_type[1] == 'zip':
 
-                        big_input = f'{zip_directory}/{file_name_type[0]}'
+                        big_input_directory = f'{zip_directory}/{file_name_type[0]}'
 
-                        with ZipFile(f'{big_input}.zip') as zip_file:
-                            zip_file.extractall(big_input)
+                        if not os.path.exists(big_input_directory):
+                            with ZipFile(f'{big_input_directory}.zip') as zip_file:
+                                zip_file.extractall(big_input)
 
-                        big_input_files = [f'{big_input}/{file}' for file in os.listdir(big_input)]
+                        big_input_files = [f'{big_input_directory}/{file}' for file in os.listdir(big_input_directory)]
 
                         big_input_file_name = big_input_files[0].split('/')[-1].split('.')[0]
 
@@ -432,7 +437,8 @@ class OperationsFileData:
                                 inputs_data[input_name].update({'full_path': file})
 
         except Exception as exc:
-            return exc
+            #return exc
+            raise
 
         return inputs_data
 

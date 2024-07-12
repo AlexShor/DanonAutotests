@@ -5,7 +5,7 @@ import time
 import requests
 
 from api.base_api_requests import BaseApiRequests
-from api.input_api_requests import InputApiRequests
+# from api.input_api_requests import InputApiRequests
 from api.scenario_api_requests import ScenarioApiRequests
 from api.account_api_requests import AccountApiRequests
 from optimizer_data.operations_file_data import OperationsFileData
@@ -25,9 +25,10 @@ class ApiOperations:
         auth_tokens = BaseApiRequests(environment, auth_creds=auth_creds).get_tokens().json()
         self._auth_tokens = auth_tokens
 
-        self._input_api = None
-        self._scenario_api = None
         self._account_api = None
+        self._scenario_api = None
+        self._input_api = None
+        self._output_api = None
 
         self.personal_info = None
         self.scenario_data = None
@@ -47,17 +48,22 @@ class ApiOperations:
 
                     match type_api:
 
-                        case 'input_api':
-                            if self._input_api is None:
-                                self._input_api = InputApiRequests(environment, auth_tokens, optimizer_type)
-
-                        case 'scenario_api':
-                            if self._scenario_api is None:
-                                self._scenario_api = ScenarioApiRequests(environment, auth_tokens, optimizer_type)
-
                         case 'account_api':
                             if self._account_api is None:
                                 self._account_api = AccountApiRequests(environment, auth_tokens, optimizer_type)
+
+                        case 'scenario_api':
+                            if self._scenario_api is None:
+                                self._scenario_api = ScenarioApiRequests(environment, auth_tokens,
+                                                                         optimizer_type).scenario
+
+                        case 'input_api':
+                            if self._input_api is None:
+                                self._input_api = ScenarioApiRequests(environment, auth_tokens, optimizer_type).input
+
+                        case 'output_api':
+                            if self._output_api is None:
+                                self._output_api = ScenarioApiRequests(environment, auth_tokens, optimizer_type).output
 
                     result = func(*args, **kwargs)
 
@@ -67,9 +73,10 @@ class ApiOperations:
 
             return _decorator
 
-        input_api = _get('input_api')
-        scenario_api = _get('scenario_api')
         account_api = _get('account_api')
+        scenario_api = _get('scenario_api')
+        input_api = _get('input_api')
+        output_api = _get('output_api')
 
     def _check_scenario_type(self) -> str:
 
@@ -83,17 +90,26 @@ class ApiOperations:
         return scenario_type
 
     @__integrate_api_request.input_api
-    def wait_file_info(self, input_data: dict, waited_file_info: list):
+    def wait_file_info(self, input_data: dict, waited_file_info: dict):
+        """
+        waited_file_info = {'key': value, 'key': value, ...}
+        """
 
-        while True:
+        checking = True
+
+        while checking:
             time.sleep(1)
 
             response = self._input_api.get_input_info(self._scenario_id, input_data)
 
-            if response.status_code < 300 and response.json()[waited_file_info[0]] == waited_file_info[1]:
-                break
+            if response.status_code < 300:
+
+                for key, value in waited_file_info.items():
+                    if response.json().get(key) == value:
+                        checking = False
+
             elif response.status_code >= 400:
-                break
+                checking = False
 
             time.sleep(4)
 
@@ -102,15 +118,38 @@ class ApiOperations:
                            inputs_data: dict,
                            files_directory: str = None,
                            files_type: str = None,
-                           wait_file_validation: bool = False) -> dict:
+                           wait_file_validation: bool = True,
+                           use_download_file_name: bool = False) -> dict:
 
         scenario_type = self._check_scenario_type()
 
         response_data = {}
 
+        def api_request_upload_input_data(input_data, file_name, file_path):
+
+            def make_not_download():
+                return self._input_api.upload_input_data(self._scenario_id, input_data,
+                                                         params={'optional_upload': True})
+
+            if input_data.get('not_download') or isinstance(file_path, Exception):
+                response = make_not_download()
+            else:
+                response = self._input_api.upload_input_data(self._scenario_id, input_data, file_path)
+
+                if wait_file_validation and response.status_code < 300:
+                    self.wait_file_info(input_data, {
+                        'uploading_status': True,
+                        'data_uploading_status': 'Data successfully uploaded'
+                    })
+
+            response_data[file_name] = response
+
         for input_name, input_data in inputs_data.items():
 
             optimization_type = input_data.get('optimization_type')
+
+            if use_download_file_name:
+                input_name = input_data.get('download_file_name')
 
             if optimization_type is None or scenario_type in optimization_type:
 
@@ -126,22 +165,14 @@ class ApiOperations:
                 if isinstance(file_path, list):
 
                     for f_path in file_path:
-
                         f_name = f_path.split('/')[-1].split('.')[0].lower()
                         input_data['system_file_name'] = f_name
 
-                        response = self._input_api.upload_input_file(self._scenario_id, input_data, f_path)
-                        response_data[f_name] = response
+                        api_request_upload_input_data(input_data, f_name, f_path)
 
-                        if wait_file_validation:
-                            self.wait_file_info(input_data, ['uploading_status', True])
                 else:
 
-                    response = self._input_api.upload_input_file(self._scenario_id, input_data, file_path)
-                    response_data[input_name] = response
-
-                    if wait_file_validation:
-                        self.wait_file_info(input_data, ['uploading_status', True])
+                    api_request_upload_input_data(input_data, input_name, file_path)
 
         return response_data
 
@@ -157,7 +188,6 @@ class ApiOperations:
             optimization_type = input_data.get('optimization_type')
 
             if optimization_type is None or scenario_type in optimization_type:
-
                 response = self._input_api.delete_input_file(self._scenario_id, input_data)
 
                 response_about_deletion[input_name] = response
@@ -180,7 +210,6 @@ class ApiOperations:
                 response = self._input_api.get_input_log(self._scenario_id, input_data)
 
                 if response.status_code < 300:
-
                     input_logs[input_name] = response.text
 
         return input_logs
@@ -201,7 +230,6 @@ class ApiOperations:
                 response = self._input_api.get_preview_data(self._scenario_id, input_data)
 
                 if 200 <= response.status_code < 300:
-
                     preview_data[input_name] = response.json()
 
         return preview_data
@@ -221,7 +249,6 @@ class ApiOperations:
             optimization_type = input_data.get('optimization_type')
 
             if optimization_type is None or scenario_type in optimization_type:
-
                 file_path = f'{save_directory}/{input_name}.xlsx'
 
                 response = self._input_api.get_input_data(self._scenario_id, input_data)
@@ -245,10 +272,29 @@ class ApiOperations:
                 response = self._input_api.get_input_info(self._scenario_id, input_data)
 
                 if response.status_code < 300:
-
                     input_info[input_name] = response.json()
 
         return input_info
+
+    def wait_scenario_info(self, waited_scenario_info: list, timeout: int = 1800) -> None:  # timeout = 1800 - 30 min
+        '''
+        waited_scenario_info = [key, [value, value, ...]]
+        '''
+
+        start_time = time.time()
+
+        while True:
+            time.sleep(1)
+
+            response = self.get_scenario()
+
+            if response.get(waited_scenario_info[0]) in waited_scenario_info[1]:
+                break
+
+            if time.time() - start_time >= timeout:
+                raise TimeoutError(f'Timeout "{timeout} sec" [{waited_scenario_info}]')
+
+            time.sleep(4)
 
     @__integrate_api_request.scenario_api
     def create_scenario(self, json_body: dict) -> dict:
@@ -296,20 +342,21 @@ class ApiOperations:
                 break
 
             for pfr_url, json_body in param_data.items():
-
                 response = self._scenario_api.save_scenario_pfr(self._scenario_id, pfr_url, json_body)
 
                 results.setdefault(param_type, {}).update({pfr_url: response})
 
         return results
 
-    def checking_scenario_param(self):
+    @__integrate_api_request.scenario_api
+    def calculation(self, wait_calculation_result: bool = True):
 
-        while True:
-            if self.get_scenario().get('uploaded_data_status'):
-                break
+        response = self._scenario_api.calculation(self._scenario_id)
 
-            time.sleep(5)
+        if wait_calculation_result:
+            self.wait_scenario_info(['calculation_status', ['success', 'error']])
+
+        return response
 
     @__integrate_api_request.account_api
     def get_personal_info(self) -> dict:
@@ -331,4 +378,21 @@ class ApiOperations:
 
         return personal_info
 
+    @__integrate_api_request.output_api
+    def get_kpi_data(self) -> requests.Response:
 
+        response = self._output_api.get_kpi_data(self._scenario_id)
+
+        return response.json()
+
+    @__integrate_api_request.output_api
+    def get_preview_output_table(self, output_table_type: str, query_params: dict = None) -> requests.Response:
+
+        if query_params is None:
+            query_params = {}
+
+        query_params.update({'limit': 50})
+
+        response = self._output_api.get_preview_output_table(self._scenario_id, output_table_type, query_params)
+
+        return response.json()
